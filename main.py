@@ -42,10 +42,10 @@ def calculate_probability(
         cumsum.append(accumulated[::-1])
 
     # probabilities for prefix/suffix for if prefix or suffix chosen first
-    prefix_first_prefix_prob = 0
-    prefix_first_suffix_prob = 0
-    suffix_first_prefix_prob = 0
-    suffix_first_suffix_prob = 0
+    prefix_first_prefix_prob = 0 if desired_prefix_count != 0 else 1
+    prefix_first_suffix_prob = 0 if desired_suffix_count != 0 else 1
+    suffix_first_prefix_prob = 0 if desired_prefix_count != 0 else 1
+    suffix_first_suffix_prob = 0 if desired_suffix_count != 0 else 1
 
     # Prefixes
     if desired_prefix_count != 0:
@@ -113,11 +113,14 @@ for desired_prefix_count in range(4):
         for desired_suffix_count in range(4):
             for crafted_suffix_count in range(5):
                 for aspect_suffix_count in range(6):
+
                     if (
                         desired_suffix_count
                         + crafted_suffix_count
                         + aspect_suffix_count
-                    ) > max_total_mods:
+                    ) > max_total_mods or (
+                        desired_prefix_count == 0 and desired_suffix_count == 0
+                    ):
                         continue
 
                     probability = calculate_probability(
