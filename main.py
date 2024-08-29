@@ -110,14 +110,14 @@ def calculate_probability(
     suffix_first_prob = 0.5 * suffix_first_prefix_prob * suffix_first_suffix_prob
     total_probability = prefix_first_prob + suffix_first_prob
 
-    if (
-        desired_prefix_count == 0
-        and desired_suffix_count == 3
-        and crafted_prefix_count == 0
-        and crafted_suffix_count == 3
-        and aspect_suffix_count == 0
-    ):
-        print("a")
+    # if (
+    #     desired_prefix_count == 0
+    #     and desired_suffix_count == 3
+    #     and crafted_prefix_count == 0
+    #     and crafted_suffix_count == 3
+    #     and aspect_suffix_count == 0
+    # ):
+    #     print("a")
 
     return total_probability
 
@@ -173,7 +173,7 @@ for desired_prefix_count in range(4):  # 3 possible desired prefixes
                             }
                         )
 
-# write results
+# write all results
 with open("results.txt", "w") as f:
     for (desired_prefix_count, desired_suffix_count), entries in results.items():
         f.write(f"\n{desired_prefix_count}p/{desired_suffix_count}s\n")
@@ -186,5 +186,24 @@ with open("results.txt", "w") as f:
                 f"crafted prefixes: {entry['crafted prefixes']}, "
                 f"crafted suffixes: {entry['crafted suffixes']}, "
                 f"aspect suffixes: {entry['aspect suffixes']}, "
-                f"prob success: {entry['prob success']:.4f}\n"
+                f"prob success: {entry['prob success']:.2%}\n"
+            )
+
+# write results for wo/ multicrafting
+with open("no_multimod_results.txt", "w") as f:
+    for (desired_prefix_count, desired_suffix_count), entries in results.items():
+        f.write(f"\n{desired_prefix_count}p/{desired_suffix_count}s\n")
+        f.write("-----------------------------------\n")
+
+        # sort and write options
+        sorted_entries = sorted(entries, key=lambda x: x["prob success"], reverse=True)
+        for entry in sorted_entries:
+            if entry["crafted prefixes"] + entry["crafted suffixes"] > 2:
+                continue
+
+            f.write(
+                f"crafted prefixes: {entry['crafted prefixes']}, "
+                f"crafted suffixes: {entry['crafted suffixes']}, "
+                f"aspect suffixes: {entry['aspect suffixes']}, "
+                f"prob success: {entry['prob success']:.2%}\n"
             )
