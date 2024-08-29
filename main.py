@@ -132,7 +132,7 @@ for desired_prefix_count in range(4):
                 if crafted_prefix_count + crafted_suffix_count > 6:
                     continue
 
-                for aspect_suffix_count in range(3):  # 3 unique aspects
+                for aspect_suffix_count in range(1):  # only 1 aspect can be applied
 
                     if (
                         desired_suffix_count
