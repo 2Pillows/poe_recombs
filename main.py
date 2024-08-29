@@ -122,17 +122,17 @@ results = {}
 max_total_mods = 6
 
 # calc each possible combo
-for desired_prefix_count in range(4):
-    for crafted_prefix_count in range(5):
+for desired_prefix_count in range(4):  # 3 possible desired prefixes
+    for crafted_prefix_count in range(5):  # 4 possible crafted prefixes
         if desired_prefix_count + crafted_prefix_count > max_total_mods:
             continue
 
-        for desired_suffix_count in range(4):
-            for crafted_suffix_count in range(5):
+        for desired_suffix_count in range(4):  # 3 possible desired suffixes
+            for crafted_suffix_count in range(7):  # 6 possible crafted suffixes
                 if crafted_prefix_count + crafted_suffix_count > 6:
                     continue
 
-                for aspect_suffix_count in range(1):  # only 1 aspect can be applied
+                for aspect_suffix_count in range(2):  # 1 aspect
 
                     if (
                         desired_suffix_count
