@@ -1,7 +1,7 @@
 # main.py
 
 # Toggle for if eldritch possible
-eldritch_annul = True
+eldritch_annul = False
 
 
 def calculate_probability(
@@ -61,20 +61,23 @@ def calculate_probability(
         if desired_suffix_count < max_final and total_prefix_count <= max_initial:
             suffix_first_prefix_prob = cumsum[total_prefix_count][desired_prefix_count]
 
-    # Suffixes first scenario
+    # Suffixes
     if desired_suffix_count != 0:
 
         # from desired to max mods, get odds including odds of avoid crafted mods
-        required_suffixes = desired_suffix_count + min(
-            crafted_suffix_count + aspect_suffix_count, 1
-        )
+        exclusive_suffixes = crafted_suffix_count + aspect_suffix_count
+        required_suffixes = desired_suffix_count + min(exclusive_suffixes, 1)
 
         if required_suffixes <= max_final and total_suffix_count <= max_initial:
             suffix_first_suffix_prob = cumsum[total_suffix_count][required_suffixes]
 
             # if there is an aspect, u need to calc odds of avoiding or annuling
             if aspect_suffix_count:
-                avoid_aspect_prob = suffix_first_suffix_prob * ((2 / required_suffixes))
+
+                # get another exclusive suffix
+                avoid_aspect_prob = suffix_first_suffix_prob * (
+                    1 - aspect_suffix_count / exclusive_suffixes
+                )
 
                 # assume u get perfect prefixes
                 annul_prob = 1 / (desired_prefix_count + required_suffixes)
@@ -82,7 +85,9 @@ def calculate_probability(
                     annul_prob = 1 / required_suffixes
 
                 annul_aspect_prob = (
-                    suffix_first_suffix_prob * (1 / required_suffixes) * annul_prob
+                    suffix_first_suffix_prob
+                    * (aspect_suffix_count / exclusive_suffixes)
+                    * annul_prob
                 )
 
                 suffix_first_suffix_prob = avoid_aspect_prob + annul_aspect_prob
@@ -97,7 +102,19 @@ def calculate_probability(
     suffix_first_prob = 0.5 * suffix_first_prefix_prob * suffix_first_suffix_prob
     total_probability = prefix_first_prob + suffix_first_prob
 
+    # if (
+    #     desired_prefix_count == 3
+    #     and desired_suffix_count == 2
+    #     and crafted_prefix_count == 3
+    #     and crafted_suffix_count == 3
+    #     and aspect_suffix_count == 1
+    # ):
+    #     print("a")
+
     return total_probability
+
+
+test = calculate_probability(3, 3, 1, 0, 4)
 
 
 results = {}
@@ -112,7 +129,10 @@ for desired_prefix_count in range(4):
 
         for desired_suffix_count in range(4):
             for crafted_suffix_count in range(5):
-                for aspect_suffix_count in range(6):
+                if crafted_prefix_count + crafted_suffix_count > 6:
+                    continue
+
+                for aspect_suffix_count in range(3):  # 3 unique aspects
 
                     if (
                         desired_suffix_count
