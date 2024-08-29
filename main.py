@@ -1,7 +1,7 @@
 # main.py
 
 # Toggle for if eldritch possible
-eldritch_annul = False
+eldritch_annul = True
 
 
 def calculate_probability(
@@ -74,22 +74,17 @@ def calculate_probability(
 
             # if there is an aspect, u need to calc odds of avoiding or annuling
             if aspect_suffix_count:
-                avoid_aspect_prob = suffix_first_suffix_prob * (
-                    (1 - aspect_suffix_count / required_suffixes)
-                )
+                avoid_aspect_prob = suffix_first_suffix_prob * ((2 / required_suffixes))
 
                 # assume u get perfect prefixes
-                annul_prob = aspect_suffix_count / (
-                    desired_prefix_count + required_suffixes
-                )
+                annul_prob = 1 / (desired_prefix_count + required_suffixes)
                 if eldritch_annul:  # can change annul to improve odds
-                    annul_prob = aspect_suffix_count / required_suffixes
+                    annul_prob = 1 / required_suffixes
 
                 annul_aspect_prob = (
-                    suffix_first_suffix_prob
-                    * (aspect_suffix_count / required_suffixes)
-                    * annul_prob
+                    suffix_first_suffix_prob * (1 / required_suffixes) * annul_prob
                 )
+
                 suffix_first_suffix_prob = avoid_aspect_prob + annul_aspect_prob
 
         # prefixes are calculated first
