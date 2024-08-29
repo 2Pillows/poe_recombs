@@ -58,7 +58,11 @@ def calculate_probability(
 
         # suffixes are calculated first
         # remove any crafted / exclusive mods from pool
-        if desired_suffix_count < max_final and total_prefix_count <= max_initial:
+        if (
+            desired_suffix_count < max_final
+            and total_prefix_count <= max_initial
+            and crafted_suffix_count > 0
+        ):
             suffix_first_prefix_prob = cumsum[total_prefix_count][desired_prefix_count]
 
     # Suffixes
@@ -94,7 +98,11 @@ def calculate_probability(
 
         # prefixes are calculated first
         # remove any crafted / exclusive mods from pool
-        if desired_prefix_count < max_final and total_suffix_count <= max_initial:
+        if (
+            desired_prefix_count < max_final
+            and total_suffix_count <= max_initial
+            and crafted_prefix_count > 0
+        ):
             prefix_first_suffix_prob = cumsum[total_suffix_count][desired_suffix_count]
 
     # Total odds
@@ -102,14 +110,14 @@ def calculate_probability(
     suffix_first_prob = 0.5 * suffix_first_prefix_prob * suffix_first_suffix_prob
     total_probability = prefix_first_prob + suffix_first_prob
 
-    # if (
-    #     desired_prefix_count == 3
-    #     and desired_suffix_count == 2
-    #     and crafted_prefix_count == 3
-    #     and crafted_suffix_count == 3
-    #     and aspect_suffix_count == 1
-    # ):
-    #     print("a")
+    if (
+        desired_prefix_count == 0
+        and desired_suffix_count == 3
+        and crafted_prefix_count == 0
+        and crafted_suffix_count == 3
+        and aspect_suffix_count == 0
+    ):
+        print("a")
 
     return total_probability
 
