@@ -1,169 +1,189 @@
 
 0p/1s
 -----------------------------------
-1c / 1c 1a, reusable:  90.50%, success:  73.25%
-1c / 1c 0a, reusable: 100.00%, success:  66.50%
+0c / 2c 1a, reusable:  93.33%, success:  75.00%
+0c / 2c 0a, reusable: 100.00%, success:  62.00%
+0c / 0c 0a, reusable: 100.00%, success:  59.00%
 1c / 0c 0a, reusable: 100.00%, success:  59.00%
 2c / 0c 0a, reusable: 100.00%, success:  59.00%
 1c / 0c 1a, reusable: 100.00%, success:  58.25%
 2c / 0c 1a, reusable: 100.00%, success:  58.25%
-0c / 2c 1a, reusable:  46.67%, success:  37.50%
-0c / 2c 0a, reusable:  50.00%, success:  31.00%
-0c / 0c 0a, reusable:  50.00%, success:  29.50%
-0c / 1c 1a, reusable:  40.50%, success:  23.25%
-0c / 1c 0a, reusable:  50.00%, success:  16.50%
-0c / 0c 1a, reusable:  50.00%, success:   8.25%
+1c / 1c 1a, reusable:  70.00%, success:  52.75%
+0c / 1c 1a, reusable:  81.00%, success:  46.50%
+1c / 1c 0a, reusable:  79.50%, success:  46.00%
+0c / 1c 0a, reusable: 100.00%, success:  33.00%
+0c / 0c 1a, reusable: 100.00%, success:  16.50%
 
 0p/2s
 -----------------------------------
-1c / 1c 1a, reusable:  69.00%, success:  55.33%
-1c / 1c 0a, reusable:  81.00%, success:  36.00%
+0c / 2c 1a, reusable:  54.67%, success:  44.33%
+1c / 1c 1a, reusable:  48.50%, success:  36.88%
+0c / 0c 0a, reusable: 100.00%, success:  33.00%
 1c / 0c 0a, reusable: 100.00%, success:  33.00%
 2c / 0c 0a, reusable: 100.00%, success:  33.00%
 1c / 0c 1a, reusable:  65.50%, success:  32.67%
 2c / 0c 1a, reusable:  65.50%, success:  32.67%
-0c / 2c 1a, reusable:  27.33%, success:  22.17%
-0c / 0c 0a, reusable:  50.00%, success:  16.50%
-0c / 2c 0a, reusable:  45.00%, success:  15.50%
-0c / 1c 1a, reusable:  19.00%, success:  10.33%
-0c / 1c 0a, reusable:  31.00%, success:   5.00%
-0c / 0c 1a, reusable:  15.50%, success:   1.67%
+0c / 2c 0a, reusable:  90.00%, success:  31.00%
+1c / 1c 0a, reusable:  60.50%, success:  23.29%
+0c / 1c 1a, reusable:  38.00%, success:  20.67%
+0c / 1c 0a, reusable:  62.00%, success:  10.00%
+0c / 0c 1a, reusable:  31.00%, success:   3.33%
 
 0p/3s
 -----------------------------------
-1c / 1c 1a, reusable:  50.00%, success:  28.50%
+1c / 1c 1a, reusable:  29.50%, success:  16.81%
 1c / 0c 1a, reusable:  45.00%, success:  15.50%
-1c / 1c 0a, reusable:  45.00%, success:  15.50%
 2c / 0c 1a, reusable:  45.00%, success:  15.50%
+0c / 0c 0a, reusable:  62.00%, success:  10.00%
 1c / 0c 0a, reusable:  62.00%, success:  10.00%
 2c / 0c 0a, reusable:  62.00%, success:  10.00%
-0c / 0c 0a, reusable:  31.00%, success:   5.00%
+1c / 1c 0a, reusable:  26.55%, success:   9.14%
 
 1p/0s
 -----------------------------------
-1c / 1c 0a, reusable: 100.00%, success:  66.50%
 1c / 1c 1a, reusable: 100.00%, success:  66.50%
-0c / 1c 0a, reusable: 100.00%, success:  59.00%
+2c / 0c 0a, reusable: 100.00%, success:  62.00%
+2c / 0c 1a, reusable:  79.50%, success:  60.50%
+0c / 0c 0a, reusable: 100.00%, success:  59.00%
 0c / 1c 1a, reusable: 100.00%, success:  59.00%
 0c / 2c 0a, reusable: 100.00%, success:  59.00%
 0c / 2c 1a, reusable: 100.00%, success:  59.00%
-2c / 0c 0a, reusable:  50.00%, success:  31.00%
-2c / 0c 1a, reusable:  50.00%, success:  31.00%
-0c / 0c 0a, reusable:  50.00%, success:  29.50%
-0c / 0c 1a, reusable:  50.00%, success:  29.50%
-1c / 0c 0a, reusable:  50.00%, success:  16.50%
-1c / 0c 1a, reusable:  50.00%, success:  16.50%
+0c / 0c 1a, reusable:  79.50%, success:  46.90%
+0c / 1c 0a, reusable:  79.50%, success:  46.90%
+1c / 0c 1a, reusable:  79.50%, success:  46.00%
+1c / 1c 0a, reusable:  79.50%, success:  46.00%
+1c / 0c 0a, reusable: 100.00%, success:  33.00%
 
 1p/1s
 -----------------------------------
-1c / 1c 1a, reusable:  78.00%, success:  37.17%
-1c / 1c 0a, reusable: 100.00%, success:  33.00%
-2c / 0c 1a, reusable:  50.00%, success:  31.00%
-0c / 2c 1a, reusable:  38.33%, success:  20.65%
-0c / 2c 0a, reusable:  50.00%, success:  18.29%
-2c / 0c 0a, reusable:  50.00%, success:  18.29%
-1c / 0c 1a, reusable:  50.00%, success:  16.50%
-0c / 1c 1a, reusable:  28.00%, success:  12.19%
-0c / 1c 0a, reusable:  50.00%, success:   9.74%
-1c / 0c 0a, reusable:  50.00%, success:   9.74%
+0c / 2c 1a, reusable:  93.33%, success:  44.25%
+0c / 2c 0a, reusable: 100.00%, success:  36.58%
+2c / 0c 0a, reusable: 100.00%, success:  36.58%
+2c / 0c 1a, reusable:  79.50%, success:  35.87%
+0c / 0c 0a, reusable: 100.00%, success:  34.81%
+1c / 1c 1a, reusable:  70.00%, success:  32.98%
+0c / 1c 1a, reusable:  81.00%, success:  27.43%
+1c / 0c 1a, reusable:  79.50%, success:  21.37%
+1c / 0c 0a, reusable: 100.00%, success:  19.47%
+1c / 1c 0a, reusable:  59.00%, success:  19.47%
+0c / 1c 0a, reusable:  79.50%, success:  15.48%
+0c / 0c 1a, reusable:  79.50%, success:   7.74%
 
 1p/2s
 -----------------------------------
-1c / 1c 1a, reusable:  65.25%, success:  24.54%
-2c / 0c 1a, reusable:  50.00%, success:  19.22%
-1c / 1c 0a, reusable:  81.00%, success:  15.23%
-0c / 2c 1a, reusable:  24.56%, success:  12.61%
-1c / 0c 1a, reusable:  50.00%, success:  10.23%
-2c / 0c 0a, reusable:  50.00%, success:  10.23%
-0c / 2c 0a, reusable:  45.00%, success:   9.14%
-0c / 1c 1a, reusable:  15.25%, success:   5.72%
-1c / 0c 0a, reusable:  50.00%, success:   5.45%
-0c / 1c 0a, reusable:  31.00%, success:   2.95%
+0c / 2c 1a, reusable:  54.67%, success:  26.16%
+2c / 0c 0a, reusable: 100.00%, success:  20.46%
+2c / 0c 1a, reusable:  59.15%, success:  20.20%
+0c / 0c 0a, reusable: 100.00%, success:  19.47%
+1c / 1c 1a, reusable:  48.50%, success:  19.09%
+0c / 2c 0a, reusable:  90.00%, success:  18.29%
+0c / 1c 1a, reusable:  38.00%, success:  12.19%
+1c / 0c 1a, reusable:  59.15%, success:  11.21%
+1c / 0c 0a, reusable: 100.00%, success:  10.89%
+1c / 1c 0a, reusable:  47.79%, success:   8.99%
+0c / 1c 0a, reusable:  49.29%, success:   4.69%
+0c / 0c 1a, reusable:  24.64%, success:   1.56%
 
 1p/3s
 -----------------------------------
 2c / 0c 1a, reusable:  45.00%, success:   9.61%
-1c / 1c 1a, reusable:  50.00%, success:   9.40%
+1c / 1c 1a, reusable:  29.50%, success:   5.55%
 1c / 0c 1a, reusable:  45.00%, success:   5.12%
-1c / 1c 0a, reusable:  45.00%, success:   5.12%
 2c / 0c 0a, reusable:  31.00%, success:   3.10%
+1c / 1c 0a, reusable:  26.55%, success:   3.02%
+0c / 0c 0a, reusable:  31.00%, success:   2.95%
 1c / 0c 0a, reusable:  31.00%, success:   1.65%
 
 2p/0s
 -----------------------------------
-1c / 1c 0a, reusable:  81.00%, success:  36.00%
+2c / 0c 1a, reusable:  74.50%, success:  42.05%
 1c / 1c 1a, reusable:  81.00%, success:  36.00%
-0c / 1c 0a, reusable: 100.00%, success:  33.00%
+0c / 0c 0a, reusable: 100.00%, success:  33.00%
 0c / 1c 1a, reusable: 100.00%, success:  33.00%
 0c / 2c 0a, reusable: 100.00%, success:  33.00%
 0c / 2c 1a, reusable: 100.00%, success:  33.00%
-0c / 0c 0a, reusable:  50.00%, success:  16.50%
-0c / 0c 1a, reusable:  50.00%, success:  16.50%
-2c / 0c 0a, reusable:  45.00%, success:  15.50%
-2c / 0c 1a, reusable:  45.00%, success:  15.50%
-1c / 0c 0a, reusable:  31.00%, success:   5.00%
-1c / 0c 1a, reusable:  31.00%, success:   5.00%
+2c / 0c 0a, reusable:  90.00%, success:  31.00%
+0c / 0c 1a, reusable:  79.50%, success:  26.24%
+0c / 1c 0a, reusable:  79.50%, success:  26.24%
+1c / 0c 1a, reusable:  60.50%, success:  23.29%
+1c / 1c 0a, reusable:  60.50%, success:  23.29%
+1c / 0c 0a, reusable:  62.00%, success:  10.00%
 
 2p/1s
 -----------------------------------
-1c / 1c 1a, reusable:  54.83%, success:  17.01%
-2c / 0c 1a, reusable:  45.00%, success:  15.50%
-1c / 1c 0a, reusable:  81.00%, success:  15.23%
-0c / 2c 1a, reusable:  35.56%, success:  11.14%
-0c / 2c 0a, reusable:  50.00%, success:  10.23%
-2c / 0c 0a, reusable:  45.00%, success:   9.14%
-0c / 1c 1a, reusable:  23.83%, success:   6.39%
-0c / 1c 0a, reusable:  50.00%, success:   5.45%
-1c / 0c 1a, reusable:  31.00%, success:   5.00%
-1c / 0c 0a, reusable:  31.00%, success:   2.95%
+0c / 2c 1a, reusable:  93.33%, success:  24.75%
+0c / 2c 0a, reusable: 100.00%, success:  20.46%
+2c / 0c 1a, reusable:  74.50%, success:  19.88%
+0c / 0c 0a, reusable: 100.00%, success:  19.47%
+2c / 0c 0a, reusable:  90.00%, success:  18.29%
+1c / 1c 1a, reusable:  58.79%, success:  17.36%
+0c / 1c 1a, reusable:  81.00%, success:  15.35%
+1c / 1c 0a, reusable:  47.79%, success:   8.99%
+0c / 1c 0a, reusable:  79.50%, success:   8.66%
+1c / 0c 1a, reusable:  60.50%, success:   8.02%
+1c / 0c 0a, reusable:  62.00%, success:   5.90%
+0c / 0c 1a, reusable:  79.50%, success:   4.33%
 
 2p/2s
 -----------------------------------
-1c / 1c 1a, reusable:  44.38%, success:  10.27%
-2c / 0c 1a, reusable:  45.00%, success:   9.61%
-0c / 2c 1a, reusable:  23.17%, success:   6.90%
-1c / 1c 0a, reusable:  62.00%, success:   6.20%
-0c / 2c 0a, reusable:  45.00%, success:   5.12%
-2c / 0c 0a, reusable:  45.00%, success:   5.12%
-1c / 0c 1a, reusable:  31.00%, success:   3.10%
-0c / 1c 1a, reusable:  13.37%, success:   3.07%
-0c / 1c 0a, reusable:  31.00%, success:   1.65%
-1c / 0c 0a, reusable:  31.00%, success:   1.65%
+0c / 2c 1a, reusable:  54.67%, success:  14.63%
+0c / 0c 0a, reusable: 100.00%, success:  10.89%
+2c / 0c 1a, reusable:  54.14%, success:  10.50%
+0c / 2c 0a, reusable:  90.00%, success:  10.23%
+2c / 0c 0a, reusable:  90.00%, success:  10.23%
+1c / 1c 1a, reusable:  37.29%, success:   9.06%
+0c / 1c 1a, reusable:  38.00%, success:   6.82%
+1c / 0c 1a, reusable:  40.14%, success:   3.71%
+1c / 1c 0a, reusable:  36.58%, success:   3.66%
+1c / 0c 0a, reusable:  62.00%, success:   3.30%
+0c / 1c 0a, reusable:  49.29%, success:   2.62%
+0c / 0c 1a, reusable:  24.64%, success:   0.87%
 
 2p/3s
 -----------------------------------
 2c / 0c 1a, reusable:  40.50%, success:   4.81%
-1c / 1c 1a, reusable:  31.00%, success:   2.85%
+1c / 1c 1a, reusable:  18.29%, success:   1.68%
+0c / 0c 0a, reusable:  31.00%, success:   1.65%
 1c / 0c 1a, reusable:  27.90%, success:   1.55%
-1c / 1c 0a, reusable:  27.90%, success:   1.55%
 2c / 0c 0a, reusable:  27.90%, success:   1.55%
+1c / 1c 0a, reusable:  16.46%, success:   0.91%
 1c / 0c 0a, reusable:  19.22%, success:   0.50%
 
 3p/0s
 -----------------------------------
-1c / 1c 0a, reusable:  45.00%, success:  15.50%
+2c / 0c 1a, reusable:  29.50%, success:  16.81%
 1c / 1c 1a, reusable:  45.00%, success:  15.50%
-0c / 1c 0a, reusable:  62.00%, success:  10.00%
+0c / 0c 0a, reusable:  62.00%, success:  10.00%
 0c / 1c 1a, reusable:  62.00%, success:  10.00%
 0c / 2c 0a, reusable:  62.00%, success:  10.00%
 0c / 2c 1a, reusable:  62.00%, success:  10.00%
-0c / 0c 0a, reusable:  31.00%, success:   5.00%
-0c / 0c 1a, reusable:  31.00%, success:   5.00%
+1c / 0c 1a, reusable:  26.55%, success:   9.14%
+1c / 1c 0a, reusable:  26.55%, success:   9.14%
+0c / 0c 1a, reusable:  49.29%, success:   7.95%
+0c / 1c 0a, reusable:  49.29%, success:   7.95%
 
 3p/1s
 -----------------------------------
-1c / 1c 1a, reusable:  19.57%, success:   5.77%
-1c / 1c 0a, reusable:  45.00%, success:   5.12%
-0c / 2c 1a, reusable:  21.18%, success:   3.30%
+1c / 1c 1a, reusable:  36.45%, success:   7.21%
+0c / 2c 1a, reusable:  28.93%, success:   3.75%
 0c / 2c 0a, reusable:  31.00%, success:   3.10%
-0c / 1c 1a, reusable:  13.48%, success:   1.86%
-0c / 1c 0a, reusable:  31.00%, success:   1.65%
+1c / 1c 0a, reusable:  26.55%, success:   3.02%
+0c / 0c 0a, reusable:  31.00%, success:   2.95%
+2c / 0c 1a, reusable:  29.50%, success:   2.77%
+0c / 1c 1a, reusable:  25.11%, success:   2.33%
+1c / 0c 1a, reusable:  26.55%, success:   1.51%
+0c / 1c 0a, reusable:  18.29%, success:   0.97%
+0c / 0c 1a, reusable:  18.29%, success:   0.49%
 
 3p/2s
 -----------------------------------
-1c / 1c 1a, reusable:  11.02%, success:   2.80%
-0c / 2c 1a, reusable:  13.85%, success:   2.06%
+1c / 1c 1a, reusable:  17.10%, success:   3.20%
+0c / 2c 1a, reusable:  16.95%, success:   2.22%
+0c / 0c 0a, reusable:  31.00%, success:   1.65%
 0c / 2c 0a, reusable:  27.90%, success:   1.55%
-1c / 1c 0a, reusable:  27.90%, success:   1.55%
-0c / 1c 1a, reusable:   7.60%, success:   0.90%
-0c / 1c 0a, reusable:  19.22%, success:   0.50%
+0c / 1c 1a, reusable:  11.78%, success:   1.03%
+1c / 1c 0a, reusable:  16.46%, success:   0.91%
+2c / 0c 1a, reusable:   9.14%, success:   0.56%
+1c / 0c 1a, reusable:   8.23%, success:   0.30%
+0c / 1c 0a, reusable:  11.34%, success:   0.29%
+0c / 0c 1a, reusable:   5.67%, success:   0.10%
