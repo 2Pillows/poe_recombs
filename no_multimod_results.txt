@@ -1,0 +1,169 @@
+
+0p/1s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 73.25%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 66.50%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 59.00%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 59.00%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 58.25%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 58.25%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 37.50%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 31.00%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 0, prob success: 29.50%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 23.25%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 16.50%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 1, prob success: 8.25%
+
+0p/2s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 55.33%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 36.00%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 33.00%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 33.00%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 32.67%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 32.67%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 22.17%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 0, prob success: 16.50%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 15.50%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 10.33%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 5.00%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 1, prob success: 1.67%
+
+0p/3s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 28.50%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 15.50%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 15.50%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 15.50%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 10.00%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 10.00%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 0, prob success: 5.00%
+
+1p/0s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 66.50%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 66.50%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 59.00%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 59.00%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 59.00%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 59.00%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 31.00%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 31.00%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 0, prob success: 29.50%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 1, prob success: 29.50%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 16.50%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 16.50%
+
+1p/1s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 37.17%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 33.00%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 31.00%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 20.65%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 18.29%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 18.29%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 16.50%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 12.19%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 9.74%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 9.74%
+
+1p/2s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 24.54%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 19.22%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 15.23%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 12.61%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 10.23%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 10.23%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 9.14%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 5.72%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 5.45%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 2.95%
+
+1p/3s
+-----------------------------------
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 9.61%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 9.40%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 5.12%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 5.12%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 3.10%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 1.65%
+
+2p/0s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 36.00%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 36.00%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 33.00%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 33.00%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 33.00%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 33.00%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 0, prob success: 16.50%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 1, prob success: 16.50%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 15.50%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 15.50%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 5.00%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 5.00%
+
+2p/1s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 17.01%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 15.50%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 15.23%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 11.14%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 10.23%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 9.14%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 6.39%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 5.45%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 5.00%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 2.95%
+
+2p/2s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 10.27%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 9.61%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 6.90%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 6.20%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 5.12%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 5.12%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 3.10%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 3.07%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 1.65%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 1.65%
+
+2p/3s
+-----------------------------------
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 1, prob success: 4.81%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 2.85%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 1, prob success: 1.55%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 1.55%
+crafted prefixes: 2, crafted suffixes: 0, aspect suffixes: 0, prob success: 1.55%
+crafted prefixes: 1, crafted suffixes: 0, aspect suffixes: 0, prob success: 0.50%
+
+3p/0s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 15.50%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 15.50%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 10.00%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 10.00%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 10.00%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 10.00%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 0, prob success: 5.00%
+crafted prefixes: 0, crafted suffixes: 0, aspect suffixes: 1, prob success: 5.00%
+
+3p/1s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 5.77%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 5.12%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 3.30%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 3.10%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 1.86%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 1.65%
+
+3p/2s
+-----------------------------------
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 1, prob success: 2.80%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 1, prob success: 2.06%
+crafted prefixes: 0, crafted suffixes: 2, aspect suffixes: 0, prob success: 1.55%
+crafted prefixes: 1, crafted suffixes: 1, aspect suffixes: 0, prob success: 1.55%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 1, prob success: 0.90%
+crafted prefixes: 0, crafted suffixes: 1, aspect suffixes: 0, prob success: 0.50%
