@@ -333,33 +333,36 @@ def pathfind(result_probs):
         (0, 1): 1.0,  # alt spam
     }
 
-    # for result, edges in result_probs.items():
-    #     best_prob = 0
-    #     best_recomb = None
+    best_recombs = {}
 
-    #     for edge in edges:
-    #         edge: Recomb_Edge
-    #         item1 = (edge.starting_prefix_count, edge.starting_suffix_count)
-    #         item2 = (edge.paired_prefix_count, edge.paired_suffix_count)
+    result_probs = dict(sorted(result_probs.items(), key=lambda item: sum(item[0])))
 
-    #         # Get the probabilities of the input items
-    #         prob_item1 = final_probs.get(item1, 0)
-    #         prob_item2 = final_probs.get(item2, 0)
+    # want to collect best probabilities for each final item
+    #
+    for result, edges in result_probs.items():
 
-    #         # Calculate the overall probability
-    #         combined_prob = prob_item1 * prob_item2 * edge.probability
+        for edge in edges:
+            edge: Recomb_Edge
+            prob = edge.probability
 
-    #         # Keep track of the best probability and method
-    #         if combined_prob > best_prob:
-    #             best_prob = combined_prob
-    #             best_recomb = edge.recomb_item()
+            item1_prob = final_probs.get(edge.starting_item())
+            item2_prob = final_probs.get(edge.paired_item())
 
-    #     # Store the best probability for this result
-    #     final_probs[result] = best_prob
-    #     # Optionally, store the best recombination method too
-    #     # final_recombs[result] = best_recomb
+            recomb_prob = prob * item1_prob * item2_prob
 
-    print("pathfind done")
+            if result not in final_probs:
+                final_probs[result] = 0
+
+            if result not in best_recombs:
+                best_recombs[result] = []
+
+            if recomb_prob > final_probs[result]:
+                final_probs[result] = recomb_prob
+                best_recombs[result] = [edge]
+            elif recomb_prob == final_probs[result]:
+                best_recombs[result].append(edge)
+
+    return best_recombs
 
 
 def get_probs_for_result(graph):
@@ -406,18 +409,28 @@ def write_final_probabilities(result_probs, filename):
                 f.write(f"Recomb: {recomb_item}, Probability: {recomb_prob:.2%}\n")
 
 
-def process_graph(filename, eldritch=False):
-    graph = build_graph(eldritch)
-    result_probs = get_probs_for_result(graph)
-    write_final_probabilities(result_probs, filename)
+def process_graph(eldritch=False):
+    resulte_file = "results"
+    paths_file = "paths"
+    if eldritch:
+        resulte_file += "_eldritch"
+        paths_file += "_eldritch"
+    resulte_file += ".txt"
+    paths_file += ".txt"
 
-    # pathfind(result_probs)
+    graph = build_graph(eldritch)
+
+    result_probs = get_probs_for_result(graph)
+    write_final_probabilities(result_probs, resulte_file)
+
+    best_path = pathfind(result_probs)
+    write_final_probabilities(best_path, paths_file)
 
 
 def main():
 
-    process_graph("results.txt")
-    process_graph("results_eldritch.txt", eldritch=True)
+    process_graph()
+    process_graph(eldritch=True)
 
 
 if __name__ == "__main__":
