@@ -151,6 +151,19 @@ class Recomb_Edge:
 
         return prefix_prob * (avoid_prob + annul_prob)
 
+    def starting_item(self):
+        return (self.starting_prefix_count, self.starting_suffix_count)
+
+    def paired_item(self):
+        return (self.paired_prefix_count, self.paired_suffix_count)
+
+    def exclusive_mods(self):
+        return (
+            self.crafted_prefix_count,
+            self.crafted_suffix_count,
+            self.aspect_suffix_count,
+        )
+
     def result_item(self):
         return (self.final_prefix_count, self.final_suffix_count)
 
@@ -274,39 +287,84 @@ def build_graph():
     return graph
 
 
-def write_final_probabilities(graph, filename="graph_edges.txt"):
+# pathfinding algorithm
+# want to know best way to go from one item to another
+# need options, multimod, cheapest, highest prob, least steps?
+# for price just use divs for estimate, use multimod constant, prefix lock for aspect. assume multimod needs to be reapplied
 
-    final_probs = {}
+
+# collect methods of getting to a node in a dict (final prefix, final suffix): combos to get to node and prob of direct combo
+# problem is getting the probs for each item in the combo for overall prob
+
+# example:
+# (3,2): 2p/2s + 3p/1s, 0c/3c0a, prob is 41.04% for this combo
+# need to get prob of 2p/2s and prob of 3p/1s to find overall
+# but for both of these, also need to get prob of items used
+
+
+def get_probs_for_result(graph):
+    result_probs = {}
 
     for parent, edges in graph.items():
 
         for edge in edges:
             edge: Recomb_Edge
-            final_item = edge.result_item()
 
-            if final_item not in final_probs:
-                final_probs[final_item] = []
+            result_item = edge.result_item()
 
-            final_probs[final_item].append(
-                {"recomb": edge.recomb_item(), "prob": edge.probability}
-            )
+            if result_item not in result_probs:
+                result_probs[result_item] = []
+
+            # item = edge.starting_item
+            # item = edge.paired_item
+            # exclusive mods = edge.exclusive_mods
+            # don't add to result_item if there is another match with both item item and exclusive mods
+            if any(
+                (
+                    (
+                        existing_edge.starting_item() == edge.starting_item()
+                        and existing_edge.paired_item() == edge.paired_item()
+                    )
+                    or (
+                        existing_edge.starting_item() == edge.paired_item()
+                        and existing_edge.paired_item() == edge.starting_item()
+                    )
+                )
+                and existing_edge.exclusive_mods() == edge.exclusive_mods()
+                for existing_edge in result_probs[result_item]
+            ):
+                continue
+
+            result_probs[result_item].append(edge)
+
+    # sort by prob
+    for recombs in result_probs.values():
+        recombs.sort(key=lambda obj: obj.probability, reverse=True)
+
+    return result_probs
+
+
+def write_final_probabilities(result_probs, filename="graph_edges.txt"):
 
     with open(filename, "w") as f:
-        for item, recombs in final_probs.items():
-
-            recombs = sorted(recombs, key=lambda obj: obj["prob"], reverse=True)
+        for item, recombs in result_probs.items():
 
             f.write(f"\n-------------------------------------\n")
             f.write(f"{item}\n")
             for recomb in recombs:
-                recomb_item = recomb["recomb"]
-                recomb_prob = recomb["prob"]
+                recomb: Recomb_Edge
+
+                recomb_item = recomb.recomb_item()
+                recomb_prob = recomb.probability
                 f.write(f"Recomb: {recomb_item}, Probability: {recomb_prob:.2%}\n")
 
 
 def main():
     graph = build_graph()
-    write_final_probabilities(graph)
+
+    result_probs = get_probs_for_result(graph)
+
+    write_final_probabilities(result_probs)
 
 
 if __name__ == "__main__":
