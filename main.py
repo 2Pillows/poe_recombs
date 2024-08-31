@@ -65,8 +65,10 @@ class Recomb_Edge:
         total_prefixes = self.desired_prefix_count + self.exclusive_prefixes
         total_suffixes = self.desired_suffix_count + self.exclusive_suffixes
 
-        ###################################
         # if aspect suffix, need to get chances of avoiding / annulling
+        avoid_aspect_prob = 1 - self.aspect_suffix_count / max(
+            self.exclusive_suffixes, 1
+        )
 
         # if prefix first, suffixes assume no exclusive, but requires there to be exclusive prefixes
         prefix_first = self._item_probability(
@@ -80,6 +82,7 @@ class Recomb_Edge:
             + (
                 1 if self.exclusive_prefixes == 0 else 0
             ),  # require 1 exclusive suffix if no exclusive prefix
+            avoid_aspect_prob,  # chance of avoiding aspect
         )
 
         suffix_first = self._item_probability(
@@ -93,6 +96,7 @@ class Recomb_Edge:
             + (
                 1 if self.exclusive_suffixes > 0 else 0
             ),  # only require at most 1 exclusive suffix
+            avoid_aspect_prob,  # chance of avoiding aspect
         )
 
         # if (
@@ -117,6 +121,7 @@ class Recomb_Edge:
         # suffixes
         initial_suffixes,
         final_suffixes,
+        avoid_aspect_odds,
     ):
 
         if (
@@ -127,10 +132,25 @@ class Recomb_Edge:
         ):
             return 0
 
-        return (
-            CUMSUM[initial_prefixes][final_prefixes]
-            * CUMSUM[initial_suffixes][final_suffixes]
-        )
+        prefix_prob = CUMSUM[initial_prefixes][final_prefixes]
+        suffix_prob = CUMSUM[initial_suffixes][final_suffixes]
+
+        # if no suffixes are required, can lock prefix and wipe
+        # aspect doesn't matter
+        if avoid_aspect_odds == 0 or final_suffixes == 0:
+            return prefix_prob * suffix_prob
+
+        # need to get odds of avoiding or annuling aspect
+        # will assume eldritch availlable
+
+        # avoiding is aspect count / exclusive count
+
+        # annulling is 1 / final suffixes
+
+        avoid_prob = suffix_prob * avoid_aspect_odds
+        annul_prob = suffix_prob * (1 - avoid_aspect_odds) * 1 / final_suffixes
+
+        return prefix_prob * (avoid_prob + annul_prob)
 
     def result_item(self):
         return (self.final_prefix_count, self.final_suffix_count)
