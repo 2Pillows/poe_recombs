@@ -67,19 +67,43 @@ class Recomb_Edge:
         # required number of mods is final + min(exclusive, 1)
         # if aspect suffix, need to get chances of avoiding / annulling
 
+        # if prefix first, suffixes assume no exclusive, but requires there to be exclusive prefixes
         prefix_first = self._item_probability(
             total_prefixes,
-            self.final_prefix_count + min(self.exclusive_prefixes, 1),
+            self.final_prefix_count
+            + (
+                1 if self.exclusive_prefixes > 0 else 0
+            ),  # only require at most 1 exclusive prefix
             total_suffixes,
-            self.final_suffix_count,
+            self.final_suffix_count
+            + (
+                1 if self.exclusive_prefixes == 0 else 0
+            ),  # require 1 exclusive suffix if no exclusive prefix
         )
 
         suffix_first = self._item_probability(
             total_prefixes,
-            self.final_prefix_count,
+            self.final_prefix_count
+            + (
+                1 if self.exclusive_suffixes == 0 else 0
+            ),  # require 1 exclusive prefix if no exclusive suffix
             total_suffixes,
-            self.final_suffix_count + min(self.exclusive_suffixes, 1),
+            self.final_suffix_count
+            + (
+                1 if self.exclusive_suffixes > 0 else 0
+            ),  # only require at most 1 exclusive suffix
         )
+
+        # if (
+        #     self.final_prefix_count == 0
+        #     and self.final_suffix_count == 2
+        #     and self.desired_prefix_count == 0
+        #     and self.crafted_prefix_count == 0
+        #     and self.desired_suffix_count == 2
+        #     and self.crafted_suffix_count == 2
+        #     and self.aspect_suffix_count == 0
+        # ):
+        #     print("check")
 
         return 0.5 * (prefix_first + suffix_first)
 
