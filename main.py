@@ -404,22 +404,13 @@ def process_graph(filename, eldritch=False):
     result_probs = get_probs_for_result(graph)
     write_final_probabilities(result_probs, filename)
 
+    # pathfind(result_probs)
+
 
 def main():
 
-    process_graph()
-    process_graph(eldritch=True)
-
-    graph = build_graph()
-    result_probs = get_probs_for_result(graph)
-
-    eldritch_graph = build_graph(eldritch=True)
-    result_eldritch_probs = get_probs_for_result(eldritch_graph)
-
-    write_final_probabilities(result_probs, "result.txt")
-    write_final_probabilities(result_eldritch_probs, "result_eldritch.txt")
-
-    pathfind(result_probs)
+    process_graph("results.txt")
+    process_graph("results_eldritch.txt", eldritch=True)
 
 
 if __name__ == "__main__":
