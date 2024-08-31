@@ -65,19 +65,16 @@ class Recomb_Edge:
         total_prefixes = self.desired_prefix_count + self.exclusive_prefixes
         total_suffixes = self.desired_suffix_count + self.exclusive_suffixes
 
-        # if aspect suffix, need to get chances of avoiding / annulling
-        chance_aspect = self.aspect_suffix_count / max(self.exclusive_suffixes, 1)
-
-        if (
-            self.final_prefix_count == 1
-            and self.final_suffix_count == 1
-            and self.desired_prefix_count == 1
-            and self.crafted_prefix_count == 2
-            and self.desired_suffix_count == 1
-            and self.crafted_suffix_count == 0
-            and self.aspect_suffix_count == 2
-        ):
-            print("check")
+        # if (
+        #     self.final_prefix_count == 1
+        #     and self.final_suffix_count == 1
+        #     and self.desired_prefix_count == 1
+        #     and self.crafted_prefix_count == 2
+        #     and self.desired_suffix_count == 1
+        #     and self.crafted_suffix_count == 0
+        #     and self.aspect_suffix_count == 2
+        # ):
+        #     print("check")
 
         # if prefix first, suffixes assume no exclusive, but requires there to be exclusive prefixes
         prefix_first = self._item_probability(
@@ -91,7 +88,7 @@ class Recomb_Edge:
             + (
                 1 if self.exclusive_prefixes == 0 else 0
             ),  # require 1 exclusive suffix if no exclusive prefix
-            chance_aspect,  # chance of getting aspect
+            0,  # can't get aspect if prefix first
         )
 
         suffix_first = self._item_probability(
@@ -105,8 +102,20 @@ class Recomb_Edge:
             + (
                 1 if self.exclusive_suffixes > 0 else 0
             ),  # only require at most 1 exclusive suffix
-            chance_aspect,  # chance of getting aspect
+            self.aspect_suffix_count
+            / max(self.exclusive_suffixes, 1),  # chance of getting aspect
         )
+
+        # if (
+        #     self.final_prefix_count == 1
+        #     and self.final_suffix_count == 1
+        #     and self.desired_prefix_count == 1
+        #     and self.crafted_prefix_count == 2
+        #     and self.desired_suffix_count == 1
+        #     and self.crafted_suffix_count == 0
+        #     and self.aspect_suffix_count == 2
+        # ):
+        #     print("check")
 
         return 0.5 * (prefix_first + suffix_first)
 
