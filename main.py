@@ -1,7 +1,5 @@
 # main.py
 
-import random
-
 MAX_MOD_POOL = 6
 MAX_CRAFTED_MODS = 6
 
@@ -34,6 +32,7 @@ class Recomb_Edge:
         final_prefix_count,
         final_suffix_count,
         recomb_details,
+        eldritch_annul,
     ):
 
         # two items used for recomb
@@ -52,6 +51,8 @@ class Recomb_Edge:
             self.crafted_suffix_count,
             self.aspect_suffix_count,
         ) = recomb_details
+
+        self.eldritch_annul = eldritch_annul
 
         self.exclusive_prefixes = self.crafted_prefix_count
         self.exclusive_suffixes = self.crafted_suffix_count + self.aspect_suffix_count
@@ -140,14 +141,22 @@ class Recomb_Edge:
             return prefix_prob * suffix_prob
 
         # need to get odds of avoiding or annuling aspect
-        # will assume eldritch availlable
 
         # avoiding is aspect count / exclusive count
 
-        # annulling is 1 / final suffixes
+        # if self.eldritch annul
+        # annuling is 1 / final suffixes
+        # else
+        # annuling is 1 / (final prefixes + final suffixes)
 
         avoid_prob = suffix_prob * avoid_aspect_odds
-        annul_prob = suffix_prob * (1 - avoid_aspect_odds) * 1 / final_suffixes
+
+        annul_odds = (
+            1 / final_suffixes
+            if self.eldritch_annul
+            else 1 / (final_prefixes + final_suffixes)
+        )
+        annul_prob = suffix_prob * (1 - avoid_aspect_odds) * annul_odds
 
         return prefix_prob * (avoid_prob + annul_prob)
 
@@ -202,7 +211,7 @@ def get_recomb_options():
     ]
 
 
-def build_graph():
+def build_graph(eldritch=False):
     graph = {}
 
     recomb_options = get_recomb_options()
@@ -283,6 +292,7 @@ def build_graph():
                         final_prefix_count,
                         final_suffix_count,
                         recomb_details,
+                        eldritch,
                     )
                     if new_edge.probability > 0:
                         edges.append(new_edge)
@@ -308,6 +318,43 @@ def build_graph():
 # but for both of these, also need to get prob of items used
 
 
+# recursion? or build dict from gorund up and lookup other probs?
+def pathfind(result_probs):
+    final_probs = {
+        (0, 0): 1.0,  # scour
+        (1, 0): 1.0,  # alt spam
+        (0, 1): 1.0,  # alt spam
+    }
+
+    # for result, edges in result_probs.items():
+    #     best_prob = 0
+    #     best_recomb = None
+
+    #     for edge in edges:
+    #         edge: Recomb_Edge
+    #         item1 = (edge.starting_prefix_count, edge.starting_suffix_count)
+    #         item2 = (edge.paired_prefix_count, edge.paired_suffix_count)
+
+    #         # Get the probabilities of the input items
+    #         prob_item1 = final_probs.get(item1, 0)
+    #         prob_item2 = final_probs.get(item2, 0)
+
+    #         # Calculate the overall probability
+    #         combined_prob = prob_item1 * prob_item2 * edge.probability
+
+    #         # Keep track of the best probability and method
+    #         if combined_prob > best_prob:
+    #             best_prob = combined_prob
+    #             best_recomb = edge.recomb_item()
+
+    #     # Store the best probability for this result
+    #     final_probs[result] = best_prob
+    #     # Optionally, store the best recombination method too
+    #     # final_recombs[result] = best_recomb
+
+    print("pathfind done")
+
+
 def get_probs_for_result(graph):
     result_probs = {}
 
@@ -320,11 +367,6 @@ def get_probs_for_result(graph):
 
             if result_item not in result_probs:
                 result_probs[result_item] = []
-
-            # item = edge.starting_item
-            # item = edge.paired_item
-            # exclusive mods = edge.exclusive_mods
-            # don't add to result_item if there is another match with both item item and exclusive mods
 
             if any(
                 existing_edge.recomb_details() == edge.recomb_details()
@@ -342,7 +384,7 @@ def get_probs_for_result(graph):
     return result_probs
 
 
-def write_final_probabilities(result_probs, filename="graph_edges.txt"):
+def write_final_probabilities(result_probs, filename):
 
     with open(filename, "w") as f:
         for item, recombs in result_probs.items():
@@ -357,12 +399,27 @@ def write_final_probabilities(result_probs, filename="graph_edges.txt"):
                 f.write(f"Recomb: {recomb_item}, Probability: {recomb_prob:.2%}\n")
 
 
-def main():
-    graph = build_graph()
+def process_graph(filename, eldritch=False):
+    graph = build_graph(eldritch)
+    result_probs = get_probs_for_result(graph)
+    write_final_probabilities(result_probs, filename)
 
+
+def main():
+
+    process_graph()
+    process_graph(eldritch=True)
+
+    graph = build_graph()
     result_probs = get_probs_for_result(graph)
 
-    write_final_probabilities(result_probs)
+    eldritch_graph = build_graph(eldritch=True)
+    result_eldritch_probs = get_probs_for_result(eldritch_graph)
+
+    write_final_probabilities(result_probs, "result.txt")
+    write_final_probabilities(result_eldritch_probs, "result_eldritch.txt")
+
+    pathfind(result_probs)
 
 
 if __name__ == "__main__":
