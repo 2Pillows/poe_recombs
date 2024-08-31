@@ -164,6 +164,12 @@ class Recomb_Edge:
             self.aspect_suffix_count,
         )
 
+    def recomb_details(self):
+        return (
+            sorted((self.starting_item(), self.paired_item())),
+            self.exclusive_mods(),
+        )
+
     def result_item(self):
         return (self.final_prefix_count, self.final_suffix_count)
 
@@ -319,17 +325,9 @@ def get_probs_for_result(graph):
             # item = edge.paired_item
             # exclusive mods = edge.exclusive_mods
             # don't add to result_item if there is another match with both item item and exclusive mods
+
             if any(
-                (
-                    (
-                        existing_edge.starting_item() == edge.starting_item()
-                        and existing_edge.paired_item() == edge.paired_item()
-                    )
-                    or (
-                        existing_edge.starting_item() == edge.paired_item()
-                        and existing_edge.paired_item() == edge.starting_item()
-                    )
-                )
+                existing_edge.recomb_details() == edge.recomb_details()
                 and existing_edge.exclusive_mods() == edge.exclusive_mods()
                 for existing_edge in result_probs[result_item]
             ):
