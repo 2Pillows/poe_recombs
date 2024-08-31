@@ -42,14 +42,14 @@ class Recomb_Edge:
         aspect_suffix_count,
     ):
 
+        self.final_prefix_count = final_prefix_count
+        self.final_suffix_count = final_suffix_count
+
         self.desired_prefix_count = desired_prefix_count
         self.desired_suffix_count = desired_suffix_count
         self.crafted_prefix_count = crafted_prefix_count
         self.crafted_suffix_count = crafted_suffix_count
         self.aspect_suffix_count = aspect_suffix_count
-
-        self.final_prefix_count = final_prefix_count
-        self.final_suffix_count = final_suffix_count
 
         self.exclusive_prefixes = self.crafted_prefix_count
         self.exclusive_suffixes = self.crafted_suffix_count + self.aspect_suffix_count
@@ -194,10 +194,7 @@ def build_graph():
 
                 # need to have at least name number of desired prefixes as final
                 # having more is fine, but can't have less
-
-                ##########################################################
                 # final item is result of starting item + recomb item, need to make sure recomb item is valid, 3 max affixes
-                ########################################################
                 if (
                     desired_prefix_count < starting_prefix_count
                     or desired_suffix_count < starting_suffix_count
@@ -211,13 +208,13 @@ def build_graph():
                     (starting_prefix_count, starting_suffix_count + 1),  # +1 suffix
                 ]
 
-                for new_prefix, new_suffix in possible_edges:
-                    if new_prefix > MAX_FINAL_AFFIX or new_suffix > MAX_FINAL_AFFIX:
+                for final_prefix, final_suffix in possible_edges:
+                    if final_prefix > MAX_FINAL_AFFIX or final_suffix > MAX_FINAL_AFFIX:
                         continue
 
                     new_edge = Recomb_Edge(
-                        new_prefix,
-                        new_suffix,
+                        final_prefix,
+                        final_suffix,
                         desired_prefix_count,
                         desired_suffix_count,
                         crafted_prefix_count,
