@@ -33,6 +33,10 @@ CUMSUM_M = len(CUMSUM[0])
 class Recomb_Edge:
     def __init__(
         self,
+        starting_prefix_count,
+        starting_suffix_count,
+        paired_prefix_count,
+        paired_suffix_count,
         final_prefix_count,
         final_suffix_count,
         desired_prefix_count,
@@ -41,6 +45,11 @@ class Recomb_Edge:
         crafted_suffix_count,
         aspect_suffix_count,
     ):
+        # two items used for recomb
+        self.starting_prefix_count = starting_prefix_count
+        self.starting_suffix_count = starting_suffix_count
+        self.paired_prefix_count = paired_prefix_count
+        self.paired_suffix_count = paired_suffix_count
 
         self.final_prefix_count = final_prefix_count
         self.final_suffix_count = final_suffix_count
@@ -143,7 +152,8 @@ class Recomb_Edge:
         return (self.final_prefix_count, self.final_suffix_count)
 
     def recomb_item(self):
-        return f"{self.desired_prefix_count}p{self.exclusive_prefixes}c/{self.desired_suffix_count}s{self.exclusive_suffixes}c{self.aspect_suffix_count}a"
+        # item 1 + item 2
+        return f"{self.starting_prefix_count}p/{self.starting_suffix_count}s + {self.paired_prefix_count}p/{self.paired_suffix_count}s | {self.crafted_prefix_count}c/{self.crafted_suffix_count}c{self.aspect_suffix_count}a"
 
 
 # every combo of affixes
@@ -192,14 +202,17 @@ def build_graph():
                     aspect_suffix_count,
                 ) = recomb_details
 
+                paired_prefix_count = desired_prefix_count - starting_prefix_count
+                paired_suffix_count = desired_suffix_count - starting_suffix_count
+
                 # need to have at least name number of desired prefixes as final
                 # having more is fine, but can't have less
                 # final item is result of starting item + recomb item, need to make sure recomb item is valid, 3 max affixes
                 if (
                     desired_prefix_count < starting_prefix_count
                     or desired_suffix_count < starting_suffix_count
-                    or desired_prefix_count - starting_prefix_count > MAX_FINAL_AFFIX
-                    or desired_suffix_count - starting_suffix_count > MAX_FINAL_AFFIX
+                    or paired_prefix_count > MAX_FINAL_AFFIX
+                    or paired_suffix_count > MAX_FINAL_AFFIX
                 ):
                     continue
 
@@ -208,13 +221,22 @@ def build_graph():
                     (starting_prefix_count, starting_suffix_count + 1),  # +1 suffix
                 ]
 
-                for final_prefix, final_suffix in possible_edges:
-                    if final_prefix > MAX_FINAL_AFFIX or final_suffix > MAX_FINAL_AFFIX:
+                for final_prefix_count, final_suffix_count in possible_edges:
+                    if (
+                        final_prefix_count > MAX_FINAL_AFFIX
+                        or final_suffix_count > MAX_FINAL_AFFIX
+                        or desired_prefix_count < final_prefix_count
+                        or desired_suffix_count < final_suffix_count
+                    ):
                         continue
 
                     new_edge = Recomb_Edge(
-                        final_prefix,
-                        final_suffix,
+                        starting_prefix_count,
+                        starting_suffix_count,
+                        paired_prefix_count,
+                        paired_suffix_count,
+                        final_prefix_count,
+                        final_suffix_count,
                         desired_prefix_count,
                         desired_suffix_count,
                         crafted_prefix_count,
