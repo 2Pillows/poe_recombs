@@ -359,7 +359,9 @@ def pathfind(result_probs):
             if recomb_prob > final_probs[result]:
                 final_probs[result] = recomb_prob
                 best_recombs[result] = [edge]
-            elif recomb_prob == final_probs[result]:
+
+            # if within 2% also include
+            elif abs(recomb_prob - final_probs[result]) <= 0.02:
                 best_recombs[result].append(edge)
 
     return best_recombs

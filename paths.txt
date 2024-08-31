@@ -31,6 +31,7 @@ Recomb: 0p/2s + 0p/1s | 3c/3c0a, Probability: 36.00%
 -------------------------------------
 (1, 2)
 Recomb: 1p/1s + 0p/1s | 3c/3c1a, Probability: 74.25%
+Recomb: 1p/1s + 0p/1s | 3c/3c0a, Probability: 73.50%
 
 -------------------------------------
 (2, 1)
@@ -48,6 +49,7 @@ Recomb: 0p/2s + 1p/1s | 3c/3c0a, Probability: 32.40%
 -------------------------------------
 (2, 2)
 Recomb: 1p/1s + 1p/1s | 3c/3c1a, Probability: 57.30%
+Recomb: 1p/1s + 1p/1s | 3c/3c0a, Probability: 57.00%
 
 -------------------------------------
 (3, 1)
@@ -56,7 +58,12 @@ Recomb: 1p/1s + 2p/0s | 3c/3c0a, Probability: 32.40%
 -------------------------------------
 (2, 3)
 Recomb: 1p/2s + 1p/1s | 3c/3c0a, Probability: 20.52%
+Recomb: 2p/1s + 0p/2s | 3c/3c0a, Probability: 20.52%
 
 -------------------------------------
 (3, 2)
 Recomb: 2p/1s + 1p/1s | 3c/3c1a, Probability: 20.52%
+Recomb: 1p/2s + 2p/0s | 2c/4c0a, Probability: 20.52%
+Recomb: 1p/2s + 2p/0s | 3c/3c0a, Probability: 20.52%
+Recomb: 2p/1s + 1p/1s | 2c/4c0a, Probability: 20.52%
+Recomb: 2p/1s + 1p/1s | 3c/3c0a, Probability: 20.52%
