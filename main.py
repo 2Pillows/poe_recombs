@@ -9,6 +9,7 @@ MAX_FINAL_AFFIX = 3
 
 # cumulative sum of weight table
 CUMSUM = [
+    # 0    1     2     3         final mods
     [1.00, 0.00, 0.00, 0.00],  # 0 initial mods, guaranteed 0 mods
     [1.00, 0.59, 0.00, 0.00],  # 1 initial mod
     [1.00, 1.00, 0.33, 0.00],  # 2 initial mods
