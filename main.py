@@ -364,6 +364,10 @@ def pathfind(result_probs):
             elif abs(recomb_prob - final_probs[result]) <= 0.02:
                 best_recombs[result].append({"edge": edge, "overall prob": recomb_prob})
 
+    # sort by overall prob
+    for recombs in best_recombs.values():
+        recombs.sort(key=lambda obj: obj["overall prob"], reverse=True)
+
     return best_recombs
 
 
