@@ -181,6 +181,9 @@ def get_recomb_options():
 
 
 # graph dict with {(prefix, suffix): [edges from node]}
+
+
+# 2p/1s + 1p/1s has chance to make 3p/2s, even though requires +1 prefix and suffix
 def build_graph():
     graph = {}
 
@@ -205,6 +208,19 @@ def build_graph():
                 paired_prefix_count = desired_prefix_count - starting_prefix_count
                 paired_suffix_count = desired_suffix_count - starting_suffix_count
 
+                # if (
+                #     starting_prefix_count == 2
+                #     and starting_suffix_count == 1
+                #     and paired_prefix_count == 1
+                #     and paired_suffix_count == 1
+                #     # and desired_prefix_count == 5
+                #     # and crafted_prefix_count == 1
+                #     # and desired_suffix_count == 2
+                #     # and crafted_suffix_count == 4
+                #     # and aspect_suffix_count == 0
+                # ):
+                #     print("check")
+
                 # need to have at least name number of desired prefixes as final
                 # having more is fine, but can't have less
                 # final item is result of starting item + recomb item, need to make sure recomb item is valid, 3 max affixes
@@ -216,9 +232,15 @@ def build_graph():
                 ):
                     continue
 
+                # all possible edges from point
                 possible_edges = [
-                    (starting_prefix_count + 1, starting_suffix_count),  # +1 prefix
-                    (starting_prefix_count, starting_suffix_count + 1),  # +1 suffix
+                    (
+                        starting_prefix_count + additional_prefix,
+                        starting_suffix_count + additional_suffix,
+                    )
+                    for additional_prefix in range(paired_prefix_count + 1)
+                    for additional_suffix in range(paired_suffix_count + 1)
+                    if not (additional_prefix == 0 and additional_suffix == 0)
                 ]
 
                 for final_prefix_count, final_suffix_count in possible_edges:
