@@ -31,16 +31,25 @@ CUMSUM_M = len(CUMSUM[0])
 
 # Inputs for reomb, edges between two result nodes
 class Recomb_Edge:
-    def __init__(self, final_prefix_count, final_suffix_count, recomb_deatils):
+    def __init__(
+        self,
+        final_prefix_count,
+        final_suffix_count,
+        desired_prefix_count,
+        desired_suffix_count,
+        crafted_prefix_count,
+        crafted_suffix_count,
+        aspect_suffix_count,
+    ):
+
+        self.desired_prefix_count = desired_prefix_count
+        self.desired_suffix_count = desired_suffix_count
+        self.crafted_prefix_count = crafted_prefix_count
+        self.crafted_suffix_count = crafted_suffix_count
+        self.aspect_suffix_count = aspect_suffix_count
+
         self.final_prefix_count = final_prefix_count
         self.final_suffix_count = final_suffix_count
-        (
-            self.desired_prefix_count,
-            self.desired_suffix_count,
-            self.crafted_prefix_count,
-            self.crafted_suffix_count,
-            self.aspect_suffix_count,
-        ) = recomb_deatils
 
         self.exclusive_prefixes = self.crafted_prefix_count
         self.exclusive_suffixes = self.crafted_suffix_count + self.aspect_suffix_count
@@ -48,13 +57,6 @@ class Recomb_Edge:
         self.probability = self._probability()
 
     def _probability(self):
-        # need to have at least name number of desired prefixes as final
-        # having more is fine, but can't have less
-        if (
-            self.desired_prefix_count < self.final_prefix_count
-            or self.desired_suffix_count < self.final_suffix_count
-        ):
-            return 0
 
         # total number of affixes in pool
         total_prefixes = self.desired_prefix_count + self.exclusive_prefixes
@@ -175,27 +177,58 @@ def build_graph():
     recomb_options = get_recomb_options()
 
     # parent node, starting item w/ final affixes
-    for final_prefix_count in range(4):  # 0-3 final prefixes
-        for final_suffix_count in range(4):  # 0-3 final suffixes
+    for starting_prefix_count in range(4):  # 0-3 final prefixes
+        for starting_suffix_count in range(4):  # 0-3 final suffixes
 
             # edges to nodes
             edges = []
 
             for recomb_details in recomb_options:
+                (
+                    desired_prefix_count,
+                    desired_suffix_count,
+                    crafted_prefix_count,
+                    crafted_suffix_count,
+                    aspect_suffix_count,
+                ) = recomb_details
+
+                # need to have at least name number of desired prefixes as final
+                # having more is fine, but can't have less
+
+                ##########################################################
+                # final item is result of starting item + recomb item, need to make sure recomb item is valid, 3 max affixes
+                ########################################################
+                if (
+                    desired_prefix_count < starting_prefix_count
+                    or desired_suffix_count < starting_suffix_count
+                    or desired_prefix_count - starting_prefix_count > MAX_FINAL_AFFIX
+                    or desired_suffix_count - starting_suffix_count > MAX_FINAL_AFFIX
+                ):
+                    continue
 
                 possible_edges = [
-                    (final_prefix_count + 1, final_suffix_count),  # +1 prefix
-                    (final_prefix_count, final_suffix_count + 1),  # +1 suffix
+                    (starting_prefix_count + 1, starting_suffix_count),  # +1 prefix
+                    (starting_prefix_count, starting_suffix_count + 1),  # +1 suffix
                 ]
 
                 for new_prefix, new_suffix in possible_edges:
-                    if new_prefix <= MAX_FINAL_AFFIX and new_suffix <= MAX_FINAL_AFFIX:
-                        new_edge = Recomb_Edge(new_prefix, new_suffix, recomb_details)
-                        if new_edge.probability > 0:
-                            edges.append(new_edge)
+                    if new_prefix > MAX_FINAL_AFFIX or new_suffix > MAX_FINAL_AFFIX:
+                        continue
+
+                    new_edge = Recomb_Edge(
+                        new_prefix,
+                        new_suffix,
+                        desired_prefix_count,
+                        desired_suffix_count,
+                        crafted_prefix_count,
+                        crafted_suffix_count,
+                        aspect_suffix_count,
+                    )
+                    if new_edge.probability > 0:
+                        edges.append(new_edge)
 
             # add parent and edges to graph
-            graph[(final_prefix_count, final_suffix_count)] = edges
+            graph[(starting_prefix_count, starting_suffix_count)] = edges
 
     return graph
 
