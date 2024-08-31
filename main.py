@@ -22,12 +22,6 @@ CUMSUM = [
 CUMSUM_N = len(CUMSUM)
 CUMSUM_M = len(CUMSUM[0])
 
-# want to know best way to get to X item
-# assume least amount of desired mods present
-
-# also want to know best odds of getting X item
-# should include any number of dsired mods, going for best chances
-
 
 # Inputs for reomb, edges between two result nodes
 class Recomb_Edge:
@@ -71,11 +65,7 @@ class Recomb_Edge:
         total_prefixes = self.desired_prefix_count + self.exclusive_prefixes
         total_suffixes = self.desired_suffix_count + self.exclusive_suffixes
 
-        # easiest way to calc, have func that takes final, total, desired, exclusive affixes and returns prob
-        # change inputs for calc, assuming prefix and suffix first, removing exclusive mods
-
-        # use total mods to fine odds of getting x mods
-        # required number of mods is final + min(exclusive, 1)
+        ###################################
         # if aspect suffix, need to get chances of avoiding / annulling
 
         # if prefix first, suffixes assume no exclusive, but requires there to be exclusive prefixes
@@ -117,12 +107,6 @@ class Recomb_Edge:
         #     print("check")
 
         return 0.5 * (prefix_first + suffix_first)
-
-        # result
-        # 0.5 * (pre pre first * suf pre first + pre suf first * suf suf first)
-        # 0.5 * (pre first item + suf first item)
-
-        # return round(random.random(), 4)
 
     # calculate prefix and suffix probability
     def _item_probability(
@@ -208,8 +192,19 @@ def build_graph():
                 paired_prefix_count = desired_prefix_count - starting_prefix_count
                 paired_suffix_count = desired_suffix_count - starting_suffix_count
 
+                if (
+                    # impossible item to make
+                    paired_prefix_count > MAX_FINAL_AFFIX
+                    or paired_suffix_count > MAX_FINAL_AFFIX
+                ):
+                    continue
+
+                starting_desired_mods = starting_prefix_count + starting_suffix_count
+                paired_desired_mods = paired_prefix_count + paired_suffix_count
+
+                # #  0p/2s + 3p/1s
                 # if (
-                #     starting_prefix_count == 2
+                #     starting_prefix_count == 0
                 #     and starting_suffix_count == 1
                 #     and paired_prefix_count == 1
                 #     and paired_suffix_count == 1
@@ -220,17 +215,6 @@ def build_graph():
                 #     # and aspect_suffix_count == 0
                 # ):
                 #     print("check")
-
-                # need to have at least name number of desired prefixes as final
-                # having more is fine, but can't have less
-                # final item is result of starting item + recomb item, need to make sure recomb item is valid, 3 max affixes
-                if (
-                    desired_prefix_count < starting_prefix_count
-                    or desired_suffix_count < starting_suffix_count
-                    or paired_prefix_count > MAX_FINAL_AFFIX
-                    or paired_suffix_count > MAX_FINAL_AFFIX
-                ):
-                    continue
 
                 # all possible edges from point
                 possible_edges = [
@@ -245,10 +229,15 @@ def build_graph():
 
                 for final_prefix_count, final_suffix_count in possible_edges:
                     if (
+                        # impossible item to make
                         final_prefix_count > MAX_FINAL_AFFIX
                         or final_suffix_count > MAX_FINAL_AFFIX
+                        # can't make final item, not enough desired in pool
                         or desired_prefix_count < final_prefix_count
                         or desired_suffix_count < final_suffix_count
+                        # starting item needs to have more mods, unless (0,0)
+                        # for (0,0), paired can't be more than 1
+                        or max(starting_desired_mods, 1) < paired_desired_mods
                     ):
                         continue
 
