@@ -1,274 +1,182 @@
 # main.py
 
-# Toggle for if eldritch possible
-eldritch_annul = False
+import random
 
+MAX_MOD_POOL = 6
+MAX_CRAFTED_MODS = 6
 
-def calculate_probability(
-    desired_prefix_count,
-    crafted_prefix_count,
-    desired_suffix_count,
-    crafted_suffix_count,
-    aspect_suffix_count,
-):
-    total_prefix_count = desired_prefix_count + crafted_prefix_count
-    total_suffix_count = (
-        desired_suffix_count + crafted_suffix_count + aspect_suffix_count
-    )
+MAX_FINAL_AFFIX = 3
 
-    # Weights table for final mod counts given initial mod counts
-    weights_table = [
-        [0.0, 0.0, 0.0, 0.0],  # 0 initial mod
-        [0.41, 0.59, 0.0, 0.0],  # 1 initial mod
-        [0.0, 0.67, 0.33, 0.0],  # 2 initial mods
-        [0.0, 0.39, 0.52, 0.10],  # 3 initial mods
-        [0.0, 0.11, 0.59, 0.31],  # 4 initial mods
-        [0.0, 0.0, 0.43, 0.57],  # 5 initial mods
-        [0.0, 0.0, 0.28, 0.72],  # 6 initial mods
-    ]
-
-    max_initial = 6
-    max_final = 3
-
-    # get odds of at least final for each possible final
-    cumsum = []
-    for row in weights_table:
-        row_reversed = row[::-1]
-        accumulated = []
-        total = 0.0
-        for value in row_reversed:
-            total = min(total + value, 1.0)
-            accumulated.append(total)
-        cumsum.append(accumulated[::-1])
-
-    # probabilities for prefix/suffix for if prefix or suffix chosen first
-    prefix_first_prefix_prob = 0 if desired_prefix_count != 0 else 1
-    suffix_first_prefix_prob = 0 if desired_prefix_count != 0 else 1
-
-    suffix_first_suffix_prob = 0 if desired_suffix_count != 0 else 1
-    prefix_first_suffix_prob = 0 if desired_suffix_count != 0 else 1
-
-    # probs for getting a reuseable base
-    reuse_prefix_first_prefix_prob = 0 if desired_prefix_count != 0 else 1
-    reuse_suffix_first_prefix_prob = 0 if desired_prefix_count != 0 else 1
-
-    reuse_suffix_first_suffix_prob = 0 if desired_suffix_count != 0 else 1
-    reuse_prefix_first_suffix_prob = 0 if desired_suffix_count != 0 else 1
-
-    # Prefixes
-    if desired_prefix_count != 0:
-        # from desired to max mods, get odds including odds of avoid crafted mods
-        # assumes that you cannot avoid crafted mods, impossible to get 3 desired wo/ crafted
-        required_prefixes = desired_prefix_count + min(crafted_prefix_count, 1)
-
-        if required_prefixes <= max_final and total_prefix_count <= max_initial:
-            prefix_first_prefix_prob = cumsum[total_prefix_count][required_prefixes]
-            reuse_prefix_first_prefix_prob = cumsum[total_prefix_count][
-                required_prefixes - 1
-            ]
-
-        # suffixes are calculated first
-        # remove any crafted / exclusive mods from pool
-        if (
-            desired_suffix_count < max_final
-            and total_prefix_count <= max_initial
-            and crafted_suffix_count > 0
-        ):
-            suffix_first_prefix_prob = cumsum[total_prefix_count][desired_prefix_count]
-            reuse_suffix_first_prefix_prob = cumsum[total_prefix_count][
-                desired_prefix_count - 1
-            ]
-
-    # Suffixes
-    if desired_suffix_count != 0:
-
-        # from desired to max mods, get odds including odds of avoid crafted mods
-        exclusive_suffixes = crafted_suffix_count + aspect_suffix_count
-        required_suffixes = desired_suffix_count + min(exclusive_suffixes, 1)
-
-        if required_suffixes <= max_final and total_suffix_count <= max_initial:
-            suffix_first_suffix_prob = cumsum[total_suffix_count][required_suffixes]
-            reuse_suffix_first_suffix_prob = cumsum[total_suffix_count][
-                required_suffixes - 1
-            ]
-
-            # if there is an aspect, u need to calc odds of avoiding or annuling
-            if aspect_suffix_count:
-
-                # get another exclusive suffix
-                avoid_aspect_prob = suffix_first_suffix_prob * (
-                    1 - aspect_suffix_count / exclusive_suffixes
-                )
-
-                # assume u get perfect prefixes
-                annul_prob = (
-                    1 / required_suffixes
-                    if eldritch_annul
-                    else 1 / (desired_prefix_count + required_suffixes)
-                )
-
-                annul_aspect_prob = (
-                    suffix_first_suffix_prob
-                    * (aspect_suffix_count / exclusive_suffixes)
-                    * annul_prob
-                )
-
-                reuse_annul_prob = (
-                    1 / (required_suffixes - 1)
-                    if eldritch_annul
-                    else 1 / (desired_prefix_count + required_suffixes - 1)
-                )
-
-                reuse_annul_aspect_prob = (
-                    reuse_suffix_first_suffix_prob
-                    * (aspect_suffix_count / exclusive_suffixes)
-                    * reuse_annul_prob
-                )
-
-                suffix_first_suffix_prob = avoid_aspect_prob + annul_aspect_prob
-                reuse_suffix_first_suffix_prob = (
-                    avoid_aspect_prob + reuse_annul_aspect_prob
-                )
-
-        # prefixes are calculated first
-        # remove any crafted / exclusive mods from pool
-        if (
-            desired_prefix_count < max_final
-            and total_suffix_count <= max_initial
-            and crafted_prefix_count > 0
-        ):
-            prefix_first_suffix_prob = cumsum[total_suffix_count][desired_suffix_count]
-            reuse_prefix_first_suffix_prob = cumsum[total_suffix_count][
-                desired_suffix_count - 1
-            ]
-
-    # Total odds of success
-    prefix_first_prob = 0.5 * prefix_first_prefix_prob * prefix_first_suffix_prob
-    suffix_first_prob = 0.5 * suffix_first_prefix_prob * suffix_first_suffix_prob
-    total_probability = prefix_first_prob + suffix_first_prob
-
-    reuse_prefix_first_prob = (
-        0.5 * reuse_prefix_first_prefix_prob * reuse_prefix_first_suffix_prob
-    )
-    reuse_suffix_first_prob = (
-        0.5 * reuse_suffix_first_prefix_prob * reuse_suffix_first_suffix_prob
-    )
-    reuse_total_probability = reuse_prefix_first_prob + reuse_suffix_first_prob
-
-    # if (
-    #     desired_prefix_count == 2
-    #     and desired_suffix_count == 0
-    #     and crafted_prefix_count == 1
-    #     and crafted_suffix_count == 1
-    #     and aspect_suffix_count == 0
-    # ):
-    #     print("a")
-
-    return total_probability, reuse_total_probability
-
-
-results = {}
-
-max_total_mods = 6
-
-combinations = [
-    (
-        desired_prefix_count,
-        crafted_prefix_count,
-        desired_suffix_count,
-        crafted_suffix_count,
-        aspect_suffix_count,
-    )
-    for desired_prefix_count in range(4)
-    for crafted_prefix_count in range(5)
-    if desired_prefix_count + crafted_prefix_count <= max_total_mods
-    for desired_suffix_count in range(4)
-    for crafted_suffix_count in range(7)
-    if crafted_prefix_count + crafted_suffix_count <= 6
-    for aspect_suffix_count in range(2)
+# cumulative sum of weight table
+CUMSUM = [
+    [1.00, 0.00, 0.00, 0.00],  # 0 initial mods, guaranteed 0 mods
+    [1.00, 0.59, 0.00, 0.00],  # 1 initial mod
+    [1.00, 1.00, 0.33, 0.00],  # 2 initial mods
+    [1.00, 1.00, 0.62, 0.10],  # 3 initial mods
+    [1.00, 1.00, 0.90, 0.31],  # 4 initial mods
+    [1.00, 1.00, 1.00, 0.57],  # 5 initial mods
+    [1.00, 1.00, 1.00, 0.72],  # 6 initial mods
 ]
 
-# Process each combination
-for combo in combinations:
-    (
-        desired_prefix_count,
-        crafted_prefix_count,
-        desired_suffix_count,
-        crafted_suffix_count,
-        aspect_suffix_count,
-    ) = combo
+CUMSUM_N = len(CUMSUM)
+CUMSUM_M = len(CUMSUM[0])
 
-    if (
-        desired_suffix_count + crafted_suffix_count + aspect_suffix_count
-    ) > max_total_mods or (desired_prefix_count == 0 and desired_suffix_count == 0):
-        continue
 
-    prob_success, prob_reusable_base = calculate_probability(
-        desired_prefix_count,
-        crafted_prefix_count,
-        desired_suffix_count,
-        crafted_suffix_count,
-        aspect_suffix_count,
-    )
+# Inputs for reomb, edges between two result nodes
+class Recomb_Edge:
+    def __init__(self, final_prefix_count, final_suffix_count, recomb_deatils):
+        self.final_prefix_count = final_prefix_count
+        self.final_suffix_count = final_suffix_count
+        (
+            self.desired_prefix_count,
+            self.desired_suffix_count,
+            self.crafted_prefix_count,
+            self.crafted_suffix_count,
+            self.aspect_suffix_count,
+        ) = recomb_deatils
 
-    # add probability if possible
-    if prob_success > 0:
-        if (desired_prefix_count, desired_suffix_count) not in results:
-            results[(desired_prefix_count, desired_suffix_count)] = []
+        self.exclusive_prefixes = self.crafted_prefix_count
+        self.exclusive_suffixes = self.crafted_suffix_count + self.aspect_suffix_count
 
-        results[(desired_prefix_count, desired_suffix_count)].append(
-            {
-                "crafted prefixes": crafted_prefix_count,
-                "crafted suffixes": crafted_suffix_count,
-                "aspect suffixes": aspect_suffix_count,
-                "success": prob_success,
-                "reusable base": prob_reusable_base,
-            }
+        self.probability = self._probability()
+
+    def _probability(self):
+
+        # total number of affixes in pool
+        total_prefixes = self.desired_prefix_count + self.exclusive_prefixes
+        total_suffixes = self.desired_suffix_count + self.exclusive_suffixes
+
+        # easiest way to calc, have func that takes final, total, desired, exclusive affixes and returns prob
+        # change inputs for calc, assuming prefix and suffix first, removing exclusive mods
+
+        # use total mods to fine odds of getting x mods
+        # required number of mods is final + min(exclusive, 1)
+        # if aspect suffix, need to get chances of avoiding / annulling
+
+        prefix_first = self._item_probability(
+            total_prefixes,
+            self.final_prefix_count + min(self.exclusive_prefixes, 1),
+            total_suffixes,
+            self.final_suffix_count,
         )
 
-# write all results
-with open("results.txt", "w") as f:
-    for (desired_prefix_count, desired_suffix_count), entries in results.items():
-        f.write(f"\n{desired_prefix_count}p/{desired_suffix_count}s\n")
-        f.write("-----------------------------------\n")
+        suffix_first = self._item_probability(
+            total_prefixes,
+            self.final_prefix_count,
+            total_suffixes,
+            self.final_suffix_count + min(self.exclusive_suffixes, 1),
+        )
 
-        # sort and write options
-        sorted_entries = sorted(entries, key=lambda x: x["success"], reverse=True)
-        for entry in sorted_entries:
-            # Format the percentage values
-            reusable_base = f"{entry['reusable base']:.2%}"
-            success = f"{entry['success']:.2%}"
-            reusable_base = reusable_base.rjust(7)
-            success = success.rjust(7)
+        return 0.5 * (prefix_first + suffix_first)
 
-            # Write the formatted string
-            f.write(
-                f"{entry['crafted prefixes']}c / {entry['crafted suffixes']}c {entry['aspect suffixes']}a, "
-                f"reusable: {reusable_base}, "
-                f"success: {success}\n"
-            )
+        # result
+        # 0.5 * (pre pre first * suf pre first + pre suf first * suf suf first)
+        # 0.5 * (pre first item + suf first item)
 
-# write results for wo/ multicrafting
-with open("no_multimod_results.txt", "w") as f:
-    for (desired_prefix_count, desired_suffix_count), entries in results.items():
-        f.write(f"\n{desired_prefix_count}p/{desired_suffix_count}s\n")
-        f.write("-----------------------------------\n")
+        # return round(random.random(), 4)
 
-        # sort and write options
-        sorted_entries = sorted(entries, key=lambda x: x["success"], reverse=True)
-        for entry in sorted_entries:
-            if entry["crafted prefixes"] + entry["crafted suffixes"] > 2:
-                continue
+    # calculate prefix and suffix probability
+    def _item_probability(
+        self,
+        # prefixes
+        initial_prefixes,
+        final_prefixes,
+        # suffixes
+        initial_suffixes,
+        final_suffixes,
+    ):
 
-            # Format the percentage values
-            reusable_base = f"{entry['reusable base']:.2%}"
-            success = f"{entry['success']:.2%}"
-            reusable_base = reusable_base.rjust(7)
-            success = success.rjust(7)
+        if (
+            initial_prefixes >= CUMSUM_N
+            or final_prefixes >= CUMSUM_M
+            or initial_suffixes >= CUMSUM_N
+            or final_suffixes >= CUMSUM_M
+        ):
+            return 0
 
-            # Write the formatted string
-            f.write(
-                f"{entry['crafted prefixes']}c / {entry['crafted suffixes']}c {entry['aspect suffixes']}a, "
-                f"reusable: {reusable_base}, "
-                f"success: {success}\n"
-            )
+        return (
+            CUMSUM[initial_prefixes][final_prefixes]
+            * CUMSUM[initial_suffixes][final_suffixes]
+        )
+
+    def result_item(self):
+        return (self.final_prefix_count, self.final_suffix_count)
+
+    def recomb_item(self):
+        return f"{self.desired_prefix_count}p{self.exclusive_prefixes}e/{self.desired_suffix_count}s{self.exclusive_suffixes}e{self.aspect_suffix_count}a"
+
+
+# every combo of affixes
+def get_recomb_options():
+    return [
+        (
+            desired_prefix_count,
+            desired_suffix_count,
+            crafted_prefix_count,
+            crafted_suffix_count,
+            aspect_suffix_count,
+        )
+        for desired_prefix_count in range(7)  # 0-6 desired prefixes
+        for crafted_prefix_count in range(5)  # 0-4 crafted prefixes
+        for desired_suffix_count in range(7)  # 0-6 desired suffixes
+        for crafted_suffix_count in range(7)  # 0-6 crafted suffixes
+        for aspect_suffix_count in range(2)  # 0-1 aspect suffixes
+        if (
+            desired_prefix_count + crafted_prefix_count <= MAX_MOD_POOL
+            and desired_suffix_count + crafted_prefix_count + aspect_suffix_count
+            <= MAX_MOD_POOL
+            and crafted_prefix_count + crafted_suffix_count <= MAX_CRAFTED_MODS
+        )
+    ]
+
+
+# graph dict with {(prefix, suffix): [edges from node]}
+def build_graph():
+    graph = {}
+
+    recomb_options = get_recomb_options()
+
+    # parent node, starting item w/ final affixes
+    for final_prefix_count in range(4):  # 0-3 final prefixes
+        for final_suffix_count in range(4):  # 0-3 final suffixes
+
+            # edges to nodes
+            edges = []
+
+            for recomb_details in recomb_options:
+
+                possible_edges = [
+                    (final_prefix_count + 1, final_suffix_count),  # +1 prefix
+                    (final_prefix_count, final_suffix_count + 1),  # +1 suffix
+                ]
+
+                for new_prefix, new_suffix in possible_edges:
+                    if new_prefix <= MAX_FINAL_AFFIX and new_suffix <= MAX_FINAL_AFFIX:
+                        new_edge = Recomb_Edge(new_prefix, new_suffix, recomb_details)
+                        if new_edge.probability > 0:
+                            edges.append(new_edge)
+
+            # add parent and edges to graph
+            graph[(final_prefix_count, final_suffix_count)] = edges
+
+    return graph
+
+
+def save_edges_to_file(graph, filename="graph_edges.txt"):
+    with open(filename, "w") as f:
+        for parent, edges in graph.items():
+            for edge in edges:
+                edge: Recomb_Edge
+                f.write(
+                    f"From: {parent} -> To: {edge.result_item()} (Recomb: {edge.recomb_item()}) (Probability: {edge.probability:.4f})\n"
+                )
+
+
+def main():
+    graph = build_graph()
+
+    save_edges_to_file(graph)
+
+
+if __name__ == "__main__":
+    main()
