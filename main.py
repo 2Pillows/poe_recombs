@@ -22,6 +22,12 @@ CUMSUM = [
 CUMSUM_N = len(CUMSUM)
 CUMSUM_M = len(CUMSUM[0])
 
+# want to know best way to get to X item
+# assume least amount of desired mods present
+
+# also want to know best odds of getting X item
+# should include any number of dsired mods, going for best chances
+
 
 # Inputs for reomb, edges between two result nodes
 class Recomb_Edge:
@@ -42,6 +48,13 @@ class Recomb_Edge:
         self.probability = self._probability()
 
     def _probability(self):
+        # need to have at least name number of desired prefixes as final
+        # having more is fine, but can't have less
+        if (
+            self.desired_prefix_count < self.final_prefix_count
+            or self.desired_suffix_count < self.final_suffix_count
+        ):
+            return 0
 
         # total number of affixes in pool
         total_prefixes = self.desired_prefix_count + self.exclusive_prefixes
@@ -163,20 +176,39 @@ def build_graph():
     return graph
 
 
-def save_edges_to_file(graph, filename="graph_edges.txt"):
+def write_final_probabilities(graph, filename="graph_edges.txt"):
+
+    final_probs = {}
+
+    for parent, edges in graph.items():
+
+        for edge in edges:
+            edge: Recomb_Edge
+            final_item = edge.result_item()
+
+            if final_item not in final_probs:
+                final_probs[final_item] = []
+
+            final_probs[final_item].append(
+                {"recomb": edge.recomb_item(), "prob": edge.probability}
+            )
+
     with open(filename, "w") as f:
-        for parent, edges in graph.items():
-            for edge in edges:
-                edge: Recomb_Edge
-                f.write(
-                    f"From: {parent} -> To: {edge.result_item()} (Recomb: {edge.recomb_item()}) (Probability: {edge.probability:.4f})\n"
-                )
+        for item, recombs in final_probs.items():
+
+            recombs = sorted(recombs, key=lambda obj: obj["prob"], reverse=True)
+
+            f.write(f"\n-------------------------------------\n")
+            f.write(f"{item}\n")
+            for recomb in recombs:
+                recomb_item = recomb["recomb"]
+                recomb_prob = recomb["prob"]
+                f.write(f"Recomb: {recomb_item}, Probability: {recomb_prob:.2%}\n")
 
 
 def main():
     graph = build_graph()
-
-    save_edges_to_file(graph)
+    write_final_probabilities(graph)
 
 
 if __name__ == "__main__":
