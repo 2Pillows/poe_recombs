@@ -358,11 +358,11 @@ def pathfind(result_probs):
 
             if recomb_prob > final_probs[result]:
                 final_probs[result] = recomb_prob
-                best_recombs[result] = [edge]
+                best_recombs[result] = [{"edge": edge, "overall prob": recomb_prob}]
 
             # if within 2% also include
             elif abs(recomb_prob - final_probs[result]) <= 0.02:
-                best_recombs[result].append(edge)
+                best_recombs[result].append({"edge": edge, "overall prob": recomb_prob})
 
     return best_recombs
 
@@ -396,7 +396,7 @@ def get_probs_for_result(graph):
     return result_probs
 
 
-def write_final_probabilities(result_probs, filename):
+def write_results(result_probs, filename):
 
     with open(filename, "w") as f:
         for item, recombs in result_probs.items():
@@ -411,6 +411,26 @@ def write_final_probabilities(result_probs, filename):
                 f.write(f"Recomb: {recomb_item}, Probability: {recomb_prob:.2%}\n")
 
 
+def write_paths(result_probs, filename):
+
+    with open(filename, "w") as f:
+        for item, recombs in result_probs.items():
+
+            f.write(f"\n-------------------------------------\n")
+            f.write(f"{item}\n")
+            for recomb_info in recombs:
+                recomb = recomb_info["edge"]
+                recomb: Recomb_Edge
+
+                overall_prob = recomb_info["overall prob"]
+
+                recomb_item = recomb.recomb_item()
+                recomb_prob = recomb.probability
+                f.write(
+                    f"Recomb: {recomb_item}, Probability: {recomb_prob:.2%}, Overall Probability: {overall_prob:.2%}\n"
+                )
+
+
 def process_graph(eldritch=False):
     resulte_file = "results"
     paths_file = "paths"
@@ -423,10 +443,10 @@ def process_graph(eldritch=False):
     graph = build_graph(eldritch)
 
     result_probs = get_probs_for_result(graph)
-    write_final_probabilities(result_probs, resulte_file)
+    write_results(result_probs, resulte_file)
 
     best_path = pathfind(result_probs)
-    write_final_probabilities(best_path, paths_file)
+    write_paths(best_path, paths_file)
 
 
 def main():
