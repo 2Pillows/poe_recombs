@@ -117,7 +117,7 @@ class Recomb_Edge:
         return (self.final_prefix_count, self.final_suffix_count)
 
     def recomb_item(self):
-        return f"{self.desired_prefix_count}p{self.exclusive_prefixes}e/{self.desired_suffix_count}s{self.exclusive_suffixes}e{self.aspect_suffix_count}a"
+        return f"{self.desired_prefix_count}p{self.exclusive_prefixes}c/{self.desired_suffix_count}s{self.exclusive_suffixes}c{self.aspect_suffix_count}a"
 
 
 # every combo of affixes
