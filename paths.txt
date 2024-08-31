@@ -1,69 +1,69 @@
 
 -------------------------------------
 (0, 1)
-Recomb: 0p/0s + 0p/1s | 0c/4c0a, Probability: 100.00%, Overall Probability: 100.00%
-Recomb: 0p/0s + 0p/1s | 0c/5c0a, Probability: 100.00%, Overall Probability: 100.00%
-Recomb: 0p/0s + 0p/1s | 2c/4c0a, Probability: 100.00%, Overall Probability: 100.00%
+Recomb: 0p/0s + 0p/1s | 0c/4c0a, Prob: 100.00%, Overall Prob: 100.00%
+Recomb: 0p/0s + 0p/1s | 0c/5c0a, Prob: 100.00%, Overall Prob: 100.00%
+Recomb: 0p/0s + 0p/1s | 2c/4c0a, Prob: 100.00%, Overall Prob: 100.00%
 
 -------------------------------------
 (1, 0)
-Recomb: 0p/0s + 1p/0s | 4c/0c0a, Probability: 100.00%, Overall Probability: 100.00%
-Recomb: 0p/0s + 1p/0s | 4c/2c0a, Probability: 100.00%, Overall Probability: 100.00%
+Recomb: 0p/0s + 1p/0s | 4c/0c0a, Prob: 100.00%, Overall Prob: 100.00%
+Recomb: 0p/0s + 1p/0s | 4c/2c0a, Prob: 100.00%, Overall Prob: 100.00%
 
 -------------------------------------
 (0, 2)
-Recomb: 0p/1s + 0p/1s | 2c/4c0a, Probability: 86.00%, Overall Probability: 86.00%
+Recomb: 0p/1s + 0p/1s | 2c/4c0a, Prob: 86.00%, Overall Prob: 86.00%
 
 -------------------------------------
 (1, 1)
-Recomb: 0p/1s + 1p/0s | 3c/3c0a, Probability: 90.00%, Overall Probability: 90.00%
+Recomb: 0p/1s + 1p/0s | 3c/3c0a, Prob: 90.00%, Overall Prob: 90.00%
 
 -------------------------------------
 (2, 0)
-Recomb: 1p/0s + 1p/0s | 4c/2c0a, Probability: 86.00%, Overall Probability: 86.00%
+Recomb: 1p/0s + 1p/0s | 4c/2c0a, Prob: 86.00%, Overall Prob: 86.00%
 
 -------------------------------------
 (0, 3)
-Recomb: 0p/2s + 0p/1s | 2c/2c1a, Probability: 36.00%, Overall Probability: 30.96%
-Recomb: 0p/2s + 0p/1s | 2c/3c0a, Probability: 36.00%, Overall Probability: 30.96%
-Recomb: 0p/2s + 0p/1s | 3c/3c0a, Probability: 36.00%, Overall Probability: 30.96%
+Recomb: 0p/2s + 0p/1s | 2c/2c1a, Prob: 36.00%, Overall Prob: 30.96%
+Recomb: 0p/2s + 0p/1s | 2c/3c0a, Prob: 36.00%, Overall Prob: 30.96%
+Recomb: 0p/2s + 0p/1s | 3c/3c0a, Prob: 36.00%, Overall Prob: 30.96%
 
 -------------------------------------
 (1, 2)
-Recomb: 1p/1s + 0p/1s | 3c/3c1a, Probability: 74.25%, Overall Probability: 66.83%
-Recomb: 1p/1s + 0p/1s | 3c/3c0a, Probability: 73.50%, Overall Probability: 66.15%
+Recomb: 1p/1s + 0p/1s | 3c/3c1a, Prob: 74.25%, Overall Prob: 66.83%
+Recomb: 1p/1s + 0p/1s | 3c/3c0a, Prob: 73.50%, Overall Prob: 66.15%
 
 -------------------------------------
 (2, 1)
-Recomb: 1p/1s + 1p/0s | 3c/3c0a, Probability: 73.50%, Overall Probability: 66.15%
+Recomb: 1p/1s + 1p/0s | 3c/3c0a, Prob: 73.50%, Overall Prob: 66.15%
 
 -------------------------------------
 (3, 0)
-Recomb: 2p/0s + 1p/0s | 3c/2c0a, Probability: 36.00%, Overall Probability: 30.96%
-Recomb: 2p/0s + 1p/0s | 3c/3c0a, Probability: 36.00%, Overall Probability: 30.96%
+Recomb: 2p/0s + 1p/0s | 3c/2c0a, Prob: 36.00%, Overall Prob: 30.96%
+Recomb: 2p/0s + 1p/0s | 3c/3c0a, Prob: 36.00%, Overall Prob: 30.96%
 
 -------------------------------------
 (1, 3)
-Recomb: 0p/2s + 1p/1s | 3c/3c0a, Probability: 32.40%, Overall Probability: 25.08%
+Recomb: 0p/2s + 1p/1s | 3c/3c0a, Prob: 32.40%, Overall Prob: 25.08%
 
 -------------------------------------
 (2, 2)
-Recomb: 1p/1s + 1p/1s | 3c/3c1a, Probability: 57.30%, Overall Probability: 46.41%
-Recomb: 1p/1s + 1p/1s | 3c/3c0a, Probability: 57.00%, Overall Probability: 46.17%
+Recomb: 1p/1s + 1p/1s | 3c/3c1a, Prob: 57.30%, Overall Prob: 46.41%
+Recomb: 1p/1s + 1p/1s | 3c/3c0a, Prob: 57.00%, Overall Prob: 46.17%
 
 -------------------------------------
 (3, 1)
-Recomb: 1p/1s + 2p/0s | 3c/3c0a, Probability: 32.40%, Overall Probability: 25.08%
+Recomb: 1p/1s + 2p/0s | 3c/3c0a, Prob: 32.40%, Overall Prob: 25.08%
 
 -------------------------------------
 (2, 3)
-Recomb: 1p/2s + 1p/1s | 3c/3c0a, Probability: 20.52%, Overall Probability: 12.34%
-Recomb: 2p/1s + 0p/2s | 3c/3c0a, Probability: 20.52%, Overall Probability: 11.67%
+Recomb: 1p/2s + 1p/1s | 3c/3c0a, Prob: 20.52%, Overall Prob: 12.34%
+Recomb: 2p/1s + 0p/2s | 3c/3c0a, Prob: 20.52%, Overall Prob: 11.67%
 
 -------------------------------------
 (3, 2)
-Recomb: 2p/1s + 1p/1s | 3c/3c1a, Probability: 20.52%, Overall Probability: 12.22%
-Recomb: 2p/1s + 1p/1s | 2c/4c0a, Probability: 20.52%, Overall Probability: 12.22%
-Recomb: 2p/1s + 1p/1s | 3c/3c0a, Probability: 20.52%, Overall Probability: 12.22%
-Recomb: 1p/2s + 2p/0s | 2c/4c0a, Probability: 20.52%, Overall Probability: 11.79%
-Recomb: 1p/2s + 2p/0s | 3c/3c0a, Probability: 20.52%, Overall Probability: 11.79%
+Recomb: 2p/1s + 1p/1s | 3c/3c1a, Prob: 20.52%, Overall Prob: 12.22%
+Recomb: 2p/1s + 1p/1s | 2c/4c0a, Prob: 20.52%, Overall Prob: 12.22%
+Recomb: 2p/1s + 1p/1s | 3c/3c0a, Prob: 20.52%, Overall Prob: 12.22%
+Recomb: 1p/2s + 2p/0s | 2c/4c0a, Prob: 20.52%, Overall Prob: 11.79%
+Recomb: 1p/2s + 2p/0s | 3c/3c0a, Prob: 20.52%, Overall Prob: 11.79%

@@ -412,7 +412,7 @@ def write_results(result_probs, filename):
 
                 recomb_item = recomb.recomb_item()
                 recomb_prob = recomb.probability
-                f.write(f"Recomb: {recomb_item}, Probability: {recomb_prob:.2%}\n")
+                f.write(f"Recomb: {recomb_item}, Prob: {recomb_prob:.2%}\n")
 
 
 def write_paths(result_probs, filename):
@@ -431,7 +431,7 @@ def write_paths(result_probs, filename):
                 recomb_item = recomb.recomb_item()
                 recomb_prob = recomb.probability
                 f.write(
-                    f"Recomb: {recomb_item}, Probability: {recomb_prob:.2%}, Overall Probability: {overall_prob:.2%}\n"
+                    f"Recomb: {recomb_item}, Prob: {recomb_prob:.2%}, Overall Prob: {overall_prob:.2%}\n"
                 )
 
 
