@@ -154,7 +154,7 @@ def get_recomb_options():
         for crafted_prefix_count in range(5)  # 0-4 crafted prefixes
         for desired_suffix_count in range(7)  # 0-6 desired suffixes
         for crafted_suffix_count in range(7)  # 0-6 crafted suffixes
-        for aspect_suffix_count in range(2)  # 0-1 aspect suffixes
+        for aspect_suffix_count in range(3)  # 0-2 aspect suffixes
         if (
             desired_prefix_count + crafted_prefix_count <= MAX_MOD_POOL
             and desired_suffix_count + crafted_prefix_count + aspect_suffix_count
@@ -162,9 +162,6 @@ def get_recomb_options():
             and crafted_prefix_count + crafted_suffix_count <= MAX_CRAFTED_MODS
         )
     ]
-
-
-# graph dict with {(prefix, suffix): [edges from node]}
 
 
 # 2p/1s + 1p/1s has chance to make 3p/2s, even though requires +1 prefix and suffix
@@ -235,7 +232,7 @@ def build_graph():
                         # can't make final item, not enough desired in pool
                         or desired_prefix_count < final_prefix_count
                         or desired_suffix_count < final_suffix_count
-                        # starting item needs to have more mods, unless (0,0)
+                        # starting item needs to have most mods, unless (0,0)
                         # for (0,0), paired can't be more than 1
                         or max(starting_desired_mods, 1) < paired_desired_mods
                     ):
