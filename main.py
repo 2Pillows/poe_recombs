@@ -33,12 +33,9 @@ class Recomb_Edge:
         paired_suffix_count,
         final_prefix_count,
         final_suffix_count,
-        desired_prefix_count,
-        desired_suffix_count,
-        crafted_prefix_count,
-        crafted_suffix_count,
-        aspect_suffix_count,
+        recomb_details,
     ):
+
         # two items used for recomb
         self.starting_prefix_count = starting_prefix_count
         self.starting_suffix_count = starting_suffix_count
@@ -48,11 +45,13 @@ class Recomb_Edge:
         self.final_prefix_count = final_prefix_count
         self.final_suffix_count = final_suffix_count
 
-        self.desired_prefix_count = desired_prefix_count
-        self.desired_suffix_count = desired_suffix_count
-        self.crafted_prefix_count = crafted_prefix_count
-        self.crafted_suffix_count = crafted_suffix_count
-        self.aspect_suffix_count = aspect_suffix_count
+        (
+            self.desired_prefix_count,
+            self.desired_suffix_count,
+            self.crafted_prefix_count,
+            self.crafted_suffix_count,
+            self.aspect_suffix_count,
+        ) = recomb_details
 
         self.exclusive_prefixes = self.crafted_prefix_count
         self.exclusive_suffixes = self.crafted_suffix_count + self.aspect_suffix_count
@@ -184,7 +183,6 @@ def get_recomb_options():
     ]
 
 
-# 2p/1s + 1p/1s has chance to make 3p/2s, even though requires +1 prefix and suffix
 def build_graph():
     graph = {}
 
@@ -265,11 +263,7 @@ def build_graph():
                         paired_suffix_count,
                         final_prefix_count,
                         final_suffix_count,
-                        desired_prefix_count,
-                        desired_suffix_count,
-                        crafted_prefix_count,
-                        crafted_suffix_count,
-                        aspect_suffix_count,
+                        recomb_details,
                     )
                     if new_edge.probability > 0:
                         edges.append(new_edge)
