@@ -66,11 +66,14 @@ class Recomb_Edge:
         total_suffixes = self.desired_suffix_count + self.exclusive_suffixes
 
         # if (
-        #     self.final_prefix_count == 1
-        #     and self.final_suffix_count == 1
-        #     and self.desired_prefix_count == 1
+        #     # result item
+        #     self.final_prefix_count == 2
+        #     and self.final_suffix_count == 0
+        #     # prefixes
+        #     and self.desired_prefix_count == 2
         #     and self.crafted_prefix_count == 2
-        #     and self.desired_suffix_count == 1
+        #     # suffixes
+        #     and self.desired_suffix_count == 0
         #     and self.crafted_suffix_count == 0
         #     and self.aspect_suffix_count == 2
         # ):
@@ -107,13 +110,16 @@ class Recomb_Edge:
         )
 
         # if (
-        #     self.final_prefix_count == 1
-        #     and self.final_suffix_count == 1
-        #     and self.desired_prefix_count == 1
-        #     and self.crafted_prefix_count == 2
-        #     and self.desired_suffix_count == 1
-        #     and self.crafted_suffix_count == 0
-        #     and self.aspect_suffix_count == 2
+        #     # result item
+        #     self.final_prefix_count == 2
+        #     and self.final_suffix_count == 0
+        #     # prefixes
+        #     and self.desired_prefix_count == 2
+        #     and self.crafted_prefix_count == 1
+        #     # suffixes
+        #     and self.desired_suffix_count == 0
+        #     and self.crafted_suffix_count == 1
+        #     and self.aspect_suffix_count == 0
         # ):
         #     print("check")
 
@@ -142,9 +148,8 @@ class Recomb_Edge:
         prefix_prob = CUMSUM[initial_prefixes][final_prefixes]
         suffix_prob = CUMSUM[initial_suffixes][final_suffixes]
 
-        # if no suffixes are required, can lock prefix and wipe
-        # aspect doesn't matter
-        if chance_aspect == 0 or final_suffixes == 0:
+        # if you won't be aspect, or the only suffix is an aspect
+        if chance_aspect == 0 or (final_suffixes == 1 and chance_aspect == 1):
             return prefix_prob * suffix_prob
 
         # need to get odds of avoiding or annuling aspect
@@ -340,7 +345,8 @@ def pathfind(result_probs):
         for edge in edges:
             edge: Recomb_Edge
             prob = edge.probability
-            cost = 0.0
+            # cost of base
+            cost = 0.5
             # add 2 divs for multicraft
             cost += (
                 2 if edge.crafted_prefix_count + edge.crafted_suffix_count > 2 else 0
@@ -391,7 +397,7 @@ def pathfind(result_probs):
                     avg_cost
                     - cheapest_probs[result]["cost"] / cheapest_probs[result]["prob"]
                 )
-                <= 0.02
+                <= 2
             ):
                 cheapest_recombs[result].append(
                     {"edge": edge, "overall prob": recomb_prob, "avg cost": avg_cost}
@@ -440,9 +446,11 @@ def write_results(result_probs, filename):
 
     with open(filename, "w") as f:
         for item, recombs in result_probs.items():
-
+            final_item = (
+                f"{recombs[0].final_prefix_count}p/{recombs[0].final_suffix_count}s"
+            )
             f.write(f"\n-------------------------------------\n")
-            f.write(f"{item}\n")
+            f.write(f"{final_item}\n")
             for recomb in recombs:
                 recomb: Recomb_Edge
 
@@ -455,9 +463,9 @@ def write_paths(result_probs, filename):
 
     with open(filename, "w") as f:
         for item, recombs in result_probs.items():
-
+            final_item = f"{recombs[0]['edge'].final_prefix_count}p/{recombs[0]['edge'].final_suffix_count}s"
             f.write(f"\n-------------------------------------\n")
-            f.write(f"{item}\n")
+            f.write(f"{final_item}\n")
             for recomb_info in recombs:
                 recomb = recomb_info["edge"]
                 recomb: Recomb_Edge
