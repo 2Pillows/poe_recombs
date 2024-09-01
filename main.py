@@ -310,65 +310,101 @@ def build_graph(eldritch=False):
     return graph
 
 
-# pathfinding algorithm
-# want to know best way to go from one item to another
-# need options, multimod, cheapest, highest prob, least steps?
-# for price just use divs for estimate, use multimod constant, prefix lock for aspect. assume multimod needs to be reapplied
-
-
-# collect methods of getting to a node in a dict (final prefix, final suffix): combos to get to node and prob of direct combo
-# problem is getting the probs for each item in the combo for overall prob
-
-# example:
-# (3,2): 2p/2s + 3p/1s, 0c/3c0a, prob is 41.04% for this combo
-# need to get prob of 2p/2s and prob of 3p/1s to find overall
-# but for both of these, also need to get prob of items used
-
-
-# recursion? or build dict from gorund up and lookup other probs?
 def pathfind(result_probs):
-    final_probs = {
-        (0, 0): 1.0,  # scour
-        (1, 0): 1.0,  # alt spam
-        (0, 1): 1.0,  # alt spam
-    }
-
-    best_recombs = {}
 
     result_probs = dict(sorted(result_probs.items(), key=lambda item: sum(item[0])))
 
-    # want to collect best probabilities for each final item
-    #
+    # prob for cumm prob of getting item, cost for multimod cost
+    final_probs = {result: {"prob": 0, "cost": 0} for result in result_probs.keys()}
+    final_probs.update(
+        {
+            (0, 0): {"prob": 1.0, "cost": 0},  # scour
+            (1, 0): {"prob": 1.0, "cost": 0},  # alt spam
+            (0, 1): {"prob": 1.0, "cost": 0},  # alt spam
+        }
+    )
+    best_recombs = {result: [] for result in result_probs.keys()}
+
+    cheapest_probs = {result: {"prob": 0, "cost": 0} for result in result_probs.keys()}
+    cheapest_probs.update(
+        {
+            (0, 0): {"prob": 1.0, "cost": 0},  # scour
+            (1, 0): {"prob": 1.0, "cost": 0},  # alt spam
+            (0, 1): {"prob": 1.0, "cost": 0},  # alt spam
+        }
+    )
+    cheapest_recombs = {result: [] for result in result_probs.keys()}
+
     for result, edges in result_probs.items():
 
         for edge in edges:
             edge: Recomb_Edge
             prob = edge.probability
+            cost = 0.1
+            # add 2 divs for multicraft
+            cost += (
+                2 if edge.crafted_prefix_count + edge.crafted_suffix_count > 2 else 0
+            )
+            # add 1 div if lock prefix scour for aspect
+            cost += (
+                1
+                if edge.final_suffix_count == 0 and edge.aspect_suffix_count > 1
+                else 0
+            )
 
-            item1_prob = final_probs.get(edge.starting_item())
-            item2_prob = final_probs.get(edge.paired_item())
+            item1_prob = final_probs.get(edge.starting_item())["prob"]
+            item2_prob = final_probs.get(edge.paired_item())["prob"]
+
+            item1_cost = cheapest_probs.get(edge.starting_item())["cost"]
+            item2_cost = cheapest_probs.get(edge.paired_item())["cost"]
 
             recomb_prob = prob * item1_prob * item2_prob
+            total_cost = cost + item1_cost + item2_cost
+            avg_cost = total_cost / recomb_prob
 
-            if result not in final_probs:
-                final_probs[result] = 0
-
-            if result not in best_recombs:
-                best_recombs[result] = []
-
-            if recomb_prob > final_probs[result]:
-                final_probs[result] = recomb_prob
-                best_recombs[result] = [{"edge": edge, "overall prob": recomb_prob}]
+            if recomb_prob > final_probs[result]["prob"]:
+                final_probs[result]["prob"] = recomb_prob
+                final_probs[result]["cost"] = total_cost
+                best_recombs[result] = [
+                    {"edge": edge, "overall prob": recomb_prob, "avg cost": avg_cost}
+                ]
 
             # if within 2% also include
-            elif abs(recomb_prob - final_probs[result]) <= 0.02:
-                best_recombs[result].append({"edge": edge, "overall prob": recomb_prob})
+            elif abs(recomb_prob - final_probs[result]["prob"]) <= 0.02:
+                best_recombs[result].append(
+                    {"edge": edge, "overall prob": recomb_prob, "avg cost": avg_cost}
+                )
+
+            # add to cheapest avg cost
+            if cheapest_probs[result]["prob"] == 0 or avg_cost < (
+                cheapest_probs[result]["cost"] / cheapest_probs[result]["prob"]
+            ):
+                cheapest_probs[result]["prob"] = recomb_prob
+                cheapest_probs[result]["cost"] = total_cost
+                cheapest_recombs[result] = [
+                    {"edge": edge, "overall prob": recomb_prob, "avg cost": avg_cost}
+                ]
+
+            # if within 2% also include
+            elif (
+                abs(
+                    avg_cost
+                    - cheapest_probs[result]["cost"] / cheapest_probs[result]["prob"]
+                )
+                <= 0.02
+            ):
+                cheapest_recombs[result].append(
+                    {"edge": edge, "overall prob": recomb_prob, "avg cost": avg_cost}
+                )
 
     # sort by overall prob
     for recombs in best_recombs.values():
         recombs.sort(key=lambda obj: obj["overall prob"], reverse=True)
 
-    return best_recombs
+    for recombs in cheapest_recombs.values():
+        recombs.sort(key=lambda obj: obj["overall prob"], reverse=True)
+
+    return best_recombs, cheapest_recombs
 
 
 def get_probs_for_result(graph):
@@ -427,30 +463,28 @@ def write_paths(result_probs, filename):
                 recomb: Recomb_Edge
 
                 overall_prob = recomb_info["overall prob"]
+                avg_cost = recomb_info["avg cost"]
 
                 recomb_item = recomb.recomb_item()
                 recomb_prob = recomb.probability
                 f.write(
-                    f"Recomb: {recomb_item}, Prob: {recomb_prob:.2%}, Overall Prob: {overall_prob:.2%}\n"
+                    f"Recomb: {recomb_item}, Avg Cost: {avg_cost:0.2f}, Overall Prob: {overall_prob:.2%}\n"
                 )
 
 
 def process_graph(eldritch=False):
-    resulte_file = "results"
-    paths_file = "paths"
-    if eldritch:
-        resulte_file += "_eldritch"
-        paths_file += "_eldritch"
-    resulte_file += ".txt"
-    paths_file += ".txt"
+    result_file = f"results{'_eldritch' if eldritch else ''}.txt"
+    paths_file = f"paths{'_eldritch' if eldritch else ''}.txt"
+    cheapest_paths_file = f"cheapest_paths{'_eldritch' if eldritch else ''}.txt"
 
     graph = build_graph(eldritch)
 
     result_probs = get_probs_for_result(graph)
-    write_results(result_probs, resulte_file)
+    write_results(result_probs, result_file)
 
-    best_path = pathfind(result_probs)
+    best_path, cheapest_path = pathfind(result_probs)
     write_paths(best_path, paths_file)
+    write_paths(cheapest_path, cheapest_paths_file)
 
 
 def main():
