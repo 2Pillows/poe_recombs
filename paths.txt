@@ -8,7 +8,7 @@ Recomb: 0p/0s + 0p/1s | 2c/4c0a, Avg Cost: 2.50, Overall Prob: 100.00%
 -------------------------------------
 1p/0s
 Recomb: 0p/0s + 1p/0s | 4c/0c0a, Avg Cost: 2.50, Overall Prob: 100.00%
-Recomb: 0p/0s + 1p/0s | 4c/0c2a, Avg Cost: 3.50, Overall Prob: 100.00%
+Recomb: 0p/0s + 1p/0s | 4c/0c2a, Avg Cost: 2.50, Overall Prob: 100.00%
 Recomb: 0p/0s + 1p/0s | 4c/2c0a, Avg Cost: 2.50, Overall Prob: 100.00%
 
 -------------------------------------
@@ -21,52 +21,52 @@ Recomb: 0p/1s + 1p/0s | 3c/3c0a, Avg Cost: 2.78, Overall Prob: 90.00%
 
 -------------------------------------
 2p/0s
-Recomb: 1p/0s + 1p/0s | 4c/0c2a, Avg Cost: 4.07, Overall Prob: 86.00%
+Recomb: 1p/0s + 1p/0s | 4c/0c2a, Avg Cost: 2.91, Overall Prob: 86.00%
 Recomb: 1p/0s + 1p/0s | 4c/2c0a, Avg Cost: 2.91, Overall Prob: 86.00%
 
 -------------------------------------
 0p/3s
-Recomb: 0p/2s + 0p/1s | 2c/2c1a, Avg Cost: 9.69, Overall Prob: 30.96%
-Recomb: 0p/2s + 0p/1s | 2c/3c0a, Avg Cost: 9.69, Overall Prob: 30.96%
-Recomb: 0p/2s + 0p/1s | 3c/3c0a, Avg Cost: 9.69, Overall Prob: 30.96%
+Recomb: 0p/2s + 0p/1s | 2c/2c1a, Avg Cost: 7.78, Overall Prob: 30.96%
+Recomb: 0p/2s + 0p/1s | 2c/3c0a, Avg Cost: 7.78, Overall Prob: 30.96%
+Recomb: 0p/2s + 0p/1s | 3c/3c0a, Avg Cost: 7.78, Overall Prob: 30.96%
 
 -------------------------------------
 1p/2s
-Recomb: 1p/1s + 0p/1s | 3c/3c1a, Avg Cost: 4.49, Overall Prob: 66.83%
-Recomb: 1p/1s + 0p/1s | 3c/3c0a, Avg Cost: 4.54, Overall Prob: 66.15%
+Recomb: 1p/1s + 0p/1s | 3c/3c1a, Avg Cost: 4.38, Overall Prob: 66.83%
+Recomb: 1p/1s + 0p/1s | 3c/3c0a, Avg Cost: 4.42, Overall Prob: 66.15%
 
 -------------------------------------
 2p/1s
-Recomb: 1p/1s + 1p/0s | 3c/3c0a, Avg Cost: 4.54, Overall Prob: 66.15%
+Recomb: 1p/1s + 1p/0s | 3c/3c0a, Avg Cost: 4.42, Overall Prob: 66.15%
 
 -------------------------------------
 3p/0s
-Recomb: 2p/0s + 1p/0s | 3c/0c2a, Avg Cost: 12.92, Overall Prob: 30.96%
-Recomb: 2p/0s + 1p/0s | 3c/2c0a, Avg Cost: 9.69, Overall Prob: 30.96%
-Recomb: 2p/0s + 1p/0s | 3c/3c0a, Avg Cost: 9.69, Overall Prob: 30.96%
+Recomb: 2p/0s + 1p/0s | 3c/0c2a, Avg Cost: 8.13, Overall Prob: 30.96%
+Recomb: 2p/0s + 1p/0s | 3c/2c0a, Avg Cost: 8.13, Overall Prob: 30.96%
+Recomb: 2p/0s + 1p/0s | 3c/3c0a, Avg Cost: 8.13, Overall Prob: 30.96%
 
 -------------------------------------
 1p/3s
-Recomb: 0p/2s + 1p/1s | 3c/3c0a, Avg Cost: 13.96, Overall Prob: 25.08%
+Recomb: 0p/2s + 1p/1s | 3c/3c0a, Avg Cost: 9.57, Overall Prob: 25.08%
 
 -------------------------------------
 2p/2s
-Recomb: 1p/1s + 1p/1s | 3c/3c1a, Avg Cost: 7.54, Overall Prob: 46.41%
-Recomb: 1p/1s + 1p/1s | 3c/3c0a, Avg Cost: 7.58, Overall Prob: 46.17%
+Recomb: 1p/1s + 1p/1s | 3c/3c1a, Avg Cost: 6.40, Overall Prob: 46.41%
+Recomb: 1p/1s + 1p/1s | 3c/3c0a, Avg Cost: 6.42, Overall Prob: 46.17%
 
 -------------------------------------
 3p/1s
-Recomb: 1p/1s + 2p/0s | 3c/3c0a, Avg Cost: 13.96, Overall Prob: 25.08%
+Recomb: 1p/1s + 2p/0s | 3c/3c0a, Avg Cost: 9.92, Overall Prob: 25.08%
 
 -------------------------------------
 2p/3s
-Recomb: 1p/2s + 1p/1s | 3c/3c0a, Avg Cost: 36.46, Overall Prob: 12.34%
-Recomb: 2p/1s + 0p/2s | 3c/3c0a, Avg Cost: 38.55, Overall Prob: 11.67%
+Recomb: 1p/2s + 1p/1s | 3c/3c0a, Avg Cost: 15.48, Overall Prob: 12.34%
+Recomb: 2p/1s + 0p/2s | 3c/3c0a, Avg Cost: 15.90, Overall Prob: 11.67%
 
 -------------------------------------
 3p/2s
-Recomb: 2p/1s + 1p/1s | 3c/3c1a, Avg Cost: 36.84, Overall Prob: 12.22%
-Recomb: 2p/1s + 1p/1s | 2c/4c0a, Avg Cost: 36.84, Overall Prob: 12.22%
-Recomb: 2p/1s + 1p/1s | 3c/3c0a, Avg Cost: 36.84, Overall Prob: 12.22%
-Recomb: 1p/2s + 2p/0s | 2c/4c0a, Avg Cost: 38.16, Overall Prob: 11.79%
-Recomb: 1p/2s + 2p/0s | 3c/3c0a, Avg Cost: 38.16, Overall Prob: 11.79%
+Recomb: 2p/1s + 1p/1s | 3c/3c1a, Avg Cost: 16.08, Overall Prob: 12.22%
+Recomb: 2p/1s + 1p/1s | 2c/4c0a, Avg Cost: 16.08, Overall Prob: 12.22%
+Recomb: 2p/1s + 1p/1s | 3c/3c0a, Avg Cost: 16.08, Overall Prob: 12.22%
+Recomb: 1p/2s + 2p/0s | 2c/4c0a, Avg Cost: 15.65, Overall Prob: 11.79%
+Recomb: 1p/2s + 2p/0s | 3c/3c0a, Avg Cost: 15.65, Overall Prob: 11.79%

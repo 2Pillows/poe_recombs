@@ -20,7 +20,6 @@ Recomb: 0p/0s + 0p/1s | 0c/1c0a, Avg Cost: 1.52, Overall Prob: 33.00%
 
 -------------------------------------
 1p/0s
-Recomb: 0p/0s + 1p/0s | 2c/0c2a, Avg Cost: 1.85, Overall Prob: 81.00%
 Recomb: 0p/0s + 1p/0s | 2c/0c0a, Avg Cost: 0.81, Overall Prob: 62.00%
 Recomb: 0p/0s + 1p/0s | 2c/0c1a, Avg Cost: 0.83, Overall Prob: 60.50%
 Recomb: 0p/0s + 1p/0s | 0c/2c0a, Avg Cost: 0.85, Overall Prob: 59.00%
@@ -85,97 +84,226 @@ Recomb: 1p/0s + 1p/0s | 0c/1c0a, Avg Cost: 2.57, Overall Prob: 19.47%
 
 -------------------------------------
 0p/3s
-Recomb: 0p/2s + 1p/1s | 1c/1c2a, Avg Cost: 5.38, Overall Prob: 27.86%
-Recomb: 0p/2s + 0p/2s | 2c/0c0a, Avg Cost: 6.54, Overall Prob: 22.93%
-Recomb: 0p/2s + 1p/1s | 1c/0c2a, Avg Cost: 6.80, Overall Prob: 22.06%
-Recomb: 0p/2s + 1p/1s | 1c/1c1a, Avg Cost: 6.80, Overall Prob: 22.06%
-Recomb: 0p/2s + 0p/1s | 1c/1c2a, Avg Cost: 5.47, Overall Prob: 18.27%
-Recomb: 0p/2s + 0p/1s | 1c/0c2a, Avg Cost: 6.92, Overall Prob: 14.46%
-Recomb: 0p/2s + 0p/1s | 1c/1c1a, Avg Cost: 6.92, Overall Prob: 14.46%
+Recomb: 0p/2s + 0p/1s | 1c/1c2a, Avg Cost: 3.19, Overall Prob: 18.27%
+Recomb: 0p/2s + 0p/2s | 1c/1c1a, Avg Cost: 4.02, Overall Prob: 15.71%
+Recomb: 0p/2s + 0p/1s | 1c/0c2a, Avg Cost: 3.81, Overall Prob: 14.46%
+Recomb: 0p/2s + 0p/1s | 1c/1c1a, Avg Cost: 3.81, Overall Prob: 14.46%
+Recomb: 0p/2s + 0p/2s | 1c/0c0a, Avg Cost: 4.40, Overall Prob: 13.53%
+Recomb: 0p/2s + 0p/1s | 2c/0c1a, Avg Cost: 4.06, Overall Prob: 13.33%
+Recomb: 0p/2s + 0p/2s | 1c/0c1a, Avg Cost: 4.64, Overall Prob: 12.44%
+Recomb: 0p/2s + 0p/2s | 1c/1c0a, Avg Cost: 4.64, Overall Prob: 12.44%
+Recomb: 0p/2s + 1p/1s | 1c/0c1a, Avg Cost: 5.08, Overall Prob: 12.00%
+Recomb: 0p/2s + 1p/1s | 1c/1c0a, Avg Cost: 5.08, Overall Prob: 12.00%
+Recomb: 0p/2s + 1p/1s | 2c/0c1a, Avg Cost: 5.08, Overall Prob: 12.00%
 
 -------------------------------------
 1p/2s
-Recomb: 1p/1s + 1p/1s | 0c/2c2a, Avg Cost: 3.17, Overall Prob: 47.38%
-Recomb: 1p/1s + 1p/1s | 0c/2c1a, Avg Cost: 3.71, Overall Prob: 40.40%
-Recomb: 0p/2s + 2p/0s | 0c/2c1a, Avg Cost: 4.07, Overall Prob: 36.89%
-Recomb: 1p/1s + 1p/1s | 1c/1c2a, Avg Cost: 4.09, Overall Prob: 36.65%
-Recomb: 1p/1s + 1p/1s | 2c/0c2a, Avg Cost: 4.17, Overall Prob: 35.94%
-Recomb: 1p/1s + 1p/1s | 0c/1c2a, Avg Cost: 4.33, Overall Prob: 34.63%
-Recomb: 0p/2s + 2p/0s | 1c/1c2a, Avg Cost: 4.48, Overall Prob: 33.47%
-Recomb: 0p/2s + 2p/0s | 2c/0c2a, Avg Cost: 4.57, Overall Prob: 32.82%
-Recomb: 0p/2s + 2p/0s | 0c/1c2a, Avg Cost: 4.74, Overall Prob: 31.62%
-Recomb: 1p/1s + 0p/1s | 0c/2c2a, Avg Cost: 3.22, Overall Prob: 31.06%
-Recomb: 1p/1s + 1p/1s | 1c/1c1a, Avg Cost: 4.93, Overall Prob: 30.45%
-Recomb: 0p/2s + 1p/1s | 2c/0c0a, Avg Cost: 5.04, Overall Prob: 29.75%
-Recomb: 0p/2s + 1p/0s | 0c/2c2a, Avg Cost: 3.37, Overall Prob: 29.68%
-Recomb: 1p/1s + 0p/1s | 2c/0c2a, Avg Cost: 3.50, Overall Prob: 28.60%
-Recomb: 1p/1s + 0p/1s | 1c/1c2a, Avg Cost: 3.61, Overall Prob: 27.68%
-Recomb: 0p/2s + 1p/0s | 2c/0c2a, Avg Cost: 3.66, Overall Prob: 27.33%
-Recomb: 1p/1s + 0p/1s | 0c/2c1a, Avg Cost: 3.78, Overall Prob: 26.48%
-Recomb: 0p/2s + 1p/0s | 1c/1c2a, Avg Cost: 3.78, Overall Prob: 26.45%
-Recomb: 0p/2s + 1p/0s | 0c/2c1a, Avg Cost: 3.95, Overall Prob: 25.31%
-Recomb: 1p/1s + 0p/1s | 0c/1c2a, Avg Cost: 4.41, Overall Prob: 22.70%
-Recomb: 1p/1s + 0p/1s | 1c/1c1a, Avg Cost: 4.53, Overall Prob: 22.08%
-Recomb: 0p/2s + 1p/0s | 0c/1c2a, Avg Cost: 4.61, Overall Prob: 21.69%
-Recomb: 0p/2s + 1p/0s | 1c/1c1a, Avg Cost: 4.74, Overall Prob: 21.10%
+Recomb: 1p/1s + 0p/1s | 0c/2c2a, Avg Cost: 2.47, Overall Prob: 31.06%
+Recomb: 0p/2s + 1p/0s | 0c/2c2a, Avg Cost: 2.28, Overall Prob: 29.68%
+Recomb: 1p/1s + 0p/1s | 2c/0c2a, Avg Cost: 2.59, Overall Prob: 28.60%
+Recomb: 1p/1s + 0p/1s | 1c/1c2a, Avg Cost: 2.64, Overall Prob: 27.68%
+Recomb: 0p/2s + 1p/0s | 2c/0c2a, Avg Cost: 2.41, Overall Prob: 27.33%
+Recomb: 0p/2s + 1p/1s | 1c/1c2a, Avg Cost: 3.30, Overall Prob: 26.70%
+Recomb: 0p/2s + 1p/1s | 1c/1c1a, Avg Cost: 3.31, Overall Prob: 26.56%
+Recomb: 1p/1s + 0p/1s | 0c/2c1a, Avg Cost: 2.72, Overall Prob: 26.48%
+Recomb: 0p/2s + 1p/0s | 1c/1c2a, Avg Cost: 2.46, Overall Prob: 26.45%
+Recomb: 0p/2s + 1p/1s | 0c/2c0a, Avg Cost: 3.34, Overall Prob: 26.03%
+Recomb: 1p/1s + 1p/1s | 1c/0c2a, Avg Cost: 3.61, Overall Prob: 25.74%
+Recomb: 0p/2s + 1p/0s | 0c/2c1a, Avg Cost: 2.53, Overall Prob: 25.31%
+Recomb: 1p/1s + 1p/1s | 0c/2c0a, Avg Cost: 3.65, Overall Prob: 25.11%
+Recomb: 0p/2s + 1p/1s | 0c/1c2a, Avg Cost: 3.42, Overall Prob: 24.66%
+Recomb: 0p/2s + 1p/1s | 2c/0c1a, Avg Cost: 3.42, Overall Prob: 24.59%
+Recomb: 1p/1s + 1p/1s | 2c/0c0a, Avg Cost: 3.72, Overall Prob: 24.06%
+Recomb: 1p/1s + 1p/1s | 2c/0c1a, Avg Cost: 3.75, Overall Prob: 23.61%
+Recomb: 0p/2s + 2p/0s | 1c/0c2a, Avg Cost: 3.60, Overall Prob: 23.50%
+Recomb: 0p/2s + 1p/1s | 1c/1c0a, Avg Cost: 3.50, Overall Prob: 23.49%
+Recomb: 0p/2s + 2p/0s | 0c/2c0a, Avg Cost: 3.64, Overall Prob: 22.93%
+Recomb: 1p/1s + 0p/1s | 0c/1c2a, Avg Cost: 3.00, Overall Prob: 22.70%
+Recomb: 1p/1s + 0p/1s | 1c/1c1a, Avg Cost: 3.05, Overall Prob: 22.08%
+Recomb: 0p/2s + 2p/0s | 2c/0c0a, Avg Cost: 3.71, Overall Prob: 21.97%
+Recomb: 0p/2s + 1p/0s | 0c/1c2a, Avg Cost: 2.82, Overall Prob: 21.69%
+Recomb: 0p/2s + 2p/0s | 2c/0c1a, Avg Cost: 3.74, Overall Prob: 21.56%
+Recomb: 0p/2s + 1p/1s | 0c/1c1a, Avg Cost: 3.68, Overall Prob: 21.15%
+Recomb: 0p/2s + 1p/0s | 1c/1c1a, Avg Cost: 2.87, Overall Prob: 21.10%
+Recomb: 1p/1s + 1p/1s | 0c/1c1a, Avg Cost: 4.02, Overall Prob: 20.40%
+Recomb: 1p/1s + 1p/1s | 1c/1c0a, Avg Cost: 4.10, Overall Prob: 19.62%
+Recomb: 0p/2s + 2p/0s | 0c/1c1a, Avg Cost: 4.01, Overall Prob: 18.63%
+Recomb: 1p/1s + 0p/1s | 2c/0c1a, Avg Cost: 3.46, Overall Prob: 18.42%
+Recomb: 1p/1s + 0p/1s | 2c/0c0a, Avg Cost: 3.46, Overall Prob: 18.41%
+Recomb: 0p/2s + 1p/1s | 1c/0c2a, Avg Cost: 3.97, Overall Prob: 18.29%
+Recomb: 0p/2s + 2p/0s | 1c/1c0a, Avg Cost: 4.09, Overall Prob: 17.91%
+Recomb: 0p/2s + 1p/0s | 2c/0c1a, Avg Cost: 3.28, Overall Prob: 17.60%
+Recomb: 0p/2s + 1p/0s | 2c/0c0a, Avg Cost: 3.28, Overall Prob: 17.60%
+Recomb: 1p/1s + 0p/1s | 1c/0c2a, Avg Cost: 3.69, Overall Prob: 16.85%
+Recomb: 1p/1s + 0p/1s | 0c/2c0a, Avg Cost: 3.75, Overall Prob: 16.46%
+Recomb: 0p/2s + 1p/1s | 0c/0c2a, Avg Cost: 4.23, Overall Prob: 16.27%
+Recomb: 0p/2s + 1p/0s | 1c/0c2a, Avg Cost: 3.50, Overall Prob: 16.10%
+Recomb: 0p/2s + 1p/0s | 0c/2c0a, Avg Cost: 3.57, Overall Prob: 15.73%
+Recomb: 0p/2s + 1p/0s | 1c/1c0a, Avg Cost: 4.12, Overall Prob: 13.10%
+Recomb: 0p/2s + 1p/0s | 0c/1c1a, Avg Cost: 4.20, Overall Prob: 12.78%
 
 -------------------------------------
 2p/1s
-Recomb: 1p/1s + 2p/0s | 0c/2c2a, Avg Cost: 3.85, Overall Prob: 38.99%
-Recomb: 1p/1s + 2p/0s | 0c/2c1a, Avg Cost: 3.97, Overall Prob: 37.79%
-Recomb: 1p/1s + 2p/0s | 0c/1c2a, Avg Cost: 4.63, Overall Prob: 32.39%
-Recomb: 1p/1s + 2p/0s | 0c/2c0a, Avg Cost: 5.04, Overall Prob: 29.75%
-Recomb: 1p/1s + 2p/0s | 2c/0c2a, Avg Cost: 5.35, Overall Prob: 28.06%
-Recomb: 1p/1s + 2p/0s | 1c/1c2a, Avg Cost: 5.42, Overall Prob: 27.67%
-Recomb: 1p/1s + 2p/0s | 2c/0c0a, Avg Cost: 5.76, Overall Prob: 26.03%
-Recomb: 1p/1s + 1p/0s | 0c/2c2a, Avg Cost: 4.14, Overall Prob: 24.13%
-Recomb: 1p/1s + 1p/0s | 0c/2c1a, Avg Cost: 4.28, Overall Prob: 23.39%
-Recomb: 2p/0s + 0p/1s | 0c/2c2a, Avg Cost: 4.34, Overall Prob: 23.06%
-Recomb: 2p/0s + 0p/1s | 0c/2c1a, Avg Cost: 4.47, Overall Prob: 22.35%
-Recomb: 1p/1s + 1p/0s | 2c/0c2a, Avg Cost: 4.94, Overall Prob: 20.23%
-Recomb: 1p/1s + 1p/0s | 0c/1c2a, Avg Cost: 4.99, Overall Prob: 20.05%
-Recomb: 2p/0s + 0p/1s | 2c/0c2a, Avg Cost: 5.17, Overall Prob: 19.33%
-Recomb: 2p/0s + 0p/1s | 0c/1c2a, Avg Cost: 5.22, Overall Prob: 19.16%
-Recomb: 1p/1s + 1p/0s | 0c/2c0a, Avg Cost: 5.43, Overall Prob: 18.41%
-Recomb: 2p/0s + 0p/1s | 0c/2c0a, Avg Cost: 5.68, Overall Prob: 17.60%
-Recomb: 1p/1s + 1p/0s | 2c/0c1a, Avg Cost: 5.78, Overall Prob: 17.29%
+Recomb: 1p/1s + 1p/0s | 0c/2c2a, Avg Cost: 2.88, Overall Prob: 24.13%
+Recomb: 1p/1s + 1p/0s | 0c/2c1a, Avg Cost: 2.94, Overall Prob: 23.39%
+Recomb: 2p/0s + 0p/1s | 0c/2c2a, Avg Cost: 3.05, Overall Prob: 23.06%
+Recomb: 2p/0s + 0p/1s | 0c/2c1a, Avg Cost: 3.11, Overall Prob: 22.35%
+Recomb: 1p/1s + 1p/1s | 0c/2c2a, Avg Cost: 3.90, Overall Prob: 21.72%
+Recomb: 1p/1s + 1p/1s | 2c/0c2a, Avg Cost: 3.99, Overall Prob: 20.76%
+Recomb: 1p/1s + 1p/0s | 2c/0c2a, Avg Cost: 3.24, Overall Prob: 20.23%
+Recomb: 1p/1s + 1p/0s | 0c/1c2a, Avg Cost: 3.26, Overall Prob: 20.05%
+Recomb: 1p/1s + 1p/1s | 0c/1c2a, Avg Cost: 4.05, Overall Prob: 20.05%
+Recomb: 2p/0s + 0p/2s | 0c/2c2a, Avg Cost: 3.89, Overall Prob: 19.83%
+Recomb: 1p/1s + 1p/1s | 1c/1c0a, Avg Cost: 4.10, Overall Prob: 19.62%
+Recomb: 1p/1s + 1p/1s | 0c/1c1a, Avg Cost: 4.11, Overall Prob: 19.55%
+Recomb: 2p/0s + 0p/1s | 2c/0c2a, Avg Cost: 3.41, Overall Prob: 19.33%
+Recomb: 2p/0s + 0p/1s | 0c/1c2a, Avg Cost: 3.43, Overall Prob: 19.16%
+Recomb: 2p/0s + 0p/2s | 2c/0c2a, Avg Cost: 3.97, Overall Prob: 18.95%
+Recomb: 1p/1s + 2p/0s | 0c/0c2a, Avg Cost: 4.29, Overall Prob: 18.60%
+Recomb: 1p/1s + 1p/0s | 0c/2c0a, Avg Cost: 3.46, Overall Prob: 18.41%
+Recomb: 2p/0s + 0p/2s | 0c/1c2a, Avg Cost: 4.04, Overall Prob: 18.31%
+Recomb: 1p/1s + 1p/1s | 2c/0c1a, Avg Cost: 4.26, Overall Prob: 18.20%
+Recomb: 1p/1s + 1p/1s | 1c/1c1a, Avg Cost: 4.26, Overall Prob: 18.17%
+Recomb: 2p/0s + 0p/2s | 1c/1c0a, Avg Cost: 4.09, Overall Prob: 17.91%
+Recomb: 2p/0s + 0p/2s | 0c/1c1a, Avg Cost: 4.09, Overall Prob: 17.85%
+Recomb: 2p/0s + 0p/1s | 0c/2c0a, Avg Cost: 3.63, Overall Prob: 17.60%
+Recomb: 1p/1s + 2p/0s | 1c/0c2a, Avg Cost: 4.43, Overall Prob: 17.40%
+Recomb: 1p/1s + 1p/0s | 2c/0c1a, Avg Cost: 3.62, Overall Prob: 17.29%
+Recomb: 1p/1s + 1p/0s | 1c/1c2a, Avg Cost: 3.66, Overall Prob: 17.05%
+Recomb: 2p/0s + 0p/2s | 2c/0c1a, Avg Cost: 4.25, Overall Prob: 16.62%
+Recomb: 1p/1s + 1p/1s | 1c/1c2a, Avg Cost: 4.47, Overall Prob: 16.61%
+Recomb: 2p/0s + 0p/2s | 1c/1c1a, Avg Cost: 4.25, Overall Prob: 16.59%
+Recomb: 1p/1s + 1p/1s | 0c/1c0a, Avg Cost: 4.48, Overall Prob: 16.57%
+Recomb: 2p/0s + 0p/1s | 2c/0c1a, Avg Cost: 3.79, Overall Prob: 16.52%
+Recomb: 1p/1s + 1p/0s | 2c/0c0a, Avg Cost: 3.75, Overall Prob: 16.46%
+Recomb: 2p/0s + 0p/1s | 1c/1c2a, Avg Cost: 3.83, Overall Prob: 16.30%
+Recomb: 1p/1s + 2p/0s | 0c/1c0a, Avg Cost: 4.65, Overall Prob: 15.84%
+Recomb: 2p/0s + 0p/1s | 2c/0c0a, Avg Cost: 3.92, Overall Prob: 15.73%
+Recomb: 1p/1s + 1p/0s | 1c/1c1a, Avg Cost: 3.96, Overall Prob: 15.31%
+Recomb: 2p/0s + 0p/2s | 1c/1c2a, Avg Cost: 4.46, Overall Prob: 15.16%
+Recomb: 2p/0s + 0p/2s | 0c/1c0a, Avg Cost: 4.47, Overall Prob: 15.13%
+Recomb: 1p/1s + 1p/1s | 0c/0c2a, Avg Cost: 4.73, Overall Prob: 15.04%
+Recomb: 1p/1s + 1p/0s | 0c/1c1a, Avg Cost: 4.02, Overall Prob: 14.96%
+Recomb: 1p/1s + 2p/0s | 1c/0c1a, Avg Cost: 4.81, Overall Prob: 14.87%
+Recomb: 2p/0s + 0p/1s | 1c/1c1a, Avg Cost: 4.13, Overall Prob: 14.63%
+Recomb: 2p/0s + 0p/1s | 0c/1c1a, Avg Cost: 4.20, Overall Prob: 14.30%
+Recomb: 2p/0s + 0p/2s | 0c/0c2a, Avg Cost: 4.72, Overall Prob: 13.73%
+Recomb: 1p/1s + 1p/0s | 1c/1c0a, Avg Cost: 4.30, Overall Prob: 13.71%
+Recomb: 2p/0s + 0p/1s | 1c/1c0a, Avg Cost: 4.47, Overall Prob: 13.10%
 
 -------------------------------------
 3p/0s
-Recomb: 2p/0s + 1p/0s | 2c/0c2a, Avg Cost: 8.16, Overall Prob: 24.51%
-Recomb: 2p/0s + 2p/0s | 0c/2c0a, Avg Cost: 6.54, Overall Prob: 22.93%
-Recomb: 2p/0s + 1p/1s | 2c/0c1a, Avg Cost: 6.80, Overall Prob: 22.06%
-Recomb: 2p/0s + 2p/0s | 0c/2c1a, Avg Cost: 7.48, Overall Prob: 20.06%
-Recomb: 2p/0s + 2p/0s | 0c/1c1a, Avg Cost: 8.05, Overall Prob: 18.63%
-Recomb: 2p/0s + 1p/0s | 2c/0c1a, Avg Cost: 6.92, Overall Prob: 14.46%
+Recomb: 2p/0s + 1p/1s | 2c/0c1a, Avg Cost: 3.96, Overall Prob: 22.06%
+Recomb: 2p/0s + 2p/0s | 0c/2c1a, Avg Cost: 4.22, Overall Prob: 20.06%
+Recomb: 2p/0s + 2p/0s | 0c/1c1a, Avg Cost: 4.36, Overall Prob: 18.63%
+Recomb: 2p/0s + 2p/0s | 2c/0c1a, Avg Cost: 4.73, Overall Prob: 15.71%
+Recomb: 2p/0s + 1p/0s | 2c/0c1a, Avg Cost: 4.16, Overall Prob: 14.46%
+Recomb: 2p/0s + 2p/0s | 0c/0c1a, Avg Cost: 5.11, Overall Prob: 13.53%
+Recomb: 2p/0s + 2p/0s | 0c/1c0a, Avg Cost: 5.11, Overall Prob: 13.53%
+Recomb: 2p/0s + 2p/0s | 1c/1c1a, Avg Cost: 5.19, Overall Prob: 13.17%
+Recomb: 2p/0s + 2p/0s | 1c/0c1a, Avg Cost: 5.35, Overall Prob: 12.44%
+Recomb: 2p/0s + 2p/0s | 1c/1c0a, Avg Cost: 5.35, Overall Prob: 12.44%
+Recomb: 2p/0s + 1p/1s | 1c/0c1a, Avg Cost: 5.43, Overall Prob: 12.00%
+Recomb: 2p/0s + 1p/1s | 1c/1c0a, Avg Cost: 5.43, Overall Prob: 12.00%
 
 -------------------------------------
 1p/3s
-Recomb: 0p/2s + 1p/1s | 3c/3c0a, Avg Cost: 13.96, Overall Prob: 25.08%
+Recomb: 1p/2s + 1p/1s | 1c/1c2a, Avg Cost: 5.54, Overall Prob: 13.42%
+Recomb: 1p/2s + 0p/2s | 2c/0c0a, Avg Cost: 5.72, Overall Prob: 11.05%
+Recomb: 1p/2s + 1p/1s | 1c/0c2a, Avg Cost: 6.13, Overall Prob: 10.63%
+Recomb: 1p/2s + 1p/1s | 1c/1c1a, Avg Cost: 6.13, Overall Prob: 10.63%
+Recomb: 1p/2s + 1p/2s | 1c/1c1a, Avg Cost: 6.80, Overall Prob: 9.97%
+Recomb: 0p/2s + 1p/1s | 1c/1c2a, Avg Cost: 6.06, Overall Prob: 9.20%
+Recomb: 1p/2s + 1p/2s | 1c/0c0a, Avg Cost: 7.17, Overall Prob: 8.58%
+Recomb: 1p/2s + 1p/1s | 2c/0c1a, Avg Cost: 6.88, Overall Prob: 8.39%
+Recomb: 1p/2s + 0p/1s | 1c/1c2a, Avg Cost: 6.49, Overall Prob: 7.94%
+Recomb: 1p/2s + 1p/2s | 1c/0c1a, Avg Cost: 7.39, Overall Prob: 7.89%
+Recomb: 1p/2s + 1p/2s | 1c/1c0a, Avg Cost: 7.39, Overall Prob: 7.89%
+Recomb: 0p/2s + 1p/1s | 2c/0c1a, Avg Cost: 7.05, Overall Prob: 7.44%
+Recomb: 0p/2s + 1p/1s | 1c/0c2a, Avg Cost: 7.17, Overall Prob: 7.28%
+Recomb: 0p/2s + 1p/1s | 1c/1c1a, Avg Cost: 7.17, Overall Prob: 7.28%
+Recomb: 1p/2s + 0p/2s | 1c/1c1a, Avg Cost: 7.32, Overall Prob: 6.83%
+Recomb: 1p/2s + 0p/1s | 2c/0c1a, Avg Cost: 7.48, Overall Prob: 6.42%
+Recomb: 0p/3s + 1p/1s | 2c/0c0a, Avg Cost: 6.81, Overall Prob: 5.36%
+Recomb: 0p/3s + 2p/0s | 1c/0c2a, Avg Cost: 7.21, Overall Prob: 4.70%
+Recomb: 0p/3s + 2p/0s | 1c/1c1a, Avg Cost: 7.21, Overall Prob: 4.70%
+Recomb: 0p/3s + 1p/0s | 1c/1c2a, Avg Cost: 7.40, Overall Prob: 3.68%
 
 -------------------------------------
 2p/2s
-Recomb: 1p/1s + 1p/1s | 3c/3c1a, Avg Cost: 7.54, Overall Prob: 46.41%
-Recomb: 1p/1s + 1p/1s | 3c/3c0a, Avg Cost: 7.58, Overall Prob: 46.17%
-Recomb: 0p/2s + 2p/0s | 3c/3c0a, Avg Cost: 8.30, Overall Prob: 42.16%
-Recomb: 1p/1s + 1p/1s | 3c/2c1a, Avg Cost: 8.75, Overall Prob: 40.01%
-Recomb: 1p/1s + 1p/1s | 2c/4c0a, Avg Cost: 9.02, Overall Prob: 38.80%
-Recomb: 1p/1s + 1p/1s | 4c/2c0a, Avg Cost: 9.02, Overall Prob: 38.80%
+Recomb: 1p/1s + 1p/1s | 0c/2c2a, Avg Cost: 4.66, Overall Prob: 15.40%
+Recomb: 0p/2s + 2p/0s | 0c/2c2a, Avg Cost: 4.65, Overall Prob: 14.06%
+Recomb: 1p/1s + 1p/1s | 2c/0c2a, Avg Cost: 5.02, Overall Prob: 13.56%
+Recomb: 1p/1s + 1p/1s | 0c/2c1a, Avg Cost: 5.10, Overall Prob: 13.20%
+Recomb: 1p/2s + 1p/0s | 0c/2c2a, Avg Cost: 4.91, Overall Prob: 12.70%
+Recomb: 2p/1s + 0p/1s | 0c/2c2a, Avg Cost: 5.51, Overall Prob: 12.57%
+Recomb: 0p/2s + 2p/0s | 2c/0c2a, Avg Cost: 5.01, Overall Prob: 12.38%
+Recomb: 0p/2s + 2p/0s | 0c/2c1a, Avg Cost: 5.09, Overall Prob: 12.06%
+Recomb: 1p/2s + 1p/1s | 0c/2c0a, Avg Cost: 5.96, Overall Prob: 11.31%
+Recomb: 2p/1s + 1p/1s | 2c/0c0a, Avg Cost: 6.56, Overall Prob: 11.20%
+Recomb: 1p/2s + 1p/0s | 2c/0c2a, Avg Cost: 5.27, Overall Prob: 11.19%
+Recomb: 1p/1s + 1p/1s | 0c/1c2a, Avg Cost: 5.66, Overall Prob: 11.17%
+Recomb: 2p/1s + 1p/1s | 2c/0c1a, Avg Cost: 6.58, Overall Prob: 11.12%
+Recomb: 2p/1s + 0p/1s | 2c/0c2a, Avg Cost: 5.87, Overall Prob: 11.07%
+Recomb: 1p/2s + 1p/0s | 0c/2c1a, Avg Cost: 5.35, Overall Prob: 10.89%
+Recomb: 1p/2s + 2p/0s | 2c/0c0a, Avg Cost: 6.13, Overall Prob: 10.81%
+Recomb: 2p/1s + 0p/1s | 0c/2c1a, Avg Cost: 5.95, Overall Prob: 10.78%
+Recomb: 1p/2s + 2p/0s | 2c/0c1a, Avg Cost: 6.15, Overall Prob: 10.73%
+Recomb: 1p/1s + 1p/1s | 1c/1c2a, Avg Cost: 5.81, Overall Prob: 10.73%
+Recomb: 2p/1s + 0p/2s | 0c/2c0a, Avg Cost: 6.37, Overall Prob: 10.70%
+Recomb: 1p/2s + 1p/1s | 0c/1c2a, Avg Cost: 6.17, Overall Prob: 10.48%
+Recomb: 0p/2s + 2p/0s | 0c/1c2a, Avg Cost: 5.65, Overall Prob: 10.20%
+Recomb: 1p/2s + 1p/1s | 2c/0c1a, Avg Cost: 6.29, Overall Prob: 10.07%
+Recomb: 2p/1s + 0p/2s | 0c/1c2a, Avg Cost: 6.58, Overall Prob: 9.91%
+Recomb: 0p/2s + 2p/0s | 1c/1c2a, Avg Cost: 5.80, Overall Prob: 9.80%
+Recomb: 1p/2s + 2p/0s | 1c/0c2a, Avg Cost: 6.46, Overall Prob: 9.62%
+Recomb: 1p/2s + 1p/1s | 1c/1c1a, Avg Cost: 6.50, Overall Prob: 9.38%
+Recomb: 1p/2s + 1p/1s | 1c/1c2a, Avg Cost: 6.54, Overall Prob: 9.27%
+Recomb: 1p/2s + 1p/0s | 0c/1c2a, Avg Cost: 5.91, Overall Prob: 9.22%
+Recomb: 2p/1s + 0p/1s | 0c/1c2a, Avg Cost: 6.51, Overall Prob: 9.12%
+Recomb: 1p/2s + 1p/1s | 0c/1c1a, Avg Cost: 6.62, Overall Prob: 9.05%
+Recomb: 1p/2s + 1p/0s | 1c/1c2a, Avg Cost: 6.06, Overall Prob: 8.85%
 
 -------------------------------------
 3p/1s
-Recomb: 1p/1s + 2p/0s | 3c/3c0a, Avg Cost: 13.96, Overall Prob: 25.08%
-Recomb: 1p/1s + 2p/0s | 3c/3c1a, Avg Cost: 15.70, Overall Prob: 22.29%
-Recomb: 1p/1s + 2p/0s | 2c/4c0a, Avg Cost: 15.87, Overall Prob: 22.06%
+Recomb: 2p/1s + 2p/0s | 0c/2c2a, Avg Cost: 6.09, Overall Prob: 14.11%
+Recomb: 2p/1s + 2p/0s | 0c/2c1a, Avg Cost: 6.14, Overall Prob: 13.76%
+Recomb: 2p/1s + 2p/0s | 0c/1c2a, Avg Cost: 6.51, Overall Prob: 11.64%
+Recomb: 2p/1s + 2p/0s | 0c/2c0a, Avg Cost: 6.67, Overall Prob: 10.93%
+Recomb: 2p/1s + 2p/1s | 0c/2c2a, Avg Cost: 7.78, Overall Prob: 10.85%
+Recomb: 2p/1s + 2p/1s | 0c/1c2a, Avg Cost: 7.96, Overall Prob: 9.95%
+Recomb: 2p/1s + 2p/1s | 0c/1c1a, Avg Cost: 8.00, Overall Prob: 9.77%
+Recomb: 2p/1s + 2p/0s | 0c/1c1a, Avg Cost: 7.32, Overall Prob: 8.75%
+Recomb: 3p/0s + 1p/1s | 0c/2c2a, Avg Cost: 6.99, Overall Prob: 6.91%
+Recomb: 3p/0s + 1p/1s | 0c/2c1a, Avg Cost: 7.05, Overall Prob: 6.74%
+Recomb: 3p/0s + 1p/1s | 0c/1c2a, Avg Cost: 7.42, Overall Prob: 5.70%
+Recomb: 3p/0s + 1p/1s | 0c/2c0a, Avg Cost: 7.58, Overall Prob: 5.36%
 
 -------------------------------------
 2p/3s
-Recomb: 1p/2s + 1p/1s | 3c/3c0a, Avg Cost: 36.46, Overall Prob: 12.34%
+Recomb: 1p/2s + 2p/1s | 1c/1c2a, Avg Cost: 9.64, Overall Prob: 4.93%
+Recomb: 2p/2s + 1p/1s | 1c/1c2a, Avg Cost: 10.15, Overall Prob: 4.66%
+Recomb: 1p/2s + 1p/2s | 2c/0c0a, Avg Cost: 9.77, Overall Prob: 4.29%
+Recomb: 1p/2s + 2p/1s | 1c/0c2a, Avg Cost: 10.82, Overall Prob: 3.91%
+Recomb: 1p/2s + 2p/1s | 1c/1c1a, Avg Cost: 10.82, Overall Prob: 3.91%
+Recomb: 1p/2s + 2p/1s | 2c/0c1a, Avg Cost: 10.82, Overall Prob: 3.91%
+Recomb: 2p/2s + 0p/2s | 2c/0c0a, Avg Cost: 10.69, Overall Prob: 3.84%
+Recomb: 2p/2s + 1p/1s | 1c/0c2a, Avg Cost: 11.33, Overall Prob: 3.69%
+Recomb: 2p/2s + 1p/1s | 1c/1c1a, Avg Cost: 11.33, Overall Prob: 3.69%
+Recomb: 2p/2s + 1p/1s | 2c/0c1a, Avg Cost: 11.33, Overall Prob: 3.69%
+Recomb: 2p/2s + 1p/2s | 1c/1c1a, Avg Cost: 11.42, Overall Prob: 3.46%
+Recomb: 1p/3s + 2p/0s | 1c/1c2a, Avg Cost: 11.21, Overall Prob: 2.41%
+Recomb: 0p/3s + 2p/1s | 2c/0c0a, Avg Cost: 11.27, Overall Prob: 1.97%
 
 -------------------------------------
 3p/2s
-Recomb: 2p/1s + 1p/1s | 3c/3c1a, Avg Cost: 36.84, Overall Prob: 12.22%
-Recomb: 2p/1s + 1p/1s | 2c/4c0a, Avg Cost: 36.84, Overall Prob: 12.22%
-Recomb: 2p/1s + 1p/1s | 3c/3c0a, Avg Cost: 36.84, Overall Prob: 12.22%
-Recomb: 1p/2s + 2p/0s | 2c/4c0a, Avg Cost: 38.16, Overall Prob: 11.79%
-Recomb: 1p/2s + 2p/0s | 3c/3c0a, Avg Cost: 38.16, Overall Prob: 11.79%
+Recomb: 2p/1s + 2p/1s | 0c/2c2a, Avg Cost: 8.59, Overall Prob: 7.73%
+Recomb: 2p/2s + 2p/0s | 0c/2c2a, Avg Cost: 8.67, Overall Prob: 7.05%
+Recomb: 2p/1s + 2p/1s | 0c/2c1a, Avg Cost: 9.05, Overall Prob: 6.66%
+Recomb: 2p/2s + 2p/0s | 0c/2c1a, Avg Cost: 9.13, Overall Prob: 6.07%
+Recomb: 2p/1s + 2p/1s | 0c/1c2a, Avg Cost: 9.68, Overall Prob: 5.58%
+Recomb: 2p/2s + 2p/0s | 0c/1c2a, Avg Cost: 9.76, Overall Prob: 5.09%
+Recomb: 3p/1s + 1p/1s | 0c/2c2a, Avg Cost: 9.93, Overall Prob: 3.99%
+Recomb: 3p/1s + 1p/1s | 0c/2c1a, Avg Cost: 10.39, Overall Prob: 3.43%
+Recomb: 1p/2s + 3p/0s | 0c/2c1a, Avg Cost: 9.53, Overall Prob: 3.15%
+Recomb: 1p/2s + 3p/0s | 0c/1c2a, Avg Cost: 10.16, Overall Prob: 2.64%

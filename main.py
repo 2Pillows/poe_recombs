@@ -129,27 +129,27 @@ class Recomb_Edge:
     def _item_probability(
         self,
         # prefixes
-        initial_prefixes,
-        final_prefixes,
+        prefix_pool,
+        required_prefixes,
         # suffixes
-        initial_suffixes,
-        final_suffixes,
-        chance_aspect,
+        suffix_pool,
+        required_suffixes,
+        aspect_chance,
     ):
 
         if (
-            initial_prefixes >= CUMSUM_N
-            or final_prefixes >= CUMSUM_M
-            or initial_suffixes >= CUMSUM_N
-            or final_suffixes >= CUMSUM_M
+            prefix_pool >= CUMSUM_N
+            or required_prefixes >= CUMSUM_M
+            or suffix_pool >= CUMSUM_N
+            or required_suffixes >= CUMSUM_M
         ):
             return 0
 
-        prefix_prob = CUMSUM[initial_prefixes][final_prefixes]
-        suffix_prob = CUMSUM[initial_suffixes][final_suffixes]
+        prefix_prob = CUMSUM[prefix_pool][required_prefixes]
+        suffix_prob = CUMSUM[suffix_pool][required_suffixes]
 
         # if you won't be aspect, or the only suffix is an aspect
-        if chance_aspect == 0 or (final_suffixes == 1 and chance_aspect == 1):
+        if aspect_chance == 0 or (required_suffixes == 1 and aspect_chance == 1):
             return prefix_prob * suffix_prob
 
         # need to get odds of avoiding or annuling aspect
@@ -161,14 +161,14 @@ class Recomb_Edge:
         # else
         # annuling is 1 / (final prefixes + final suffixes)
 
-        avoid_prob = suffix_prob * (1 - chance_aspect)
+        avoid_prob = suffix_prob * (1 - aspect_chance)
 
         annul_odds = (
-            1 / final_suffixes
+            1 / required_suffixes
             if self.eldritch_annul
-            else 1 / (final_prefixes + final_suffixes)
+            else 1 / (required_prefixes + required_suffixes)
         )
-        annul_prob = suffix_prob * chance_aspect * annul_odds
+        annul_prob = suffix_prob * aspect_chance * annul_odds
 
         return prefix_prob * (avoid_prob + annul_prob)
 
@@ -347,16 +347,11 @@ def pathfind(result_probs):
             prob = edge.probability
             # cost of base
             cost = 0.5
-            # add 2 divs for multicraft
-            cost += (
-                2 if edge.crafted_prefix_count + edge.crafted_suffix_count > 2 else 0
-            )
-            # add 1 div if lock prefix scour for aspect
-            cost += (
-                1
-                if edge.final_suffix_count == 0 and edge.aspect_suffix_count > 1
-                else 0
-            )
+            # add 2 divs for multicraft or lock prefix to remove aspect
+            if edge.crafted_prefix_count + edge.crafted_suffix_count > 2 or (
+                edge.final_suffix_count == 0 and edge.aspect_suffix_count > 1
+            ):
+                cost += 2
 
             item1_prob = final_probs.get(edge.starting_item())["prob"]
             item2_prob = final_probs.get(edge.paired_item())["prob"]
@@ -365,42 +360,36 @@ def pathfind(result_probs):
             item2_cost = cheapest_probs.get(edge.paired_item())["cost"]
 
             recomb_prob = prob * item1_prob * item2_prob
-            total_cost = cost + item1_cost + item2_cost
-            avg_cost = total_cost / recomb_prob
+            recomb_cost = cost / prob
+            total_cost = recomb_cost + item1_cost + item2_cost
 
             if recomb_prob > final_probs[result]["prob"]:
                 final_probs[result]["prob"] = recomb_prob
                 final_probs[result]["cost"] = total_cost
                 best_recombs[result] = [
-                    {"edge": edge, "overall prob": recomb_prob, "avg cost": avg_cost}
+                    {"edge": edge, "overall prob": recomb_prob, "avg cost": total_cost}
                 ]
 
             # if within 2% also include
             elif abs(recomb_prob - final_probs[result]["prob"]) <= 0.02:
                 best_recombs[result].append(
-                    {"edge": edge, "overall prob": recomb_prob, "avg cost": avg_cost}
+                    {"edge": edge, "overall prob": recomb_prob, "avg cost": total_cost}
                 )
 
             # add to cheapest avg cost
-            if cheapest_probs[result]["prob"] == 0 or avg_cost < (
-                cheapest_probs[result]["cost"] / cheapest_probs[result]["prob"]
+            if cheapest_probs[result]["prob"] == 0 or total_cost < (
+                cheapest_probs[result]["cost"]
             ):
                 cheapest_probs[result]["prob"] = recomb_prob
                 cheapest_probs[result]["cost"] = total_cost
                 cheapest_recombs[result] = [
-                    {"edge": edge, "overall prob": recomb_prob, "avg cost": avg_cost}
+                    {"edge": edge, "overall prob": recomb_prob, "avg cost": total_cost}
                 ]
 
             # if within 2% also include
-            elif (
-                abs(
-                    avg_cost
-                    - cheapest_probs[result]["cost"] / cheapest_probs[result]["prob"]
-                )
-                <= 2
-            ):
+            elif abs(total_cost - cheapest_probs[result]["cost"]) <= 2:
                 cheapest_recombs[result].append(
-                    {"edge": edge, "overall prob": recomb_prob, "avg cost": avg_cost}
+                    {"edge": edge, "overall prob": recomb_prob, "avg cost": total_cost}
                 )
 
     # sort by overall prob
@@ -446,6 +435,7 @@ def write_results(result_probs, filename):
 
     with open(filename, "w") as f:
         for item, recombs in result_probs.items():
+
             final_item = (
                 f"{recombs[0].final_prefix_count}p/{recombs[0].final_suffix_count}s"
             )
@@ -463,7 +453,17 @@ def write_paths(result_probs, filename):
 
     with open(filename, "w") as f:
         for item, recombs in result_probs.items():
-            final_item = f"{recombs[0]['edge'].final_prefix_count}p/{recombs[0]['edge'].final_suffix_count}s"
+            final_item = ""
+            if len(recombs) == 0:
+                if item == (1, 0):
+                    final_item = "1p/0s"
+                elif item == (0, 1):
+                    final_item = "0p/1s"
+                else:
+                    print("wrong final item")
+            else:
+                final_item = f"{recombs[0]['edge'].final_prefix_count}p/{recombs[0]['edge'].final_suffix_count}s"
+
             f.write(f"\n-------------------------------------\n")
             f.write(f"{final_item}\n")
             for recomb_info in recombs:
