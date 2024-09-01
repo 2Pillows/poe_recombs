@@ -340,7 +340,7 @@ def pathfind(result_probs):
         for edge in edges:
             edge: Recomb_Edge
             prob = edge.probability
-            cost = 0.1
+            cost = 0.0
             # add 2 divs for multicraft
             cost += (
                 2 if edge.crafted_prefix_count + edge.crafted_suffix_count > 2 else 0
