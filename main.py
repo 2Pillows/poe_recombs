@@ -481,9 +481,9 @@ def write_paths(result_probs, filename):
 
 
 def process_graph(eldritch=False):
-    result_file = f"results{'_eldritch' if eldritch else ''}.txt"
-    paths_file = f"paths{'_eldritch' if eldritch else ''}.txt"
-    cheapest_paths_file = f"cheapest_paths{'_eldritch' if eldritch else ''}.txt"
+    result_file = f"results/results{'_eldritch' if eldritch else ''}.txt"
+    paths_file = f"results/paths{'_eldritch' if eldritch else ''}.txt"
+    cheapest_paths_file = f"results/cheapest_paths{'_eldritch' if eldritch else ''}.txt"
 
     graph = build_graph(eldritch)
 
