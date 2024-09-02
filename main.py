@@ -6,7 +6,7 @@ MAX_CRAFTED_MODS = 6
 MAX_FINAL_AFFIX = 3
 
 # costs
-BASE_COST = 0.1
+BASE_COST = 0.5
 ASPECT_COST = 0.2
 
 # cumulative sum of weight table
@@ -208,7 +208,7 @@ def get_recomb_dict(eldritch=False):
 
 # every combo of affixes
 def get_recomb_options():
-    return [
+    recomb_options = [
         (
             desired_prefix_count,
             desired_suffix_count,
@@ -222,12 +222,17 @@ def get_recomb_options():
         for crafted_suffix_count in range(7)  # 0-6 crafted suffixes
         for aspect_suffix_count in range(3)  # 0-2 aspect suffixes
         if (
+            # prefix possible
             desired_prefix_count + crafted_prefix_count <= MAX_MOD_POOL
-            and desired_suffix_count + crafted_prefix_count + aspect_suffix_count
+            # suffix possible
+            and desired_suffix_count + crafted_suffix_count + aspect_suffix_count
             <= MAX_MOD_POOL
+            # crafted mods possible
             and crafted_prefix_count + crafted_suffix_count <= MAX_CRAFTED_MODS
         )
     ]
+
+    return recomb_options
 
 
 def build_graph(eldritch=False):
@@ -253,6 +258,20 @@ def build_graph(eldritch=False):
 
                 paired_prefix_count = desired_prefix_count - starting_prefix_count
                 paired_suffix_count = desired_suffix_count - starting_suffix_count
+
+                if (
+                    # result item
+                    # final_prefix_count == 2
+                    # and final_suffix_count == 3
+                    # prefixes
+                    desired_prefix_count == 2
+                    and crafted_prefix_count == 4
+                    # suffixes
+                    and desired_suffix_count == 3
+                    # and self.crafted_suffix_count == 0
+                    # and self.aspect_suffix_count == 2
+                ):
+                    print("check")
 
                 if (
                     # impossible item to make
