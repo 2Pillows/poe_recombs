@@ -194,9 +194,12 @@ class Recomb_Edge:
     def result_item(self):
         return (self.final_prefix_count, self.final_suffix_count)
 
-    def recomb_item(self):
+    def recomb_items_string(self):
         # item 1 + item 2
-        return f"{self.starting_prefix_count}p/{self.starting_suffix_count}s + {self.paired_prefix_count}p/{self.paired_suffix_count}s | {self.crafted_prefix_count}c/{self.crafted_suffix_count}c{self.aspect_suffix_count}a"
+        return f"{self.starting_prefix_count}p/{self.starting_suffix_count}s + {self.paired_prefix_count}p/{self.paired_suffix_count}s"
+
+    def exclusive_pool_string(self):
+        return f"{self.crafted_prefix_count}c/{self.crafted_suffix_count}c{self.aspect_suffix_count}a"
 
 
 # every combo of affixes
@@ -444,9 +447,12 @@ def write_results(result_probs, filename):
             for recomb in recombs:
                 recomb: Recomb_Edge
 
-                recomb_item = recomb.recomb_item()
+                recomb_items = recomb.recomb_items_string()
+                exclusive_mods = recomb.exclusive_pool_string()
                 recomb_prob = recomb.probability
-                f.write(f"Recomb: {recomb_item}, Prob: {recomb_prob:.2%}\n")
+                f.write(
+                    f"Items: {recomb_items}, Exclusive: {exclusive_mods}, Prob: {recomb_prob:.2%}\n"
+                )
 
 
 def write_paths(result_probs, filename):
@@ -473,10 +479,11 @@ def write_paths(result_probs, filename):
                 overall_prob = recomb_info["overall prob"]
                 avg_cost = recomb_info["avg cost"]
 
-                recomb_item = recomb.recomb_item()
+                recomb_items = recomb.recomb_items_string()
+                exclusive_mods = recomb.exclusive_pool_string()
                 recomb_prob = recomb.probability
                 f.write(
-                    f"Recomb: {recomb_item}, Avg Cost: {avg_cost:0.2f}, Overall Prob: {overall_prob:.2%}\n"
+                    f"Items: {recomb_items}, Exclusive: {exclusive_mods}, Path Cost: {avg_cost:0.2f}, Path Prob: {overall_prob:.2%}\n"
                 )
 
 
