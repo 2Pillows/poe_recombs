@@ -1,9 +1,11 @@
-# main.py
+# new main.py
 
+# constants
 MAX_MOD_POOL = 6
 MAX_CRAFTED_MODS = 6
 
-MAX_FINAL_AFFIX = 3
+MAX_INITIAL_MODS = 6
+MAX_FINAL_MODS = 3
 
 # costs
 BASE_COST = 0.5
@@ -22,511 +24,384 @@ CUMSUM = [
     [1.00, 1.00, 1.00, 0.72],  # 6 initial mods
 ]
 
-CUMSUM_N = len(CUMSUM)
-CUMSUM_M = len(CUMSUM[0])
+
+def get_item_combos():
+    return [
+        Item(prefix_count, suffix_count)
+        for prefix_count in range(4)  # 0-3 prefixes
+        for suffix_count in range(4)  # 0-3 suffixes
+    ]
 
 
-# Recombination
-# Gets % success for items used in recomb and desired final item
-class Recombination:
-    def __init__(
-        self,
-        starting_prefix_count,
-        starting_suffix_count,
-        paired_prefix_count,
-        paired_suffix_count,
-        final_prefix_count,
-        final_suffix_count,
-        recomb_details,
-        eldritch_annul,
-    ):
-
-        # two items used for recomb
-        self.starting_prefix_count = starting_prefix_count
-        self.starting_suffix_count = starting_suffix_count
-        self.paired_prefix_count = paired_prefix_count
-        self.paired_suffix_count = paired_suffix_count
-
-        # final item from recomb
-        self.final_prefix_count = final_prefix_count
-        self.final_suffix_count = final_suffix_count
-
-        # mods in pool
+def get_exclusive_combinations():
+    return [
         (
-            self.desired_prefix_count,
-            self.desired_suffix_count,
-            self.crafted_prefix_count,
-            self.crafted_suffix_count,
-            self.aspect_suffix_count,
-        ) = recomb_details
-
-        # if an eldritch annul is available for aspect annul
-        self.eldritch_annul = eldritch_annul
-
-        # number of exclusive mods
-        self.exclusive_prefixes = self.crafted_prefix_count
-        self.exclusive_suffixes = self.crafted_suffix_count + self.aspect_suffix_count
-
-        # probability of getting final item
-        self.probability = self._probability()
-
-    def _probability(self):
-
-        # total number of affixes in pool
-        total_prefixes = self.desired_prefix_count + self.exclusive_prefixes
-        total_suffixes = self.desired_suffix_count + self.exclusive_suffixes
-
-        # if prefix first, suffixes assume no exclusive, but requires there to be exclusive prefixes
-        prefix_first = self._item_probability(
-            total_prefixes,
-            self.final_prefix_count
-            + (
-                1 if self.exclusive_prefixes > 0 else 0
-            ),  # only require at most 1 exclusive prefix
-            total_suffixes,
-            self.final_suffix_count
-            + (
-                1 if self.exclusive_prefixes == 0 else 0
-            ),  # require 1 exclusive suffix if no exclusive prefix
-            0,  # can't get aspect if prefix first
-        )
-
-        suffix_first = self._item_probability(
-            total_prefixes,
-            self.final_prefix_count
-            + (
-                1 if self.exclusive_suffixes == 0 else 0
-            ),  # require 1 exclusive prefix if no exclusive suffix
-            total_suffixes,
-            self.final_suffix_count
-            + (
-                1 if self.exclusive_suffixes > 0 else 0
-            ),  # only require at most 1 exclusive suffix
-            self.aspect_suffix_count
-            / max(self.exclusive_suffixes, 1),  # chance of getting aspect
-        )
-
-        return 0.5 * (prefix_first + suffix_first)
-
-    # calculate prefix and suffix probability
-    def _item_probability(
-        self,
-        # prefixes
-        prefix_pool,
-        required_prefixes,
-        # suffixes
-        suffix_pool,
-        required_suffixes,
-        aspect_chance,
-    ):
-
-        if (
-            prefix_pool >= CUMSUM_N
-            or required_prefixes >= CUMSUM_M
-            or suffix_pool >= CUMSUM_N
-            or required_suffixes >= CUMSUM_M
-        ):
-            return 0
-
-        prefix_prob = CUMSUM[prefix_pool][required_prefixes]
-        suffix_prob = CUMSUM[suffix_pool][required_suffixes]
-
-        # if you won't be aspect, or the only suffix is an aspect
-        if aspect_chance == 0 or (required_suffixes == 1 and aspect_chance == 1):
-            return prefix_prob * suffix_prob
-
-        avoid_prob = suffix_prob * (1 - aspect_chance)
-
-        annul_odds = (
-            1 / required_suffixes
-            if self.eldritch_annul
-            else 1 / (required_prefixes + required_suffixes)
-        )
-        annul_prob = suffix_prob * aspect_chance * annul_odds
-
-        return prefix_prob * (avoid_prob + annul_prob)
-
-    def starting_item(self):
-        return (self.starting_prefix_count, self.starting_suffix_count)
-
-    def paired_item(self):
-        return (self.paired_prefix_count, self.paired_suffix_count)
-
-    def exclusive_mods(self):
-        return (
-            self.crafted_prefix_count,
-            self.crafted_suffix_count,
-            self.aspect_suffix_count,
-        )
-
-    def recomb_details(self):
-        return (
-            sorted((self.starting_item(), self.paired_item())),
-            self.exclusive_mods(),
-        )
-
-    def result_item(self):
-        return (self.final_prefix_count, self.final_suffix_count)
-
-    def recomb_items_string(self):
-        # item 1 + item 2
-        return f"{self.starting_prefix_count}p/{self.starting_suffix_count}s + {self.paired_prefix_count}p/{self.paired_suffix_count}s"
-
-    def exclusive_pool_string(self):
-        return f"{self.crafted_prefix_count}c/{self.crafted_suffix_count}c{self.aspect_suffix_count}a"
-
-
-# new method
-# create recomb_dict with {(final item): [potential recombs]}
-# potential recombs is a recombination objec
-
-
-def get_recomb_dict(eldritch=False):
-
-    recomb_dict = {
-        (prefix_count, suffix_count): []
-        for prefix_count in range(4)
-        for suffix_count in range(4)
-    }
-
-    # fill in values for recomb dict
-
-    for final_item in recomb_dict.keys():
-        prefix_count = final_item[0]
-        suffix_count = final_item[1]
-
-        # for every lesser item combo, add a recombination
-        for paired_prefix_count in range(prefix_count, -1, -1):
-            for paired_suffix_count in range(suffix_count, -1, -1):
-                if (paired_suffix_count, paired_suffix_count) != final_item:
-                    recomb_dict[final_item].append(
-                        (paired_prefix_count, paired_suffix_count)
-                    )
-
-    print("recomb dict done")
-
-
-# every combo of affixes
-def get_recomb_options():
-    recomb_options = [
-        (
-            desired_prefix_count,
-            desired_suffix_count,
             crafted_prefix_count,
             crafted_suffix_count,
             aspect_suffix_count,
         )
-        for desired_prefix_count in range(7)  # 0-6 desired prefixes
         for crafted_prefix_count in range(5)  # 0-4 crafted prefixes
-        for desired_suffix_count in range(7)  # 0-6 desired suffixes
         for crafted_suffix_count in range(7)  # 0-6 crafted suffixes
         for aspect_suffix_count in range(3)  # 0-2 aspect suffixes
-        if (
-            # prefix possible
-            desired_prefix_count + crafted_prefix_count <= MAX_MOD_POOL
-            # suffix possible
-            and desired_suffix_count + crafted_suffix_count + aspect_suffix_count
-            <= MAX_MOD_POOL
-            # crafted mods possible
-            and crafted_prefix_count + crafted_suffix_count <= MAX_CRAFTED_MODS
-        )
     ]
 
-    return recomb_options
+
+# item
+class Item:
+    def __init__(self, prefix_count, suffix_count) -> None:
+        self.prefix_count = prefix_count
+        self.suffix_count = suffix_count
+
+    def get_item(self):
+        return (self.prefix_count, self.suffix_count)
+
+    def to_string(self):
+        return f"{self.prefix_count}p/{self.suffix_count}s"
+
+    def __eq__(self, other):
+        if isinstance(other, Item):
+            return (self.prefix_count, self.suffix_count) == (
+                other.prefix_count,
+                other.suffix_count,
+            )
+        return False
+
+    def __hash__(self):
+        return hash((self.prefix_count, self.suffix_count))
 
 
-def build_graph(eldritch=False):
-    graph = {}
+class Recombinate:
+    def __init__(
+        self, item1, item2, exclusive_mods, final_item, eldritch_annul
+    ) -> None:
+        # two items used in recomb
+        self.item1: Item = item1
+        self.item2: Item = item2
 
-    recomb_options = get_recomb_options()
+        # exclusive mods
+        (
+            self.crafted_prefix_count,
+            self.crafted_suffix_count,
+            self.aspect_suffix_count,
+        ) = exclusive_mods
 
-    # parent node, starting item w/ final affixes
-    for starting_prefix_count in range(4):  # 0-3 final prefixes
-        for starting_suffix_count in range(4):  # 0-3 final suffixes
+        # goal final item of recomb
+        self.final_item: Item = final_item
 
-            # edges to nodes
-            edges = []
+        self.eldritch_annul = eldritch_annul
 
-            for recomb_details in recomb_options:
-                (
-                    desired_prefix_count,
-                    desired_suffix_count,
-                    crafted_prefix_count,
-                    crafted_suffix_count,
-                    aspect_suffix_count,
-                ) = recomb_details
+        # get probability of recombination
+        self.probability = self._get_recombinate_prob()
 
-                paired_prefix_count = desired_prefix_count - starting_prefix_count
-                paired_suffix_count = desired_suffix_count - starting_suffix_count
+    def get_item1(self):
+        return self.item1.to_string()
 
+    def get_item2(self):
+        return self.item2.to_string()
+
+    def get_exclusive_mods(self):
+        return f"{self.crafted_prefix_count}c/{self.crafted_suffix_count}c{self.aspect_suffix_count}a"
+
+    # returns chance to recombinate item1 + item2 = final item
+    def _get_recombinate_prob(self):
+        (item1_desired_prefixes, item1_desired_suffixes) = self.item1.get_item()
+        (item2_desired_prefixes, item2_desired_suffixes) = self.item2.get_item()
+        (final_prefixes, final_suffixes) = self.final_item.get_item()
+
+        # desired mods
+        total_desired_prefixes = item1_desired_prefixes + item2_desired_prefixes
+        total_desired_suffixes = item1_desired_suffixes + item2_desired_suffixes
+
+        # exclusive mods
+        self.total_exclusive_prefixes = self.crafted_prefix_count
+        self.total_exclusive_suffixes = (
+            self.crafted_suffix_count + self.aspect_suffix_count
+        )
+
+        # total mods
+        self.total_prefixes = total_desired_prefixes + self.total_exclusive_prefixes
+        self.total_suffixes = total_desired_suffixes + self.total_exclusive_suffixes
+
+        # total crafted
+        self.total_crafted_mods = self.crafted_prefix_count + self.crafted_suffix_count
+
+        if (
+            # need at least desired number of affixes
+            total_desired_prefixes < final_prefixes
+            or total_desired_suffixes < final_suffixes
+            # dont include if a single item has more desired mods than final
+            or sum(self.item1.get_item()) > sum(self.final_item.get_item())
+            or sum(self.item2.get_item()) > sum(self.final_item.get_item())
+            # cant have more than max initial mods
+            or self.total_prefixes > MAX_INITIAL_MODS
+            or self.total_suffixes > MAX_INITIAL_MODS
+            # cant have more than max crafted mods
+            or self.total_crafted_mods > MAX_CRAFTED_MODS
+        ):
+            return 0
+
+        # if (
+        #     # final item
+        #     self.final_item.get_item() == (3, 2)
+        #     # # item1
+        #     and self.item1.get_item() == (3, 1)
+        #     # # item2
+        #     and self.item2.get_item() == (3, 1)
+        #     # # exclusive mods
+        #     and self.crafted_prefix_count == 0
+        #     and self.crafted_suffix_count == 3
+        #     and self.aspect_suffix_count == 1
+        # ):
+        #     print("check")
+
+        # if prefix first, suffixes assume no exclusive, but requires there to be exclusive prefixes
+        prefix_first = self._item_probability(prefix_first=True)
+        suffix_first = self._item_probability(suffix_first=True)
+
+        return 0.5 * (prefix_first + suffix_first)
+
+    # calculate prefix and suffix probability
+    def _item_probability(self, prefix_first=False, suffix_first=False):
+        (required_prefixes, required_suffixes) = self.final_item.get_item()
+
+        # if prefix first, need to add exclusive mod to final prefixes
+        # if no exclusive prefixes, add exclusive suffix
+        if prefix_first:
+            if self.total_exclusive_prefixes > 0:
+                required_prefixes += 1
+            else:
+                required_suffixes += 1
+
+        # if suffix first, need to add exclusive mod to final suffixes
+        # if no exclusive suffixes, add exclusive prefix
+        elif suffix_first:
+            if self.total_exclusive_suffixes > 0:
+                required_suffixes += 1
+            else:
+                required_prefixes += 1
+
+        # else error
+        else:
+            print("error w/ prefix or suffix first")
+
+        # impossible final item
+        if required_prefixes > MAX_FINAL_MODS or required_suffixes > MAX_FINAL_MODS:
+            return 0
+
+        # get probs to complete affixes
+        prefix_prob = CUMSUM[self.total_prefixes][required_prefixes]
+        suffix_prob = CUMSUM[self.total_suffixes][required_suffixes]
+
+        # if there is an aspect and need suffixes, adjust suffix prob
+        if self.aspect_suffix_count > 0 and self.final_item.suffix_count != 0:
+            # chance of getting asepct as exclusive mod
+            get_aspect_prob = self.aspect_suffix_count / self.total_exclusive_suffixes
+
+            # odds of getting suffixes by avoid aspect
+            avoid_aspect_prob = suffix_prob * (1 - get_aspect_prob)
+
+            # odds of annuling aspect
+            annul_odds = (
+                1 / required_suffixes
+                if self.eldritch_annul
+                else 1 / (required_prefixes + required_suffixes)
+            )
+
+            # odds of getting suffixes by annuling aspect
+            annul_aspect_prob = suffix_prob * get_aspect_prob * annul_odds
+
+            # update suffix prob
+            suffix_prob = avoid_aspect_prob + annul_aspect_prob
+
+        return prefix_prob * suffix_prob
+
+
+def get_recomb_dict(item_combos, exclusive_combos, eldritch_annul=False):
+
+    recomb_dict = {
+        Item(prefix_count, suffix_count): []
+        for prefix_count in range(4)  # 0-3 final prefixes
+        for suffix_count in range(4)  # 0-3 final suffixes
+        if not (
+            prefix_count == 0
+            and suffix_count == 0
+            or prefix_count == 1
+            and suffix_count == 0
+            or prefix_count == 0
+            and suffix_count == 1
+            or prefix_count == 3
+            and suffix_count == 3
+        )
+    }
+
+    # fill in values for recomb dict
+    for final_item in recomb_dict.keys():
+
+        # track item pairs
+        seen_items = set()
+
+        # loop through all item combos and add recombination
+        for item1 in item_combos:
+            item1: Item
+            for item2 in item_combos:
+                item2: Item
+
+                # cant' use same item as final item
                 if (
-                    # result item
-                    # final_prefix_count == 2
-                    # and final_suffix_count == 3
-                    # prefixes
-                    desired_prefix_count == 2
-                    and crafted_prefix_count == 4
-                    # suffixes
-                    and desired_suffix_count == 3
-                    # and self.crafted_suffix_count == 0
-                    # and self.aspect_suffix_count == 2
-                ):
-                    print("check")
-
-                if (
-                    # impossible item to make
-                    paired_prefix_count > MAX_FINAL_AFFIX
-                    or paired_suffix_count > MAX_FINAL_AFFIX
+                    item1.get_item() == final_item.get_item()
+                    or item2.get_item() == final_item.get_item()
                 ):
                     continue
 
-                starting_desired_mods = starting_prefix_count + starting_suffix_count
-                paired_desired_mods = paired_prefix_count + paired_suffix_count
+                # avoid adding same items in dif order
+                item_pair = tuple(sorted((item1.get_item(), item2.get_item())))
+                if item_pair in seen_items:
+                    continue
+                seen_items.add(item_pair)
 
-                # all possible edges from point
-                possible_edges = [
-                    (
-                        starting_prefix_count + additional_prefix,
-                        starting_suffix_count + additional_suffix,
+                # for each set of exclusive mods, create combination with items
+                for exclusive_mods in exclusive_combos:
+                    recombination = Recombinate(
+                        item1, item2, exclusive_mods, final_item, eldritch_annul
                     )
-                    for additional_prefix in range(paired_prefix_count + 1)
-                    for additional_suffix in range(paired_suffix_count + 1)
-                    if not (additional_prefix == 0 and additional_suffix == 0)
-                ]
 
-                for final_prefix_count, final_suffix_count in possible_edges:
-                    if (
-                        # impossible item to make
-                        final_prefix_count > MAX_FINAL_AFFIX
-                        or final_suffix_count > MAX_FINAL_AFFIX
-                        # can't make final item, not enough desired in pool
-                        or desired_prefix_count < final_prefix_count
-                        or desired_suffix_count < final_suffix_count
-                        # starting item needs to have most mods, unless (0,0)
-                        # for (0,0), paired can't be more than 1
-                        or max(starting_desired_mods, 1) < paired_desired_mods
-                    ):
+                    if recombination.probability == 0:
                         continue
 
-                    new_edge = Recombination(
-                        starting_prefix_count,
-                        starting_suffix_count,
-                        paired_prefix_count,
-                        paired_suffix_count,
-                        final_prefix_count,
-                        final_suffix_count,
-                        recomb_details,
-                        eldritch,
-                    )
-                    if new_edge.probability > 0:
-                        edges.append(new_edge)
+                    recomb_dict[final_item].append(recombination)
 
-            # add parent and edges to graph
-            graph[(starting_prefix_count, starting_suffix_count)] = edges
+        # sort results by highest prob
+        recomb_dict[final_item] = sorted(
+            recomb_dict[final_item],
+            key=lambda recombination: recombination.probability,
+            reverse=True,
+        )
+
+    return recomb_dict
+
+
+def write_to_file(filename, data, format_line):
+    with open(filename, "w") as f:
+        for final_item, items_list in data.items():
+            if not items_list:
+                continue
+
+            f.write(f"\n-------------------------------------\n")
+            f.write(f"{final_item.to_string()}\n")
+
+            for item in items_list:
+                f.write(format_line(item))
+
+
+def format_recomb_line(recombination):
+    return (
+        f"Items: {recombination.get_item1()} + {recombination.get_item2()}, "
+        f"Exclusive: {recombination.get_exclusive_mods()}, "
+        f"Prob: {recombination.probability:.2%}\n"
+    )
+
+
+def format_path_line(path_details):
+    recombination = path_details["recomb"]
+    path_prob = path_details["path prob"]
+    path_cost = path_details["path cost"]
+
+    return (
+        f"Items: {recombination.get_item1()} + {recombination.get_item2()}, "
+        f"Exclusive: {recombination.get_exclusive_mods()}, "
+        f"Path Cost: {path_cost:.2f}, Path Prob: {path_prob:.2%}\n"
+    )
+
+
+class GraphEdge:
+    def __init__(self, recombinate: Recombinate):
+        self.item1 = recombinate.item1
+        self.item2 = recombinate.item2
+        self.recombinate = recombinate
+
+    def to_string(self):
+        return f"Edge({self.item1.to_string()} + {self.item2.to_string()} -> {self.recombinate.final_item.to_string()}), Prob: {self.recombinate.probability:.2%}%"
+
+
+class Graph:
+    def __init__(self):
+        self.nodes = {}
+
+    def add_edge(self, recombinate):
+        final_item = recombinate.final_item
+        if final_item not in self.nodes:
+            self.nodes[final_item] = []
+
+        edge = GraphEdge(recombinate)
+        self.nodes[final_item].append(edge)
+
+    def print_graph(self):
+        for final_item, edges in self.nodes.items():
+            print(f"Final Item: {final_item.to_string()}")
+            for edge in edges:
+                print(f"  {edge.to_string()}")
+
+    def find_all_paths(self, start_nodes):
+        all_paths = []
+        for start_node in start_nodes:
+            for final_item in self.nodes:
+                self._dfs(start_node, final_item, [], all_paths)
+        return all_paths
+
+    def _dfs(self, current_node, target_node, path, all_paths):
+        # Add the current node to the path
+        path.append(current_node)
+
+        # If current node is the target, store the path
+        if current_node == target_node:
+            all_paths.append(list(path))
+        else:
+            # Continue DFS for all adjacent nodes
+            if current_node in self.nodes:
+                for edge in self.nodes[current_node]:
+                    next_node = edge.recombinate.final_item
+                    if next_node not in path:
+                        self._dfs(next_node, target_node, path, all_paths)
+
+        # Backtrack
+        path.pop()
+
+    def print_graph_to_file(self, file):
+        for final_item, edges in self.nodes.items():
+            file.write(f"Final Item: {final_item.to_string()}\n")
+            for edge in edges:
+                file.write(f"  {edge.to_string()}\n")
+
+
+def build_graph(recomb_dict):
+    graph = Graph()
+    for final_item, recombinations in recomb_dict.items():
+        for recomb in recombinations:
+            recomb: Recombinate
+
+            graph.add_edge(recomb)
 
     return graph
 
 
-def pathfind(result_probs):
-
-    result_probs = dict(sorted(result_probs.items(), key=lambda item: sum(item[0])))
-
-    # prob for cumm prob of getting item, cost for multimod cost
-    final_probs = {result: {"prob": 0, "cost": 0.1} for result in result_probs.keys()}
-    final_probs.update(
-        {
-            (0, 0): {"prob": 1.0, "cost": 0.1},  # scour
-            (1, 0): {"prob": 1.0, "cost": 0.1},  # alt spam
-            (0, 1): {"prob": 1.0, "cost": 0.1},  # alt spam
-        }
-    )
-    best_recombs = {result: [] for result in result_probs.keys()}
-
-    cheapest_probs = {result: {"prob": 0, "cost": 0} for result in result_probs.keys()}
-    cheapest_probs.update(
-        {
-            (0, 0): {"prob": 1.0, "cost": 0.1},  # scour
-            (1, 0): {"prob": 1.0, "cost": 0.1},  # alt spam
-            (0, 1): {"prob": 1.0, "cost": 0.1},  # alt spam
-        }
-    )
-    cheapest_recombs = {result: [] for result in result_probs.keys()}
-
-    for result, edges in result_probs.items():
-
-        for edge in edges:
-            edge: Recombination
-            prob = edge.probability
-
-            # cost of base
-            cost = BASE_COST
-
-            # add 2 divs for multicraft or lock prefix to remove aspect
-            if edge.crafted_prefix_count + edge.crafted_suffix_count > 2 or (
-                edge.final_suffix_count == 0 and edge.aspect_suffix_count > 1
-            ):
-                cost += 2
-
-            # add cost for aspect
-            cost += ASPECT_COST * edge.aspect_suffix_count
-
-            item1_prob = final_probs.get(edge.starting_item())["prob"]
-            item2_prob = final_probs.get(edge.paired_item())["prob"]
-
-            item1_cost = cheapest_probs.get(edge.starting_item())["cost"]
-            item2_cost = cheapest_probs.get(edge.paired_item())["cost"]
-
-            recomb_prob = prob * item1_prob * item2_prob
-            recomb_cost = cost / prob
-            total_cost = recomb_cost + item1_cost + item2_cost
-
-            if recomb_prob > final_probs[result]["prob"]:
-                final_probs[result]["prob"] = recomb_prob
-                final_probs[result]["cost"] = total_cost
-                best_recombs[result] = [
-                    {"edge": edge, "overall prob": recomb_prob, "avg cost": total_cost}
-                ]
-
-            # if within 2% also include
-            elif abs(recomb_prob - final_probs[result]["prob"]) <= 0.02:
-                best_recombs[result].append(
-                    {"edge": edge, "overall prob": recomb_prob, "avg cost": total_cost}
-                )
-
-            # add to cheapest avg cost
-            if cheapest_probs[result]["prob"] == 0 or total_cost < (
-                cheapest_probs[result]["cost"]
-            ):
-                cheapest_probs[result]["prob"] = recomb_prob
-                cheapest_probs[result]["cost"] = total_cost
-                cheapest_recombs[result] = [
-                    {"edge": edge, "overall prob": recomb_prob, "avg cost": total_cost}
-                ]
-
-            # if within 2 div also include
-            elif abs(total_cost - cheapest_probs[result]["cost"]) <= 2:
-                cheapest_recombs[result].append(
-                    {"edge": edge, "overall prob": recomb_prob, "avg cost": total_cost}
-                )
-
-    # sort by overall prob
-    for recombs in best_recombs.values():
-        recombs.sort(key=lambda obj: obj["overall prob"], reverse=True)
-
-    for recombs in cheapest_recombs.values():
-        recombs.sort(key=lambda obj: obj["overall prob"], reverse=True)
-
-    return best_recombs, cheapest_recombs
-
-
-def get_probs_for_result(graph):
-    result_probs = {}
-
-    for parent, edges in graph.items():
-
-        for edge in edges:
-            edge: Recombination
-
-            result_item = edge.result_item()
-
-            if result_item not in result_probs:
-                result_probs[result_item] = []
-
-            if any(
-                existing_edge.recomb_details() == edge.recomb_details()
-                and existing_edge.exclusive_mods() == edge.exclusive_mods()
-                for existing_edge in result_probs[result_item]
-            ):
-                continue
-
-            result_probs[result_item].append(edge)
-
-    # sort by prob
-    for recombs in result_probs.values():
-        recombs.sort(key=lambda obj: obj.probability, reverse=True)
-
-    return result_probs
-
-
-def write_results(result_probs, filename):
-
-    with open(filename, "w") as f:
-        for item, recombs in result_probs.items():
-
-            final_item = (
-                f"{recombs[0].final_prefix_count}p/{recombs[0].final_suffix_count}s"
-            )
-            f.write(f"\n-------------------------------------\n")
-            f.write(f"{final_item}\n")
-            for recomb in recombs:
-                recomb: Recombination
-
-                recomb_items = recomb.recomb_items_string()
-                exclusive_mods = recomb.exclusive_pool_string()
-                recomb_prob = recomb.probability
-                f.write(
-                    f"Items: {recomb_items}, Exclusive: {exclusive_mods}, Prob: {recomb_prob:.2%}\n"
-                )
-
-
-def write_paths(result_probs, filename):
-
-    with open(filename, "w") as f:
-        for item, recombs in result_probs.items():
-            final_item = ""
-            if len(recombs) == 0:
-                if item == (1, 0):
-                    final_item = "1p/0s"
-                elif item == (0, 1):
-                    final_item = "0p/1s"
-                else:
-                    print("wrong final item")
-            else:
-                final_item = f"{recombs[0]['edge'].final_prefix_count}p/{recombs[0]['edge'].final_suffix_count}s"
-
-            f.write(f"\n-------------------------------------\n")
-            f.write(f"{final_item}\n")
-            for recomb_info in recombs:
-                recomb = recomb_info["edge"]
-                recomb: Recombination
-
-                overall_prob = recomb_info["overall prob"]
-                avg_cost = recomb_info["avg cost"]
-
-                recomb_items = recomb.recomb_items_string()
-                exclusive_mods = recomb.exclusive_pool_string()
-                recomb_prob = recomb.probability
-                f.write(
-                    f"Items: {recomb_items}, Exclusive: {exclusive_mods}, Path Cost: {avg_cost:0.2f}, Path Prob: {overall_prob:.2%}\n"
-                )
-
-
-# calls other funcs to get / write results
-def process_graph(eldritch=False):
-    # result file paths
-    result_file = f"results/all_recombs{'_eldritch' if eldritch else ''}.txt"
-    paths_file = f"results/paths{'_eldritch' if eldritch else ''}.txt"
-    cheapest_paths_file = f"results/cheapest_paths{'_eldritch' if eldritch else ''}.txt"
-
-    graph = build_graph(eldritch)
-
-    result_probs = get_probs_for_result(graph)
-    write_results(result_probs, result_file)
-
-    best_path, cheapest_path = pathfind(result_probs)
-    write_paths(best_path, paths_file)
-    write_paths(cheapest_path, cheapest_paths_file)
-
-
 def main():
 
-    a = get_recomb_dict()
+    item_combos = get_item_combos()
+    exclusive_combos = get_exclusive_combinations()
 
-    # create results for non-eldritch items
-    process_graph()
+    recomb_dict = get_recomb_dict(item_combos, exclusive_combos, eldritch_annul=False)
+    recomb_dict_eldritch = get_recomb_dict(
+        item_combos, exclusive_combos, eldritch_annul=True
+    )
+    write_to_file("results/all_recombs.txt", recomb_dict, format_recomb_line)
+    write_to_file(
+        "results/all_recombs_eldritch.txt",
+        recomb_dict_eldritch,
+        format_recomb_line,
+    )
 
-    # create results for eldritch items
-    process_graph(eldritch=True)
+    graph = build_graph(recomb_dict)
+    graph_eldritch = build_graph(recomb_dict_eldritch)
 
 
 if __name__ == "__main__":
