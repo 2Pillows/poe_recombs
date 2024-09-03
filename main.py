@@ -209,24 +209,24 @@ class Recombinate:
                 # if no crafted suffixes, subtract 4 from
 
                 if (
-                    crafted_prefixes >= self.crafted_prefix_count
-                    and crafted_suffixes >= self.crafted_suffix_count
+                    crafted_prefixes == self.crafted_prefix_count
+                    and crafted_suffixes == self.crafted_suffix_count
                 ):
                     valid_crafted_mods = True
 
-        # if (
-        #     # final item
-        #     self.final_item.get_item() == (2, 3)
-        #     # # item1
-        #     and self.item1.get_item() == (0, 2)
-        #     # # item2
-        #     and self.item2.get_item() == (2, 2)
-        #     # # exclusive mods
-        #     and self.crafted_prefix_count == 4
-        #     and self.crafted_suffix_count == 2
-        #     and self.aspect_suffix_count == 0
-        # ):
-        #     print("check")
+        if (
+            # final item
+            self.final_item.get_item() == (2, 3)
+            # # item1
+            and self.item1.get_item() == (1, 2)
+            # # item2
+            and self.item2.get_item() == (1, 3)
+            # # exclusive mods
+            and self.crafted_prefix_count == 3
+            and self.crafted_suffix_count == 0
+            and self.aspect_suffix_count == 0
+        ):
+            print("check")
 
         return not valid_crafted_mods
 
