@@ -1,0 +1,224 @@
+
+-------------------------------------
+0p/2s
+Items: 1p/1s + 1p/1s, Exclusive: 1c/2c2a, Path Cost: 31.50, Path Prob: 11724.09%
+Items: 1p/1s + 1p/1s, Exclusive: 2c/2c2a, Path Cost: 31.50, Path Prob: 11724.09%
+Items: 1p/1s + 1p/1s, Exclusive: 3c/2c2a, Path Cost: 31.50, Path Prob: 11724.09%
+Items: 1p/1s + 1p/1s, Exclusive: 4c/2c2a, Path Cost: 31.50, Path Prob: 11724.09%
+Items: 1p/1s + 1p/1s, Exclusive: 0c/3c0a, Path Cost: 31.10, Path Prob: 11655.93%
+Items: 1p/1s + 1p/1s, Exclusive: 0c/2c2a, Path Cost: 29.50, Path Prob: 9815.52%
+Items: 1p/1s + 1p/1s, Exclusive: 1c/1c2a, Path Cost: 29.50, Path Prob: 8918.04%
+Items: 1p/1s + 1p/1s, Exclusive: 2c/1c2a, Path Cost: 31.50, Path Prob: 8918.04%
+Items: 1p/1s + 1p/1s, Exclusive: 3c/1c2a, Path Cost: 31.50, Path Prob: 8918.04%
+Items: 1p/1s + 1p/1s, Exclusive: 4c/1c2a, Path Cost: 31.50, Path Prob: 8918.04%
+Items: 1p/1s + 1p/1s, Exclusive: 2c/1c1a, Path Cost: 31.30, Path Prob: 8247.76%
+Items: 1p/1s + 1p/1s, Exclusive: 3c/1c1a, Path Cost: 31.30, Path Prob: 8247.76%
+Items: 1p/1s + 1p/1s, Exclusive: 4c/1c1a, Path Cost: 31.30, Path Prob: 8247.76%
+Items: 1p/1s + 1p/1s, Exclusive: 2c/1c0a, Path Cost: 31.10, Path Prob: 7361.64%
+Items: 1p/1s + 1p/1s, Exclusive: 3c/1c0a, Path Cost: 31.10, Path Prob: 7361.64%
+Items: 1p/1s + 1p/1s, Exclusive: 4c/1c0a, Path Cost: 31.10, Path Prob: 7361.64%
+Items: 1p/1s + 1p/1s, Exclusive: 3c/0c0a, Path Cost: 31.10, Path Prob: 6748.17%
+Items: 1p/1s + 1p/1s, Exclusive: 4c/0c0a, Path Cost: 31.10, Path Prob: 6748.17%
+Items: 1p/1s + 1p/1s, Exclusive: 0c/1c2a, Path Cost: 29.50, Path Prob: 6475.52%
+Items: 1p/1s + 1p/1s, Exclusive: 1c/0c2a, Path Cost: 29.50, Path Prob: 4123.88%
+Items: 1p/1s + 1p/1s, Exclusive: 2c/0c2a, Path Cost: 29.50, Path Prob: 4123.88%
+Items: 1p/1s + 1p/1s, Exclusive: 3c/0c2a, Path Cost: 31.50, Path Prob: 4123.88%
+Items: 1p/1s + 1p/1s, Exclusive: 4c/0c2a, Path Cost: 31.50, Path Prob: 4123.88%
+Items: 1p/1s + 1p/1s, Exclusive: 3c/0c1a, Path Cost: 31.30, Path Prob: 2453.88%
+Items: 1p/1s + 1p/1s, Exclusive: 4c/0c1a, Path Cost: 31.30, Path Prob: 2453.88%
+Items: 1p/1s + 1p/1s, Exclusive: 0c/0c2a, Path Cost: 29.50, Path Prob: 2113.06%
+
+-------------------------------------
+1p/1s
+Items: 0p/2s + 2p/0s, Exclusive: 3c/2c2a, Path Cost: 14.30, Path Prob: 2070.00%
+Items: 0p/2s + 2p/0s, Exclusive: 4c/2c2a, Path Cost: 14.30, Path Prob: 2070.00%
+Items: 0p/2s + 2p/0s, Exclusive: 2c/2c2a, Path Cost: 14.30, Path Prob: 1966.50%
+Items: 0p/2s + 2p/0s, Exclusive: 3c/1c1a, Path Cost: 14.10, Path Prob: 1966.50%
+Items: 0p/2s + 2p/0s, Exclusive: 4c/1c1a, Path Cost: 14.10, Path Prob: 1966.50%
+Items: 0p/2s + 2p/0s, Exclusive: 1c/2c1a, Path Cost: 14.10, Path Prob: 1956.15%
+Items: 0p/2s + 2p/0s, Exclusive: 2c/1c1a, Path Cost: 14.10, Path Prob: 1863.00%
+Items: 0p/2s + 2p/0s, Exclusive: 0c/1c2a, Path Cost: 12.30, Path Prob: 1725.00%
+Items: 0p/2s + 2p/0s, Exclusive: 3c/1c2a, Path Cost: 14.30, Path Prob: 1725.00%
+Items: 0p/2s + 2p/0s, Exclusive: 4c/1c2a, Path Cost: 14.30, Path Prob: 1725.00%
+Items: 0p/2s + 2p/0s, Exclusive: 1c/2c2a, Path Cost: 14.30, Path Prob: 1676.70%
+Items: 0p/2s + 2p/0s, Exclusive: 2c/1c2a, Path Cost: 14.30, Path Prob: 1638.75%
+Items: 0p/2s + 2p/0s, Exclusive: 1c/1c2a, Path Cost: 12.30, Path Prob: 1397.25%
+Items: 0p/2s + 2p/0s, Exclusive: 3c/0c2a, Path Cost: 14.30, Path Prob: 983.25%
+Items: 0p/2s + 2p/0s, Exclusive: 4c/0c2a, Path Cost: 14.30, Path Prob: 983.25%
+Items: 0p/2s + 2p/0s, Exclusive: 0c/0c2a, Path Cost: 12.30, Path Prob: 931.50%
+Items: 0p/2s + 2p/0s, Exclusive: 2c/0c2a, Path Cost: 12.30, Path Prob: 931.50%
+Items: 0p/2s + 2p/0s, Exclusive: 3c/0c1a, Path Cost: 14.10, Path Prob: 838.35%
+Items: 0p/2s + 2p/0s, Exclusive: 4c/0c1a, Path Cost: 14.10, Path Prob: 838.35%
+Items: 0p/2s + 2p/0s, Exclusive: 1c/0c2a, Path Cost: 12.30, Path Prob: 786.60%
+
+-------------------------------------
+2p/0s
+Items: 1p/0s + 1p/0s, Exclusive: 4c/0c2a, Path Cost: 6.90, Path Prob: 86.00%
+Items: 1p/0s + 1p/0s, Exclusive: 4c/1c1a, Path Cost: 6.70, Path Prob: 86.00%
+Items: 1p/0s + 1p/0s, Exclusive: 4c/1c2a, Path Cost: 6.90, Path Prob: 86.00%
+Items: 1p/0s + 1p/0s, Exclusive: 4c/2c1a, Path Cost: 6.70, Path Prob: 86.00%
+Items: 1p/0s + 1p/0s, Exclusive: 4c/2c2a, Path Cost: 6.90, Path Prob: 86.00%
+Items: 1p/0s + 1p/0s, Exclusive: 3c/0c2a, Path Cost: 6.90, Path Prob: 78.50%
+Items: 1p/0s + 1p/0s, Exclusive: 3c/1c1a, Path Cost: 6.70, Path Prob: 78.50%
+Items: 1p/0s + 1p/0s, Exclusive: 3c/1c2a, Path Cost: 6.90, Path Prob: 78.50%
+Items: 1p/0s + 1p/0s, Exclusive: 3c/2c1a, Path Cost: 6.70, Path Prob: 78.50%
+Items: 1p/0s + 1p/0s, Exclusive: 3c/2c2a, Path Cost: 6.90, Path Prob: 78.50%
+Items: 1p/0s + 1p/0s, Exclusive: 3c/3c1a, Path Cost: 6.70, Path Prob: 78.50%
+Items: 1p/0s + 1p/0s, Exclusive: 3c/3c2a, Path Cost: 6.90, Path Prob: 78.50%
+Items: 1p/0s + 1p/0s, Exclusive: 4c/0c1a, Path Cost: 6.70, Path Prob: 65.50%
+Items: 1p/0s + 1p/0s, Exclusive: 2c/0c2a, Path Cost: 4.90, Path Prob: 60.50%
+Items: 1p/0s + 1p/0s, Exclusive: 2c/1c1a, Path Cost: 6.70, Path Prob: 60.50%
+Items: 1p/0s + 1p/0s, Exclusive: 2c/1c2a, Path Cost: 6.90, Path Prob: 60.50%
+Items: 1p/0s + 1p/0s, Exclusive: 2c/2c1a, Path Cost: 6.70, Path Prob: 60.50%
+Items: 1p/0s + 1p/0s, Exclusive: 2c/2c2a, Path Cost: 6.90, Path Prob: 60.50%
+Items: 1p/0s + 1p/0s, Exclusive: 2c/3c1a, Path Cost: 6.70, Path Prob: 60.50%
+Items: 1p/0s + 1p/0s, Exclusive: 2c/3c2a, Path Cost: 6.90, Path Prob: 60.50%
+Items: 1p/0s + 1p/0s, Exclusive: 2c/4c1a, Path Cost: 6.70, Path Prob: 60.50%
+Items: 1p/0s + 1p/0s, Exclusive: 2c/4c2a, Path Cost: 6.90, Path Prob: 60.50%
+Items: 1p/0s + 1p/0s, Exclusive: 3c/0c1a, Path Cost: 6.70, Path Prob: 58.00%
+Items: 1p/0s + 1p/0s, Exclusive: 1c/0c2a, Path Cost: 4.90, Path Prob: 36.00%
+Items: 1p/0s + 1p/0s, Exclusive: 1c/1c2a, Path Cost: 4.90, Path Prob: 36.00%
+Items: 1p/0s + 1p/0s, Exclusive: 1c/2c1a, Path Cost: 6.70, Path Prob: 36.00%
+Items: 1p/0s + 1p/0s, Exclusive: 1c/2c2a, Path Cost: 6.90, Path Prob: 36.00%
+Items: 1p/0s + 1p/0s, Exclusive: 1c/3c1a, Path Cost: 6.70, Path Prob: 36.00%
+Items: 1p/0s + 1p/0s, Exclusive: 1c/3c2a, Path Cost: 6.90, Path Prob: 36.00%
+Items: 1p/0s + 1p/0s, Exclusive: 1c/4c1a, Path Cost: 6.70, Path Prob: 36.00%
+Items: 1p/0s + 1p/0s, Exclusive: 1c/4c2a, Path Cost: 6.90, Path Prob: 36.00%
+Items: 1p/0s + 1p/0s, Exclusive: 1c/5c1a, Path Cost: 6.70, Path Prob: 36.00%
+Items: 1p/0s + 1p/0s, Exclusive: 0c/0c2a, Path Cost: 4.90, Path Prob: 33.00%
+Items: 1p/0s + 1p/0s, Exclusive: 0c/1c2a, Path Cost: 4.90, Path Prob: 33.00%
+Items: 1p/0s + 1p/0s, Exclusive: 0c/2c2a, Path Cost: 4.90, Path Prob: 33.00%
+Items: 1p/0s + 1p/0s, Exclusive: 0c/3c1a, Path Cost: 6.70, Path Prob: 33.00%
+Items: 1p/0s + 1p/0s, Exclusive: 0c/3c2a, Path Cost: 6.90, Path Prob: 33.00%
+Items: 1p/0s + 1p/0s, Exclusive: 0c/4c1a, Path Cost: 6.70, Path Prob: 33.00%
+Items: 1p/0s + 1p/0s, Exclusive: 0c/4c2a, Path Cost: 6.90, Path Prob: 33.00%
+Items: 1p/0s + 1p/0s, Exclusive: 0c/5c1a, Path Cost: 6.70, Path Prob: 33.00%
+Items: 1p/0s + 1p/1s, Exclusive: 4c/0c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 4c/0c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 4c/1c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 4c/1c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 4c/2c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 4c/2c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/1s + 1p/1s, Exclusive: 4c/0c2a, Path Cost: 4.90, Path Prob: 0.00%
+Items: 1p/1s + 1p/1s, Exclusive: 4c/1c2a, Path Cost: 4.90, Path Prob: 0.00%
+Items: 1p/1s + 1p/1s, Exclusive: 4c/2c2a, Path Cost: 4.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 3c/0c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 3c/0c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 3c/1c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 3c/1c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 3c/2c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 3c/2c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 3c/3c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 3c/3c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/1s + 1p/1s, Exclusive: 3c/0c2a, Path Cost: 4.90, Path Prob: 0.00%
+Items: 1p/1s + 1p/1s, Exclusive: 3c/1c2a, Path Cost: 4.90, Path Prob: 0.00%
+Items: 1p/1s + 1p/1s, Exclusive: 3c/2c2a, Path Cost: 4.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 2c/1c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 2c/1c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 2c/2c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 2c/2c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 2c/3c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 2c/3c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 2c/4c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/1s + 1p/1s, Exclusive: 2c/1c2a, Path Cost: 4.90, Path Prob: 0.00%
+Items: 1p/1s + 1p/1s, Exclusive: 2c/2c2a, Path Cost: 4.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 1c/2c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 1c/2c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 1c/3c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 1c/3c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 1c/4c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/1s + 1p/1s, Exclusive: 1c/2c2a, Path Cost: 4.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 0c/3c1a, Path Cost: 5.70, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 0c/3c2a, Path Cost: 5.90, Path Prob: 0.00%
+Items: 1p/0s + 1p/1s, Exclusive: 0c/4c1a, Path Cost: 5.70, Path Prob: 0.00%
+
+-------------------------------------
+0p/3s
+Items: 1p/2s + 1p/2s, Exclusive: 3c/0c2a, Path Cost: 481.90, Path Prob: 516242.25%
+Items: 1p/2s + 1p/2s, Exclusive: 4c/0c2a, Path Cost: 481.90, Path Prob: 516242.25%
+Items: 1p/2s + 1p/2s, Exclusive: 3c/0c1a, Path Cost: 481.70, Path Prob: 408691.78%
+Items: 1p/2s + 1p/2s, Exclusive: 4c/0c1a, Path Cost: 481.70, Path Prob: 408691.78%
+
+-------------------------------------
+1p/2s
+Items: 2p/1s + 2p/1s, Exclusive: 1c/2c2a, Path Cost: 239.50, Path Prob: 752225.34%
+Items: 2p/1s + 2p/1s, Exclusive: 2c/2c2a, Path Cost: 239.50, Path Prob: 752225.34%
+Items: 2p/1s + 2p/1s, Exclusive: 0c/2c2a, Path Cost: 237.50, Path Prob: 629770.05%
+Items: 2p/1s + 2p/1s, Exclusive: 1c/1c2a, Path Cost: 237.50, Path Prob: 549299.43%
+Items: 2p/1s + 2p/1s, Exclusive: 2c/1c2a, Path Cost: 239.50, Path Prob: 549299.43%
+Items: 2p/1s + 2p/1s, Exclusive: 2c/1c1a, Path Cost: 239.30, Path Prob: 529181.78%
+Items: 2p/1s + 2p/1s, Exclusive: 2c/1c0a, Path Cost: 239.10, Path Prob: 503816.04%
+Items: 2p/1s + 2p/1s, Exclusive: 0c/1c2a, Path Cost: 237.50, Path Prob: 398854.36%
+Items: 2p/1s + 2p/1s, Exclusive: 1c/0c2a, Path Cost: 237.50, Path Prob: 211672.71%
+Items: 2p/1s + 2p/1s, Exclusive: 2c/0c2a, Path Cost: 237.50, Path Prob: 211672.71%
+Items: 2p/1s + 2p/1s, Exclusive: 0c/0c2a, Path Cost: 237.50, Path Prob: 108460.40%
+
+-------------------------------------
+2p/1s
+Items: 1p/2s + 3p/0s, Exclusive: 2c/2c2a, Path Cost: 118.30, Path Prob: 177078.30%
+Items: 1p/2s + 3p/0s, Exclusive: 2c/1c1a, Path Cost: 118.10, Path Prob: 166783.05%
+Items: 1p/2s + 3p/0s, Exclusive: 1c/2c2a, Path Cost: 118.30, Path Prob: 161635.42%
+Items: 1p/2s + 3p/0s, Exclusive: 0c/1c2a, Path Cost: 116.30, Path Prob: 148251.60%
+Items: 1p/2s + 3p/0s, Exclusive: 2c/1c2a, Path Cost: 118.30, Path Prob: 141662.64%
+Items: 1p/2s + 3p/0s, Exclusive: 1c/1c2a, Path Cost: 116.30, Path Prob: 129308.34%
+Items: 1p/2s + 3p/0s, Exclusive: 0c/0c2a, Path Cost: 116.30, Path Prob: 66713.22%
+Items: 1p/2s + 3p/0s, Exclusive: 2c/0c2a, Path Cost: 116.30, Path Prob: 66713.22%
+Items: 1p/2s + 3p/0s, Exclusive: 1c/0c2a, Path Cost: 116.30, Path Prob: 60536.07%
+
+-------------------------------------
+3p/0s
+Items: 1p/2s + 2p/0s, Exclusive: 3c/0c2a, Path Cost: 63.60, Path Prob: 12867.12%
+Items: 1p/2s + 2p/0s, Exclusive: 3c/1c1a, Path Cost: 63.40, Path Prob: 12867.12%
+Items: 1p/2s + 2p/0s, Exclusive: 3c/1c2a, Path Cost: 63.60, Path Prob: 12867.12%
+Items: 1p/2s + 2p/0s, Exclusive: 3c/2c1a, Path Cost: 63.40, Path Prob: 12867.12%
+Items: 1p/2s + 2p/0s, Exclusive: 3c/2c2a, Path Cost: 63.60, Path Prob: 12867.12%
+Items: 1p/2s + 2p/0s, Exclusive: 3c/3c1a, Path Cost: 63.40, Path Prob: 12867.12%
+Items: 1p/2s + 2p/0s, Exclusive: 2c/0c2a, Path Cost: 61.60, Path Prob: 10186.47%
+Items: 1p/2s + 2p/0s, Exclusive: 2c/1c1a, Path Cost: 63.40, Path Prob: 10186.47%
+Items: 1p/2s + 2p/0s, Exclusive: 2c/1c2a, Path Cost: 63.60, Path Prob: 10186.47%
+Items: 1p/2s + 2p/0s, Exclusive: 2c/2c1a, Path Cost: 63.40, Path Prob: 10186.47%
+Items: 1p/2s + 2p/0s, Exclusive: 2c/2c2a, Path Cost: 63.60, Path Prob: 10186.47%
+Items: 1p/2s + 2p/0s, Exclusive: 2c/3c1a, Path Cost: 63.40, Path Prob: 10186.47%
+Items: 1p/2s + 2p/0s, Exclusive: 1c/0c2a, Path Cost: 61.60, Path Prob: 5540.01%
+Items: 1p/2s + 2p/0s, Exclusive: 1c/1c2a, Path Cost: 61.60, Path Prob: 5540.01%
+Items: 1p/2s + 2p/0s, Exclusive: 1c/2c1a, Path Cost: 63.40, Path Prob: 5540.01%
+Items: 1p/2s + 2p/0s, Exclusive: 1c/2c2a, Path Cost: 63.60, Path Prob: 5540.01%
+Items: 1p/2s + 2p/0s, Exclusive: 1c/3c1a, Path Cost: 63.40, Path Prob: 5540.01%
+Items: 1p/2s + 2p/0s, Exclusive: 0c/0c2a, Path Cost: 61.60, Path Prob: 3574.20%
+Items: 1p/2s + 2p/0s, Exclusive: 0c/1c2a, Path Cost: 61.60, Path Prob: 3574.20%
+Items: 1p/2s + 2p/0s, Exclusive: 0c/2c2a, Path Cost: 61.60, Path Prob: 3574.20%
+Items: 1p/2s + 2p/0s, Exclusive: 0c/3c1a, Path Cost: 63.40, Path Prob: 3574.20%
+
+-------------------------------------
+1p/3s
+Items: 2p/2s + 2p/2s, Exclusive: 2c/1c1a, Path Cost: 3388.50, Path Prob: 61903664.86%
+Items: 2p/2s + 2p/2s, Exclusive: 1c/0c2a, Path Cost: 3386.70, Path Prob: 20634554.95%
+Items: 2p/2s + 2p/2s, Exclusive: 2c/0c2a, Path Cost: 3386.70, Path Prob: 20634554.95%
+Items: 2p/2s + 2p/2s, Exclusive: 1c/0c1a, Path Cost: 3386.50, Path Prob: 16335689.34%
+Items: 2p/2s + 2p/2s, Exclusive: 2c/0c1a, Path Cost: 3386.50, Path Prob: 16335689.34%
+
+-------------------------------------
+2p/2s
+Items: 3p/1s + 3p/1s, Exclusive: 0c/3c1a, Path Cost: 1692.90, Path Prob: 41137574.98%
+Items: 3p/1s + 3p/1s, Exclusive: 0c/3c0a, Path Cost: 1692.70, Path Prob: 40709058.57%
+Items: 3p/1s + 3p/1s, Exclusive: 0c/2c2a, Path Cost: 1691.10, Path Prob: 30853181.23%
+Items: 3p/1s + 3p/1s, Exclusive: 0c/2c1a, Path Cost: 1690.90, Path Prob: 29853309.62%
+Items: 3p/1s + 3p/1s, Exclusive: 0c/1c2a, Path Cost: 1691.10, Path Prob: 18997560.67%
+Items: 3p/1s + 3p/1s, Exclusive: 0c/1c1a, Path Cost: 1690.90, Path Prob: 13284008.59%
+Items: 3p/1s + 3p/1s, Exclusive: 0c/0c2a, Path Cost: 1691.10, Path Prob: 4428002.86%
+Items: 3p/1s + 3p/1s, Exclusive: 0c/0c1a, Path Cost: 1690.90, Path Prob: 1428388.02%
+
+-------------------------------------
+3p/1s
+Items: 1p/3s + 2p/1s, Exclusive: 3c/0c2a, Path Cost: 845.10, Path Prob: 616589.06%
+Items: 1p/3s + 2p/1s, Exclusive: 2c/0c2a, Path Cost: 843.10, Path Prob: 488133.01%
+Items: 1p/3s + 2p/1s, Exclusive: 1c/0c2a, Path Cost: 843.10, Path Prob: 265475.85%
+Items: 1p/3s + 2p/1s, Exclusive: 0c/0c2a, Path Cost: 843.10, Path Prob: 171274.74%
+
+-------------------------------------
+2p/3s
+Items: 3p/2s + 3p/2s, Exclusive: 0c/0c0a, Path Cost: 27119.50, Path Prob: 2051878049.19%
+
+-------------------------------------
+3p/2s
+Items: 2p/3s + 2p/3s, Exclusive: 0c/0c0a, Path Cost: 13559.50, Path Prob: 512931681.99%
