@@ -127,7 +127,7 @@ function getPaths(
   // guaranteed item path
   var guaranteedItem = {
     pathProb: 1,
-    pathCost: 0,
+    pathCost: BASE_COST,
     recomb: null,
   };
 
@@ -161,14 +161,14 @@ function getPaths(
       aspectSuffixCount = parseFloat(aspectSuffixCount);
       totalDesiredSuffixes = parseFloat(totalDesiredSuffixes);
 
-      let recombCost = BASE_COST;
-      recombCost += multimodsUsed * 2;
+      // recomb cost is nothing, unless guaranteed, then risking base
+      let benchCost = 0;
+      benchCost += multimodsUsed * 2;
       // lock prefix
       if (aspectSuffixCount > 0 && totalDesiredSuffixes === 0) {
-        recombCost += 1;
+        benchCost += 1;
       }
-      recombCost += aspectSuffixCount * ASPECT_COST;
-      recomb.recombCost = recombCost / probability;
+      benchCost += aspectSuffixCount * ASPECT_COST;
 
       if (!bestPaths[item1]) {
         if (pastFinalItems.has(item1)) continue;
@@ -192,19 +192,22 @@ function getPaths(
       // Otherwise need only 1 guaranteed for both
       if (item1 === item2 && GUARANTEED_ITEMS[item1] === 2) {
         item1Prob = 1;
-        item1Cost = 0;
+        item1Cost = BASE_COST;
         item2Prob = 1;
-        item2Cost = 0;
+        item2Cost = BASE_COST;
       } else if (GUARANTEED_ITEMS[item1] === 1) {
         item1Prob = 1;
-        item1Cost = 0;
+        item1Cost = BASE_COST;
       } else if (GUARANTEED_ITEMS[item2] === 1) {
         item2Prob = 1;
-        item2Cost = 0;
+        item2Cost = BASE_COST;
       }
 
+      recombCost = (benchCost + BASE_COST) / probability;
+      recomb.recombCost = recombCost;
+
       const pathProb = probability * item1Prob * item2Prob;
-      const pathCost = recombCost + item1Cost + item2Cost / probability;
+      const pathCost = (benchCost + (item1Cost + item2Cost) / 2) / probability;
 
       // update best combo if same or better
       if (
@@ -225,7 +228,7 @@ function getPaths(
           bestCombination = {
             pathProb: pathProb,
             pathCost: pathCost,
-            recomb: recomb,
+            recomb: { ...recomb },
           };
         }
 
@@ -238,7 +241,7 @@ function getPaths(
           bestCombination = {
             pathProb: pathProb,
             pathCost: pathCost,
-            recomb: recomb,
+            recomb: { ...recomb },
           };
         }
       }
@@ -422,7 +425,7 @@ function run() {
 
   // get paths
   path_prob = getPaths(
-    recombDict,
+    { ...recombDict },
     BASE_COST,
     ASPECT_COST,
     GUARANTEED_ITEMS,
@@ -431,7 +434,7 @@ function run() {
     (allowAspect = false)
   );
   path_prob_aspect = getPaths(
-    recombDict,
+    { ...recombDict },
     BASE_COST,
     ASPECT_COST,
     GUARANTEED_ITEMS,
@@ -440,7 +443,7 @@ function run() {
     (allowAspect = true)
   );
   path_cost = getPaths(
-    recombDict,
+    { ...recombDict },
     BASE_COST,
     ASPECT_COST,
     GUARANTEED_ITEMS,
@@ -449,7 +452,7 @@ function run() {
     (allowAspect = false)
   );
   path_cost_aspect = getPaths(
-    recombDict,
+    { ...recombDict },
     BASE_COST,
     ASPECT_COST,
     GUARANTEED_ITEMS,
