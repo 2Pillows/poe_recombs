@@ -13,7 +13,7 @@ MAX_INITIAL_MODS = 6
 MAX_FINAL_MODS = 3
 
 # costs
-BASE_COST = 0.5
+BASE_COST = 0.1
 ASPECT_COST = 0.2
 
 # cumulative sum of weight table
@@ -410,7 +410,7 @@ def format_recomb_detailed_line(recomb: Recombinate):
         f"Item1: {recomb.get_item1().to_string()}, "
         f"Item2: {recomb.get_item2().to_string()}, "
         f"Exclusive: {recomb.get_exclusive_mods()}, "
-        f"Prob: {recomb.probability:.2%}, "
+        f"Prob: {recomb.probability}, "
         f"Multimods: {recomb.multimods_used}, "
         f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
         f"Desired Suffixes: {recomb.total_desired_prefixes}\n"
@@ -430,6 +430,7 @@ def find_paths(recomb_dict, sort_prob=False, sort_cost=False, allow_aspect=False
         Item(0, 0): guaranteed_item,
         Item(1, 0): guaranteed_item,
         Item(0, 1): guaranteed_item,
+        Item(1, 1): guaranteed_item,
     }
 
     # for each final item
@@ -492,8 +493,8 @@ def find_paths(recomb_dict, sort_prob=False, sort_cost=False, allow_aspect=False
 
     # print_best_paths(best_paths)
 
-    # target_item = Item(3, 2)
-    # print_paths_to(target_item, best_paths)
+    target_item = Item(3, 2)
+    print_paths_to(target_item, best_paths)
 
     # add combo to array to match print func
     for final_item in best_paths.keys():
@@ -564,21 +565,21 @@ def main():
 
     # pass eldritch dict instead for eldritch paths
 
-    prob_paths = find_paths(recomb_dict=recomb_dict, sort_prob=True)
-    cost_paths = find_paths(recomb_dict=recomb_dict, sort_cost=True)
+    # prob_paths = find_paths(recomb_dict=recomb_dict, sort_prob=True)
+    # cost_paths = find_paths(recomb_dict=recomb_dict, sort_cost=True)
 
-    prob_paths_aspect = find_paths(
-        recomb_dict=recomb_dict, sort_prob=True, allow_aspect=True
-    )
-    cost_paths_aspect = find_paths(
-        recomb_dict=recomb_dict, sort_cost=True, allow_aspect=True
-    )
+    # prob_paths_aspect = find_paths(
+    #     recomb_dict=recomb_dict, sort_prob=True, allow_aspect=True
+    # )
+    # cost_paths_aspect = find_paths(
+    #     recomb_dict=recomb_dict, sort_cost=True, allow_aspect=True
+    # )
 
-    write_to_file("results/paths_probs.txt", prob_paths, format_path_line)
-    write_to_file("results/paths_cost.txt", cost_paths, format_path_line)
+    # write_to_file("results/paths_probs.txt", prob_paths, format_path_line)
+    # write_to_file("results/paths_cost.txt", cost_paths, format_path_line)
 
-    write_to_file("results/paths_probs_aspect.txt", prob_paths_aspect, format_path_line)
-    write_to_file("results/paths_cost_aspect.txt", cost_paths_aspect, format_path_line)
+    # write_to_file("results/paths_probs_aspect.txt", prob_paths_aspect, format_path_line)
+    # write_to_file("results/paths_cost_aspect.txt", cost_paths_aspect, format_path_line)
 
 
 if __name__ == "__main__":
