@@ -317,14 +317,10 @@ def get_recomb_dict(item_combos, exclusive_combos, eldritch_annul=False):
         for prefix_count in range(4)  # 0-3 final prefixes
         for suffix_count in range(4)  # 0-3 final suffixes
         if not (
-            prefix_count == 0
-            and suffix_count == 0
-            or prefix_count == 1
-            and suffix_count == 0
-            or prefix_count == 0
-            and suffix_count == 1
-            or prefix_count == 3
-            and suffix_count == 3
+            (prefix_count == 0 and suffix_count == 0)
+            or (prefix_count == 1 and suffix_count == 0)
+            or (prefix_count == 0 and suffix_count == 1)
+            or (prefix_count == 3 and suffix_count == 3)
         )
     }
 
@@ -387,11 +383,11 @@ def write_to_file(filename, data, format_line):
                 f.write(format_line(item))
 
 
-def format_recomb_line(recombination):
+def format_recomb_line(recomb):
     return (
-        f"Items: {recombination.get_item1().to_string()} + {recombination.get_item2().to_string()}, "
-        f"Exclusive: {recombination.get_exclusive_mods()}, "
-        f"Prob: {recombination.probability:.2%}\n"
+        f"Items: {recomb.get_item1().to_string()} + {recomb.get_item2().to_string()}, "
+        f"Exclusive: {recomb.get_exclusive_mods()}, "
+        f"Prob: {recomb.probability:.2%}\n"
     )
 
 
@@ -409,12 +405,18 @@ def format_path_line(path_details):
     )
 
 
-# instead of gettiing all paths
-# assume the highest % prob for each path is best
-# build off that?
+def format_recomb_detailed_line(recomb: Recombinate):
+    return (
+        f"Item1: {recomb.get_item1().to_string()}, "
+        f"Item2: {recomb.get_item2().to_string()}, "
+        f"Exclusive: {recomb.get_exclusive_mods()}, "
+        f"Prob: {recomb.probability:.2%}, "
+        f"Multimods: {recomb.multimods_used}, "
+        f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
+        f"Desired Suffixes: {recomb.total_desired_prefixes}\n"
+    )
 
 
-# recursion - 2p/0s uses 1p/0s, creates inf loop
 def find_paths(recomb_dict, sort_prob=False, sort_cost=False, allow_aspect=False):
 
     # best paths, w/ guaranteed starts
@@ -550,6 +552,17 @@ def main():
         recomb_dict_eldritch,
         format_recomb_line,
     )
+
+    write_to_file(
+        "results/detailed_recombs.txt", recomb_dict, format_recomb_detailed_line
+    )
+    write_to_file(
+        "results/detailed_recombs_eldritch.txt",
+        recomb_dict_eldritch,
+        format_recomb_detailed_line,
+    )
+
+    # pass eldritch dict instead for eldritch paths
 
     prob_paths = find_paths(recomb_dict=recomb_dict, sort_prob=True)
     cost_paths = find_paths(recomb_dict=recomb_dict, sort_cost=True)
