@@ -198,8 +198,8 @@ class Recombinate:
             self.total_desired_prefixes < final_prefixes
             or self.total_desired_suffixes < final_suffixes
             # dont include if a single item has more desired mods than final
-            or sum(self.item1.get_item()) > sum(self.final_item.get_item())
-            or sum(self.item2.get_item()) > sum(self.final_item.get_item())
+            or sum(self.item1.get_item()) >= sum(self.final_item.get_item())
+            or sum(self.item2.get_item()) >= sum(self.final_item.get_item())
         ):
             return True
 
