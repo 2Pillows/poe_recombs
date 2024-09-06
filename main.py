@@ -2,6 +2,7 @@
 
 from collections import deque, defaultdict
 import heapq
+import re
 
 # constants
 MAX_MOD_POOL = 6
@@ -56,6 +57,8 @@ class Item:
     def __init__(self, prefix_count, suffix_count) -> None:
         self.prefix_count = prefix_count
         self.suffix_count = suffix_count
+
+        self.path_prob = 0
 
     def get_crafted_combos(self, aspect_count=0):
         crafted_combos = set()
@@ -157,6 +160,9 @@ class Recombinate:
         self.total_exclusive_suffixes = (
             self.crafted_suffix_count + self.aspect_suffix_count
         )
+        self.total_exclusive_mods = (
+            self.total_exclusive_prefixes + self.total_exclusive_suffixes
+        )
 
         # total mods
         self.total_prefixes = (
@@ -232,15 +238,15 @@ class Recombinate:
                         self.multimods_used = recomb_multimods
         # if (
         #     # final item
-        #     self.final_item.get_item() == (2, 1)
+        #     self.final_item.get_item() == (1, 1)
         #     # # item1
-        #     and self.item1.get_item() == (1, 0)
+        #     and self.item1.get_item() == (0, 1)
         #     # # item2
-        #     and self.item2.get_item() == (1, 1)
+        #     and self.item2.get_item() == (1, 0)
         #     # # exclusive mods
-        #     and self.crafted_prefix_count == 4
-        #     and self.crafted_suffix_count == 2
-        #     and self.aspect_suffix_count == 1
+        #     and self.crafted_prefix_count == 0
+        #     and self.crafted_suffix_count == 0
+        #     and self.aspect_suffix_count == 0
         # ):
         #     print("check")
 
@@ -253,17 +259,21 @@ class Recombinate:
         # if prefix first, need to add exclusive mod to final prefixes
         # if no exclusive prefixes, add exclusive suffix
         if prefix_first:
+            # if there is an exclsuive prefix, add 1 required prefix
             if self.total_exclusive_prefixes > 0:
                 required_prefixes += 1
-            else:
+            # if there is no required prefix and a required suffix, add a req suffix
+            elif self.total_exclusive_suffixes > 0:
                 required_suffixes += 1
 
         # if suffix first, need to add exclusive mod to final suffixes
         # if no exclusive suffixes, add exclusive prefix
         elif suffix_first:
+            # if there is an exclsuive suffix, add 1 required suffix
             if self.total_exclusive_suffixes > 0:
                 required_suffixes += 1
-            else:
+            # if there is no required suffix and a required prefix, add a req prefix
+            elif self.total_exclusive_prefixes > 0:
                 required_prefixes += 1
 
         # else error
@@ -304,7 +314,32 @@ class Recombinate:
             # update suffix prob
             suffix_prob = avoid_aspect_prob + annul_aspect_prob
 
-        return prefix_prob * suffix_prob
+        # if final item is 1 prefix and 1 suffix w/ exclusive mods, need to annul exclusive
+        # if eldritch annul is 1/2, if no edlritch annul is 1/3
+        # if (
+        #     # final item
+        #     self.final_item.get_item() == (1, 1)
+        #     # # item1
+        #     and self.item1.get_item() == (0, 1)
+        #     # # item2
+        #     and self.item2.get_item() == (1, 0)
+        #     # # exclusive mods
+        #     and self.crafted_prefix_count == 0
+        #     and self.crafted_suffix_count == 1
+        #     and self.aspect_suffix_count == 0
+        # ):
+        #     print("check")
+
+        # if only 1 prefix and suffix wo/ exclusive mods, need to reagl and annul
+        if (
+            self.final_item.prefix_count == 1
+            and self.final_item.suffix_count == 1
+            and self.total_exclusive_mods == 0
+        ):
+            annul_rare_mod = 1 / 2 if self.eldritch_annul else 1 / 3
+            return prefix_prob * suffix_prob * annul_rare_mod
+        else:
+            return prefix_prob * suffix_prob
 
     def to_string(self):
         return f"{self.item1.to_string()} + {self.item2.to_string()} -> {self.final_item.to_string()}"
@@ -417,125 +452,87 @@ def format_recomb_detailed_line(recomb: Recombinate):
     )
 
 
-def find_paths(recomb_dict, sort_prob=False, sort_cost=False, allow_aspect=False):
+def find_paths(
+    recomb_dict,
+    final_item,
+    f,
+    guaranteed_items,
+    sort_prob=False,
+    sort_cost=False,
+    allow_aspect=False,
+    visited=None,
+):
+    if visited is None:
+        visited = set()
 
-    # best paths, w/ guaranteed starts
-    # adjust staring item to add guarnteed mods
-    guaranteed_item = {
-        "path prob": 1,
-        "path cost": BASE_COST,
-        "recomb": None,
-    }
-    best_paths = {
-        Item(0, 0): guaranteed_item,
-        Item(1, 0): guaranteed_item,
-        Item(0, 1): guaranteed_item,
-        Item(1, 1): guaranteed_item,
-    }
-
-    # for each final item
-    def find_final_item_paths(final_item, past_final_items):
-        best_combination = best_paths.get(final_item)
-        min_cost = best_combination["path cost"] if best_combination else float("inf")
-        max_prob = best_combination["path prob"] if best_combination else float("-inf")
-
-        # check all ways to get to final item
-        for recomb in recomb_dict[final_item]:
-            recomb: Recombinate
-
-            item1 = recomb.item1
-            item2 = recomb.item2
-
-            if item1 not in best_paths:
-                if item1 in past_final_items:
-                    continue
-                past_final_items.add(item1)
-                find_final_item_paths(item1, past_final_items)
-            if item2 not in best_paths:
-                if item2 in past_final_items:
-                    continue
-                past_final_items.add(item2)
-                find_final_item_paths(item2, past_final_items)
-
-            recomb_prob = recomb.probability
-            item1_prob = best_paths[item1]["path prob"]
-            item2_prob = best_paths[item2]["path prob"]
-            path_prob = recomb_prob * item1_prob * item2_prob
-
-            recomb_cost = BASE_COST
-            # need to add cost of multimod and aspect
-            recomb_cost += recomb.multimods_used * 2
-            if recomb.aspect_suffix_count > 0 and recomb.total_desired_suffixes == 0:
-                recomb_cost += 1
-            item1_cost = best_paths[item1]["path cost"]
-            item2_cost = best_paths[item2]["path cost"]
-            path_cost = (recomb_cost + item1_cost + item2_cost) / recomb_prob
-
-            if (sort_prob and path_prob > max_prob) or (
-                sort_cost and path_cost < min_cost
-            ):
-                if not allow_aspect and recomb.aspect_suffix_count > 0:
-                    continue
-
-                max_prob = path_prob
-                min_cost = path_cost
-
-                best_combination = {
-                    "path prob": path_prob,
-                    "path cost": path_cost,
-                    "recomb": recomb,
-                }
-
-        best_paths[final_item] = best_combination
-
-    for final_item in recomb_dict.keys():
-        find_final_item_paths(final_item, set())
-
-    # print_best_paths(best_paths)
-
-    target_item = Item(3, 2)
-    print_paths_to(target_item, best_paths)
-
-    # add combo to array to match print func
-    for final_item in best_paths.keys():
-        best_paths[final_item] = [best_paths[final_item]]
-
-    return best_paths
-
-
-def print_best_paths(best_paths):
-    for final_item, path_details in best_paths.items():
-        recomb: Recombinate = path_details["recomb"]
-        if recomb is None:
-            continue
-
-        path_prob = path_details["path prob"]
-        path_cost = path_details["path cost"]
-
-        print(
-            f"{recomb.to_string()} | {recomb.get_exclusive_mods()}, Cost {path_cost}, Prob: {path_prob}"
-        )
-
-
-def print_paths_to(target_item, best_paths):
-    path_details = best_paths[target_item]
-
-    recomb: Recombinate = path_details["recomb"]
-    if recomb is None:
+    # Base case: if the node has already been visited, skip it
+    if final_item in visited:
         return
 
-    path_prob = path_details["path prob"]
-    path_cost = path_details["path cost"]
+    if final_item not in recomb_dict:
+        final_item.path_prob = 1
+        return
 
-    print(
-        f"{recomb.to_string()} | {recomb.get_exclusive_mods()}, Cost {path_cost}, Prob: {path_prob}"
-    )
+    # Mark the current node as visited
+    visited.add(final_item)
 
-    item1 = recomb.item1
-    item2 = recomb.item2
+    # Process all recombinations for the final_item
+    for recomb in recomb_dict[final_item]:
 
-    print_paths_to(item2, best_paths)
-    print_paths_to(item1, best_paths)
+        # Get the items involved in the recombination
+        item1 = recomb.get_item1()
+        item2 = recomb.get_item2()
+
+        avail_guaranteed = guaranteed_items.copy()
+
+        # Recursively process item1 and item2
+        if item1 not in visited:
+            find_paths(
+                recomb_dict,
+                item1,
+                f,
+                avail_guaranteed,
+                sort_prob,
+                sort_cost,
+                allow_aspect,
+                visited,
+            )
+        if item2 not in visited:
+            find_paths(
+                recomb_dict,
+                item2,
+                f,
+                avail_guaranteed,
+                sort_prob,
+                sort_cost,
+                allow_aspect,
+                visited,
+            )
+
+        # assume no guaranteed
+        new_prob = item1.path_prob * item2.path_prob * recomb.probability
+
+        item1_prob_str = item1.path_prob
+        item2_prob_str = item2.path_prob
+
+        # if gauranteed available, supplement path prob to 1, remove 1 guar item
+        if item1 in guaranteed_items and guaranteed_items[item1] > 0:
+            new_prob /= item1.path_prob
+            guaranteed_items[item1] -= 1
+            item1_prob_str = 1
+
+        # Calculate the new path probability
+        if item2 in guaranteed_items and guaranteed_items[item2] > 0:
+            new_prob /= item2.path_prob
+            guaranteed_items[item2] -= 1
+            item2_prob_str = 1
+
+        if new_prob > final_item.path_prob:
+            final_item.path_prob = new_prob
+
+        f.write(
+            f"Recomb: {recomb.to_string()}, Path Prob: {item1_prob_str} * {item2_prob_str} * {recomb.probability} = {new_prob}\n",
+        )
 
 
 def main():
@@ -563,23 +560,47 @@ def main():
         format_recomb_detailed_line,
     )
 
-    # pass eldritch dict instead for eldritch paths
+    # path testing for app script
 
-    # prob_paths = find_paths(recomb_dict=recomb_dict, sort_prob=True)
-    # cost_paths = find_paths(recomb_dict=recomb_dict, sort_cost=True)
+    # file_path = "results/path_testing.txt"
+    # guaranteed_items = {Item(1, 1): 1}
+    # with open(file_path, "w") as f:
+    #     pass
 
-    # prob_paths_aspect = find_paths(
-    #     recomb_dict=recomb_dict, sort_prob=True, allow_aspect=True
-    # )
-    # cost_paths_aspect = find_paths(
-    #     recomb_dict=recomb_dict, sort_cost=True, allow_aspect=True
-    # )
+    # with open(file_path, "a") as f:
+    #     find_paths(
+    #         recomb_dict=recomb_dict,
+    #         guaranteed_items=guaranteed_items,
+    #         final_item=Item(3, 2),
+    #         f=f,
+    #         sort_prob=True,
+    #     )
 
-    # write_to_file("results/paths_probs.txt", prob_paths, format_path_line)
-    # write_to_file("results/paths_cost.txt", cost_paths, format_path_line)
+    # # A dictionary to store the highest probability for each "Recomb" item
+    # highest_probabilities = defaultdict(float)
 
-    # write_to_file("results/paths_probs_aspect.txt", prob_paths_aspect, format_path_line)
-    # write_to_file("results/paths_cost_aspect.txt", cost_paths_aspect, format_path_line)
+    # # Regular expression to extract the recomb pattern, result pattern, and probability
+    # line_pattern = re.compile(r"Recomb: (.*?) -> (.*?), Path Prob: .* = (\d+\.\d+)")
+
+    # with open(file_path, "r") as file:
+    #     for line in file:
+    #         # Extract the components using regular expression
+    #         match = line_pattern.search(line)
+    #         if match:
+    #             recomb_pattern = match.group(1).strip()
+    #             result_pattern = match.group(2).strip()
+    #             prob = float(match.group(3))
+
+    #             # Update the highest probability and associated line for this result pattern
+    #             if (
+    #                 result_pattern not in highest_probabilities
+    #                 or prob > highest_probabilities[result_pattern][1]
+    #             ):
+    #                 highest_probabilities[result_pattern] = (line.strip(), prob)
+
+    # # Print out the highest probabilities and associated lines
+    # for result, (line, prob) in highest_probabilities.items():
+    #     print(f"{line}")
 
 
 if __name__ == "__main__":

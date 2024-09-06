@@ -21,6 +21,7 @@ Item1: 0p/1s, Item2: 0p/1s, Exclusive: 3c/1c1a, Prob: 0.44083333333333335, Multi
 Item1: 0p/1s, Item2: 0p/1s, Exclusive: 1c/2c0a, Prob: 0.4205, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 0
 Item1: 0p/1s, Item2: 0p/1s, Exclusive: 2c/1c0a, Prob: 0.36, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 0
 Item1: 0p/1s, Item2: 0p/1s, Exclusive: 3c/1c0a, Prob: 0.36, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 0
+Item1: 0p/1s, Item2: 0p/1s, Exclusive: 0c/0c0a, Prob: 0.33, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 0
 Item1: 0p/1s, Item2: 0p/1s, Exclusive: 2c/0c0a, Prob: 0.33, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 0
 Item1: 0p/1s, Item2: 0p/1s, Exclusive: 0c/2c0a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 0
 Item1: 0p/1s, Item2: 0p/1s, Exclusive: 1c/1c1a, Prob: 0.30245833333333333, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 0
@@ -45,6 +46,7 @@ Item1: 0p/2s, Item2: 0p/2s, Exclusive: 4c/2c0a, Prob: 0.36, Multimods: 2, Aspect
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/3c0a, Prob: 0.36, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/3c0a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 3c/3c0a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 1
+Item1: 0p/2s, Item2: 0p/2s, Exclusive: 0c/0c0a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 0
 Item1: 0p/2s, Item2: 0p/2s, Exclusive: 2c/0c0a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 0
 Item1: 0p/1s, Item2: 0p/2s, Exclusive: 2c/2c0a, Prob: 0.285, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 0
 Item1: 0p/1s, Item2: 0p/2s, Exclusive: 3c/2c0a, Prob: 0.285, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 0
@@ -71,7 +73,9 @@ Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/1c0a, Prob: 0.155, Multimods: 0, Aspec
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/1c0a, Prob: 0.155, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 3c/1c0a, Prob: 0.155, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/1s, Item2: 0p/2s, Exclusive: 1c/1c1a, Prob: 0.11209999999999998, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 0
+Item1: 0p/1s, Item2: 0p/2s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 0
 Item1: 0p/1s, Item2: 0p/2s, Exclusive: 2c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 0
+Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 0p/2s, Exclusive: 2c/0c1a, Prob: 0.09499999999999999, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 0
@@ -82,7 +86,6 @@ Item1: 0p/1s, Item2: 0p/2s, Exclusive: 2c/0c1a, Prob: 0.051666666666666666, Mult
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/0c1a, Prob: 0.051666666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/0c1a, Prob: 0.051666666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
 Item1: 0p/1s, Item2: 0p/2s, Exclusive: 1c/0c1a, Prob: 0.03048333333333333, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 0
-Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.0295, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 
 -------------------------------------
 1p/1s
@@ -128,6 +131,7 @@ Item1: 0p/1s, Item2: 1p/0s, Exclusive: 1c/0c1a, Prob: 0.2475, Multimods: 0, Aspe
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/1c0a, Prob: 0.1947, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 1c/0c0a, Prob: 0.1947, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/0c2a, Prob: 0.18289999999999998, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 1
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/0c0a, Prob: 0.17404999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/0c1a, Prob: 0.09735, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
 
 -------------------------------------
@@ -201,6 +205,7 @@ Item1: 0p/2s, Item2: 1p/0s, Exclusive: 3c/1c1a, Prob: 0.40708333333333335, Multi
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 2c/1c1a, Prob: 0.40708333333333335, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 2c/1c1a, Prob: 0.40708333333333335, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/0c0a, Prob: 0.3844, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
+Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.36579999999999996, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 3c/1c0a, Prob: 0.36, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 3c/1c0a, Prob: 0.36, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/1s, Item2: 1p/1s, Exclusive: 1c/2c1a, Prob: 0.3591666666666667, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 1
@@ -208,6 +213,8 @@ Item1: 0p/2s, Item2: 1p/0s, Exclusive: 1c/2c1a, Prob: 0.3591666666666667, Multim
 Item1: 0p/1s, Item2: 1p/1s, Exclusive: 0c/3c0a, Prob: 0.33629999999999993, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/0s, Exclusive: 0c/3c0a, Prob: 0.33629999999999993, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/2c0a, Prob: 0.33629999999999993, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
+Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.33, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.33, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/1s, Item2: 1p/1s, Exclusive: 3c/1c0a, Prob: 0.329, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/0s, Exclusive: 3c/1c0a, Prob: 0.329, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 2c/1c0a, Prob: 0.329, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
@@ -241,6 +248,8 @@ Item1: 0p/2s, Item2: 1p/0s, Exclusive: 2c/0c0a, Prob: 0.2046, Multimods: 0, Aspe
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/0c0a, Prob: 0.2046, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 1c/0c0a, Prob: 0.2046, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 1c/0c0a, Prob: 0.2046, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/1s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.1947, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
+Item1: 0p/2s, Item2: 1p/0s, Exclusive: 0c/0c0a, Prob: 0.1947, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/1s, Item2: 1p/1s, Exclusive: 2c/0c2a, Prob: 0.19116666666666668, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/0c1a, Prob: 0.19116666666666668, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 1c/0c2a, Prob: 0.19116666666666668, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 2
@@ -270,11 +279,8 @@ Item1: 0p/1s, Item2: 1p/1s, Exclusive: 0c/0c2a, Prob: 0.06096666666666666, Multi
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/0c1a, Prob: 0.06096666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
 Item1: 0p/1s, Item2: 1p/1s, Exclusive: 0c/1c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/0s, Exclusive: 0c/1c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
-Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.054450000000000005, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.054450000000000005, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.03333333333333333, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/0c1a, Prob: 0.03333333333333333, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
-Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.0295, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/1s, Item2: 1p/1s, Exclusive: 0c/0c1a, Prob: 0.019666666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/0s, Exclusive: 0c/0c1a, Prob: 0.019666666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
 
@@ -288,6 +294,7 @@ Item1: 1p/2s, Item2: 1p/2s, Exclusive: 4c/2c0a, Prob: 0.36, Multimods: 2, Aspect
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 2c/3c0a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 3c/3c0a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/3s, Item2: 1p/2s, Exclusive: 2c/0c0a, Prob: 0.3534, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
+Item1: 0p/3s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.33629999999999993, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/1s, Item2: 1p/2s, Exclusive: 3c/3c0a, Prob: 0.324, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 3c/3c0a, Prob: 0.324, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/2s, Exclusive: 3c/2c0a, Prob: 0.324, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 1
@@ -298,6 +305,8 @@ Item1: 0p/3s, Item2: 3p/0s, Exclusive: 1c/3c0a, Prob: 0.324, Multimods: 1, Aspec
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 2c/3c0a, Prob: 0.324, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 1p/2s, Exclusive: 2c/2c0a, Prob: 0.324, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 1c/3c0a, Prob: 0.324, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 0p/3s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/2s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/1s, Item2: 1p/2s, Exclusive: 4c/2c0a, Prob: 0.285, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 4c/2c0a, Prob: 0.285, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 3c/2c0a, Prob: 0.285, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 2
@@ -336,6 +345,8 @@ Item1: 1p/2s, Item2: 1p/2s, Exclusive: 1c/0c0a, Prob: 0.1922, Multimods: 0, Aspe
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 3c/1c1a, Prob: 0.18999999999999997, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.18999999999999997, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 0p/3s, Item2: 1p/2s, Exclusive: 1c/0c0a, Prob: 0.1881, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
+Item1: 0p/2s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.18289999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
+Item1: 0p/3s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.18289999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/1s, Item2: 1p/2s, Exclusive: 2c/2c0a, Prob: 0.1767, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/2c0a, Prob: 0.1767, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/2s, Exclusive: 2c/1c0a, Prob: 0.1767, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
@@ -375,6 +386,11 @@ Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.11779999999999999, Multi
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/1c1a, Prob: 0.11779999999999999, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 1p/2s, Exclusive: 1c/0c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/3s, Item2: 1p/1s, Exclusive: 1c/0c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
+Item1: 0p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 2c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 1p/2s, Exclusive: 2c/1c0a, Prob: 0.0961, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/1c0a, Prob: 0.0961, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 1
@@ -401,14 +417,15 @@ Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/0c0a, Prob: 0.062, Multimods: 0, Aspec
 Item1: 0p/3s, Item2: 1p/0s, Exclusive: 2c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/3s, Item2: 2p/0s, Exclusive: 1c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/1s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
+Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
+Item1: 0p/3s, Item2: 1p/0s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.058899999999999994, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
 Item1: 1p/2s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.058899999999999994, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.051666666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 1p/2s, Exclusive: 1c/1c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/1c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
 Item1: 0p/3s, Item2: 1p/0s, Exclusive: 1c/1c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 1
-Item1: 0p/3s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 1p/2s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.0465, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.0465, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.0465, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
@@ -420,13 +437,8 @@ Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/0c1a, Prob: 0.03203333333333333, Multi
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.03203333333333333, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.03203333333333333, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.031349999999999996, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
-Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.01705, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/0c1a, Prob: 0.01705, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 1
-Item1: 0p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 0p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 1p/1s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 
 -------------------------------------
 2p/0s
@@ -464,6 +476,7 @@ Item1: 1p/0s, Item2: 1p/0s, Exclusive: 1c/3c1a, Prob: 0.36, Multimods: 1, Aspect
 Item1: 1p/0s, Item2: 1p/0s, Exclusive: 1c/4c0a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/0s, Exclusive: 1c/4c1a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/0s, Exclusive: 1c/5c0a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/0c0a, Prob: 0.33, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/0c2a, Prob: 0.33, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/1c1a, Prob: 0.33, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/1c2a, Prob: 0.33, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 2
@@ -564,6 +577,7 @@ Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c2a, Prob: 0.42500000000000004, Multi
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/2c0a, Prob: 0.3844, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/1c2a, Prob: 0.37200000000000005, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/0c1a, Prob: 0.3675, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.36579999999999996, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 2c/1c1a, Prob: 0.36424999999999996, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 2c/1c1a, Prob: 0.36424999999999996, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.36424999999999996, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
@@ -579,10 +593,12 @@ Item1: 1p/1s, Item2: 1p/1s, Exclusive: 2c/0c2a, Prob: 0.35750000000000004, Multi
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/0c0a, Prob: 0.33629999999999993, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/4c0a, Prob: 0.33, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/5c0a, Prob: 0.33, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.33, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/3c0a, Prob: 0.33, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/4c0a, Prob: 0.33, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 0c/4c0a, Prob: 0.33, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 0c/5c0a, Prob: 0.33, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.33, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/3c0a, Prob: 0.33, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/4c0a, Prob: 0.33, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 1c/3c0a, Prob: 0.329, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
@@ -636,6 +652,8 @@ Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/1c0a, Prob: 0.2046, Multimods: 0, Aspe
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/1c0a, Prob: 0.2046, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/1c2a, Prob: 0.19800000000000004, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 0c/1c2a, Prob: 0.19800000000000004, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 2
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.1947, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/0s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.1947, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.19415, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 1c/1c1a, Prob: 0.19415, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.1922, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
@@ -666,10 +684,7 @@ Item1: 1p/1s, Item2: 1p/1s, Exclusive: 1c/0c0a, Prob: 0.1, Multimods: 0, Aspect 
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 1c/0c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 1c/0c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.054450000000000005, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
-Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.054450000000000005, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 0c/0c1a, Prob: 0.054450000000000005, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
-Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.054450000000000005, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.0295, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 
 -------------------------------------
 2p/2s
@@ -773,6 +788,8 @@ Item1: 1p/1s, Item2: 1p/2s, Exclusive: 3c/1c1a, Prob: 0.40374999999999994, Multi
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.40374999999999994, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/2c1a, Prob: 0.399, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/2c1a, Prob: 0.399, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
+Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.3844, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.3844, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/3c0a, Prob: 0.3534, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/2c0a, Prob: 0.3534, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/3c0a, Prob: 0.3534, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
@@ -788,6 +805,10 @@ Item1: 1p/0s, Item2: 1p/2s, Exclusive: 2c/2c1a, Prob: 0.32866666666666666, Multi
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 2c/2c1a, Prob: 0.32866666666666666, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/2c1a, Prob: 0.32866666666666666, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 1c/2c1a, Prob: 0.32866666666666666, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
+Item1: 0p/3s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.29700000000000004, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/2s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.29700000000000004, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.29700000000000004, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.29700000000000004, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 0p/1s, Item2: 2p/1s, Exclusive: 3c/1c1a, Prob: 0.29570833333333335, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/2s, Exclusive: 3c/1c1a, Prob: 0.29570833333333335, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 3c/1c1a, Prob: 0.29570833333333335, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
@@ -860,6 +881,12 @@ Item1: 1p/2s, Item2: 2p/0s, Exclusive: 2c/1c0a, Prob: 0.2267, Multimods: 1, Aspe
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 1c/1c0a, Prob: 0.2267, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 1c/1c0a, Prob: 0.2267, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 2c/0c2a, Prob: 0.21366666666666667, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 4
+Item1: 0p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.2046, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.2046, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 0p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.2046, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.2046, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.2046, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.2046, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.197625, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 2c/1c1a, Prob: 0.197625, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/1c1a, Prob: 0.197625, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
@@ -932,6 +959,10 @@ Item1: 1p/1s, Item2: 1p/1s, Exclusive: 2c/0c2a, Prob: 0.11625, Multimods: 0, Asp
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.11625, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/0c2a, Prob: 0.11625, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.11625, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.10890000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.10890000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/0s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.10890000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.10890000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.10501666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 2c/0c1a, Prob: 0.10501666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 1c/0c1a, Prob: 0.10501666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
@@ -979,21 +1010,15 @@ Item1: 0p/2s, Item2: 2p/0s, Exclusive: 1c/1c0a, Prob: 0.062, Multimods: 0, Aspec
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/1c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/3s, Item2: 2p/0s, Exclusive: 1c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 1p/2s, Exclusive: 1c/1c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 1c/1c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/1c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/1c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 2p/1s, Exclusive: 1c/0c2a, Prob: 0.054533333333333336, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.054533333333333336, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 1c/0c2a, Prob: 0.054533333333333336, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.054533333333333336, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
-Item1: 0p/3s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 1p/2s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
-Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 0p/1s, Item2: 2p/1s, Exclusive: 0c/0c2a, Prob: 0.0341, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.0341, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/0c2a, Prob: 0.0341, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 2
@@ -1015,12 +1040,6 @@ Item1: 1p/1s, Item2: 1p/1s, Exclusive: 1c/0c1a, Prob: 0.025833333333333333, Mult
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/0c1a, Prob: 0.020666666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.020666666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.020666666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
-Item1: 0p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 0p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 1p/1s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.011000000000000001, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.011000000000000001, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/0s, Item2: 1p/2s, Exclusive: 0c/0c1a, Prob: 0.011000000000000001, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
@@ -1028,7 +1047,10 @@ Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/0c1a, Prob: 0.011000000000000001, Mult
 
 -------------------------------------
 2p/3s
+Item1: 1p/3s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.3534, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/3s, Item2: 2p/2s, Exclusive: 2c/0c0a, Prob: 0.32489999999999997, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/3s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.279, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 2p/2s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.279, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 1p/2s, Exclusive: 4c/2c0a, Prob: 0.2592, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 3c/3c0a, Prob: 0.2592, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/2s, Exclusive: 3c/2c0a, Prob: 0.2592, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
@@ -1036,6 +1058,7 @@ Item1: 1p/2s, Item2: 3p/1s, Exclusive: 2c/3c0a, Prob: 0.2592, Multimods: 2, Aspe
 Item1: 2p/1s, Item2: 2p/2s, Exclusive: 2c/3c0a, Prob: 0.2592, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/2s, Item2: 2p/2s, Exclusive: 2c/2c0a, Prob: 0.2592, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/2s, Item2: 3p/1s, Exclusive: 1c/3c0a, Prob: 0.2592, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 5
+Item1: 1p/3s, Item2: 1p/3s, Exclusive: 0c/0c0a, Prob: 0.2376, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/3s, Item2: 1p/3s, Exclusive: 2c/0c0a, Prob: 0.22319999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 2p/2s, Item2: 2p/2s, Exclusive: 2c/0c0a, Prob: 0.22319999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 3c/3c0a, Prob: 0.20519999999999997, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 2
@@ -1062,6 +1085,11 @@ Item1: 2p/1s, Item2: 2p/2s, Exclusive: 2c/2c0a, Prob: 0.20519999999999997, Multi
 Item1: 2p/2s, Item2: 2p/2s, Exclusive: 1c/2c0a, Prob: 0.20519999999999997, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/2s, Item2: 2p/2s, Exclusive: 2c/1c0a, Prob: 0.20519999999999997, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/2s, Item2: 3p/1s, Exclusive: 1c/2c0a, Prob: 0.20519999999999997, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 5
+Item1: 0p/3s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.1922, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/2s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.1922, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/3s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.1922, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 0p/3s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.1881, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/2s, Item2: 1p/3s, Exclusive: 0c/0c0a, Prob: 0.1881, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/3s, Item2: 2p/2s, Exclusive: 2c/0c0a, Prob: 0.1767, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 1p/3s, Exclusive: 2c/0c0a, Prob: 0.1767, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 2p/2s, Exclusive: 2c/0c0a, Prob: 0.1767, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
@@ -1118,6 +1146,11 @@ Item1: 1p/1s, Item2: 2p/2s, Exclusive: 2c/1c1a, Prob: 0.10829999999999998, Multi
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.10829999999999998, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 3p/1s, Exclusive: 1c/1c1a, Prob: 0.10829999999999998, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/2s, Exclusive: 1c/1c1a, Prob: 0.10829999999999998, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
+Item1: 0p/2s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/3s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/1s, Item2: 1p/3s, Exclusive: 0c/0c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/2s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 2p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 0p/2s, Item2: 2p/2s, Exclusive: 2c/0c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/3s, Item2: 2p/1s, Exclusive: 2c/0c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/3s, Item2: 3p/1s, Exclusive: 1c/0c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
@@ -1125,6 +1158,9 @@ Item1: 1p/1s, Item2: 1p/3s, Exclusive: 2c/0c0a, Prob: 0.0961, Multimods: 0, Aspe
 Item1: 1p/2s, Item2: 1p/2s, Exclusive: 2c/0c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 2p/2s, Exclusive: 1c/0c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/3s, Item2: 2p/1s, Exclusive: 1c/0c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.09000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 1p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.09000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 2p/1s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.09000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 0p/1s, Item2: 2p/2s, Exclusive: 2c/2c0a, Prob: 0.08835, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/1s, Item2: 2p/2s, Exclusive: 3c/1c0a, Prob: 0.08835, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 2c/2c0a, Prob: 0.08835, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
@@ -1157,6 +1193,11 @@ Item1: 1p/3s, Item2: 1p/3s, Exclusive: 1c/0c0a, Prob: 0.072, Multimods: 0, Aspec
 Item1: 2p/1s, Item2: 2p/2s, Exclusive: 2c/0c0a, Prob: 0.072, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/2s, Item2: 3p/1s, Exclusive: 1c/0c0a, Prob: 0.072, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 2p/2s, Item2: 2p/2s, Exclusive: 2c/0c1a, Prob: 0.06839999999999999, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
+Item1: 0p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/1s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 2p/2s, Exclusive: 2c/1c1a, Prob: 0.058899999999999994, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.058899999999999994, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 3p/1s, Exclusive: 1c/1c1a, Prob: 0.058899999999999994, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
@@ -1183,8 +1224,6 @@ Item1: 1p/1s, Item2: 1p/2s, Exclusive: 2c/1c0a, Prob: 0.04805, Multimods: 1, Asp
 Item1: 1p/1s, Item2: 2p/2s, Exclusive: 1c/1c0a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 1c/1c0a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/3s, Item2: 2p/0s, Exclusive: 1c/1c0a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/3s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
-Item1: 2p/2s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/2s, Exclusive: 2c/0c1a, Prob: 0.0372, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/2s, Item2: 3p/1s, Exclusive: 1c/0c1a, Prob: 0.0372, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 5
 Item1: 0p/1s, Item2: 2p/2s, Exclusive: 1c/3c0a, Prob: 0.036, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
@@ -1198,6 +1237,11 @@ Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/3c0a, Prob: 0.036, Multimods: 1, Aspec
 Item1: 1p/1s, Item2: 1p/3s, Exclusive: 1c/2c0a, Prob: 0.036, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 1p/2s, Exclusive: 1c/2c0a, Prob: 0.036, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 1p/3s, Exclusive: 1c/1c0a, Prob: 0.036, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/1s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 0p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/0s, Item2: 1p/3s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/1s, Item2: 2p/2s, Exclusive: 2c/0c0a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 2c/0c0a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/2s, Exclusive: 1c/0c0a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
@@ -1228,8 +1272,6 @@ Item1: 1p/0s, Item2: 1p/3s, Exclusive: 1c/2c0a, Prob: 0.028499999999999998, Mult
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/2c0a, Prob: 0.028499999999999998, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/3s, Exclusive: 1c/1c0a, Prob: 0.028499999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/2s, Item2: 1p/2s, Exclusive: 1c/1c0a, Prob: 0.028499999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 1p/3s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.028499999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 2p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.028499999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 0p/1s, Item2: 2p/2s, Exclusive: 1c/1c1a, Prob: 0.019, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.019, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/1c1a, Prob: 0.019, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
@@ -1242,14 +1284,8 @@ Item1: 1p/2s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.016016666666666665, Mult
 Item1: 0p/1s, Item2: 2p/2s, Exclusive: 1c/1c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/1c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/3s, Item2: 2p/0s, Exclusive: 1c/1c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 0p/3s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 1p/3s, Exclusive: 1c/1c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/1c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
-Item1: 1p/2s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
-Item1: 1p/3s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
-Item1: 2p/1s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 0p/1s, Item2: 2p/2s, Exclusive: 1c/0c0a, Prob: 0.010000000000000002, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/0c0a, Prob: 0.010000000000000002, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
 Item1: 0p/3s, Item2: 2p/0s, Exclusive: 1c/0c0a, Prob: 0.010000000000000002, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 2
@@ -1260,11 +1296,6 @@ Item1: 1p/2s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.0095, Multimods: 0, Aspe
 Item1: 0p/1s, Item2: 2p/2s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 2
-Item1: 0p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.005000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.005000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/1s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.005000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.005000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.005000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 
 -------------------------------------
 3p/0s
@@ -1291,6 +1322,7 @@ Item1: 2p/0s, Item2: 2p/0s, Exclusive: 2c/3c0a, Prob: 0.36, Multimods: 2, Aspect
 Item1: 2p/0s, Item2: 2p/0s, Exclusive: 2c/3c1a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/0s, Exclusive: 2c/4c0a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/0s, Exclusive: 2c/4c1a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 1, Desired Suffixes: 4
+Item1: 2p/0s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/0s, Exclusive: 0c/1c1a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/0s, Exclusive: 0c/1c2a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 4
@@ -1365,6 +1397,7 @@ Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/3c0a, Prob: 0.155, Multimods: 1, Aspec
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/3c1a, Prob: 0.155, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/4c0a, Prob: 0.155, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/5c0a, Prob: 0.155, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/1c1a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/1c2a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
@@ -1377,6 +1410,7 @@ Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/4c0a, Prob: 0.1, Multimods: 1, Aspect 
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/4c1a, Prob: 0.1, Multimods: 2, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/5c0a, Prob: 0.1, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/6c0a, Prob: 0.1, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/1c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
@@ -1392,7 +1426,6 @@ Item1: 1p/0s, Item2: 2p/0s, Exclusive: 1c/0c1a, Prob: 0.09144999999999999, Multi
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 1c/1c0a, Prob: 0.09144999999999999, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/1c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.0295, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 
 -------------------------------------
 3p/1s
@@ -1415,6 +1448,7 @@ Item1: 2p/1s, Item2: 3p/0s, Exclusive: 1c/4c0a, Prob: 0.36, Multimods: 2, Aspect
 Item1: 2p/1s, Item2: 3p/0s, Exclusive: 1c/5c0a, Prob: 0.36, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 2p/1s, Item2: 3p/0s, Exclusive: 0c/2c0a, Prob: 0.3534, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 2p/1s, Item2: 3p/0s, Exclusive: 0c/1c2a, Prob: 0.342, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 5
+Item1: 2p/1s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.33629999999999993, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 3c/3c0a, Prob: 0.324, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 3c/3c0a, Prob: 0.324, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 3c/2c0a, Prob: 0.324, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
@@ -1431,10 +1465,12 @@ Item1: 2p/0s, Item2: 2p/1s, Exclusive: 2c/3c1a, Prob: 0.315, Multimods: 2, Aspec
 Item1: 2p/1s, Item2: 3p/0s, Exclusive: 1c/3c1a, Prob: 0.315, Multimods: 2, Aspect Suffix Count: 1, Desired Suffixes: 5
 Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/4c0a, Prob: 0.31, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/5c0a, Prob: 0.31, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/3c0a, Prob: 0.31, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/4c0a, Prob: 0.31, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/1s, Exclusive: 0c/4c0a, Prob: 0.31, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/1s, Exclusive: 0c/5c0a, Prob: 0.31, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.31, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/3c0a, Prob: 0.31, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/4c0a, Prob: 0.31, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 3c/2c1a, Prob: 0.3, Multimods: 2, Aspect Suffix Count: 1, Desired Suffixes: 3
@@ -1527,6 +1563,8 @@ Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/1c0a, Prob: 0.1922, Multimods: 0, Aspe
 Item1: 2p/1s, Item2: 3p/0s, Exclusive: 0c/1c0a, Prob: 0.1881, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/1c2a, Prob: 0.18600000000000003, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/1s, Exclusive: 0c/1c2a, Prob: 0.18600000000000003, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 4
+Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.18289999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 2p/0s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.18289999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 2c/2c0a, Prob: 0.1767, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 2c/1c0a, Prob: 0.1767, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 2c/2c0a, Prob: 0.1767, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
@@ -1608,18 +1646,23 @@ Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/1c0a, Prob: 0.1023, Multimods: 0, Aspe
 Item1: 2p/0s, Item2: 2p/1s, Exclusive: 0c/1c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/4c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/5c0a, Prob: 0.1, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/3c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/4c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/2c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/3c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/4c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/5c0a, Prob: 0.1, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/4c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/5c0a, Prob: 0.1, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/3c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/4c0a, Prob: 0.1, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/3c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/4c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/2c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/3c0a, Prob: 0.1, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/2c0a, Prob: 0.0961, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
@@ -1686,13 +1729,14 @@ Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/1c2a, Prob: 0.06000000000000001, Multi
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/1c2a, Prob: 0.06000000000000001, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
 Item1: 2p/0s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.0594, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 3p/0s, Exclusive: 1c/0c1a, Prob: 0.0594, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 5
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/1c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/1c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/0c1a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
-Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
-Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.05115, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/0c2a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/0c1a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/0c2a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
@@ -1713,21 +1757,16 @@ Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/1c0a, Prob: 0.033, Multimods: 0, Aspec
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/1c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/0c2a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/0c1a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
-Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/0c2a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 2, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
-Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.031, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/0c1a, Prob: 0.025575, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.025575, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/0c1a, Prob: 0.025575, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/0c1a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
-Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
-Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.0165, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 
 -------------------------------------
 3p/2s
@@ -1736,10 +1775,13 @@ Item1: 2p/1s, Item2: 3p/1s, Exclusive: 0c/4c0a, Prob: 0.41039999999999993, Multi
 Item1: 2p/2s, Item2: 3p/0s, Exclusive: 0c/4c0a, Prob: 0.41039999999999993, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 2p/2s, Item2: 3p/1s, Exclusive: 0c/3c0a, Prob: 0.41039999999999993, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 3p/1s, Item2: 3p/1s, Exclusive: 0c/3c0a, Prob: 0.41039999999999993, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 6
+Item1: 2p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.3534, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 2p/1s, Item2: 3p/1s, Exclusive: 0c/3c0a, Prob: 0.32489999999999997, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 2p/2s, Item2: 3p/0s, Exclusive: 0c/3c0a, Prob: 0.32489999999999997, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 2p/2s, Item2: 3p/1s, Exclusive: 0c/2c0a, Prob: 0.32489999999999997, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 3p/1s, Item2: 3p/1s, Exclusive: 0c/2c1a, Prob: 0.3192, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 6
+Item1: 1p/3s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.279, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 2p/2s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.279, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 3c/3c0a, Prob: 0.2592, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/2s, Exclusive: 3c/2c0a, Prob: 0.2592, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 2c/4c0a, Prob: 0.2592, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 4
@@ -1752,6 +1794,7 @@ Item1: 2p/2s, Item2: 3p/0s, Exclusive: 1c/4c0a, Prob: 0.2592, Multimods: 2, Aspe
 Item1: 2p/2s, Item2: 3p/1s, Exclusive: 1c/3c0a, Prob: 0.2592, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 2p/1s, Item2: 3p/1s, Exclusive: 0c/2c1a, Prob: 0.2527, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 5
 Item1: 2p/2s, Item2: 3p/0s, Exclusive: 0c/2c1a, Prob: 0.2527, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 5
+Item1: 3p/1s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.2376, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 6
 Item1: 1p/1s, Item2: 3p/1s, Exclusive: 0c/4c0a, Prob: 0.22319999999999998, Multimods: 2, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/4c0a, Prob: 0.22319999999999998, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 3p/1s, Exclusive: 0c/3c0a, Prob: 0.22319999999999998, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
@@ -1796,6 +1839,11 @@ Item1: 2p/2s, Item2: 2p/2s, Exclusive: 1c/2c0a, Prob: 0.20519999999999997, Multi
 Item1: 2p/2s, Item2: 2p/2s, Exclusive: 2c/1c0a, Prob: 0.20519999999999997, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/2s, Item2: 3p/0s, Exclusive: 1c/3c0a, Prob: 0.20519999999999997, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 2p/2s, Item2: 3p/1s, Exclusive: 1c/2c0a, Prob: 0.20519999999999997, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 5
+Item1: 1p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.1922, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 1p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.1922, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 2p/1s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.1922, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 2p/1s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.1881, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
+Item1: 2p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.1881, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 1p/1s, Item2: 3p/1s, Exclusive: 0c/3c0a, Prob: 0.1767, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/3c0a, Prob: 0.1767, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 3p/1s, Exclusive: 0c/2c0a, Prob: 0.1767, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
@@ -1886,6 +1934,11 @@ Item1: 1p/1s, Item2: 2p/2s, Exclusive: 2c/1c1a, Prob: 0.10829999999999998, Multi
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.10829999999999998, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 3p/1s, Exclusive: 1c/1c1a, Prob: 0.10829999999999998, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/2s, Exclusive: 1c/1c1a, Prob: 0.10829999999999998, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
+Item1: 1p/1s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 2p/0s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.1023, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 1p/3s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 3p/1s, Exclusive: 0c/2c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/2c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 3p/1s, Exclusive: 0c/1c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
@@ -1893,6 +1946,9 @@ Item1: 1p/3s, Item2: 3p/0s, Exclusive: 0c/1c0a, Prob: 0.0961, Multimods: 0, Aspe
 Item1: 2p/0s, Item2: 2p/2s, Exclusive: 0c/2c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/2c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/2s, Exclusive: 0c/1c0a, Prob: 0.0961, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
+Item1: 0p/3s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.09000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/2s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.09000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/3s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.09000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/1s, Exclusive: 1c/3c0a, Prob: 0.08835, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/1s, Exclusive: 2c/2c0a, Prob: 0.08835, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/3c0a, Prob: 0.08835, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
@@ -1955,6 +2011,11 @@ Item1: 1p/1s, Item2: 3p/1s, Exclusive: 0c/1c1a, Prob: 0.06406666666666666, Multi
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/1c1a, Prob: 0.06406666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/2s, Exclusive: 0c/1c1a, Prob: 0.06406666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/1c1a, Prob: 0.06406666666666666, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
+Item1: 0p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/1s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/1s, Exclusive: 2c/1c1a, Prob: 0.058899999999999994, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/1s, Exclusive: 1c/1c1a, Prob: 0.058899999999999994, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/2s, Exclusive: 2c/1c1a, Prob: 0.058899999999999994, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
@@ -1996,8 +2057,6 @@ Item1: 1p/1s, Item2: 2p/2s, Exclusive: 1c/1c0a, Prob: 0.04805, Multimods: 0, Asp
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 1c/2c0a, Prob: 0.04805, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 1c/1c0a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/3s, Item2: 2p/0s, Exclusive: 1c/1c0a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/3s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
-Item1: 2p/2s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.04805, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 0p/1s, Item2: 3p/1s, Exclusive: 0c/2c1a, Prob: 0.044333333333333336, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/2c1a, Prob: 0.044333333333333336, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/2s, Exclusive: 0c/2c1a, Prob: 0.044333333333333336, Multimods: 1, Aspect Suffix Count: 1, Desired Suffixes: 3
@@ -2019,6 +2078,11 @@ Item1: 2p/0s, Item2: 2p/2s, Exclusive: 2c/1c0a, Prob: 0.036, Multimods: 1, Aspec
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 2c/1c0a, Prob: 0.036, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 3p/1s, Exclusive: 1c/1c0a, Prob: 0.036, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 2p/2s, Item2: 3p/0s, Exclusive: 1c/1c0a, Prob: 0.036, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
+Item1: 0p/1s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/0s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
+Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/1s, Exclusive: 1c/1c1a, Prob: 0.03203333333333333, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/1c1a, Prob: 0.03203333333333333, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/2s, Exclusive: 1c/1c1a, Prob: 0.03203333333333333, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
@@ -2057,10 +2121,8 @@ Item1: 1p/1s, Item2: 2p/1s, Exclusive: 2c/1c0a, Prob: 0.028499999999999998, Mult
 Item1: 1p/1s, Item2: 3p/1s, Exclusive: 1c/1c0a, Prob: 0.028499999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 2c/1c0a, Prob: 0.028499999999999998, Multimods: 1, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 1c/1c0a, Prob: 0.028499999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
-Item1: 1p/3s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.028499999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 2p/0s, Item2: 2p/2s, Exclusive: 1c/1c0a, Prob: 0.028499999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 1c/1c0a, Prob: 0.028499999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
-Item1: 2p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.028499999999999998, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 5
 Item1: 3p/1s, Item2: 3p/1s, Exclusive: 0c/0c1a, Prob: 0.024, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 6
 Item1: 0p/1s, Item2: 3p/1s, Exclusive: 0c/1c1a, Prob: 0.020666666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/1c1a, Prob: 0.020666666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
@@ -2077,15 +2139,9 @@ Item1: 1p/1s, Item2: 2p/2s, Exclusive: 1c/0c1a, Prob: 0.016016666666666665, Mult
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.016016666666666665, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/1s, Exclusive: 1c/1c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/1c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 0p/3s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/2s, Exclusive: 1c/1c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/1c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 1c/1c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/2s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
-Item1: 1p/3s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
-Item1: 2p/1s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.0155, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 4
 Item1: 2p/0s, Item2: 2p/2s, Exclusive: 2c/0c1a, Prob: 0.012, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.012, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 4
 Item1: 2p/1s, Item2: 3p/1s, Exclusive: 1c/0c1a, Prob: 0.012, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 5
@@ -2116,11 +2172,6 @@ Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Mult
 Item1: 1p/0s, Item2: 2p/2s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
-Item1: 0p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.005000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 0p/3s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.005000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/1s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.005000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.005000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
-Item1: 1p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.005000000000000001, Multimods: 0, Aspect Suffix Count: 0, Desired Suffixes: 3
 Item1: 0p/1s, Item2: 3p/1s, Exclusive: 0c/0c1a, Prob: 0.0033333333333333335, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/0c1a, Prob: 0.0033333333333333335, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3
 Item1: 1p/0s, Item2: 2p/2s, Exclusive: 0c/0c1a, Prob: 0.0033333333333333335, Multimods: 0, Aspect Suffix Count: 1, Desired Suffixes: 3

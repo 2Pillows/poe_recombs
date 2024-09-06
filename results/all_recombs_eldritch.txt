@@ -21,6 +21,7 @@ Items: 0p/1s + 0p/1s, Exclusive: 3c/1c1a, Prob: 44.08%
 Items: 0p/1s + 0p/1s, Exclusive: 1c/2c0a, Prob: 42.05%
 Items: 0p/1s + 0p/1s, Exclusive: 2c/1c0a, Prob: 36.00%
 Items: 0p/1s + 0p/1s, Exclusive: 3c/1c0a, Prob: 36.00%
+Items: 0p/1s + 0p/1s, Exclusive: 0c/0c0a, Prob: 33.00%
 Items: 0p/1s + 0p/1s, Exclusive: 2c/0c0a, Prob: 33.00%
 Items: 0p/1s + 0p/1s, Exclusive: 0c/2c0a, Prob: 31.00%
 Items: 0p/1s + 0p/1s, Exclusive: 1c/1c1a, Prob: 30.25%
@@ -45,6 +46,7 @@ Items: 0p/2s + 0p/2s, Exclusive: 4c/2c0a, Prob: 36.00%
 Items: 0p/2s + 1p/1s, Exclusive: 1c/3c0a, Prob: 36.00%
 Items: 0p/2s + 1p/1s, Exclusive: 2c/3c0a, Prob: 36.00%
 Items: 0p/2s + 1p/1s, Exclusive: 3c/3c0a, Prob: 36.00%
+Items: 0p/2s + 0p/2s, Exclusive: 0c/0c0a, Prob: 31.00%
 Items: 0p/2s + 0p/2s, Exclusive: 2c/0c0a, Prob: 31.00%
 Items: 0p/1s + 0p/2s, Exclusive: 2c/2c0a, Prob: 28.50%
 Items: 0p/1s + 0p/2s, Exclusive: 3c/2c0a, Prob: 28.50%
@@ -71,7 +73,9 @@ Items: 0p/2s + 1p/1s, Exclusive: 1c/1c0a, Prob: 15.50%
 Items: 0p/2s + 1p/1s, Exclusive: 2c/1c0a, Prob: 15.50%
 Items: 0p/2s + 1p/1s, Exclusive: 3c/1c0a, Prob: 15.50%
 Items: 0p/1s + 0p/2s, Exclusive: 1c/1c1a, Prob: 11.21%
+Items: 0p/1s + 0p/2s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 0p/1s + 0p/2s, Exclusive: 2c/0c0a, Prob: 10.00%
+Items: 0p/2s + 1p/1s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 0p/2s + 1p/1s, Exclusive: 1c/0c0a, Prob: 10.00%
 Items: 0p/2s + 1p/1s, Exclusive: 2c/0c0a, Prob: 10.00%
 Items: 0p/2s + 0p/2s, Exclusive: 2c/0c1a, Prob: 9.50%
@@ -82,7 +86,6 @@ Items: 0p/1s + 0p/2s, Exclusive: 2c/0c1a, Prob: 5.17%
 Items: 0p/2s + 1p/1s, Exclusive: 1c/0c1a, Prob: 5.17%
 Items: 0p/2s + 1p/1s, Exclusive: 2c/0c1a, Prob: 5.17%
 Items: 0p/1s + 0p/2s, Exclusive: 1c/0c1a, Prob: 3.05%
-Items: 0p/2s + 1p/1s, Exclusive: 0c/0c0a, Prob: 2.95%
 
 -------------------------------------
 1p/1s
@@ -128,6 +131,7 @@ Items: 0p/1s + 1p/0s, Exclusive: 1c/0c1a, Prob: 24.75%
 Items: 0p/1s + 1p/0s, Exclusive: 0c/1c0a, Prob: 19.47%
 Items: 0p/1s + 1p/0s, Exclusive: 1c/0c0a, Prob: 19.47%
 Items: 0p/1s + 1p/0s, Exclusive: 0c/0c2a, Prob: 18.29%
+Items: 0p/1s + 1p/0s, Exclusive: 0c/0c0a, Prob: 17.40%
 Items: 0p/1s + 1p/0s, Exclusive: 0c/0c1a, Prob: 9.74%
 
 -------------------------------------
@@ -201,6 +205,7 @@ Items: 0p/2s + 1p/0s, Exclusive: 3c/1c1a, Prob: 40.71%
 Items: 0p/2s + 2p/0s, Exclusive: 2c/1c1a, Prob: 40.71%
 Items: 1p/1s + 1p/1s, Exclusive: 2c/1c1a, Prob: 40.71%
 Items: 0p/2s + 1p/1s, Exclusive: 2c/0c0a, Prob: 38.44%
+Items: 0p/2s + 1p/1s, Exclusive: 0c/0c0a, Prob: 36.58%
 Items: 0p/2s + 2p/0s, Exclusive: 3c/1c0a, Prob: 36.00%
 Items: 1p/1s + 1p/1s, Exclusive: 3c/1c0a, Prob: 36.00%
 Items: 0p/1s + 1p/1s, Exclusive: 1c/2c1a, Prob: 35.92%
@@ -208,6 +213,8 @@ Items: 0p/2s + 1p/0s, Exclusive: 1c/2c1a, Prob: 35.92%
 Items: 0p/1s + 1p/1s, Exclusive: 0c/3c0a, Prob: 33.63%
 Items: 0p/2s + 1p/0s, Exclusive: 0c/3c0a, Prob: 33.63%
 Items: 0p/2s + 1p/1s, Exclusive: 0c/2c0a, Prob: 33.63%
+Items: 0p/2s + 2p/0s, Exclusive: 0c/0c0a, Prob: 33.00%
+Items: 1p/1s + 1p/1s, Exclusive: 0c/0c0a, Prob: 33.00%
 Items: 0p/1s + 1p/1s, Exclusive: 3c/1c0a, Prob: 32.90%
 Items: 0p/2s + 1p/0s, Exclusive: 3c/1c0a, Prob: 32.90%
 Items: 0p/2s + 2p/0s, Exclusive: 2c/1c0a, Prob: 32.90%
@@ -241,6 +248,8 @@ Items: 0p/2s + 1p/0s, Exclusive: 2c/0c0a, Prob: 20.46%
 Items: 0p/2s + 1p/1s, Exclusive: 1c/0c0a, Prob: 20.46%
 Items: 0p/2s + 2p/0s, Exclusive: 1c/0c0a, Prob: 20.46%
 Items: 1p/1s + 1p/1s, Exclusive: 1c/0c0a, Prob: 20.46%
+Items: 0p/1s + 1p/1s, Exclusive: 0c/0c0a, Prob: 19.47%
+Items: 0p/2s + 1p/0s, Exclusive: 0c/0c0a, Prob: 19.47%
 Items: 0p/1s + 1p/1s, Exclusive: 2c/0c2a, Prob: 19.12%
 Items: 0p/2s + 1p/1s, Exclusive: 2c/0c1a, Prob: 19.12%
 Items: 1p/1s + 1p/1s, Exclusive: 1c/0c2a, Prob: 19.12%
@@ -270,11 +279,8 @@ Items: 0p/1s + 1p/1s, Exclusive: 0c/0c2a, Prob: 6.10%
 Items: 0p/2s + 1p/1s, Exclusive: 0c/0c1a, Prob: 6.10%
 Items: 0p/1s + 1p/1s, Exclusive: 0c/1c0a, Prob: 5.90%
 Items: 0p/2s + 1p/0s, Exclusive: 0c/1c0a, Prob: 5.90%
-Items: 0p/2s + 2p/0s, Exclusive: 0c/0c0a, Prob: 5.45%
-Items: 1p/1s + 1p/1s, Exclusive: 0c/0c0a, Prob: 5.45%
 Items: 0p/2s + 2p/0s, Exclusive: 0c/0c1a, Prob: 3.33%
 Items: 1p/1s + 1p/1s, Exclusive: 0c/0c1a, Prob: 3.33%
-Items: 0p/2s + 1p/1s, Exclusive: 0c/0c0a, Prob: 2.95%
 Items: 0p/1s + 1p/1s, Exclusive: 0c/0c1a, Prob: 1.97%
 Items: 0p/2s + 1p/0s, Exclusive: 0c/0c1a, Prob: 1.97%
 
@@ -288,6 +294,7 @@ Items: 1p/2s + 1p/2s, Exclusive: 4c/2c0a, Prob: 36.00%
 Items: 1p/2s + 2p/1s, Exclusive: 2c/3c0a, Prob: 36.00%
 Items: 1p/2s + 2p/1s, Exclusive: 3c/3c0a, Prob: 36.00%
 Items: 0p/3s + 1p/2s, Exclusive: 2c/0c0a, Prob: 35.34%
+Items: 0p/3s + 1p/2s, Exclusive: 0c/0c0a, Prob: 33.63%
 Items: 0p/1s + 1p/2s, Exclusive: 3c/3c0a, Prob: 32.40%
 Items: 0p/2s + 1p/1s, Exclusive: 3c/3c0a, Prob: 32.40%
 Items: 0p/2s + 1p/2s, Exclusive: 3c/2c0a, Prob: 32.40%
@@ -298,6 +305,8 @@ Items: 0p/3s + 3p/0s, Exclusive: 1c/3c0a, Prob: 32.40%
 Items: 1p/1s + 1p/2s, Exclusive: 2c/3c0a, Prob: 32.40%
 Items: 1p/2s + 1p/2s, Exclusive: 2c/2c0a, Prob: 32.40%
 Items: 1p/2s + 2p/1s, Exclusive: 1c/3c0a, Prob: 32.40%
+Items: 0p/3s + 2p/1s, Exclusive: 0c/0c0a, Prob: 31.00%
+Items: 1p/2s + 1p/2s, Exclusive: 0c/0c0a, Prob: 31.00%
 Items: 0p/1s + 1p/2s, Exclusive: 4c/2c0a, Prob: 28.50%
 Items: 0p/2s + 1p/1s, Exclusive: 4c/2c0a, Prob: 28.50%
 Items: 0p/2s + 2p/1s, Exclusive: 3c/2c0a, Prob: 28.50%
@@ -336,6 +345,8 @@ Items: 1p/2s + 1p/2s, Exclusive: 1c/0c0a, Prob: 19.22%
 Items: 1p/1s + 1p/2s, Exclusive: 3c/1c1a, Prob: 19.00%
 Items: 1p/2s + 2p/1s, Exclusive: 2c/1c1a, Prob: 19.00%
 Items: 0p/3s + 1p/2s, Exclusive: 1c/0c0a, Prob: 18.81%
+Items: 0p/2s + 1p/2s, Exclusive: 0c/0c0a, Prob: 18.29%
+Items: 0p/3s + 1p/1s, Exclusive: 0c/0c0a, Prob: 18.29%
 Items: 0p/1s + 1p/2s, Exclusive: 2c/2c0a, Prob: 17.67%
 Items: 0p/2s + 1p/1s, Exclusive: 2c/2c0a, Prob: 17.67%
 Items: 0p/2s + 1p/2s, Exclusive: 2c/1c0a, Prob: 17.67%
@@ -375,6 +386,11 @@ Items: 0p/2s + 2p/1s, Exclusive: 1c/1c1a, Prob: 11.78%
 Items: 1p/1s + 1p/2s, Exclusive: 1c/1c1a, Prob: 11.78%
 Items: 0p/2s + 1p/2s, Exclusive: 1c/0c0a, Prob: 10.23%
 Items: 0p/3s + 1p/1s, Exclusive: 1c/0c0a, Prob: 10.23%
+Items: 0p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 10.00%
+Items: 0p/3s + 2p/0s, Exclusive: 0c/0c0a, Prob: 10.00%
+Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 10.00%
+Items: 1p/1s + 1p/2s, Exclusive: 0c/0c0a, Prob: 10.00%
+Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 1p/2s + 2p/1s, Exclusive: 2c/0c0a, Prob: 10.00%
 Items: 0p/1s + 1p/2s, Exclusive: 2c/1c0a, Prob: 9.61%
 Items: 0p/2s + 1p/1s, Exclusive: 2c/1c0a, Prob: 9.61%
@@ -401,14 +417,15 @@ Items: 0p/2s + 2p/1s, Exclusive: 1c/0c0a, Prob: 6.20%
 Items: 0p/3s + 1p/0s, Exclusive: 2c/0c0a, Prob: 6.20%
 Items: 0p/3s + 2p/0s, Exclusive: 1c/0c0a, Prob: 6.20%
 Items: 1p/1s + 1p/2s, Exclusive: 1c/0c0a, Prob: 6.20%
+Items: 0p/1s + 1p/2s, Exclusive: 0c/0c0a, Prob: 5.90%
+Items: 0p/2s + 1p/1s, Exclusive: 0c/0c0a, Prob: 5.90%
+Items: 0p/3s + 1p/0s, Exclusive: 0c/0c0a, Prob: 5.90%
 Items: 0p/2s + 1p/2s, Exclusive: 2c/0c1a, Prob: 5.89%
 Items: 1p/2s + 1p/2s, Exclusive: 1c/0c1a, Prob: 5.89%
 Items: 1p/2s + 2p/1s, Exclusive: 2c/0c1a, Prob: 5.17%
 Items: 0p/1s + 1p/2s, Exclusive: 1c/1c0a, Prob: 5.12%
 Items: 0p/2s + 1p/1s, Exclusive: 1c/1c0a, Prob: 5.12%
 Items: 0p/3s + 1p/0s, Exclusive: 1c/1c0a, Prob: 5.12%
-Items: 0p/3s + 2p/1s, Exclusive: 0c/0c0a, Prob: 5.12%
-Items: 1p/2s + 1p/2s, Exclusive: 0c/0c0a, Prob: 5.12%
 Items: 0p/2s + 2p/1s, Exclusive: 2c/0c1a, Prob: 4.65%
 Items: 1p/1s + 1p/2s, Exclusive: 2c/0c1a, Prob: 4.65%
 Items: 1p/2s + 2p/1s, Exclusive: 1c/0c1a, Prob: 4.65%
@@ -420,13 +437,8 @@ Items: 0p/2s + 1p/1s, Exclusive: 2c/0c1a, Prob: 3.20%
 Items: 0p/2s + 2p/1s, Exclusive: 1c/0c1a, Prob: 3.20%
 Items: 1p/1s + 1p/2s, Exclusive: 1c/0c1a, Prob: 3.20%
 Items: 0p/2s + 1p/2s, Exclusive: 1c/0c1a, Prob: 3.13%
-Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 3.10%
-Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 3.10%
 Items: 0p/1s + 1p/2s, Exclusive: 1c/0c1a, Prob: 1.70%
 Items: 0p/2s + 1p/1s, Exclusive: 1c/0c1a, Prob: 1.70%
-Items: 0p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 1.65%
-Items: 0p/3s + 2p/0s, Exclusive: 0c/0c0a, Prob: 1.65%
-Items: 1p/1s + 1p/2s, Exclusive: 0c/0c0a, Prob: 1.65%
 
 -------------------------------------
 2p/0s
@@ -464,6 +476,7 @@ Items: 1p/0s + 1p/0s, Exclusive: 1c/3c1a, Prob: 36.00%
 Items: 1p/0s + 1p/0s, Exclusive: 1c/4c0a, Prob: 36.00%
 Items: 1p/0s + 1p/0s, Exclusive: 1c/4c1a, Prob: 36.00%
 Items: 1p/0s + 1p/0s, Exclusive: 1c/5c0a, Prob: 36.00%
+Items: 1p/0s + 1p/0s, Exclusive: 0c/0c0a, Prob: 33.00%
 Items: 1p/0s + 1p/0s, Exclusive: 0c/0c2a, Prob: 33.00%
 Items: 1p/0s + 1p/0s, Exclusive: 0c/1c1a, Prob: 33.00%
 Items: 1p/0s + 1p/0s, Exclusive: 0c/1c2a, Prob: 33.00%
@@ -564,6 +577,7 @@ Items: 1p/1s + 2p/0s, Exclusive: 1c/1c2a, Prob: 42.50%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/2c0a, Prob: 38.44%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/1c2a, Prob: 37.20%
 Items: 1p/1s + 2p/0s, Exclusive: 2c/0c1a, Prob: 36.75%
+Items: 1p/1s + 2p/0s, Exclusive: 0c/0c0a, Prob: 36.58%
 Items: 0p/1s + 2p/0s, Exclusive: 2c/1c1a, Prob: 36.42%
 Items: 1p/0s + 1p/1s, Exclusive: 2c/1c1a, Prob: 36.42%
 Items: 1p/1s + 2p/0s, Exclusive: 1c/1c1a, Prob: 36.42%
@@ -579,10 +593,12 @@ Items: 1p/1s + 1p/1s, Exclusive: 2c/0c2a, Prob: 35.75%
 Items: 1p/1s + 2p/0s, Exclusive: 2c/0c0a, Prob: 33.63%
 Items: 0p/1s + 2p/0s, Exclusive: 0c/4c0a, Prob: 33.00%
 Items: 0p/1s + 2p/0s, Exclusive: 0c/5c0a, Prob: 33.00%
+Items: 0p/2s + 2p/0s, Exclusive: 0c/0c0a, Prob: 33.00%
 Items: 0p/2s + 2p/0s, Exclusive: 0c/3c0a, Prob: 33.00%
 Items: 0p/2s + 2p/0s, Exclusive: 0c/4c0a, Prob: 33.00%
 Items: 1p/0s + 1p/1s, Exclusive: 0c/4c0a, Prob: 33.00%
 Items: 1p/0s + 1p/1s, Exclusive: 0c/5c0a, Prob: 33.00%
+Items: 1p/1s + 1p/1s, Exclusive: 0c/0c0a, Prob: 33.00%
 Items: 1p/1s + 1p/1s, Exclusive: 0c/3c0a, Prob: 33.00%
 Items: 1p/1s + 1p/1s, Exclusive: 0c/4c0a, Prob: 33.00%
 Items: 0p/1s + 2p/0s, Exclusive: 1c/3c0a, Prob: 32.90%
@@ -636,6 +652,8 @@ Items: 1p/1s + 1p/1s, Exclusive: 0c/1c0a, Prob: 20.46%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/1c0a, Prob: 20.46%
 Items: 0p/1s + 2p/0s, Exclusive: 0c/1c2a, Prob: 19.80%
 Items: 1p/0s + 1p/1s, Exclusive: 0c/1c2a, Prob: 19.80%
+Items: 0p/1s + 2p/0s, Exclusive: 0c/0c0a, Prob: 19.47%
+Items: 1p/0s + 1p/1s, Exclusive: 0c/0c0a, Prob: 19.47%
 Items: 0p/1s + 2p/0s, Exclusive: 1c/1c1a, Prob: 19.41%
 Items: 1p/0s + 1p/1s, Exclusive: 1c/1c1a, Prob: 19.41%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/0c2a, Prob: 19.22%
@@ -666,10 +684,7 @@ Items: 1p/1s + 1p/1s, Exclusive: 1c/0c0a, Prob: 10.00%
 Items: 0p/1s + 2p/0s, Exclusive: 1c/0c0a, Prob: 5.90%
 Items: 1p/0s + 1p/1s, Exclusive: 1c/0c0a, Prob: 5.90%
 Items: 0p/1s + 2p/0s, Exclusive: 0c/0c1a, Prob: 5.45%
-Items: 0p/2s + 2p/0s, Exclusive: 0c/0c0a, Prob: 5.45%
 Items: 1p/0s + 1p/1s, Exclusive: 0c/0c1a, Prob: 5.45%
-Items: 1p/1s + 1p/1s, Exclusive: 0c/0c0a, Prob: 5.45%
-Items: 1p/1s + 2p/0s, Exclusive: 0c/0c0a, Prob: 2.95%
 
 -------------------------------------
 2p/2s
@@ -773,6 +788,8 @@ Items: 1p/1s + 1p/2s, Exclusive: 3c/1c1a, Prob: 40.37%
 Items: 1p/2s + 2p/1s, Exclusive: 2c/1c1a, Prob: 40.37%
 Items: 1p/2s + 3p/0s, Exclusive: 0c/2c1a, Prob: 39.90%
 Items: 2p/1s + 2p/1s, Exclusive: 0c/2c1a, Prob: 39.90%
+Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 38.44%
+Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 38.44%
 Items: 0p/2s + 3p/0s, Exclusive: 0c/3c0a, Prob: 35.34%
 Items: 0p/3s + 3p/0s, Exclusive: 0c/2c0a, Prob: 35.34%
 Items: 1p/1s + 2p/1s, Exclusive: 0c/3c0a, Prob: 35.34%
@@ -788,6 +805,10 @@ Items: 1p/0s + 1p/2s, Exclusive: 2c/2c1a, Prob: 32.87%
 Items: 1p/1s + 1p/1s, Exclusive: 2c/2c1a, Prob: 32.87%
 Items: 1p/1s + 2p/1s, Exclusive: 1c/2c1a, Prob: 32.87%
 Items: 1p/2s + 2p/0s, Exclusive: 1c/2c1a, Prob: 32.87%
+Items: 0p/3s + 2p/1s, Exclusive: 0c/0c0a, Prob: 29.70%
+Items: 1p/2s + 1p/2s, Exclusive: 0c/0c0a, Prob: 29.70%
+Items: 1p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 29.70%
+Items: 2p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 29.70%
 Items: 0p/1s + 2p/1s, Exclusive: 3c/1c1a, Prob: 29.57%
 Items: 1p/0s + 1p/2s, Exclusive: 3c/1c1a, Prob: 29.57%
 Items: 1p/1s + 1p/1s, Exclusive: 3c/1c1a, Prob: 29.57%
@@ -860,6 +881,12 @@ Items: 1p/2s + 2p/0s, Exclusive: 2c/1c0a, Prob: 22.67%
 Items: 1p/2s + 3p/0s, Exclusive: 1c/1c0a, Prob: 22.67%
 Items: 2p/1s + 2p/1s, Exclusive: 1c/1c0a, Prob: 22.67%
 Items: 2p/1s + 2p/1s, Exclusive: 2c/0c2a, Prob: 21.37%
+Items: 0p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 20.46%
+Items: 0p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 20.46%
+Items: 0p/3s + 2p/0s, Exclusive: 0c/0c0a, Prob: 20.46%
+Items: 1p/1s + 1p/2s, Exclusive: 0c/0c0a, Prob: 20.46%
+Items: 1p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 20.46%
+Items: 1p/2s + 2p/0s, Exclusive: 0c/0c0a, Prob: 20.46%
 Items: 0p/1s + 2p/1s, Exclusive: 2c/1c1a, Prob: 19.76%
 Items: 0p/2s + 2p/0s, Exclusive: 2c/1c1a, Prob: 19.76%
 Items: 0p/2s + 3p/0s, Exclusive: 1c/1c1a, Prob: 19.76%
@@ -932,6 +959,10 @@ Items: 1p/1s + 1p/1s, Exclusive: 2c/0c2a, Prob: 11.62%
 Items: 1p/1s + 1p/2s, Exclusive: 2c/0c1a, Prob: 11.62%
 Items: 1p/1s + 2p/1s, Exclusive: 1c/0c2a, Prob: 11.62%
 Items: 1p/2s + 2p/1s, Exclusive: 1c/0c1a, Prob: 11.62%
+Items: 0p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 10.89%
+Items: 0p/2s + 2p/0s, Exclusive: 0c/0c0a, Prob: 10.89%
+Items: 1p/0s + 1p/2s, Exclusive: 0c/0c0a, Prob: 10.89%
+Items: 1p/1s + 1p/1s, Exclusive: 0c/0c0a, Prob: 10.89%
 Items: 1p/1s + 2p/1s, Exclusive: 2c/0c1a, Prob: 10.50%
 Items: 1p/2s + 2p/0s, Exclusive: 2c/0c1a, Prob: 10.50%
 Items: 1p/2s + 3p/0s, Exclusive: 1c/0c1a, Prob: 10.50%
@@ -979,21 +1010,15 @@ Items: 0p/2s + 2p/0s, Exclusive: 1c/1c0a, Prob: 6.20%
 Items: 0p/2s + 2p/1s, Exclusive: 1c/0c0a, Prob: 6.20%
 Items: 0p/2s + 3p/0s, Exclusive: 0c/1c0a, Prob: 6.20%
 Items: 0p/3s + 2p/0s, Exclusive: 1c/0c0a, Prob: 6.20%
-Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 6.20%
 Items: 1p/0s + 1p/2s, Exclusive: 1c/1c0a, Prob: 6.20%
 Items: 1p/1s + 1p/1s, Exclusive: 1c/1c0a, Prob: 6.20%
 Items: 1p/1s + 1p/2s, Exclusive: 1c/0c0a, Prob: 6.20%
 Items: 1p/1s + 2p/1s, Exclusive: 0c/1c0a, Prob: 6.20%
 Items: 1p/2s + 2p/0s, Exclusive: 0c/1c0a, Prob: 6.20%
-Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 6.20%
 Items: 0p/1s + 2p/1s, Exclusive: 1c/0c2a, Prob: 5.45%
 Items: 0p/2s + 2p/1s, Exclusive: 1c/0c1a, Prob: 5.45%
 Items: 1p/1s + 1p/1s, Exclusive: 1c/0c2a, Prob: 5.45%
 Items: 1p/1s + 1p/2s, Exclusive: 1c/0c1a, Prob: 5.45%
-Items: 0p/3s + 2p/1s, Exclusive: 0c/0c0a, Prob: 5.12%
-Items: 1p/2s + 1p/2s, Exclusive: 0c/0c0a, Prob: 5.12%
-Items: 1p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 5.12%
-Items: 2p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 5.12%
 Items: 0p/1s + 2p/1s, Exclusive: 0c/0c2a, Prob: 3.41%
 Items: 0p/2s + 2p/1s, Exclusive: 0c/0c1a, Prob: 3.41%
 Items: 1p/1s + 1p/1s, Exclusive: 0c/0c2a, Prob: 3.41%
@@ -1015,12 +1040,6 @@ Items: 1p/1s + 1p/1s, Exclusive: 1c/0c1a, Prob: 2.58%
 Items: 0p/2s + 3p/0s, Exclusive: 0c/0c1a, Prob: 2.07%
 Items: 1p/1s + 2p/1s, Exclusive: 0c/0c1a, Prob: 2.07%
 Items: 1p/2s + 2p/0s, Exclusive: 0c/0c1a, Prob: 2.07%
-Items: 0p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 1.65%
-Items: 0p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 1.65%
-Items: 0p/3s + 2p/0s, Exclusive: 0c/0c0a, Prob: 1.65%
-Items: 1p/1s + 1p/2s, Exclusive: 0c/0c0a, Prob: 1.65%
-Items: 1p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 1.65%
-Items: 1p/2s + 2p/0s, Exclusive: 0c/0c0a, Prob: 1.65%
 Items: 0p/1s + 2p/1s, Exclusive: 0c/0c1a, Prob: 1.10%
 Items: 0p/2s + 2p/0s, Exclusive: 0c/0c1a, Prob: 1.10%
 Items: 1p/0s + 1p/2s, Exclusive: 0c/0c1a, Prob: 1.10%
@@ -1028,7 +1047,10 @@ Items: 1p/1s + 1p/1s, Exclusive: 0c/0c1a, Prob: 1.10%
 
 -------------------------------------
 2p/3s
+Items: 1p/3s + 2p/2s, Exclusive: 0c/0c0a, Prob: 35.34%
 Items: 1p/3s + 2p/2s, Exclusive: 2c/0c0a, Prob: 32.49%
+Items: 1p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 27.90%
+Items: 2p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 27.90%
 Items: 1p/2s + 1p/2s, Exclusive: 4c/2c0a, Prob: 25.92%
 Items: 1p/2s + 2p/1s, Exclusive: 3c/3c0a, Prob: 25.92%
 Items: 1p/2s + 2p/2s, Exclusive: 3c/2c0a, Prob: 25.92%
@@ -1036,6 +1058,7 @@ Items: 1p/2s + 3p/1s, Exclusive: 2c/3c0a, Prob: 25.92%
 Items: 2p/1s + 2p/2s, Exclusive: 2c/3c0a, Prob: 25.92%
 Items: 2p/2s + 2p/2s, Exclusive: 2c/2c0a, Prob: 25.92%
 Items: 2p/2s + 3p/1s, Exclusive: 1c/3c0a, Prob: 25.92%
+Items: 1p/3s + 1p/3s, Exclusive: 0c/0c0a, Prob: 23.76%
 Items: 1p/3s + 1p/3s, Exclusive: 2c/0c0a, Prob: 22.32%
 Items: 2p/2s + 2p/2s, Exclusive: 2c/0c0a, Prob: 22.32%
 Items: 0p/2s + 2p/1s, Exclusive: 3c/3c0a, Prob: 20.52%
@@ -1062,6 +1085,11 @@ Items: 2p/1s + 2p/2s, Exclusive: 2c/2c0a, Prob: 20.52%
 Items: 2p/2s + 2p/2s, Exclusive: 1c/2c0a, Prob: 20.52%
 Items: 2p/2s + 2p/2s, Exclusive: 2c/1c0a, Prob: 20.52%
 Items: 2p/2s + 3p/1s, Exclusive: 1c/2c0a, Prob: 20.52%
+Items: 0p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 19.22%
+Items: 1p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 19.22%
+Items: 1p/3s + 2p/1s, Exclusive: 0c/0c0a, Prob: 19.22%
+Items: 0p/3s + 2p/2s, Exclusive: 0c/0c0a, Prob: 18.81%
+Items: 1p/2s + 1p/3s, Exclusive: 0c/0c0a, Prob: 18.81%
 Items: 0p/3s + 2p/2s, Exclusive: 2c/0c0a, Prob: 17.67%
 Items: 1p/2s + 1p/3s, Exclusive: 2c/0c0a, Prob: 17.67%
 Items: 1p/2s + 2p/2s, Exclusive: 2c/0c0a, Prob: 17.67%
@@ -1118,6 +1146,11 @@ Items: 1p/1s + 2p/2s, Exclusive: 2c/1c1a, Prob: 10.83%
 Items: 1p/2s + 2p/1s, Exclusive: 2c/1c1a, Prob: 10.83%
 Items: 1p/2s + 3p/1s, Exclusive: 1c/1c1a, Prob: 10.83%
 Items: 2p/1s + 2p/2s, Exclusive: 1c/1c1a, Prob: 10.83%
+Items: 0p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 10.23%
+Items: 0p/3s + 2p/1s, Exclusive: 0c/0c0a, Prob: 10.23%
+Items: 1p/1s + 1p/3s, Exclusive: 0c/0c0a, Prob: 10.23%
+Items: 1p/2s + 1p/2s, Exclusive: 0c/0c0a, Prob: 10.23%
+Items: 2p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 0p/2s + 2p/2s, Exclusive: 2c/0c0a, Prob: 9.61%
 Items: 0p/3s + 2p/1s, Exclusive: 2c/0c0a, Prob: 9.61%
 Items: 0p/3s + 3p/1s, Exclusive: 1c/0c0a, Prob: 9.61%
@@ -1125,6 +1158,9 @@ Items: 1p/1s + 1p/3s, Exclusive: 2c/0c0a, Prob: 9.61%
 Items: 1p/2s + 1p/2s, Exclusive: 2c/0c0a, Prob: 9.61%
 Items: 1p/2s + 2p/2s, Exclusive: 1c/0c0a, Prob: 9.61%
 Items: 1p/3s + 2p/1s, Exclusive: 1c/0c0a, Prob: 9.61%
+Items: 1p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 9.00%
+Items: 1p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 9.00%
+Items: 2p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 9.00%
 Items: 0p/1s + 2p/2s, Exclusive: 2c/2c0a, Prob: 8.83%
 Items: 0p/1s + 2p/2s, Exclusive: 3c/1c0a, Prob: 8.83%
 Items: 0p/2s + 2p/1s, Exclusive: 2c/2c0a, Prob: 8.83%
@@ -1157,6 +1193,11 @@ Items: 1p/3s + 1p/3s, Exclusive: 1c/0c0a, Prob: 7.20%
 Items: 2p/1s + 2p/2s, Exclusive: 2c/0c0a, Prob: 7.20%
 Items: 2p/2s + 3p/1s, Exclusive: 1c/0c0a, Prob: 7.20%
 Items: 2p/2s + 2p/2s, Exclusive: 2c/0c1a, Prob: 6.84%
+Items: 0p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 6.20%
+Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 6.20%
+Items: 1p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 6.20%
+Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 6.20%
+Items: 1p/3s + 2p/0s, Exclusive: 0c/0c0a, Prob: 6.20%
 Items: 0p/1s + 2p/2s, Exclusive: 2c/1c1a, Prob: 5.89%
 Items: 0p/2s + 2p/1s, Exclusive: 2c/1c1a, Prob: 5.89%
 Items: 0p/2s + 3p/1s, Exclusive: 1c/1c1a, Prob: 5.89%
@@ -1183,8 +1224,6 @@ Items: 1p/1s + 1p/2s, Exclusive: 2c/1c0a, Prob: 4.81%
 Items: 1p/1s + 2p/2s, Exclusive: 1c/1c0a, Prob: 4.81%
 Items: 1p/2s + 2p/1s, Exclusive: 1c/1c0a, Prob: 4.81%
 Items: 1p/3s + 2p/0s, Exclusive: 1c/1c0a, Prob: 4.81%
-Items: 1p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 4.81%
-Items: 2p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 4.81%
 Items: 2p/1s + 2p/2s, Exclusive: 2c/0c1a, Prob: 3.72%
 Items: 2p/2s + 3p/1s, Exclusive: 1c/0c1a, Prob: 3.72%
 Items: 0p/1s + 2p/2s, Exclusive: 1c/3c0a, Prob: 3.60%
@@ -1198,6 +1237,11 @@ Items: 1p/1s + 1p/2s, Exclusive: 1c/3c0a, Prob: 3.60%
 Items: 1p/1s + 1p/3s, Exclusive: 1c/2c0a, Prob: 3.60%
 Items: 1p/2s + 1p/2s, Exclusive: 1c/2c0a, Prob: 3.60%
 Items: 1p/2s + 1p/3s, Exclusive: 1c/1c0a, Prob: 3.60%
+Items: 0p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 3.30%
+Items: 0p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 3.30%
+Items: 0p/3s + 2p/0s, Exclusive: 0c/0c0a, Prob: 3.30%
+Items: 1p/0s + 1p/3s, Exclusive: 0c/0c0a, Prob: 3.30%
+Items: 1p/1s + 1p/2s, Exclusive: 0c/0c0a, Prob: 3.30%
 Items: 0p/1s + 2p/2s, Exclusive: 2c/0c0a, Prob: 3.10%
 Items: 0p/2s + 2p/1s, Exclusive: 2c/0c0a, Prob: 3.10%
 Items: 0p/2s + 2p/2s, Exclusive: 1c/0c0a, Prob: 3.10%
@@ -1228,8 +1272,6 @@ Items: 1p/0s + 1p/3s, Exclusive: 1c/2c0a, Prob: 2.85%
 Items: 1p/1s + 1p/2s, Exclusive: 1c/2c0a, Prob: 2.85%
 Items: 1p/1s + 1p/3s, Exclusive: 1c/1c0a, Prob: 2.85%
 Items: 1p/2s + 1p/2s, Exclusive: 1c/1c0a, Prob: 2.85%
-Items: 1p/3s + 2p/2s, Exclusive: 0c/0c0a, Prob: 2.85%
-Items: 2p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 2.85%
 Items: 0p/1s + 2p/2s, Exclusive: 1c/1c1a, Prob: 1.90%
 Items: 0p/2s + 2p/1s, Exclusive: 1c/1c1a, Prob: 1.90%
 Items: 1p/1s + 1p/2s, Exclusive: 1c/1c1a, Prob: 1.90%
@@ -1242,14 +1284,8 @@ Items: 1p/2s + 2p/1s, Exclusive: 1c/0c1a, Prob: 1.60%
 Items: 0p/1s + 2p/2s, Exclusive: 1c/1c0a, Prob: 1.55%
 Items: 0p/2s + 2p/1s, Exclusive: 1c/1c0a, Prob: 1.55%
 Items: 0p/3s + 2p/0s, Exclusive: 1c/1c0a, Prob: 1.55%
-Items: 0p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 1.55%
 Items: 1p/0s + 1p/3s, Exclusive: 1c/1c0a, Prob: 1.55%
 Items: 1p/1s + 1p/2s, Exclusive: 1c/1c0a, Prob: 1.55%
-Items: 1p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 1.55%
-Items: 1p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 1.55%
-Items: 1p/3s + 2p/1s, Exclusive: 0c/0c0a, Prob: 1.55%
-Items: 1p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 1.55%
-Items: 2p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 1.55%
 Items: 0p/1s + 2p/2s, Exclusive: 1c/0c0a, Prob: 1.00%
 Items: 0p/2s + 2p/1s, Exclusive: 1c/0c0a, Prob: 1.00%
 Items: 0p/3s + 2p/0s, Exclusive: 1c/0c0a, Prob: 1.00%
@@ -1260,11 +1296,6 @@ Items: 1p/2s + 1p/2s, Exclusive: 1c/0c1a, Prob: 0.95%
 Items: 0p/1s + 2p/2s, Exclusive: 1c/0c1a, Prob: 0.52%
 Items: 0p/2s + 2p/1s, Exclusive: 1c/0c1a, Prob: 0.52%
 Items: 1p/1s + 1p/2s, Exclusive: 1c/0c1a, Prob: 0.52%
-Items: 0p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 0.50%
-Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 0.50%
-Items: 1p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 0.50%
-Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 0.50%
-Items: 1p/3s + 2p/0s, Exclusive: 0c/0c0a, Prob: 0.50%
 
 -------------------------------------
 3p/0s
@@ -1291,6 +1322,7 @@ Items: 2p/0s + 2p/0s, Exclusive: 2c/3c0a, Prob: 36.00%
 Items: 2p/0s + 2p/0s, Exclusive: 2c/3c1a, Prob: 36.00%
 Items: 2p/0s + 2p/0s, Exclusive: 2c/4c0a, Prob: 36.00%
 Items: 2p/0s + 2p/0s, Exclusive: 2c/4c1a, Prob: 36.00%
+Items: 2p/0s + 2p/0s, Exclusive: 0c/0c0a, Prob: 31.00%
 Items: 2p/0s + 2p/0s, Exclusive: 0c/0c2a, Prob: 31.00%
 Items: 2p/0s + 2p/0s, Exclusive: 0c/1c1a, Prob: 31.00%
 Items: 2p/0s + 2p/0s, Exclusive: 0c/1c2a, Prob: 31.00%
@@ -1365,6 +1397,7 @@ Items: 1p/1s + 2p/0s, Exclusive: 1c/3c0a, Prob: 15.50%
 Items: 1p/1s + 2p/0s, Exclusive: 1c/3c1a, Prob: 15.50%
 Items: 1p/1s + 2p/0s, Exclusive: 1c/4c0a, Prob: 15.50%
 Items: 1p/1s + 2p/0s, Exclusive: 1c/5c0a, Prob: 15.50%
+Items: 1p/0s + 2p/0s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 1p/0s + 2p/0s, Exclusive: 0c/0c2a, Prob: 10.00%
 Items: 1p/0s + 2p/0s, Exclusive: 0c/1c1a, Prob: 10.00%
 Items: 1p/0s + 2p/0s, Exclusive: 0c/1c2a, Prob: 10.00%
@@ -1377,6 +1410,7 @@ Items: 1p/0s + 2p/0s, Exclusive: 0c/4c0a, Prob: 10.00%
 Items: 1p/0s + 2p/0s, Exclusive: 0c/4c1a, Prob: 10.00%
 Items: 1p/0s + 2p/0s, Exclusive: 0c/5c0a, Prob: 10.00%
 Items: 1p/0s + 2p/0s, Exclusive: 0c/6c0a, Prob: 10.00%
+Items: 1p/1s + 2p/0s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/0c1a, Prob: 10.00%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/0c2a, Prob: 10.00%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/1c0a, Prob: 10.00%
@@ -1392,7 +1426,6 @@ Items: 1p/0s + 2p/0s, Exclusive: 1c/0c1a, Prob: 9.14%
 Items: 1p/0s + 2p/0s, Exclusive: 1c/1c0a, Prob: 9.14%
 Items: 1p/0s + 2p/0s, Exclusive: 0c/0c1a, Prob: 5.90%
 Items: 1p/0s + 2p/0s, Exclusive: 0c/1c0a, Prob: 5.90%
-Items: 1p/1s + 2p/0s, Exclusive: 0c/0c0a, Prob: 2.95%
 
 -------------------------------------
 3p/1s
@@ -1415,6 +1448,7 @@ Items: 2p/1s + 3p/0s, Exclusive: 1c/4c0a, Prob: 36.00%
 Items: 2p/1s + 3p/0s, Exclusive: 1c/5c0a, Prob: 36.00%
 Items: 2p/1s + 3p/0s, Exclusive: 0c/2c0a, Prob: 35.34%
 Items: 2p/1s + 3p/0s, Exclusive: 0c/1c2a, Prob: 34.20%
+Items: 2p/1s + 3p/0s, Exclusive: 0c/0c0a, Prob: 33.63%
 Items: 1p/0s + 2p/1s, Exclusive: 3c/3c0a, Prob: 32.40%
 Items: 1p/1s + 2p/0s, Exclusive: 3c/3c0a, Prob: 32.40%
 Items: 1p/1s + 2p/1s, Exclusive: 3c/2c0a, Prob: 32.40%
@@ -1431,10 +1465,12 @@ Items: 2p/0s + 2p/1s, Exclusive: 2c/3c1a, Prob: 31.50%
 Items: 2p/1s + 3p/0s, Exclusive: 1c/3c1a, Prob: 31.50%
 Items: 1p/1s + 3p/0s, Exclusive: 0c/4c0a, Prob: 31.00%
 Items: 1p/1s + 3p/0s, Exclusive: 0c/5c0a, Prob: 31.00%
+Items: 1p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 31.00%
 Items: 1p/2s + 3p/0s, Exclusive: 0c/3c0a, Prob: 31.00%
 Items: 1p/2s + 3p/0s, Exclusive: 0c/4c0a, Prob: 31.00%
 Items: 2p/0s + 2p/1s, Exclusive: 0c/4c0a, Prob: 31.00%
 Items: 2p/0s + 2p/1s, Exclusive: 0c/5c0a, Prob: 31.00%
+Items: 2p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 31.00%
 Items: 2p/1s + 2p/1s, Exclusive: 0c/3c0a, Prob: 31.00%
 Items: 2p/1s + 2p/1s, Exclusive: 0c/4c0a, Prob: 31.00%
 Items: 1p/1s + 2p/1s, Exclusive: 3c/2c1a, Prob: 30.00%
@@ -1527,6 +1563,8 @@ Items: 2p/1s + 2p/1s, Exclusive: 0c/1c0a, Prob: 19.22%
 Items: 2p/1s + 3p/0s, Exclusive: 0c/1c0a, Prob: 18.81%
 Items: 1p/1s + 3p/0s, Exclusive: 0c/1c2a, Prob: 18.60%
 Items: 2p/0s + 2p/1s, Exclusive: 0c/1c2a, Prob: 18.60%
+Items: 1p/1s + 3p/0s, Exclusive: 0c/0c0a, Prob: 18.29%
+Items: 2p/0s + 2p/1s, Exclusive: 0c/0c0a, Prob: 18.29%
 Items: 0p/1s + 3p/0s, Exclusive: 2c/2c0a, Prob: 17.67%
 Items: 0p/2s + 3p/0s, Exclusive: 2c/1c0a, Prob: 17.67%
 Items: 1p/0s + 2p/1s, Exclusive: 2c/2c0a, Prob: 17.67%
@@ -1608,18 +1646,23 @@ Items: 1p/1s + 3p/0s, Exclusive: 0c/1c0a, Prob: 10.23%
 Items: 2p/0s + 2p/1s, Exclusive: 0c/1c0a, Prob: 10.23%
 Items: 0p/1s + 3p/0s, Exclusive: 0c/4c0a, Prob: 10.00%
 Items: 0p/1s + 3p/0s, Exclusive: 0c/5c0a, Prob: 10.00%
+Items: 0p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 0p/2s + 3p/0s, Exclusive: 0c/3c0a, Prob: 10.00%
 Items: 0p/2s + 3p/0s, Exclusive: 0c/4c0a, Prob: 10.00%
+Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 0p/3s + 3p/0s, Exclusive: 0c/2c0a, Prob: 10.00%
 Items: 0p/3s + 3p/0s, Exclusive: 0c/3c0a, Prob: 10.00%
 Items: 1p/0s + 2p/1s, Exclusive: 0c/4c0a, Prob: 10.00%
 Items: 1p/0s + 2p/1s, Exclusive: 0c/5c0a, Prob: 10.00%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/4c0a, Prob: 10.00%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/5c0a, Prob: 10.00%
+Items: 1p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 1p/1s + 2p/1s, Exclusive: 0c/3c0a, Prob: 10.00%
 Items: 1p/1s + 2p/1s, Exclusive: 0c/4c0a, Prob: 10.00%
+Items: 1p/2s + 2p/0s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 1p/2s + 2p/0s, Exclusive: 0c/3c0a, Prob: 10.00%
 Items: 1p/2s + 2p/0s, Exclusive: 0c/4c0a, Prob: 10.00%
+Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 1p/2s + 2p/1s, Exclusive: 0c/2c0a, Prob: 10.00%
 Items: 1p/2s + 2p/1s, Exclusive: 0c/3c0a, Prob: 10.00%
 Items: 0p/1s + 3p/0s, Exclusive: 1c/2c0a, Prob: 9.61%
@@ -1686,13 +1729,14 @@ Items: 1p/0s + 2p/1s, Exclusive: 0c/1c2a, Prob: 6.00%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/1c2a, Prob: 6.00%
 Items: 2p/0s + 2p/1s, Exclusive: 2c/0c1a, Prob: 5.94%
 Items: 2p/1s + 3p/0s, Exclusive: 1c/0c1a, Prob: 5.94%
+Items: 0p/1s + 3p/0s, Exclusive: 0c/0c0a, Prob: 5.90%
+Items: 1p/0s + 2p/1s, Exclusive: 0c/0c0a, Prob: 5.90%
+Items: 1p/1s + 2p/0s, Exclusive: 0c/0c0a, Prob: 5.90%
 Items: 0p/1s + 3p/0s, Exclusive: 1c/1c0a, Prob: 5.12%
 Items: 1p/0s + 2p/1s, Exclusive: 1c/1c0a, Prob: 5.12%
 Items: 1p/1s + 2p/0s, Exclusive: 1c/1c0a, Prob: 5.12%
 Items: 1p/1s + 3p/0s, Exclusive: 0c/0c1a, Prob: 5.12%
-Items: 1p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 5.12%
 Items: 2p/0s + 2p/1s, Exclusive: 0c/0c1a, Prob: 5.12%
-Items: 2p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 5.12%
 Items: 0p/1s + 3p/0s, Exclusive: 1c/0c2a, Prob: 4.81%
 Items: 0p/2s + 3p/0s, Exclusive: 1c/0c1a, Prob: 4.81%
 Items: 1p/0s + 2p/1s, Exclusive: 1c/0c2a, Prob: 4.81%
@@ -1713,21 +1757,16 @@ Items: 1p/0s + 2p/1s, Exclusive: 0c/1c0a, Prob: 3.30%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/1c0a, Prob: 3.30%
 Items: 0p/1s + 3p/0s, Exclusive: 0c/0c2a, Prob: 3.10%
 Items: 0p/2s + 3p/0s, Exclusive: 0c/0c1a, Prob: 3.10%
-Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 3.10%
 Items: 1p/0s + 2p/1s, Exclusive: 0c/0c2a, Prob: 3.10%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/0c2a, Prob: 3.10%
 Items: 1p/1s + 2p/1s, Exclusive: 0c/0c1a, Prob: 3.10%
 Items: 1p/2s + 2p/0s, Exclusive: 0c/0c1a, Prob: 3.10%
-Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 3.10%
 Items: 0p/1s + 3p/0s, Exclusive: 1c/0c1a, Prob: 2.56%
 Items: 1p/0s + 2p/1s, Exclusive: 1c/0c1a, Prob: 2.56%
 Items: 1p/1s + 2p/0s, Exclusive: 1c/0c1a, Prob: 2.56%
 Items: 0p/1s + 3p/0s, Exclusive: 0c/0c1a, Prob: 1.65%
-Items: 0p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 1.65%
 Items: 1p/0s + 2p/1s, Exclusive: 0c/0c1a, Prob: 1.65%
 Items: 1p/1s + 2p/0s, Exclusive: 0c/0c1a, Prob: 1.65%
-Items: 1p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 1.65%
-Items: 1p/2s + 2p/0s, Exclusive: 0c/0c0a, Prob: 1.65%
 
 -------------------------------------
 3p/2s
@@ -1736,10 +1775,13 @@ Items: 2p/1s + 3p/1s, Exclusive: 0c/4c0a, Prob: 41.04%
 Items: 2p/2s + 3p/0s, Exclusive: 0c/4c0a, Prob: 41.04%
 Items: 2p/2s + 3p/1s, Exclusive: 0c/3c0a, Prob: 41.04%
 Items: 3p/1s + 3p/1s, Exclusive: 0c/3c0a, Prob: 41.04%
+Items: 2p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 35.34%
 Items: 2p/1s + 3p/1s, Exclusive: 0c/3c0a, Prob: 32.49%
 Items: 2p/2s + 3p/0s, Exclusive: 0c/3c0a, Prob: 32.49%
 Items: 2p/2s + 3p/1s, Exclusive: 0c/2c0a, Prob: 32.49%
 Items: 3p/1s + 3p/1s, Exclusive: 0c/2c1a, Prob: 31.92%
+Items: 1p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 27.90%
+Items: 2p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 27.90%
 Items: 1p/2s + 2p/1s, Exclusive: 3c/3c0a, Prob: 25.92%
 Items: 1p/2s + 2p/2s, Exclusive: 3c/2c0a, Prob: 25.92%
 Items: 1p/2s + 3p/0s, Exclusive: 2c/4c0a, Prob: 25.92%
@@ -1752,6 +1794,7 @@ Items: 2p/2s + 3p/0s, Exclusive: 1c/4c0a, Prob: 25.92%
 Items: 2p/2s + 3p/1s, Exclusive: 1c/3c0a, Prob: 25.92%
 Items: 2p/1s + 3p/1s, Exclusive: 0c/2c1a, Prob: 25.27%
 Items: 2p/2s + 3p/0s, Exclusive: 0c/2c1a, Prob: 25.27%
+Items: 3p/1s + 3p/1s, Exclusive: 0c/0c0a, Prob: 23.76%
 Items: 1p/1s + 3p/1s, Exclusive: 0c/4c0a, Prob: 22.32%
 Items: 1p/2s + 3p/0s, Exclusive: 0c/4c0a, Prob: 22.32%
 Items: 1p/2s + 3p/1s, Exclusive: 0c/3c0a, Prob: 22.32%
@@ -1796,6 +1839,11 @@ Items: 2p/2s + 2p/2s, Exclusive: 1c/2c0a, Prob: 20.52%
 Items: 2p/2s + 2p/2s, Exclusive: 2c/1c0a, Prob: 20.52%
 Items: 2p/2s + 3p/0s, Exclusive: 1c/3c0a, Prob: 20.52%
 Items: 2p/2s + 3p/1s, Exclusive: 1c/2c0a, Prob: 20.52%
+Items: 1p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 19.22%
+Items: 1p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 19.22%
+Items: 2p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 19.22%
+Items: 2p/1s + 3p/1s, Exclusive: 0c/0c0a, Prob: 18.81%
+Items: 2p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 18.81%
 Items: 1p/1s + 3p/1s, Exclusive: 0c/3c0a, Prob: 17.67%
 Items: 1p/2s + 3p/0s, Exclusive: 0c/3c0a, Prob: 17.67%
 Items: 1p/2s + 3p/1s, Exclusive: 0c/2c0a, Prob: 17.67%
@@ -1886,6 +1934,11 @@ Items: 1p/1s + 2p/2s, Exclusive: 2c/1c1a, Prob: 10.83%
 Items: 1p/2s + 2p/1s, Exclusive: 2c/1c1a, Prob: 10.83%
 Items: 1p/2s + 3p/1s, Exclusive: 1c/1c1a, Prob: 10.83%
 Items: 2p/1s + 2p/2s, Exclusive: 1c/1c1a, Prob: 10.83%
+Items: 1p/1s + 3p/1s, Exclusive: 0c/0c0a, Prob: 10.23%
+Items: 1p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 10.23%
+Items: 2p/0s + 2p/2s, Exclusive: 0c/0c0a, Prob: 10.23%
+Items: 2p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 10.23%
+Items: 1p/3s + 2p/2s, Exclusive: 0c/0c0a, Prob: 10.00%
 Items: 1p/1s + 3p/1s, Exclusive: 0c/2c0a, Prob: 9.61%
 Items: 1p/2s + 3p/0s, Exclusive: 0c/2c0a, Prob: 9.61%
 Items: 1p/2s + 3p/1s, Exclusive: 0c/1c0a, Prob: 9.61%
@@ -1893,6 +1946,9 @@ Items: 1p/3s + 3p/0s, Exclusive: 0c/1c0a, Prob: 9.61%
 Items: 2p/0s + 2p/2s, Exclusive: 0c/2c0a, Prob: 9.61%
 Items: 2p/1s + 2p/1s, Exclusive: 0c/2c0a, Prob: 9.61%
 Items: 2p/1s + 2p/2s, Exclusive: 0c/1c0a, Prob: 9.61%
+Items: 0p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 9.00%
+Items: 1p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 9.00%
+Items: 1p/3s + 2p/1s, Exclusive: 0c/0c0a, Prob: 9.00%
 Items: 0p/1s + 3p/1s, Exclusive: 1c/3c0a, Prob: 8.83%
 Items: 0p/1s + 3p/1s, Exclusive: 2c/2c0a, Prob: 8.83%
 Items: 0p/2s + 3p/0s, Exclusive: 1c/3c0a, Prob: 8.83%
@@ -1955,6 +2011,11 @@ Items: 1p/1s + 3p/1s, Exclusive: 0c/1c1a, Prob: 6.41%
 Items: 1p/2s + 3p/0s, Exclusive: 0c/1c1a, Prob: 6.41%
 Items: 2p/0s + 2p/2s, Exclusive: 0c/1c1a, Prob: 6.41%
 Items: 2p/1s + 2p/1s, Exclusive: 0c/1c1a, Prob: 6.41%
+Items: 0p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 6.20%
+Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 6.20%
+Items: 1p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 6.20%
+Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 6.20%
+Items: 1p/3s + 2p/0s, Exclusive: 0c/0c0a, Prob: 6.20%
 Items: 0p/1s + 3p/1s, Exclusive: 2c/1c1a, Prob: 5.89%
 Items: 0p/2s + 3p/1s, Exclusive: 1c/1c1a, Prob: 5.89%
 Items: 1p/0s + 2p/2s, Exclusive: 2c/1c1a, Prob: 5.89%
@@ -1996,8 +2057,6 @@ Items: 1p/1s + 2p/2s, Exclusive: 1c/1c0a, Prob: 4.81%
 Items: 1p/2s + 2p/0s, Exclusive: 1c/2c0a, Prob: 4.81%
 Items: 1p/2s + 2p/1s, Exclusive: 1c/1c0a, Prob: 4.81%
 Items: 1p/3s + 2p/0s, Exclusive: 1c/1c0a, Prob: 4.81%
-Items: 1p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 4.81%
-Items: 2p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 4.81%
 Items: 0p/1s + 3p/1s, Exclusive: 0c/2c1a, Prob: 4.43%
 Items: 0p/2s + 3p/0s, Exclusive: 0c/2c1a, Prob: 4.43%
 Items: 1p/0s + 2p/2s, Exclusive: 0c/2c1a, Prob: 4.43%
@@ -2019,6 +2078,11 @@ Items: 2p/0s + 2p/2s, Exclusive: 2c/1c0a, Prob: 3.60%
 Items: 2p/1s + 2p/1s, Exclusive: 2c/1c0a, Prob: 3.60%
 Items: 2p/1s + 3p/1s, Exclusive: 1c/1c0a, Prob: 3.60%
 Items: 2p/2s + 3p/0s, Exclusive: 1c/1c0a, Prob: 3.60%
+Items: 0p/1s + 3p/1s, Exclusive: 0c/0c0a, Prob: 3.30%
+Items: 0p/2s + 3p/0s, Exclusive: 0c/0c0a, Prob: 3.30%
+Items: 1p/0s + 2p/2s, Exclusive: 0c/0c0a, Prob: 3.30%
+Items: 1p/1s + 2p/1s, Exclusive: 0c/0c0a, Prob: 3.30%
+Items: 1p/2s + 2p/0s, Exclusive: 0c/0c0a, Prob: 3.30%
 Items: 0p/1s + 3p/1s, Exclusive: 1c/1c1a, Prob: 3.20%
 Items: 0p/2s + 3p/0s, Exclusive: 1c/1c1a, Prob: 3.20%
 Items: 1p/0s + 2p/2s, Exclusive: 1c/1c1a, Prob: 3.20%
@@ -2057,10 +2121,8 @@ Items: 1p/1s + 2p/1s, Exclusive: 2c/1c0a, Prob: 2.85%
 Items: 1p/1s + 3p/1s, Exclusive: 1c/1c0a, Prob: 2.85%
 Items: 1p/2s + 2p/0s, Exclusive: 2c/1c0a, Prob: 2.85%
 Items: 1p/2s + 3p/0s, Exclusive: 1c/1c0a, Prob: 2.85%
-Items: 1p/3s + 2p/2s, Exclusive: 0c/0c0a, Prob: 2.85%
 Items: 2p/0s + 2p/2s, Exclusive: 1c/1c0a, Prob: 2.85%
 Items: 2p/1s + 2p/1s, Exclusive: 1c/1c0a, Prob: 2.85%
-Items: 2p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 2.85%
 Items: 3p/1s + 3p/1s, Exclusive: 0c/0c1a, Prob: 2.40%
 Items: 0p/1s + 3p/1s, Exclusive: 0c/1c1a, Prob: 2.07%
 Items: 0p/2s + 3p/0s, Exclusive: 0c/1c1a, Prob: 2.07%
@@ -2077,15 +2139,9 @@ Items: 1p/1s + 2p/2s, Exclusive: 1c/0c1a, Prob: 1.60%
 Items: 1p/2s + 2p/1s, Exclusive: 1c/0c1a, Prob: 1.60%
 Items: 0p/1s + 3p/1s, Exclusive: 1c/1c0a, Prob: 1.55%
 Items: 0p/2s + 3p/0s, Exclusive: 1c/1c0a, Prob: 1.55%
-Items: 0p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 1.55%
 Items: 1p/0s + 2p/2s, Exclusive: 1c/1c0a, Prob: 1.55%
 Items: 1p/1s + 2p/1s, Exclusive: 1c/1c0a, Prob: 1.55%
 Items: 1p/2s + 2p/0s, Exclusive: 1c/1c0a, Prob: 1.55%
-Items: 1p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 1.55%
-Items: 1p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 1.55%
-Items: 1p/3s + 2p/1s, Exclusive: 0c/0c0a, Prob: 1.55%
-Items: 1p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 1.55%
-Items: 2p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 1.55%
 Items: 2p/0s + 2p/2s, Exclusive: 2c/0c1a, Prob: 1.20%
 Items: 2p/1s + 2p/1s, Exclusive: 2c/0c1a, Prob: 1.20%
 Items: 2p/1s + 3p/1s, Exclusive: 1c/0c1a, Prob: 1.20%
@@ -2116,11 +2172,6 @@ Items: 0p/2s + 3p/0s, Exclusive: 1c/0c1a, Prob: 0.52%
 Items: 1p/0s + 2p/2s, Exclusive: 1c/0c1a, Prob: 0.52%
 Items: 1p/1s + 2p/1s, Exclusive: 1c/0c1a, Prob: 0.52%
 Items: 1p/2s + 2p/0s, Exclusive: 1c/0c1a, Prob: 0.52%
-Items: 0p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 0.50%
-Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 0.50%
-Items: 1p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 0.50%
-Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 0.50%
-Items: 1p/3s + 2p/0s, Exclusive: 0c/0c0a, Prob: 0.50%
 Items: 0p/1s + 3p/1s, Exclusive: 0c/0c1a, Prob: 0.33%
 Items: 0p/2s + 3p/0s, Exclusive: 0c/0c1a, Prob: 0.33%
 Items: 1p/0s + 2p/2s, Exclusive: 0c/0c1a, Prob: 0.33%
