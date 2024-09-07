@@ -137,6 +137,8 @@ class Recombinate:
         # get probability of recombination
         self.probability = self._get_recombinate_prob()
 
+        self.bench_cost = self._get_bench_cost()
+
     def get_item1(self):
         return self.item1
 
@@ -341,6 +343,13 @@ class Recombinate:
         else:
             return prefix_prob * suffix_prob
 
+    def _get_bench_cost(self):
+        bench_cost = 0
+        # 2 div for each multimod
+        bench_cost += self.multimods_used * 2
+
+        return bench_cost
+
     def to_string(self):
         return f"{self.item1.to_string()} + {self.item2.to_string()} -> {self.final_item.to_string()}"
 
@@ -405,6 +414,94 @@ def get_recomb_dict(item_combos, exclusive_combos, eldritch_annul=False):
     return recomb_dict
 
 
+# create dict for script, avoids worse probs w/ same items
+def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
+
+    recomb_dict = {
+        Item(prefix_count, suffix_count): []
+        for prefix_count in range(4)  # 0-3 final prefixes
+        for suffix_count in range(4)  # 0-3 final suffixes
+        if not (
+            (prefix_count == 0 and suffix_count == 0)
+            or (prefix_count == 1 and suffix_count == 0)
+            or (prefix_count == 0 and suffix_count == 1)
+            or (prefix_count == 3 and suffix_count == 3)
+        )
+    }
+
+    # fill in values for recomb dict
+    for final_item in recomb_dict.keys():
+
+        # track item pairs
+        seen_items = set()
+
+        # loop through all item combos and add recombination
+        for item1 in item_combos:
+            item1: Item
+            for item2 in item_combos:
+                item2: Item
+
+                # cant' use same item as final item
+                if (
+                    item1.get_item() == final_item.get_item()
+                    or item2.get_item() == final_item.get_item()
+                ):
+                    continue
+
+                # avoid adding same items in dif order
+                item_pair = tuple(sorted((item1.get_item(), item2.get_item())))
+                if item_pair in seen_items:
+                    continue
+                seen_items.add(item_pair)
+
+                # all recombs for item pair
+                item_pair_recombs: list[Recombinate] = []
+
+                # for each set of exclusive mods, create combination with items
+                for exclusive_mods in exclusive_combos:
+                    recomb = Recombinate(
+                        item1, item2, exclusive_mods, final_item, eldritch_annul
+                    )
+
+                    if recomb.probability == 0:
+                        continue
+
+                    # if same multimod count and aspect but better prob, remove current and add other
+                    index = 0
+                    matching_recomb_found = False
+                    while index < len(item_pair_recombs):
+                        pair_recomb_prob = item_pair_recombs[index].probability
+                        pair_recomb_multis = item_pair_recombs[index].multimods_used
+                        pair_recomb_aspects = item_pair_recombs[
+                            index
+                        ].aspect_suffix_count
+
+                        if (
+                            pair_recomb_multis == recomb.multimods_used
+                            and pair_recomb_aspects == recomb.aspect_suffix_count
+                        ):
+                            matching_recomb_found = True
+                            if pair_recomb_prob < recomb.probability:
+                                item_pair_recombs[index] = recomb
+
+                        index += 1
+
+                    if not matching_recomb_found:
+                        item_pair_recombs.append(recomb)
+
+                if item_pair_recombs:
+                    recomb_dict[final_item].extend(item_pair_recombs)
+
+        # sort results by highest prob
+        recomb_dict[final_item] = sorted(
+            recomb_dict[final_item],
+            key=lambda recomb: recomb.probability,
+            reverse=True,
+        )
+
+    return recomb_dict
+
+
 def write_to_file(filename, data, format_line):
     with open(filename, "w") as f:
         for final_item, items_list in data.items():
@@ -448,7 +545,7 @@ def format_recomb_detailed_line(recomb: Recombinate):
         f"Prob: {recomb.probability}, "
         f"Multimods: {recomb.multimods_used}, "
         f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
-        f"Desired Suffixes: {recomb.total_desired_prefixes}\n"
+        f"Desired Suffixes: {recomb.total_desired_suffixes}\n"
     )
 
 
@@ -544,6 +641,13 @@ def main():
         item_combos, exclusive_combos, eldritch_annul=True
     )
 
+    script_recomb_dict = get_script_dict(
+        item_combos, exclusive_combos, eldritch_annul=False
+    )
+    script_recomb_dict_eldritch = get_script_dict(
+        item_combos, exclusive_combos, eldritch_annul=True
+    )
+
     write_to_file("results/all_recombs.txt", recomb_dict, format_recomb_line)
     write_to_file(
         "results/all_recombs_eldritch.txt",
@@ -552,11 +656,13 @@ def main():
     )
 
     write_to_file(
-        "results/detailed_recombs.txt", recomb_dict, format_recomb_detailed_line
+        "results/detailed_recombs.txt",
+        script_recomb_dict,
+        format_recomb_detailed_line,
     )
     write_to_file(
         "results/detailed_recombs_eldritch.txt",
-        recomb_dict_eldritch,
+        script_recomb_dict_eldritch,
         format_recomb_detailed_line,
     )
 
