@@ -429,6 +429,13 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
         )
     }
 
+    recomb_dict = dict(
+        sorted(
+            recomb_dict.items(),
+            key=lambda item: sum(item[0].get_item()),
+        )
+    )
+
     # fill in values for recomb dict
     for final_item in recomb_dict.keys():
 
