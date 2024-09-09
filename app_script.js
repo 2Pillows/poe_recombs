@@ -77,6 +77,9 @@ function getPathOptions(sheetName) {
       obj[key] = guaranteedItems[key];
       return obj;
     }, {});
+  // always guaranteed items
+  guaranteedItems["1p/0s"] = 9999999;
+  guaranteedItems["0p/1s"] = 9999999;
 
   return {
     finalItem,
@@ -88,157 +91,176 @@ function getPathOptions(sheetName) {
 }
 
 // Calculate best paths to get to final item according to params
-function getPaths(
+function getGuaranteedPath(
   recombDict,
-  pathDetails,
   FINAL_ITEM,
   BASE_COST,
   ASPECT_COST,
-  guaranteedItems,
+  GUARANTEED_ITEMS,
   sortProb,
   sortCost,
-  allowAspect,
-  visited
+  allowAspect
 ) {
-  // Skip if visited or not in recomb dict
-  if (visited.has(FINAL_ITEM) || !(FINAL_ITEM in recombDict)) {
-    return;
-  }
-
-  visited.add(FINAL_ITEM);
-
-  // Process all recombinations for the final item
-  for (const recomb of recombDict[FINAL_ITEM]) {
-    var {
-      Item1: item1,
-      Item2: item2,
-      Exclusive: exclusive,
-      Prob: probability,
-      Multimods: multimodsUsed,
-      "Aspect Suffix Count": aspectSuffixCount,
-      "Desired Suffixes": totalDesiredSuffixes,
-    } = recomb;
-    probability = parseFloat(probability);
-    multimodsUsed = parseFloat(multimodsUsed);
-    aspectSuffixCount = parseFloat(aspectSuffixCount);
-    totalDesiredSuffixes = parseFloat(totalDesiredSuffixes);
-
-    // Guaranteed items for current final item
-    // const availGuaranteed = { ...guaranteedItems };
-
-    // Recursively process item1 and item2
-    if (!visited.has(item1)) {
-      getPaths(
-        recombDict,
-        pathDetails,
-        item1,
-        BASE_COST,
-        ASPECT_COST,
-        guaranteedItems,
-        sortProb,
-        sortCost,
-        allowAspect,
-        visited
-      );
-    }
-    if (!visited.has(item2)) {
-      getPaths(
-        recombDict,
-        pathDetails,
-        item2,
-        BASE_COST,
-        ASPECT_COST,
-        guaranteedItems,
-        sortProb,
-        sortCost,
-        allowAspect,
-        visited
-      );
+  // explore paths for target item
+  function dfs(guaranteedItems, targetItem, curPath) {
+    // Skip if not in recomb dict
+    if (!(targetItem in recombDict)) {
+      return;
     }
 
-    // recomb cost is nothing, unless guaranteed, then risking base
-    let benchCost = 0;
-    benchCost += multimodsUsed * 2;
-    if (aspectSuffixCount > 0 && totalDesiredSuffixes === 0) benchCost += 1;
-    benchCost += aspectSuffixCount * ASPECT_COST;
-    recombCost = (benchCost + BASE_COST) / probability;
+    let bestPath = {
+      feederItems: [],
+      exclusiveMods: "",
+      cost: Infinity,
+      prob: -Infinity,
+      pathProb: -Infinity,
+      pathCost: Infinity,
+    };
 
-    let curItem1Prob = pathDetails[item1]["pathProb"];
-    let curItem2Prob = pathDetails[item2]["pathProb"];
+    // Process all recombinations for the target item
+    for (const recomb of recombDict[targetItem]) {
+      var {
+        Item1: item1,
+        Item2: item2,
+        Exclusive: exclusive,
+        Prob: probability,
+        Multimods: multimodsUsed,
+        "Aspect Suffix Count": aspectSuffixCount,
+        "Desired Suffixes": totalDesiredSuffixes,
+      } = recomb;
+      probability = parseFloat(probability);
+      multimodsUsed = parseFloat(multimodsUsed);
+      aspectSuffixCount = parseFloat(aspectSuffixCount);
+      totalDesiredSuffixes = parseFloat(totalDesiredSuffixes);
 
-    let curItem1Cost = pathDetails[item1]["pathCost"];
-    let curItem2Cost = pathDetails[item2]["pathCost"];
+      // Guaranteed items for current final item
+      // reach recomb has same starting amount of guaranteed items from dfs call
+      let availGuaranteed = JSON.parse(JSON.stringify(guaranteedItems));
 
-    // let item1GuarUsed = false
-    // let item2GuarUsed = false
+      // assume paths are guar
+      let item1Path = { pathProb: 1, pathCost: BASE_COST, path: [] };
+      let item2Path = { pathProb: 1, pathCost: BASE_COST, path: [] };
 
-    // Change prob and cost if guaranteed item
-    // if (guaranteedItems[item1] > 0) {
-    //   curItem1Prob = 1;
-    //   curItem1Cost = BASE_COST;
-    //   guaranteedItems[item1] -= 1;
-    //   item1GuarUsed = true
-    // }
-
-    // if (guaranteedItems[item2] > 0) {
-    //   curItem2Prob = 1;
-    //   curItem2Cost = BASE_COST;
-    //   guaranteedItems[item2] -= 1;
-    //   item2GuarUsed = true
-    // }
-
-    let curPathProb = curItem1Prob * curItem2Prob * probability;
-    let curPathCost =
-      (benchCost + (curItem1Cost + curItem2Cost) / 2) / probability;
-
-    // if (sortProb && !allowAspect && FINAL_ITEM === '3p/2s' && item1 === "2p/1s" && item2 === "2p/1s") {
-    //   console.log(item1, " + ", item2, " | ", curItem1Prob, " * ", curItem2Prob, " = ", curPathProb)
-    // }
-
-    // set as path if sort by prob and highest prob, or sort by cost and lowest cost
-    // let itemUsed = false
-    if (
-      (sortProb && curPathProb >= pathDetails[FINAL_ITEM]["pathProb"]) ||
-      (sortCost && curPathCost <= pathDetails[FINAL_ITEM]["pathCost"])
-    ) {
-      // skip if has aspect and cant include
-      if (!allowAspect && aspectSuffixCount > 0) continue;
-
-      pathDetailDict = {
-        feederItems: [item1, item2],
-        exclusiveMods: exclusive,
-        cost: recombCost,
-        prob: probability,
-        pathProb: curPathProb,
-        pathCost: curPathCost,
-      };
-
-      // always update if is "better" or is cheaper
-      if (
-        (sortProb && curPathProb > pathDetails[FINAL_ITEM]["pathProb"]) ||
-        (sortCost && curPathCost < pathDetails[FINAL_ITEM]["pathCost"]) ||
-        curPathCost < pathDetails[FINAL_ITEM]["pathCost"]
-      ) {
-        pathDetails[FINAL_ITEM] = pathDetailDict;
+      // check if item1 and item2 are guar, decrease count if so
+      let item1Guar = false;
+      let item2Guar = false;
+      if (availGuaranteed[item1] > 0) {
+        availGuaranteed[item1] -= 1;
+        item1Guar = true;
       }
+
+      if (availGuaranteed[item2] > 0) {
+        availGuaranteed[item2] -= 1;
+        item2Guar = true;
+      }
+
+      // if not guar, explore paths
+      if (!item1Guar) {
+        item1Path = { pathProb: 0, pathCost: 0, path: [] };
+        dfs(availGuaranteed, item1, item1Path);
+      }
+
+      if (!item2Guar) {
+        item2Path = { pathProb: 0, pathCost: 0, path: [] };
+        dfs(availGuaranteed, item2, item2Path);
+      }
+
+      // recomb cost is nothing, unless guaranteed, then risking base
+      let benchCost = 0;
+      benchCost += multimodsUsed * 2;
+      if (aspectSuffixCount > 0 && totalDesiredSuffixes === 0) benchCost += 1;
+      benchCost += aspectSuffixCount * ASPECT_COST;
+      recombCost = (benchCost + BASE_COST) / probability;
+
+      // get prob of current item in path
+      let curPathProb =
+        item1Path["pathProb"] * item2Path["pathProb"] * probability;
+
+      // get cost of current item in path
+      let curPathCost =
+        (benchCost + (item1Path["pathCost"] + item2Path["pathCost"]) / 2) /
+        probability;
+
+      // if (
+      //   sortProb &&
+      //   !allowAspect &&
+      //   targetItem === "3p/2s" &&
+      //   item1 === "2p/1s" &&
+      //   item2 === "1p/1s"
+      // ) {
+      //   console.log(
+      //     item1,
+      //     " + ",
+      //     item2,
+      //     " | ",
+      //     item1Path["pathProb"],
+      //     " * ",
+      //     item2Path["pathProb"],
+      //     " = ",
+      //     curPathProb
+      //   );
+      // }
+
+      // set as path if sort by prob and highest prob, or sort by cost and lowest cost
+      if (
+        (sortProb && curPathProb >= bestPath["pathProb"]) ||
+        (sortCost && curPathCost <= bestPath["pathCost"])
+      ) {
+        // skip if has aspect and cant include
+        if (!allowAspect && aspectSuffixCount > 0) continue;
+
+        // always update if is "better" or is cheaper
+        if (
+          (sortProb && curPathProb > bestPath["pathProb"]) ||
+          (sortCost && curPathCost < bestPath["pathCost"]) ||
+          curPathCost < bestPath["pathCost"]
+        ) {
+          let curPathItems = [...item1Path["path"], ...item2Path["path"]];
+          curPathItems.push({
+            final: targetItem,
+            feeder: item1 + " + " + item2,
+            exclusive: exclusive,
+            cost: recombCost,
+            prob: probability,
+          });
+          bestPath = {
+            item1: item1,
+            item2: item2,
+            pathProb: curPathProb,
+            pathCost: curPathCost,
+            path: curPathItems,
+          };
+        }
+      }
+      // }
     }
 
-    // if (!itemUsed && item1GuarUsed) {
-    //   guaranteedItems[item1] += 1;
-    // }
-    // if (!itemUsed && item2GuarUsed) {
-    //   guaranteedItems[item2] += 1;
-    // }
+    // set path to best path found
+    curPath["pathProb"] = bestPath["pathProb"];
+    curPath["pathCost"] = bestPath["pathCost"];
+    curPath["path"].push(...bestPath["path"]);
+
+    // remove from guar if either item is used
+    if (guaranteedItems[bestPath["item1"]] > 0) {
+      guaranteedItems[bestPath["item1"]] -= 1;
+    }
+
+    if (guaranteedItems[bestPath["item2"]] > 0) {
+      guaranteedItems[bestPath["item2"]] -= 1;
+    }
   }
 
-  return pathDetails;
+  // start exploring paths
+  finalPath = { pathProb: 0, pathCost: 0, path: [] };
+  dfs(GUARANTEED_ITEMS, FINAL_ITEM, finalPath);
+
+  // return best path
+  return finalPath;
 }
 
 // write all paths to final item
 function writeToSheet(
   sheetName,
-  FINAL_ITEM,
-  GUARANTEED_ITEMS,
   path_prob,
   path_prob_aspect,
   path_cost,
@@ -253,141 +275,52 @@ function writeToSheet(
   sheet.getRange("K28:P47").clearContent();
 
   // Path probability
-  sheet.getRange("G24").setValue(path_prob[FINAL_ITEM]["pathCost"].toFixed(2));
+  sheet.getRange("G24").setValue(path_prob["pathCost"].toFixed(2));
   sheet
     .getRange("I24")
-    .setValue((path_prob[FINAL_ITEM]["pathProb"] * 100).toFixed(2) + "%");
-  pathProbData = collectPaths(FINAL_ITEM, { ...GUARANTEED_ITEMS }, path_prob);
-  writeDataToSheet(sheet, pathProbData, "E4");
+    .setValue((path_prob["pathProb"] * 100).toFixed(2) + "%");
+  writeDataToSheet(sheet, path_prob["path"], "E4");
 
   // Path probability with aspect
-  sheet
-    .getRange("M24")
-    .setValue(path_prob_aspect[FINAL_ITEM]["pathCost"].toFixed(2));
+  sheet.getRange("M24").setValue(path_prob_aspect["pathCost"].toFixed(2));
   sheet
     .getRange("O24")
-    .setValue(
-      (path_prob_aspect[FINAL_ITEM]["pathProb"] * 100).toFixed(2) + "%"
-    );
-  pathProbAspectData = collectPaths(
-    FINAL_ITEM,
-    { ...GUARANTEED_ITEMS },
-    path_prob_aspect
-  );
-  writeDataToSheet(sheet, pathProbAspectData, "K4");
+    .setValue((path_prob_aspect["pathProb"] * 100).toFixed(2) + "%");
+  writeDataToSheet(sheet, path_prob_aspect["path"], "K4");
 
   // Path cost
-  sheet.getRange("G48").setValue(path_cost[FINAL_ITEM]["pathCost"].toFixed(2));
+  sheet.getRange("G48").setValue(path_cost["pathCost"].toFixed(2));
   sheet
     .getRange("I48")
-    .setValue((path_cost[FINAL_ITEM]["pathProb"] * 100).toFixed(2) + "%");
-  pathCostData = collectPaths(FINAL_ITEM, { ...GUARANTEED_ITEMS }, path_cost);
-  writeDataToSheet(sheet, pathCostData, "E28");
+    .setValue((path_cost["pathProb"] * 100).toFixed(2) + "%");
+  writeDataToSheet(sheet, path_cost["path"], "E28");
 
   // Path cost with aspect
-  sheet
-    .getRange("M48")
-    .setValue(path_cost_aspect[FINAL_ITEM]["pathCost"].toFixed(2));
+  sheet.getRange("M48").setValue(path_cost_aspect["pathCost"].toFixed(2));
   sheet
     .getRange("O48")
-    .setValue(
-      (path_cost_aspect[FINAL_ITEM]["pathProb"] * 100).toFixed(2) + "%"
-    );
-  pathCostAspectData = collectPaths(
-    FINAL_ITEM,
-    { ...GUARANTEED_ITEMS },
-    path_cost_aspect
-  );
-  writeDataToSheet(sheet, pathCostAspectData, "K28");
-}
-
-// Collects all recombs needed for target item
-function collectPaths(target_item, guaranteedItems, pathDetails) {
-  var path_details = pathDetails[target_item];
-  if (!path_details || path_details["feederItems"].length === 0) {
-    return [];
-  }
-
-  var feeder_items =
-    path_details["feederItems"][0] + " + " + path_details["feederItems"][1];
-  var exclusive_mods = path_details["exclusiveMods"];
-  var cost = path_details["cost"];
-  var prob = path_details["prob"];
-
-  // create row for current item
-  var row = [
-    target_item,
-    feeder_items,
-    exclusive_mods,
-    cost.toFixed(2),
-    (prob * 100).toFixed(2) + "%",
-  ];
-
-  // collect paths for item1 and item2
-  var rows = [row];
-  if (guaranteedItems[path_details["feederItems"][1]] > 0) {
-    guaranteedItems[path_details["feederItems"][1]] -= 1;
-  } else {
-    rows = rows.concat(
-      collectPaths(path_details["feederItems"][1], guaranteedItems, pathDetails)
-    );
-  }
-  if (guaranteedItems[path_details["feederItems"][0]] > 0) {
-    guaranteedItems[path_details["feederItems"][0]] -= 1;
-  } else {
-    rows = rows.concat(
-      collectPaths(path_details["feederItems"][0], guaranteedItems, pathDetails)
-    );
-  }
-
-  return rows;
+    .setValue((path_cost_aspect["pathProb"] * 100).toFixed(2) + "%");
+  writeDataToSheet(sheet, path_cost_aspect["path"], "K28");
 }
 
 // write data to sheet section
-function writeDataToSheet(sheet, data, startCell) {
-  var numRows = data.length;
-  var numCols = data[0].length;
+function writeDataToSheet(sheet, pathData, startCell) {
+  // reverse path order, final item to starting
+  pathData = pathData.reverse();
+  const pathArray = pathData.map((obj) => [
+    obj.final,
+    obj.feeder,
+    obj.exclusive,
+    obj.cost.toFixed(2),
+    obj.prob,
+  ]);
+
+  var numRows = pathArray.length;
+  var numCols = pathArray[0].length;
 
   var range = sheet.getRange(startCell).offset(0, 0, numRows, numCols);
 
-  range.setValues(data);
-}
-
-// get base dict for path details, used to hold best paths
-function getpathDetails(BASE_COST) {
-  const pathDetails = {};
-
-  for (let p = 0; p <= 3; p++) {
-    for (let s = 0; s <= 3; s++) {
-      const key = `${p}p/${s}s`;
-      pathDetails[key] = {};
-      pathDetailDict = {
-        feederItems: [],
-        exclusiveMods: "",
-        cost:
-          (p === 0 && s === 0) || (p === 1 && s === 0) || (p === 0 && s === 1)
-            ? BASE_COST
-            : Infinity,
-        prob:
-          (p === 0 && s === 0) || (p === 1 && s === 0) || (p === 0 && s === 1)
-            ? 1
-            : -Infinity,
-        pathProb:
-          (p === 0 && s === 0) || (p === 1 && s === 0) || (p === 0 && s === 1)
-            ? 1
-            : -Infinity,
-        pathCost:
-          (p === 0 && s === 0) || (p === 1 && s === 0) || (p === 0 && s === 1)
-            ? BASE_COST
-            : Infinity,
-      };
-      pathDetails[key] = pathDetailDict;
-    }
-  }
-
-  delete pathDetails["0p/0s"];
-  delete pathDetails["3p/3s"];
-  return pathDetails;
+  range.setValues(pathArray);
 }
 
 // main script
@@ -401,63 +334,50 @@ function run() {
 
   recombDict = getRecombData("Recombs for Script", ELDTRICH_ITEM);
 
-  pathDetails = getpathDetails(BASE_COST);
-
-  // get paths
-  path_prob = getPaths(
-    { ...recombDict },
-    { ...pathDetails },
+  path_prob = getGuaranteedPath(
+    JSON.parse(JSON.stringify(recombDict)),
     FINAL_ITEM,
     BASE_COST,
     ASPECT_COST,
-    { ...GUARANTEED_ITEMS },
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
     (sortProb = true),
     (sortCost = false),
-    (allowAspect = false),
-    new Set()
+    (allowAspect = false)
   );
-  path_prob_aspect = getPaths(
-    { ...recombDict },
-    { ...pathDetails },
+  path_prob_aspect = getGuaranteedPath(
+    JSON.parse(JSON.stringify(recombDict)),
     FINAL_ITEM,
     BASE_COST,
     ASPECT_COST,
-    { ...GUARANTEED_ITEMS },
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
     (sortProb = true),
     (sortCost = false),
-    (allowAspect = true),
-    new Set()
+    (allowAspect = true)
   );
-  path_cost = getPaths(
-    { ...recombDict },
-    { ...pathDetails },
+  path_cost = getGuaranteedPath(
+    JSON.parse(JSON.stringify(recombDict)),
     FINAL_ITEM,
     BASE_COST,
     ASPECT_COST,
-    { ...GUARANTEED_ITEMS },
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
     (sortProb = false),
     (sortCost = true),
-    (allowAspect = false),
-    new Set()
+    (allowAspect = false)
   );
-  path_cost_aspect = getPaths(
-    { ...recombDict },
-    { ...pathDetails },
+  path_cost_aspect = getGuaranteedPath(
+    JSON.parse(JSON.stringify(recombDict)),
     FINAL_ITEM,
     BASE_COST,
     ASPECT_COST,
-    { ...GUARANTEED_ITEMS },
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
     (sortProb = false),
     (sortCost = true),
-    (allowAspect = true),
-    new Set()
+    (allowAspect = true)
   );
 
   // write paths to sheet
   writeToSheet(
     "Find Path",
-    FINAL_ITEM,
-    GUARANTEED_ITEMS,
     path_prob,
     path_prob_aspect,
     path_cost,
