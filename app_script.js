@@ -218,7 +218,7 @@ function getGuaranteedPath(
           let curPathItems = [...item1Path["path"], ...item2Path["path"]];
           curPathItems.push({
             final: targetItem,
-            feeder: item1 + " + " + item2,
+            feeder: item2 + " + " + item1,
             exclusive: exclusive,
             cost: recombCost,
             prob: probability,
