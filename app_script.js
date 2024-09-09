@@ -258,6 +258,151 @@ function getGuaranteedPath(
   return finalPath;
 }
 
+// Calculate best paths to get to final item according to params
+function getPath(
+  recombDict,
+  FINAL_ITEM,
+  BASE_COST,
+  ASPECT_COST,
+  GUARANTEED_ITEMS,
+  sortProb,
+  sortCost,
+  allowAspect
+) {
+  pathDetails = {
+    "0p/1s": { pathProb: 1, pathCost: BASE_COST, path: [] },
+    "1p/0s": { pathProb: 1, pathCost: BASE_COST, path: [] },
+  };
+
+  // explore paths for target item
+  function dfs(targetItem, visited) {
+    // Skip if not in recomb dict
+    if (visited.has(targetItem) || !(targetItem in recombDict)) {
+      return;
+    }
+
+    visited.add(targetItem);
+
+    let bestPath = {
+      feederItems: [],
+      exclusiveMods: "",
+      cost: Infinity,
+      prob: -Infinity,
+      pathProb: -Infinity,
+      pathCost: Infinity,
+    };
+
+    // Process all recombinations for the target item
+    for (const recomb of recombDict[targetItem]) {
+      var {
+        Item1: item1,
+        Item2: item2,
+        Exclusive: exclusive,
+        Prob: probability,
+        Multimods: multimodsUsed,
+        "Aspect Suffix Count": aspectSuffixCount,
+        "Desired Suffixes": totalDesiredSuffixes,
+      } = recomb;
+      probability = parseFloat(probability);
+      multimodsUsed = parseFloat(multimodsUsed);
+      aspectSuffixCount = parseFloat(aspectSuffixCount);
+      totalDesiredSuffixes = parseFloat(totalDesiredSuffixes);
+
+      // check if item1 and item2 are guar, decrease count if so
+
+      // explore path if haven't yet
+      if (!visited.has(item1)) {
+        dfs(item1, visited);
+      }
+
+      if (!visited.has(item2)) {
+        dfs(item2, visited);
+      }
+
+      item1Path = pathDetails[item1];
+      item2Path = pathDetails[item2];
+
+      // recomb cost is nothing, unless guaranteed, then risking base
+      let benchCost = 0;
+      benchCost += multimodsUsed * 2;
+      if (aspectSuffixCount > 0 && totalDesiredSuffixes === 0) benchCost += 1;
+      benchCost += aspectSuffixCount * ASPECT_COST;
+      recombCost = (benchCost + BASE_COST) / probability;
+
+      // get prob of current item in path
+      let curPathProb =
+        item1Path["pathProb"] * item2Path["pathProb"] * probability;
+
+      // get cost of current item in path
+      let curPathCost =
+        (benchCost + (item1Path["pathCost"] + item2Path["pathCost"]) / 2) /
+        probability;
+
+      // if (
+      //   sortProb &&
+      //   !allowAspect &&
+      //   targetItem === "3p/2s" &&
+      //   item1 === "2p/1s" &&
+      //   item2 === "1p/1s"
+      // ) {
+      //   console.log(
+      //     item1,
+      //     " + ",
+      //     item2,
+      //     " | ",
+      //     item1Path["pathProb"],
+      //     " * ",
+      //     item2Path["pathProb"],
+      //     " = ",
+      //     curPathProb
+      //   );
+      // }
+
+      // set as path if sort by prob and highest prob, or sort by cost and lowest cost
+      if (
+        (sortProb && curPathProb >= bestPath["pathProb"]) ||
+        (sortCost && curPathCost <= bestPath["pathCost"])
+      ) {
+        // skip if has aspect and cant include
+        if (!allowAspect && aspectSuffixCount > 0) continue;
+
+        // always update if is "better" or is cheaper
+        if (
+          (sortProb && curPathProb > bestPath["pathProb"]) ||
+          (sortCost && curPathCost < bestPath["pathCost"]) ||
+          curPathCost < bestPath["pathCost"]
+        ) {
+          let curPathItems = [...item1Path["path"], ...item2Path["path"]];
+          curPathItems.push({
+            final: targetItem,
+            feeder: item2 + " + " + item1,
+            exclusive: exclusive,
+            cost: recombCost,
+            prob: probability,
+          });
+          bestPath = {
+            item1: item1,
+            item2: item2,
+            pathProb: curPathProb,
+            pathCost: curPathCost,
+            path: curPathItems,
+          };
+        }
+      }
+      // }
+    }
+
+    // add to pathDetails
+    pathDetails[targetItem] = bestPath;
+  }
+
+  // start exploring paths
+  dfs(FINAL_ITEM, new Set());
+
+  // return best path
+  return pathDetails[FINAL_ITEM];
+}
+
 // write all paths to final item
 function writeToSheet(
   sheetName,
@@ -334,46 +479,90 @@ function run() {
 
   recombDict = getRecombData("Recombs for Script", ELDTRICH_ITEM);
 
-  path_prob = getGuaranteedPath(
-    JSON.parse(JSON.stringify(recombDict)),
-    FINAL_ITEM,
-    BASE_COST,
-    ASPECT_COST,
-    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-    (sortProb = true),
-    (sortCost = false),
-    (allowAspect = false)
-  );
-  path_prob_aspect = getGuaranteedPath(
-    JSON.parse(JSON.stringify(recombDict)),
-    FINAL_ITEM,
-    BASE_COST,
-    ASPECT_COST,
-    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-    (sortProb = true),
-    (sortCost = false),
-    (allowAspect = true)
-  );
-  path_cost = getGuaranteedPath(
-    JSON.parse(JSON.stringify(recombDict)),
-    FINAL_ITEM,
-    BASE_COST,
-    ASPECT_COST,
-    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-    (sortProb = false),
-    (sortCost = true),
-    (allowAspect = false)
-  );
-  path_cost_aspect = getGuaranteedPath(
-    JSON.parse(JSON.stringify(recombDict)),
-    FINAL_ITEM,
-    BASE_COST,
-    ASPECT_COST,
-    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-    (sortProb = false),
-    (sortCost = true),
-    (allowAspect = true)
-  );
+  // 2 always guaranteed
+  if (Object.keys(GUARANTEED_ITEMS).length > 2) {
+    path_prob = getGuaranteedPath(
+      JSON.parse(JSON.stringify(recombDict)),
+      FINAL_ITEM,
+      BASE_COST,
+      ASPECT_COST,
+      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+      (sortProb = true),
+      (sortCost = false),
+      (allowAspect = false)
+    );
+    path_prob_aspect = getGuaranteedPath(
+      JSON.parse(JSON.stringify(recombDict)),
+      FINAL_ITEM,
+      BASE_COST,
+      ASPECT_COST,
+      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+      (sortProb = true),
+      (sortCost = false),
+      (allowAspect = true)
+    );
+    path_cost = getGuaranteedPath(
+      JSON.parse(JSON.stringify(recombDict)),
+      FINAL_ITEM,
+      BASE_COST,
+      ASPECT_COST,
+      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+      (sortProb = false),
+      (sortCost = true),
+      (allowAspect = false)
+    );
+    path_cost_aspect = getGuaranteedPath(
+      JSON.parse(JSON.stringify(recombDict)),
+      FINAL_ITEM,
+      BASE_COST,
+      ASPECT_COST,
+      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+      (sortProb = false),
+      (sortCost = true),
+      (allowAspect = true)
+    );
+  } else {
+    path_prob = getPath(
+      JSON.parse(JSON.stringify(recombDict)),
+      FINAL_ITEM,
+      BASE_COST,
+      ASPECT_COST,
+      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+      (sortProb = true),
+      (sortCost = false),
+      (allowAspect = false)
+    );
+    path_prob_aspect = getPath(
+      JSON.parse(JSON.stringify(recombDict)),
+      FINAL_ITEM,
+      BASE_COST,
+      ASPECT_COST,
+      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+      (sortProb = true),
+      (sortCost = false),
+      (allowAspect = true)
+    );
+    path_cost = getPath(
+      JSON.parse(JSON.stringify(recombDict)),
+      FINAL_ITEM,
+      BASE_COST,
+      ASPECT_COST,
+      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+      (sortProb = false),
+      (sortCost = true),
+      (allowAspect = false)
+    );
+    path_cost_aspect = getPath(
+      JSON.parse(JSON.stringify(recombDict)),
+      FINAL_ITEM,
+      BASE_COST,
+      ASPECT_COST,
+      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+      (sortProb = false),
+      (sortCost = true),
+      (allowAspect = true)
+    );
+  }
 
   // write paths to sheet
   writeToSheet(
