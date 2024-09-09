@@ -546,8 +546,8 @@ def format_path_line(path_details):
 
 def format_recomb_detailed_line(recomb: Recombinate):
     return (
-        f"Item2: {recomb.get_item1().to_string()}, "
-        f"Item1: {recomb.get_item2().to_string()}, "
+        f"Item1: {recomb.get_item1().to_string()}, "
+        f"Item2: {recomb.get_item2().to_string()}, "
         f"Exclusive: {recomb.get_exclusive_mods()}, "
         f"Prob: {recomb.probability}, "
         f"Multimods: {recomb.multimods_used}, "
