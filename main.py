@@ -131,6 +131,9 @@ class Recombinate:
         # number of times need to multimod
         self.multimods_used = float("inf")
 
+        # number of annuls used
+        self.annuls_used = 0
+
         # number of times u need to lock prefix to remove aspect
         self.prefix_lock_required = False
 
@@ -297,6 +300,9 @@ class Recombinate:
 
         # if there is an aspect and need suffixes, adjust suffix prob
         if self.aspect_suffix_count > 0 and self.final_item.suffix_count != 0:
+            # add annul used
+            self.annuls_used = 1
+
             # chance of getting asepct as exclusive mod
             get_aspect_prob = self.aspect_suffix_count / self.total_exclusive_suffixes
 
@@ -551,6 +557,7 @@ def format_recomb_detailed_line(recomb: Recombinate):
         f"Exclusive: {recomb.get_exclusive_mods()}, "
         f"Prob: {recomb.probability}, "
         f"Multimods: {recomb.multimods_used}, "
+        f"Eldritch Annuls: {recomb.annuls_used}, "
         f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
         f"Desired Suffixes: {recomb.total_desired_suffixes}\n"
     )
