@@ -301,7 +301,8 @@ class Recombinate:
         # if there is an aspect and need suffixes, adjust suffix prob
         if self.aspect_suffix_count > 0 and self.final_item.suffix_count != 0:
             # add annul used
-            self.annuls_used = 1
+            if self.eldritch_annul:
+                self.annuls_used = required_suffixes
 
             # chance of getting asepct as exclusive mod
             get_aspect_prob = self.aspect_suffix_count / self.total_exclusive_suffixes
