@@ -2095,3 +2095,42 @@ Items: 0p/2s + 3p/0s, Exclusive: 0c/0c1a, Prob: 0.33%
 Items: 1p/0s + 2p/2s, Exclusive: 0c/0c1a, Prob: 0.33%
 Items: 1p/1s + 2p/1s, Exclusive: 0c/0c1a, Prob: 0.33%
 Items: 1p/2s + 2p/0s, Exclusive: 0c/0c1a, Prob: 0.33%
+
+-------------------------------------
+3p/3s
+Items: 2p/3s + 3p/2s, Exclusive: 0c/0c0a, Prob: 32.49%
+Items: 2p/3s + 2p/3s, Exclusive: 0c/0c0a, Prob: 22.32%
+Items: 3p/2s + 3p/2s, Exclusive: 0c/0c0a, Prob: 22.32%
+Items: 1p/3s + 3p/2s, Exclusive: 0c/0c0a, Prob: 17.67%
+Items: 2p/2s + 2p/3s, Exclusive: 0c/0c0a, Prob: 17.67%
+Items: 2p/2s + 3p/2s, Exclusive: 0c/0c0a, Prob: 17.67%
+Items: 2p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 17.67%
+Items: 1p/2s + 3p/2s, Exclusive: 0c/0c0a, Prob: 9.61%
+Items: 1p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 9.61%
+Items: 2p/1s + 2p/3s, Exclusive: 0c/0c0a, Prob: 9.61%
+Items: 2p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 9.61%
+Items: 1p/3s + 2p/3s, Exclusive: 0c/0c0a, Prob: 7.20%
+Items: 3p/1s + 3p/2s, Exclusive: 0c/0c0a, Prob: 7.20%
+Items: 0p/3s + 3p/2s, Exclusive: 0c/0c0a, Prob: 5.70%
+Items: 1p/2s + 2p/3s, Exclusive: 0c/0c0a, Prob: 5.70%
+Items: 1p/3s + 2p/2s, Exclusive: 0c/0c0a, Prob: 5.70%
+Items: 2p/1s + 3p/2s, Exclusive: 0c/0c0a, Prob: 5.70%
+Items: 2p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 5.70%
+Items: 2p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 5.70%
+Items: 0p/2s + 3p/2s, Exclusive: 0c/0c0a, Prob: 3.10%
+Items: 0p/3s + 3p/1s, Exclusive: 0c/0c0a, Prob: 3.10%
+Items: 1p/1s + 2p/3s, Exclusive: 0c/0c0a, Prob: 3.10%
+Items: 1p/1s + 3p/2s, Exclusive: 0c/0c0a, Prob: 3.10%
+Items: 1p/2s + 2p/2s, Exclusive: 0c/0c0a, Prob: 3.10%
+Items: 1p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 3.10%
+Items: 1p/3s + 2p/1s, Exclusive: 0c/0c0a, Prob: 3.10%
+Items: 1p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 3.10%
+Items: 2p/0s + 2p/3s, Exclusive: 0c/0c0a, Prob: 3.10%
+Items: 2p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 3.10%
+Items: 0p/1s + 3p/2s, Exclusive: 0c/0c0a, Prob: 1.00%
+Items: 0p/2s + 3p/1s, Exclusive: 0c/0c0a, Prob: 1.00%
+Items: 0p/3s + 3p/0s, Exclusive: 0c/0c0a, Prob: 1.00%
+Items: 1p/0s + 2p/3s, Exclusive: 0c/0c0a, Prob: 1.00%
+Items: 1p/1s + 2p/2s, Exclusive: 0c/0c0a, Prob: 1.00%
+Items: 1p/2s + 2p/1s, Exclusive: 0c/0c0a, Prob: 1.00%
+Items: 1p/3s + 2p/0s, Exclusive: 0c/0c0a, Prob: 1.00%

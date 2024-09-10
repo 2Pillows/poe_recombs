@@ -371,7 +371,7 @@ def get_recomb_dict(item_combos, exclusive_combos, eldritch_annul=False):
             (prefix_count == 0 and suffix_count == 0)
             or (prefix_count == 1 and suffix_count == 0)
             or (prefix_count == 0 and suffix_count == 1)
-            or (prefix_count == 3 and suffix_count == 3)
+            # or (prefix_count == 3 and suffix_count == 3)
         )
     }
 
@@ -432,7 +432,7 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
             (prefix_count == 0 and suffix_count == 0)
             or (prefix_count == 1 and suffix_count == 0)
             or (prefix_count == 0 and suffix_count == 1)
-            or (prefix_count == 3 and suffix_count == 3)
+            # or (prefix_count == 3 and suffix_count == 3)
         )
     }
 
