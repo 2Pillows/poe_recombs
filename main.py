@@ -260,7 +260,7 @@ class Recombinate:
 
         # if prefix first, need to add exclusive mod to final prefixes
         # if no exclusive prefixes, add exclusive suffix
-        if prefix_first:
+        if prefix_first and self.total_desired_prefixes > 0:
             # if there is an exclsuive prefix, add 1 required prefix
             if self.total_exclusive_prefixes > 0:
                 required_prefixes += 1
@@ -270,7 +270,7 @@ class Recombinate:
 
         # if suffix first, need to add exclusive mod to final suffixes
         # if no exclusive suffixes, add exclusive prefix
-        elif suffix_first:
+        elif suffix_first and self.total_desired_suffixes > 0:
             # if there is an exclsuive suffix, add 1 required suffix
             if self.total_exclusive_suffixes > 0:
                 required_suffixes += 1
@@ -278,9 +278,9 @@ class Recombinate:
             elif self.total_exclusive_prefixes > 0:
                 required_prefixes += 1
 
-        # else error
-        else:
-            print("error w/ prefix or suffix first")
+        # # else error
+        # else:
+        #     print("error w/ prefix or suffix first")
 
         # impossible final item
         if (
