@@ -104,7 +104,7 @@ function getGuaranteedPath(
   allowAspect
 ) {
   // explore paths for target item
-  function dfs(guaranteedItems, targetItem, curPath) {
+  function guaranteedDfs(guaranteedItems, targetItem, curPath) {
     // Skip if not in recomb dict
     if (!(targetItem in recombDict)) {
       return;
@@ -161,20 +161,20 @@ function getGuaranteedPath(
       // if not guar, explore paths
       if (!item1Guar) {
         item1Path = { pathProb: 0, pathCost: 0, path: [] };
-        dfs(availGuaranteed, item1, item1Path);
+        guaranteedDfs(availGuaranteed, item1, item1Path);
       }
 
       if (!item2Guar) {
         item2Path = { pathProb: 0, pathCost: 0, path: [] };
-        dfs(availGuaranteed, item2, item2Path);
+        guaranteedDfs(availGuaranteed, item2, item2Path);
       }
 
       // recomb cost is nothing, unless guaranteed, then risking base
       let benchCost = 0;
-      benchCost += multimodsUsed * 2;
+      if (multimodsUsed > 0) benchCost += multimodsUsed * 2;
       if (aspectSuffixCount > 0 && totalDesiredSuffixes === 0) benchCost += 1;
       benchCost += aspectSuffixCount * ASPECT_COST;
-      benchCost += annulsUsed * ANNUL_COST;
+      if (annulsUsed > 0) benchCost += annulsUsed * ANNUL_COST;
       recombCost = (benchCost + BASE_COST) / probability;
 
       // get prob of current item in path
@@ -256,11 +256,11 @@ function getGuaranteedPath(
   }
 
   // start exploring paths
-  finalPath = { pathProb: 0, pathCost: 0, path: [] };
-  dfs(GUARANTEED_ITEMS, FINAL_ITEM, finalPath);
+  let guarFinalPath = { pathProb: 0, pathCost: 0, path: [] };
+  guaranteedDfs(GUARANTEED_ITEMS, FINAL_ITEM, guarFinalPath);
 
   // return best path
-  return finalPath;
+  return guarFinalPath;
 }
 
 // Calculate best paths to get to final item according to params
@@ -491,7 +491,7 @@ function run() {
 
   // 2 always guaranteed
   if (Object.keys(GUARANTEED_ITEMS).length > 2) {
-    path_prob = getGuaranteedPath(
+    let path_prob = getGuaranteedPath(
       JSON.parse(JSON.stringify(recombDict)),
       FINAL_ITEM,
       BASE_COST,
@@ -502,7 +502,8 @@ function run() {
       (sortCost = false),
       (allowAspect = false)
     );
-    path_prob_aspect = getGuaranteedPath(
+
+    let path_prob_aspect = getGuaranteedPath(
       JSON.parse(JSON.stringify(recombDict)),
       FINAL_ITEM,
       BASE_COST,
@@ -513,7 +514,7 @@ function run() {
       (sortCost = false),
       (allowAspect = true)
     );
-    path_cost = getGuaranteedPath(
+    let path_cost = getGuaranteedPath(
       JSON.parse(JSON.stringify(recombDict)),
       FINAL_ITEM,
       BASE_COST,
@@ -524,7 +525,7 @@ function run() {
       (sortCost = true),
       (allowAspect = false)
     );
-    path_cost_aspect = getGuaranteedPath(
+    let path_cost_aspect = getGuaranteedPath(
       JSON.parse(JSON.stringify(recombDict)),
       FINAL_ITEM,
       BASE_COST,
@@ -534,9 +535,17 @@ function run() {
       (sortProb = false),
       (sortCost = true),
       (allowAspect = true)
+    );
+    // write paths to sheet
+    writeToSheet(
+      "Find Path",
+      path_prob,
+      path_prob_aspect,
+      path_cost,
+      path_cost_aspect
     );
   } else {
-    path_prob = getPath(
+    let path_prob = getPath(
       JSON.parse(JSON.stringify(recombDict)),
       FINAL_ITEM,
       BASE_COST,
@@ -547,7 +556,7 @@ function run() {
       (sortCost = false),
       (allowAspect = false)
     );
-    path_prob_aspect = getPath(
+    let path_prob_aspect = getPath(
       JSON.parse(JSON.stringify(recombDict)),
       FINAL_ITEM,
       BASE_COST,
@@ -558,7 +567,7 @@ function run() {
       (sortCost = false),
       (allowAspect = true)
     );
-    path_cost = getPath(
+    let path_cost = getPath(
       JSON.parse(JSON.stringify(recombDict)),
       FINAL_ITEM,
       BASE_COST,
@@ -569,7 +578,7 @@ function run() {
       (sortCost = true),
       (allowAspect = false)
     );
-    path_cost_aspect = getPath(
+    let path_cost_aspect = getPath(
       JSON.parse(JSON.stringify(recombDict)),
       FINAL_ITEM,
       BASE_COST,
@@ -579,17 +588,16 @@ function run() {
       (sortProb = false),
       (sortCost = true),
       (allowAspect = true)
+    );
+    // write paths to sheet
+    writeToSheet(
+      "Find Path",
+      path_prob,
+      path_prob_aspect,
+      path_cost,
+      path_cost_aspect
     );
   }
-
-  // write paths to sheet
-  writeToSheet(
-    "Find Path",
-    path_prob,
-    path_prob_aspect,
-    path_cost,
-    path_cost_aspect
-  );
 }
 
 // trigger run from script
