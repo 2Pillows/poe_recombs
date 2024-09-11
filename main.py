@@ -137,6 +137,9 @@ class Recombinate:
         # number of times u need to lock prefix to remove aspect
         self.prefix_lock_required = False
 
+        # flag for if one mod items can be magic
+        self.one_mod_magic = False
+
         # get probability of recombination
         self.probability = self._get_recombinate_prob()
 
@@ -201,7 +204,24 @@ class Recombinate:
         return 0.5 * (prefix_first + suffix_first)
 
     def _invalid_crafted_mods(self):
+        (item1_desired_prefixes, item1_desired_suffixes) = self.item1.get_item()
+        (item2_desired_prefixes, item2_desired_suffixes) = self.item2.get_item()
         (final_prefixes, final_suffixes) = self.final_item.get_item()
+
+        affix_limit = 0
+
+        # if both items are magic, limited to 2 prefix and 2 suffix
+        if (item1_desired_prefixes <= 1 and item1_desired_suffixes <= 1) and (
+            item2_desired_prefixes <= 1 and item2_desired_suffixes <= 1
+        ):
+            if self.total_prefixes <= 2 and self.total_suffixes <= 2:
+                affix_limit = 2
+        # item1 magic, limited to 1 prefix / suffix on item1 and 3 prefix / suffix on item2
+        elif (item1_desired_prefixes <= 1 and item1_desired_suffixes <= 1) or (
+            item2_desired_prefixes <= 1 and item2_desired_suffixes <= 1
+        ):
+            if self.total_prefixes <= 4 and self.total_suffixes <= 4:
+                affix_limit = 4
 
         # basic item check, can get valid mods and less ovrall item
         if (
@@ -241,6 +261,15 @@ class Recombinate:
 
                     if recomb_multimods < self.multimods_used:
                         self.multimods_used = recomb_multimods
+
+                    # check if magic item possible
+                    if (
+                        crafted_prefixes <= affix_limit
+                        and crafted_suffixes <= affix_limit
+                        and crafted_prefixes == self.total_exclusive_prefixes
+                        and crafted_suffixes == self.total_exclusive_suffixes
+                    ):
+                        self.one_mod_magic = True
         # if (
         #     # final item
         #     self.final_item.get_item() == (1, 1)
@@ -497,10 +526,7 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
                             matching_recomb_found = True
                             if pair_recomb_prob < recomb.probability:
                                 # if index can be magic item, don't overwrite
-                                if (
-                                    item_pair_recombs[index].total_prefixes <= 1
-                                    and item_pair_recombs[index].total_suffixes <= 1
-                                ):
+                                if item_pair_recombs[index].one_mod_magic:
                                     item_pair_recombs.append(recomb)
                                     break
                                 else:
@@ -569,8 +595,7 @@ def format_recomb_detailed_line(recomb: Recombinate):
         f"Eldritch Annuls: {recomb.annuls_used}, "
         f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
         f"Desired Suffixes: {recomb.total_desired_suffixes}, "
-        f"Total Prefixes: {recomb.total_prefixes}, "
-        f"Total Suffixes: {recomb.total_suffixes}\n"
+        f"One Mod Magic: {recomb.one_mod_magic}\n"
     )
 
 
