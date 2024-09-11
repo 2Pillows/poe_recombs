@@ -56,20 +56,21 @@ function getPathOptions(sheetName) {
   const annulCost = parseFloat(sheet.getRange("C9").getValue());
 
   const eldritchItem = sheet.getRange("C11").getValue();
+  const oneModMagic = sheet.getRange("C12").getValue();
 
   var guaranteedItems = {
-    "2p/0s": sheet.getRange("C14").getValue(),
-    "1p/1s": sheet.getRange("C15").getValue(),
-    "0p/2s": sheet.getRange("C16").getValue(),
-    "3p/0s": sheet.getRange("C17").getValue(),
-    "2p/1s": sheet.getRange("C18").getValue(),
-    "1p/2s": sheet.getRange("C19").getValue(),
-    "0p/3s": sheet.getRange("C20").getValue(),
-    "3p/1s": sheet.getRange("C21").getValue(),
-    "2p/2s": sheet.getRange("C22").getValue(),
-    "1p/3s": sheet.getRange("C23").getValue(),
-    "3p/2s": sheet.getRange("C24").getValue(),
-    "2p/3s": sheet.getRange("C25").getValue(),
+    "2p/0s": sheet.getRange("C15").getValue(),
+    "1p/1s": sheet.getRange("C16").getValue(),
+    "0p/2s": sheet.getRange("C17").getValue(),
+    "3p/0s": sheet.getRange("C18").getValue(),
+    "2p/1s": sheet.getRange("C19").getValue(),
+    "1p/2s": sheet.getRange("C20").getValue(),
+    "0p/3s": sheet.getRange("C21").getValue(),
+    "3p/1s": sheet.getRange("C22").getValue(),
+    "2p/2s": sheet.getRange("C23").getValue(),
+    "1p/3s": sheet.getRange("C24").getValue(),
+    "3p/2s": sheet.getRange("C25").getValue(),
+    "2p/3s": sheet.getRange("C26").getValue(),
   };
 
   guaranteedItems = Object.keys(guaranteedItems)
@@ -88,6 +89,8 @@ function getPathOptions(sheetName) {
     aspectCost,
     eldritchItem,
     guaranteedItems,
+    annulCost,
+    oneModMagic,
   };
 }
 
@@ -98,6 +101,7 @@ function getGuaranteedPath(
   BASE_COST,
   ASPECT_COST,
   ANNUL_COST,
+  ONE_MOD_MAGIC,
   GUARANTEED_ITEMS,
   sortProb,
   sortCost,
@@ -109,6 +113,10 @@ function getGuaranteedPath(
     if (!(targetItem in recombDict)) {
       return;
     }
+
+    let finalAffixes = targetItem.match(/(\d+)p\/(\d+)s/);
+    let finalPrefixes = finalAffixes ? parseInt(finalAffixes[1]) : null;
+    let finalSuffixes = finalAffixes ? parseInt(finalAffixes[2]) : null;
 
     let bestPath = {
       feederItems: [],
@@ -130,12 +138,14 @@ function getGuaranteedPath(
         "Eldritch Annuls": annulsUsed,
         "Aspect Suffix Count": aspectSuffixCount,
         "Desired Suffixes": totalDesiredSuffixes,
+        "One Mod Magic": oneModMagic,
       } = recomb;
       probability = parseFloat(probability);
       multimodsUsed = parseFloat(multimodsUsed);
       aspectSuffixCount = parseFloat(aspectSuffixCount);
       annulsUsed = parseFloat(annulsUsed);
       totalDesiredSuffixes = parseFloat(totalDesiredSuffixes);
+      oneModMagic = oneModMagic.toLowerCase() === "true";
 
       // Guaranteed items for current final item
       // reach recomb has same starting amount of guaranteed items from dfs call
@@ -214,6 +224,8 @@ function getGuaranteedPath(
         // skip if has aspect and cant include
         if (!allowAspect && aspectSuffixCount > 0) continue;
 
+        if (ONE_MOD_MAGIC && !oneModMagic) continue;
+
         // always update if is "better" or is cheaper
         if (
           (sortProb && curPathProb > bestPath["pathProb"]) ||
@@ -270,6 +282,7 @@ function getPath(
   BASE_COST,
   ASPECT_COST,
   ANNUL_COST,
+  ONE_MOD_MAGIC,
   GUARANTEED_ITEMS,
   sortProb,
   sortCost,
@@ -309,12 +322,14 @@ function getPath(
         "Eldritch Annuls": annulsUsed,
         "Aspect Suffix Count": aspectSuffixCount,
         "Desired Suffixes": totalDesiredSuffixes,
+        "One Mod Magic": oneModMagic,
       } = recomb;
       probability = parseFloat(probability);
       multimodsUsed = parseFloat(multimodsUsed);
       aspectSuffixCount = parseFloat(aspectSuffixCount);
       annulsUsed = parseFloat(annulsUsed);
       totalDesiredSuffixes = parseFloat(totalDesiredSuffixes);
+      oneModMagic = oneModMagic.toLowerCase() === "true";
 
       // check if item1 and item2 are guar, decrease count if so
 
@@ -374,6 +389,8 @@ function getPath(
       ) {
         // skip if has aspect and cant include
         if (!allowAspect && aspectSuffixCount > 0) continue;
+
+        if (ONE_MOD_MAGIC && !oneModMagic) continue;
 
         // always update if is "better" or is cheaper
         if (
@@ -486,6 +503,7 @@ function run() {
   const ELDTRICH_ITEM = pathOptions.eldritchItem;
   const GUARANTEED_ITEMS = pathOptions.guaranteedItems;
   const ANNUL_COST = pathOptions.annulCost;
+  const ONE_MOD_MAGIC = pathOptions.oneModMagic;
 
   recombDict = getRecombData("Recombs for Script", ELDTRICH_ITEM);
 
@@ -497,6 +515,7 @@ function run() {
       BASE_COST,
       ASPECT_COST,
       ANNUL_COST,
+      ONE_MOD_MAGIC,
       JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
       (sortProb = true),
       (sortCost = false),
@@ -509,6 +528,7 @@ function run() {
       BASE_COST,
       ASPECT_COST,
       ANNUL_COST,
+      ONE_MOD_MAGIC,
       JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
       (sortProb = true),
       (sortCost = false),
@@ -520,6 +540,7 @@ function run() {
       BASE_COST,
       ASPECT_COST,
       ANNUL_COST,
+      ONE_MOD_MAGIC,
       JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
       (sortProb = false),
       (sortCost = true),
@@ -531,6 +552,7 @@ function run() {
       BASE_COST,
       ASPECT_COST,
       ANNUL_COST,
+      ONE_MOD_MAGIC,
       JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
       (sortProb = false),
       (sortCost = true),
@@ -551,6 +573,7 @@ function run() {
       BASE_COST,
       ASPECT_COST,
       ANNUL_COST,
+      ONE_MOD_MAGIC,
       JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
       (sortProb = true),
       (sortCost = false),
@@ -562,6 +585,7 @@ function run() {
       BASE_COST,
       ASPECT_COST,
       ANNUL_COST,
+      ONE_MOD_MAGIC,
       JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
       (sortProb = true),
       (sortCost = false),
@@ -573,6 +597,7 @@ function run() {
       BASE_COST,
       ASPECT_COST,
       ANNUL_COST,
+      ONE_MOD_MAGIC,
       JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
       (sortProb = false),
       (sortCost = true),
@@ -584,6 +609,7 @@ function run() {
       BASE_COST,
       ASPECT_COST,
       ANNUL_COST,
+      ONE_MOD_MAGIC,
       JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
       (sortProb = false),
       (sortCost = true),
@@ -606,11 +632,11 @@ function onEdit(e) {
     var sheet = e.source.getActiveSheet();
     if (sheet.getName() === "Find Path") {
       var range = e.range;
-      if (range.getA1Notation() === "C27") {
+      if (range.getA1Notation() === "C28") {
         // Check if the value is TRUE
         if (range.getValue() === true) {
           run();
-          sheet.getRange("C27").setValue(false);
+          sheet.getRange("C28").setValue(false);
         }
       }
     }
