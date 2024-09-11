@@ -560,7 +560,9 @@ def format_recomb_detailed_line(recomb: Recombinate):
         f"Multimods: {recomb.multimods_used}, "
         f"Eldritch Annuls: {recomb.annuls_used}, "
         f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
-        f"Desired Suffixes: {recomb.total_desired_suffixes}\n"
+        f"Desired Suffixes: {recomb.total_desired_suffixes}, "
+        f"Total Prefixes: {recomb.total_prefixes}, "
+        f"Total Suffixes: {recomb.total_suffixes}\n"
     )
 
 
