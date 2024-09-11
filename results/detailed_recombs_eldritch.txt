@@ -19,6 +19,11 @@ Item1: 0p/1s, Item2: 1p/0s, Exclusive: 2c/2c0a, Prob: 0.62, Multimods: 1, Eldrit
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 1c/1c2a, Prob: 0.4650000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, Total Prefixes: 2, Total Suffixes: 4
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/2c1a, Prob: 0.44250000000000006, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, Total Prefixes: 1, Total Suffixes: 4
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/2c0a, Prob: 0.36579999999999996, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, Total Prefixes: 1, Total Suffixes: 3
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 2c/0c0a, Prob: 0.36579999999999996, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, Total Prefixes: 3, Total Suffixes: 1
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 1c/1c0a, Prob: 0.33, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, Total Prefixes: 2, Total Suffixes: 2
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/1c0a, Prob: 0.1947, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, Total Prefixes: 1, Total Suffixes: 2
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 1c/0c0a, Prob: 0.1947, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, Total Prefixes: 2, Total Suffixes: 1
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/0c0a, Prob: 0.17404999999999998, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, Total Prefixes: 1, Total Suffixes: 1
 
 -------------------------------------
 2p/0s

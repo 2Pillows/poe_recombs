@@ -496,7 +496,15 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
                         ):
                             matching_recomb_found = True
                             if pair_recomb_prob < recomb.probability:
-                                item_pair_recombs[index] = recomb
+                                # if index can be magic item, don't overwrite
+                                if (
+                                    item_pair_recombs[index].total_prefixes <= 1
+                                    and item_pair_recombs[index].total_suffixes <= 1
+                                ):
+                                    item_pair_recombs.append(recomb)
+                                    break
+                                else:
+                                    item_pair_recombs[index] = recomb
 
                         index += 1
 
