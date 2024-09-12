@@ -282,15 +282,13 @@ class Recombinate:
                     <= affix_limit
                 ):
                     # check if item works if magic
-                    if (
-                        magic_items[0]
-                        and item1_desired_prefixes + item1_crafted[0] > 1
+                    if magic_items[0] and (
+                        item1_desired_prefixes + item1_crafted[0] > 1
                         or item1_desired_suffixes + item1_crafted[1] > 1
                     ):
                         continue
-                    if (
-                        magic_items[1]
-                        and item2_desired_prefixes + item2_crafted[0] > 1
+                    if magic_items[1] and (
+                        item2_desired_prefixes + item2_crafted[0] > 1
                         or item2_desired_suffixes + item2_crafted[1] > 1
                     ):
                         continue
