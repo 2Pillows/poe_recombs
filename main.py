@@ -130,7 +130,7 @@ class Recombinate:
 
         # number of times need to multimod
         self.multimods_used = float("inf")
-        self.magic_multimods = float("inf")
+        self.magic_multimods_used = float("inf")
 
         # number of annuls used
         self.annuls_used = 0
@@ -139,7 +139,7 @@ class Recombinate:
         self.prefix_lock_required = False
 
         # flag for if one mod items can be magic
-        self.one_mod_magic = False
+        self.magic_item_used = False
 
         # get probability of recombination
         self.probability = self._get_recombinate_prob()
@@ -181,22 +181,22 @@ class Recombinate:
             self.total_desired_suffixes + self.total_exclusive_suffixes
         )
 
-        if self._invalid_crafted_mods():
-            return 0
-
         # if (
         #     # final item
         #     self.final_item.get_item() == (2, 1)
         #     # # item1
-        #     and self.item1.get_item() == (1, 0)
+        #     and self.item1.get_item() == (1, 1)
         #     # # item2
-        #     and self.item2.get_item() == (1, 1)
+        #     and self.item2.get_item() == (2, 0)
         #     # # exclusive mods
-        #     and self.crafted_prefix_count == 4
+        #     and self.crafted_prefix_count == 0
         #     and self.crafted_suffix_count == 2
-        #     and self.aspect_suffix_count == 1
+        #     and self.aspect_suffix_count == 0
         # ):
         #     print("check")
+
+        if self._invalid_crafted_mods():
+            return 0
 
         # if prefix first, suffixes assume no exclusive, but requires there to be exclusive prefixes
         prefix_first = self._item_probability(prefix_first=True)
@@ -210,19 +210,27 @@ class Recombinate:
         (final_prefixes, final_suffixes) = self.final_item.get_item()
 
         affix_limit = 0
+        magic_items = [False, False]
 
         # if both items are magic, limited to 2 prefix and 2 suffix
         if (item1_desired_prefixes <= 1 and item1_desired_suffixes <= 1) and (
             item2_desired_prefixes <= 1 and item2_desired_suffixes <= 1
         ):
-            if self.total_prefixes <= 2 and self.total_suffixes <= 2:
-                affix_limit = 2
+            # if self.total_prefixes <= 2 and self.total_suffixes <= 2:
+            affix_limit = 2
+            magic_items = [True, True]
         # item1 magic, limited to 1 prefix / suffix on item1 and 3 prefix / suffix on item2
         elif (item1_desired_prefixes <= 1 and item1_desired_suffixes <= 1) or (
             item2_desired_prefixes <= 1 and item2_desired_suffixes <= 1
         ):
-            if self.total_prefixes <= 4 and self.total_suffixes <= 4:
-                affix_limit = 4
+            # if self.total_prefixes <= 4 and self.total_suffixes <= 4:
+            affix_limit = 4
+            if item1_desired_prefixes <= 1 and item1_desired_suffixes <= 1:
+                magic_items = [True, False]
+            else:
+                magic_items = [False, True]
+
+        self.magic_item_used = affix_limit > 0
 
         # basic item check, can get valid mods and less ovrall item
         if (
@@ -248,27 +256,53 @@ class Recombinate:
 
                 # require matching crafted mods
                 if (
-                    crafted_prefixes == self.crafted_prefix_count
-                    and crafted_suffixes == self.crafted_suffix_count
+                    crafted_prefixes != self.crafted_prefix_count
+                    or crafted_suffixes != self.crafted_suffix_count
                 ):
-                    valid_crafted_mods = True
+                    continue
 
-                    # add multimod if either item has more than 1 crafted mod
-                    recomb_multimods = 0
-                    if sum(item1_crafted) > 1:
-                        recomb_multimods += 1
-                    if sum(item2_crafted) > 1:
-                        recomb_multimods += 1
+                valid_crafted_mods = True
 
-                    if recomb_multimods < self.multimods_used:
-                        self.multimods_used = recomb_multimods
+                # add multimod if either item has more than 1 crafted mod
+                recomb_multimods = 0
+                if sum(item1_crafted) > 1:
+                    recomb_multimods += 1
+                if sum(item2_crafted) > 1:
+                    recomb_multimods += 1
 
-                    # check if magic item possible
+                if recomb_multimods < self.multimods_used:
+                    self.multimods_used = recomb_multimods
+
+                # if items can be magic, get magic recomb amount
+                if (
+                    self.total_desired_prefixes + crafted_prefixes <= affix_limit
+                    and self.total_desired_suffixes
+                    + crafted_suffixes
+                    + self.aspect_suffix_count
+                    <= affix_limit
+                ):
+                    # check if item works if magic
                     if (
-                        crafted_prefixes <= affix_limit
-                        and crafted_suffixes + self.aspect_suffix_count <= affix_limit
+                        magic_items[0]
+                        and item1_desired_prefixes + item1_crafted[0] > 1
+                        or item1_desired_suffixes + item1_crafted[1] > 1
                     ):
-                        self.one_mod_magic = True
+                        continue
+                    if (
+                        magic_items[1]
+                        and item2_desired_prefixes + item2_crafted[0] > 1
+                        or item2_desired_suffixes + item2_crafted[1] > 1
+                    ):
+                        continue
+
+                    if recomb_multimods < self.magic_multimods_used:
+                        self.magic_multimods_used = recomb_multimods
+
+        # if (
+        #     self.magic_multimods_used != self.multimods_used
+        #     and self.magic_multimods_used != float("inf")
+        # ):
+        #     print("a")
         # if (
         #     # final item
         #     self.final_item.get_item() == (1, 1)
@@ -512,20 +546,20 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
                     index = 0
                     matching_recomb_found = False
                     while index < len(item_pair_recombs):
-                        pair_recomb_prob = item_pair_recombs[index].probability
-                        pair_recomb_multis = item_pair_recombs[index].multimods_used
-                        pair_recomb_aspects = item_pair_recombs[
-                            index
-                        ].aspect_suffix_count
+                        cur_recomb = item_pair_recombs[index]
 
                         if (
-                            pair_recomb_multis == recomb.multimods_used
-                            and pair_recomb_aspects == recomb.aspect_suffix_count
+                            cur_recomb.multimods_used == recomb.multimods_used
+                            and cur_recomb.magic_multimods_used
+                            == recomb.magic_multimods_used
+                            and cur_recomb.aspect_suffix_count
+                            == recomb.aspect_suffix_count
                         ):
                             matching_recomb_found = True
-                            if pair_recomb_prob < recomb.probability:
+
+                            if cur_recomb.probability < recomb.probability:
                                 # if index can be magic item, don't overwrite
-                                if item_pair_recombs[index].one_mod_magic:
+                                if cur_recomb.magic_item_used:
                                     item_pair_recombs.append(recomb)
                                     break
                                 else:
@@ -594,7 +628,8 @@ def format_recomb_detailed_line(recomb: Recombinate):
         f"Eldritch Annuls: {recomb.annuls_used}, "
         f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
         f"Desired Suffixes: {recomb.total_desired_suffixes}, "
-        f"One Mod Magic: {recomb.one_mod_magic}\n"
+        f"Magic Item Used: {recomb.magic_item_used}, "
+        f"Magic Multimods: {recomb.magic_multimods_used}\n"
     )
 
 
