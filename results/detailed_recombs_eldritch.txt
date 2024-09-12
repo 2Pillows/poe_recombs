@@ -18,12 +18,17 @@ Item1: 0p/1s, Item2: 1p/0s, Exclusive: 2c/2c1a, Prob: 0.685, Multimods: 1, Eldri
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 2c/2c0a, Prob: 0.62, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 1c/1c2a, Prob: 0.4650000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/2c1a, Prob: 0.44250000000000006, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 1c/1c1a, Prob: 0.39749999999999996, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 2c/0c1a, Prob: 0.3925, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/2c0a, Prob: 0.36579999999999996, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 2c/0c0a, Prob: 0.36579999999999996, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 1c/1c0a, Prob: 0.33, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/1c1a, Prob: 0.27435, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 1c/0c1a, Prob: 0.2475, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/1c0a, Prob: 0.1947, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 1c/0c0a, Prob: 0.1947, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/0c0a, Prob: 0.17404999999999998, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 1p/0s, Exclusive: 0c/0c1a, Prob: 0.09735, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 
 -------------------------------------
 2p/0s
@@ -34,8 +39,11 @@ Item1: 1p/0s, Item2: 1p/0s, Exclusive: 3c/1c0a, Prob: 0.57, Multimods: 1, Eldrit
 Item1: 1p/0s, Item2: 1p/0s, Exclusive: 3c/1c1a, Prob: 0.57, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: False
 Item1: 1p/0s, Item2: 1p/0s, Exclusive: 3c/1c2a, Prob: 0.57, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 0, One Mod Magic: False
 Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/0c0a, Prob: 0.33, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 0, One Mod Magic: True
-Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/1c1a, Prob: 0.33, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: False
-Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/0c2a, Prob: 0.33, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 0, One Mod Magic: False
+Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/0c2a, Prob: 0.33, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 0, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/1c1a, Prob: 0.33, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/2c1a, Prob: 0.33, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: False
+Item1: 1p/0s, Item2: 1p/0s, Exclusive: 2c/0c1a, Prob: 0.31, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: False
+Item1: 1p/0s, Item2: 1p/0s, Exclusive: 0c/0c1a, Prob: 0.26235, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: True
 
 -------------------------------------
 0p/3s
@@ -47,6 +55,7 @@ Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/1c1a, Prob: 0.18999999999999997, Multi
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/1c0a, Prob: 0.155, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: True
 Item1: 0p/1s, Item2: 0p/2s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: True
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/0c1a, Prob: 0.051666666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
 
 -------------------------------------
 1p/2s
@@ -76,12 +85,20 @@ Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/1c1a, Prob: 0.31375, Multimods: 0, Eld
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.3125833333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 0p/1s, Item2: 1p/1s, Exclusive: 0c/2c1a, Prob: 0.26156666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 2c/0c2a, Prob: 0.25416666666666665, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
-Item1: 0p/2s, Item2: 1p/0s, Exclusive: 1c/1c1a, Prob: 0.21470833333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/1c1a, Prob: 0.22419999999999995, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
+Item1: 0p/2s, Item2: 1p/0s, Exclusive: 1c/1c1a, Prob: 0.21470833333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/1s, Item2: 1p/1s, Exclusive: 2c/0c0a, Prob: 0.2046, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: False
 Item1: 0p/2s, Item2: 1p/0s, Exclusive: 2c/0c0a, Prob: 0.2046, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/1s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.1947, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/2s, Item2: 1p/0s, Exclusive: 0c/0c0a, Prob: 0.1947, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/1s, Item2: 1p/1s, Exclusive: 2c/0c2a, Prob: 0.19116666666666668, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
+Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/0c1a, Prob: 0.19116666666666668, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/0c1a, Prob: 0.12591666666666668, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/2s, Item2: 1p/0s, Exclusive: 0c/1c1a, Prob: 0.12193333333333332, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/2s, Item2: 1p/0s, Exclusive: 2c/0c1a, Prob: 0.11276666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/2s, Item2: 1p/0s, Exclusive: 1c/0c1a, Prob: 0.06781666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/0c1a, Prob: 0.06096666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/2s, Item2: 1p/0s, Exclusive: 0c/0c1a, Prob: 0.019666666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 
 -------------------------------------
 2p/1s
@@ -110,14 +127,20 @@ Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/3c0a, Prob: 0.558, Multimods: 1, Eldri
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 2c/2c1a, Prob: 0.53, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 3c/1c1a, Prob: 0.5175, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 3c/1c1a, Prob: 0.5175, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
-Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/2c1a, Prob: 0.4650000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 2c/2c1a, Prob: 0.49250000000000005, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/2c1a, Prob: 0.4650000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 3c/1c0a, Prob: 0.44999999999999996, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 3c/1c0a, Prob: 0.44999999999999996, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/0c2a, Prob: 0.43999999999999995, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 2c/2c0a, Prob: 0.43400000000000005, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
-Item1: 0p/1s, Item2: 2p/0s, Exclusive: 2c/1c2a, Prob: 0.42500000000000004, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 2c/1c2a, Prob: 0.42500000000000004, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c2a, Prob: 0.42500000000000004, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/2c0a, Prob: 0.3844, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/1c2a, Prob: 0.37200000000000005, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/0c1a, Prob: 0.3675, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.36579999999999996, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 2c/1c1a, Prob: 0.36424999999999996, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.36424999999999996, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 2c/0c2a, Prob: 0.35750000000000004, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/4c0a, Prob: 0.33, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.33, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
@@ -125,23 +148,42 @@ Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.33, Multimods: 0, Eldrit
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 1c/3c0a, Prob: 0.329, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 2c/1c0a, Prob: 0.3035, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/3c0a, Prob: 0.29700000000000004, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
-Item1: 0p/1s, Item2: 2p/0s, Exclusive: 2c/0c2a, Prob: 0.2945, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 2c/0c2a, Prob: 0.2945, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 2c/0c1a, Prob: 0.2945, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 2c/0c2a, Prob: 0.2945, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 2c/0c1a, Prob: 0.2945, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
-Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/2c1a, Prob: 0.24750000000000005, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/0c2a, Prob: 0.2945, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/1c1a, Prob: 0.2883, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/2c1a, Prob: 0.24750000000000005, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 0c/2c1a, Prob: 0.24750000000000005, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 1c/1c2a, Prob: 0.23600000000000004, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 2c/0c1a, Prob: 0.22925, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/1s, Exclusive: 2c/0c1a, Prob: 0.22925, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/0c1a, Prob: 0.22925, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/2c0a, Prob: 0.2046, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 0c/2c0a, Prob: 0.2046, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/1c2a, Prob: 0.19800000000000004, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.1947, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/0s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.1947, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.19415, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/1s, Exclusive: 1c/1c1a, Prob: 0.19415, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.1922, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/1c1a, Prob: 0.15345, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/1s, Exclusive: 0c/1c1a, Prob: 0.15345, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 1c/0c2a, Prob: 0.1461, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.1023, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.1023, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 1c/0c1a, Prob: 0.10115, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/1s, Exclusive: 1c/0c1a, Prob: 0.10115, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.054450000000000005, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/1s, Exclusive: 0c/0c1a, Prob: 0.054450000000000005, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 
 -------------------------------------
 3p/0s
-Item1: 1p/1s, Item2: 2p/0s, Exclusive: 3c/1c1a, Prob: 0.36, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 3c/2c0a, Prob: 0.36, Multimods: 2, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 3c/2c1a, Prob: 0.36, Multimods: 2, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 3c/1c0a, Prob: 0.36, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 3c/1c1a, Prob: 0.36, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 2p/0s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.31, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 0, One Mod Magic: True
 Item1: 2p/0s, Item2: 2p/0s, Exclusive: 0c/1c1a, Prob: 0.31, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: False
 Item1: 2p/0s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.31, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 0, One Mod Magic: False
@@ -152,20 +194,31 @@ Item1: 2p/0s, Item2: 2p/0s, Exclusive: 0c/5c0a, Prob: 0.31, Multimods: 2, Eldrit
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/0c1a, Prob: 0.285, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/0c2a, Prob: 0.285, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/1c0a, Prob: 0.285, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/1c1a, Prob: 0.285, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/1c2a, Prob: 0.285, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/2c0a, Prob: 0.285, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/2c1a, Prob: 0.285, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/2c1a, Prob: 0.155, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/0c1a, Prob: 0.155, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/0c2a, Prob: 0.155, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c0a, Prob: 0.155, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.155, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c2a, Prob: 0.155, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/2c0a, Prob: 0.155, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/3c0a, Prob: 0.155, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 0, One Mod Magic: True
-Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/1c1a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: False
-Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 0, One Mod Magic: False
+Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 0, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/1c1a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/2c1a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: True
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/3c0a, Prob: 0.1, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 0, One Mod Magic: True
-Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/3c1a, Prob: 0.1, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: False
+Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/3c1a, Prob: 0.1, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: True
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/4c1a, Prob: 0.1, Multimods: 2, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: False
 Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/5c0a, Prob: 0.1, Multimods: 2, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 0, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/3c0a, Prob: 0.1, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.0795, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 1, Desired Suffixes: 0, One Mod Magic: True
 
 -------------------------------------
 1p/3s
@@ -222,6 +275,12 @@ Item1: 0p/1s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Eldri
 Item1: 0p/2s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: True
 Item1: 0p/3s, Item2: 1p/0s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: True
 Item1: 0p/2s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.058899999999999994, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 4, One Mod Magic: False
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.0465, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/1s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/2s, Item2: 1p/1s, Exclusive: 2c/0c1a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/1s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.01705, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/2s, Item2: 1p/1s, Exclusive: 1c/0c1a, Prob: 0.01705, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
 
 -------------------------------------
 2p/2s
@@ -273,6 +332,8 @@ Item1: 0p/3s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.29700000000000004, Multi
 Item1: 1p/2s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.29700000000000004, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 4, One Mod Magic: True
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.29700000000000004, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.29700000000000004, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 3c/1c1a, Prob: 0.29570833333333335, Multimods: 1, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/0s, Item2: 1p/2s, Exclusive: 3c/1c1a, Prob: 0.29570833333333335, Multimods: 1, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 1c/1c1a, Prob: 0.29570833333333335, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.28725, Multimods: 1, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.28725, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
@@ -289,7 +350,10 @@ Item1: 0p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.2046, Multimods: 0, Eldr
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.2046, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.2046, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.2046, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.197625, Multimods: 1, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/1c1a, Prob: 0.197625, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/0s, Item2: 1p/2s, Exclusive: 2c/1c1a, Prob: 0.197625, Multimods: 1, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.197625, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.197625, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 2c/0c2a, Prob: 0.17991666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/2s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.16299999999999998, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 4, One Mod Magic: False
@@ -297,14 +361,35 @@ Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.1553, Multimods: 0, Eldr
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/1c1a, Prob: 0.1553, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
 Item1: 0p/1s, Item2: 2p/1s, Exclusive: 0c/2c1a, Prob: 0.1463, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/2c1a, Prob: 0.1463, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
-Item1: 0p/1s, Item2: 2p/1s, Exclusive: 2c/0c2a, Prob: 0.11625, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/1c1a, Prob: 0.12813333333333332, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 0c/1c1a, Prob: 0.12539999999999998, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 2c/0c2a, Prob: 0.11625, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 2c/0c2a, Prob: 0.11625, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.11625, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/0c2a, Prob: 0.11625, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.10890000000000001, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.10890000000000001, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/0s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.10890000000000001, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/1s, Item2: 1p/1s, Exclusive: 0c/0c0a, Prob: 0.10890000000000001, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.10501666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.09781666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/2s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.09781666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
-Item1: 1p/0s, Item2: 1p/2s, Exclusive: 1c/1c1a, Prob: 0.09781666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/0s, Item2: 1p/2s, Exclusive: 1c/1c1a, Prob: 0.09781666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 0c/1c1a, Prob: 0.0682, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/2s, Exclusive: 0c/1c1a, Prob: 0.0682, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c2a, Prob: 0.06406666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.06305, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.06305, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.06305, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 1c/0c2a, Prob: 0.054533333333333336, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.054533333333333336, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 0c/0c2a, Prob: 0.0341, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 0c/0c1a, Prob: 0.0341, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.025833333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.025833333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.020666666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.011000000000000001, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/0s, Item2: 1p/2s, Exclusive: 0c/0c1a, Prob: 0.011000000000000001, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 
 -------------------------------------
 3p/1s
@@ -352,7 +437,7 @@ Item1: 0p/1s, Item2: 3p/0s, Exclusive: 2c/3c1a, Prob: 0.24937499999999999, Multi
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 3c/1c1a, Prob: 0.243, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.243, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 2c/2c1a, Prob: 0.2375, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
-Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/2c1a, Prob: 0.23250000000000004, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/2c1a, Prob: 0.23250000000000004, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 Item1: 2p/0s, Item2: 2p/1s, Exclusive: 0c/2c1a, Prob: 0.23250000000000004, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 3c/1c0a, Prob: 0.22319999999999998, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 3c/1c2a, Prob: 0.21600000000000003, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
@@ -364,7 +449,7 @@ Item1: 1p/2s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.21375, Multimods: 1, Eld
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/1c1a, Prob: 0.20925000000000002, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/2c0a, Prob: 0.1922, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 2p/0s, Item2: 2p/1s, Exclusive: 0c/2c0a, Prob: 0.1922, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
-Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/1c2a, Prob: 0.18600000000000003, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/1c2a, Prob: 0.18600000000000003, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
 Item1: 2p/0s, Item2: 2p/1s, Exclusive: 0c/1c2a, Prob: 0.18600000000000003, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.18289999999999998, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 2p/0s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.18289999999999998, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
@@ -373,22 +458,35 @@ Item1: 1p/0s, Item2: 2p/1s, Exclusive: 2c/2c0a, Prob: 0.1767, Multimods: 1, Eldr
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/2c0a, Prob: 0.1767, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 2c/1c0a, Prob: 0.1767, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/1c2a, Prob: 0.171, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 3p/0s, Exclusive: 1c/1c2a, Prob: 0.171, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 3c/1c1a, Prob: 0.1674, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 3c/1c1a, Prob: 0.1674, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 2c/0c2a, Prob: 0.162, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
 Item1: 0p/3s, Item2: 3p/0s, Exclusive: 1c/2c0a, Prob: 0.155, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/3c0a, Prob: 0.155, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/1c1a, Prob: 0.14415, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/3c0a, Prob: 0.1395, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/3s, Item2: 3p/0s, Exclusive: 1c/1c0a, Prob: 0.1395, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: False
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/3c0a, Prob: 0.1395, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/3c0a, Prob: 0.1395, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/2c0a, Prob: 0.1395, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 1c/1c0a, Prob: 0.1395, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: False
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/3c1a, Prob: 0.135625, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/3c1a, Prob: 0.135625, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 2c/1c1a, Prob: 0.13252499999999998, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 2c/1c1a, Prob: 0.13252499999999998, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/1c1a, Prob: 0.13252499999999998, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 3p/0s, Exclusive: 1c/1c1a, Prob: 0.13252499999999998, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/2c1a, Prob: 0.12916666666666668, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 2c/0c2a, Prob: 0.12825, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.12825, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 3c/1c0a, Prob: 0.1188, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 3c/1c0a, Prob: 0.1188, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/2c1a, Prob: 0.11625000000000002, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/2c1a, Prob: 0.11625000000000002, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/2c1a, Prob: 0.11625000000000002, Multimods: 1, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/1c1a, Prob: 0.10462500000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
-Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.10462500000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.10462500000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.10462500000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/4c0a, Prob: 0.1, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
@@ -401,24 +499,58 @@ Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.1, Multimods: 0, Eldritc
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/2c0a, Prob: 0.0961, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/2c0a, Prob: 0.0961, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/2c0a, Prob: 0.0961, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/0c2a, Prob: 0.0961, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 2c/1c0a, Prob: 0.09405, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 2c/1c0a, Prob: 0.09405, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/1c0a, Prob: 0.09405, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: False
-Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/1c2a, Prob: 0.09300000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
-Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/1c2a, Prob: 0.09300000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
-Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c2a, Prob: 0.09300000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/1c2a, Prob: 0.09300000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/1c2a, Prob: 0.09300000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c2a, Prob: 0.09300000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/3c0a, Prob: 0.09000000000000001, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/3c0a, Prob: 0.09000000000000001, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/3c0a, Prob: 0.09000000000000001, Multimods: 1, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
-Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/2c1a, Prob: 0.07500000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
-Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/2c1a, Prob: 0.07500000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
-Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/2c1a, Prob: 0.07500000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 2c/0c2a, Prob: 0.08835, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/0c2a, Prob: 0.08835, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.08835, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/2c1a, Prob: 0.08333333333333334, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/2c1a, Prob: 0.07500000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/2c1a, Prob: 0.07500000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/2c1a, Prob: 0.07500000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/1c1a, Prob: 0.072075, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.072075, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.072075, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/0c2a, Prob: 0.06975, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/1c1a, Prob: 0.0675, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/2c0a, Prob: 0.062, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/2c0a, Prob: 0.062, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/2c0a, Prob: 0.062, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/1c2a, Prob: 0.06000000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/1c2a, Prob: 0.06000000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/1c2a, Prob: 0.06000000000000001, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
 Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.059, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 3p/0s, Exclusive: 0c/0c1a, Prob: 0.05115, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/0c2a, Prob: 0.04805, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/0c2a, Prob: 0.04805, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/0c2a, Prob: 0.04805, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.04805, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.047025, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 2c/0c1a, Prob: 0.047025, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: False
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/1c1a, Prob: 0.0465, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/1c1a, Prob: 0.0465, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/1c1a, Prob: 0.0465, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c2a, Prob: 0.045000000000000005, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/0c2a, Prob: 0.031, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/0c2a, Prob: 0.031, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c2a, Prob: 0.031, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 2, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.031, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 1c/0c1a, Prob: 0.025575, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.025575, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 1c/0c1a, Prob: 0.025575, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 0p/1s, Item2: 3p/0s, Exclusive: 0c/0c1a, Prob: 0.0165, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.0165, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/0s, Exclusive: 0c/0c1a, Prob: 0.0165, Multimods: 0, Eldritch Annuls: 2, Aspect Suffix Count: 1, Desired Suffixes: 1, One Mod Magic: True
 
 -------------------------------------
 2p/3s
@@ -510,10 +642,16 @@ Item1: 0p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Eldri
 Item1: 1p/0s, Item2: 1p/3s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: True
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: True
 Item1: 0p/2s, Item2: 2p/2s, Exclusive: 2c/0c1a, Prob: 0.029449999999999997, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 4, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/2s, Exclusive: 2c/0c1a, Prob: 0.029449999999999997, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
 Item1: 1p/2s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.029449999999999997, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 4, One Mod Magic: False
 Item1: 0p/1s, Item2: 2p/2s, Exclusive: 1c/1c1a, Prob: 0.019, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
 Item1: 0p/2s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.019, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
 Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/1c1a, Prob: 0.019, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
+Item1: 0p/1s, Item2: 2p/2s, Exclusive: 2c/0c1a, Prob: 0.016016666666666665, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 2c/0c1a, Prob: 0.016016666666666665, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/2s, Exclusive: 1c/0c1a, Prob: 0.016016666666666665, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/1s, Item2: 2p/2s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 1p/1s, Item2: 1p/2s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
 
 -------------------------------------
 3p/2s
@@ -608,6 +746,7 @@ Item1: 1p/2s, Item2: 2p/0s, Exclusive: 1c/3c0a, Prob: 0.08835, Multimods: 1, Eld
 Item1: 3p/1s, Item2: 3p/1s, Exclusive: 0c/0c2a, Prob: 0.0744, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/2c1a, Prob: 0.06871666666666668, Multimods: 1, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 2p/2s, Item2: 2p/2s, Exclusive: 2c/0c1a, Prob: 0.06839999999999999, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 4, One Mod Magic: False
+Item1: 1p/1s, Item2: 3p/1s, Exclusive: 0c/1c1a, Prob: 0.06406666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/2s, Item2: 3p/0s, Exclusive: 0c/1c1a, Prob: 0.06406666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 2p/0s, Item2: 2p/2s, Exclusive: 0c/1c1a, Prob: 0.06406666666666666, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 0p/2s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: True
@@ -617,23 +756,45 @@ Item1: 1p/2s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Eldri
 Item1: 1p/3s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.062, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 3, One Mod Magic: True
 Item1: 0p/2s, Item2: 3p/1s, Exclusive: 1c/1c1a, Prob: 0.058899999999999994, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/2s, Exclusive: 1c/1c1a, Prob: 0.058899999999999994, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
+Item1: 1p/1s, Item2: 3p/1s, Exclusive: 1c/1c1a, Prob: 0.058899999999999994, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/2s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.058899999999999994, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
 Item1: 2p/1s, Item2: 3p/1s, Exclusive: 0c/0c2a, Prob: 0.058899999999999994, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/2s, Item2: 2p/2s, Exclusive: 2c/0c1a, Prob: 0.05414999999999999, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 4, One Mod Magic: False
 Item1: 0p/1s, Item2: 3p/1s, Exclusive: 0c/2c1a, Prob: 0.044333333333333336, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/2c1a, Prob: 0.044333333333333336, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/2s, Exclusive: 0c/1c1a, Prob: 0.038, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
 Item1: 2p/1s, Item2: 2p/1s, Exclusive: 2c/0c2a, Prob: 0.0372, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
 Item1: 0p/1s, Item2: 3p/1s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/0s, Item2: 2p/2s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 0c/0c0a, Prob: 0.033, Multimods: 0, Eldritch Annuls: 0, Aspect Suffix Count: 0, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 3p/1s, Exclusive: 1c/1c1a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 Item1: 0p/2s, Item2: 3p/0s, Exclusive: 1c/1c1a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
-Item1: 1p/0s, Item2: 2p/2s, Exclusive: 1c/1c1a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
-Item1: 1p/1s, Item2: 3p/1s, Exclusive: 0c/0c2a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/0s, Item2: 2p/2s, Exclusive: 1c/1c1a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/1c1a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 3p/1s, Exclusive: 0c/0c2a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
 Item1: 1p/2s, Item2: 2p/0s, Exclusive: 1c/1c1a, Prob: 0.03203333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
 Item1: 1p/1s, Item2: 2p/1s, Exclusive: 2c/0c2a, Prob: 0.029449999999999997, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
-Item1: 0p/1s, Item2: 3p/1s, Exclusive: 1c/0c2a, Prob: 0.016016666666666665, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/2s, Exclusive: 2c/0c1a, Prob: 0.029449999999999997, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: False
+Item1: 0p/1s, Item2: 3p/1s, Exclusive: 0c/1c1a, Prob: 0.020666666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/2s, Exclusive: 0c/1c1a, Prob: 0.020666666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/1c1a, Prob: 0.020666666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 3p/1s, Exclusive: 1c/0c2a, Prob: 0.016016666666666665, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/0c2a, Prob: 0.016016666666666665, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/2s, Exclusive: 1c/0c1a, Prob: 0.016016666666666665, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 0p/1s, Item2: 3p/1s, Exclusive: 0c/0c2a, Prob: 0.010333333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c2a, Prob: 0.010333333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 2, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/2s, Exclusive: 0c/0c1a, Prob: 0.010333333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 3, One Mod Magic: True
+Item1: 1p/1s, Item2: 3p/1s, Exclusive: 0c/0c1a, Prob: 0.010333333333333333, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/2s, Exclusive: 2c/0c1a, Prob: 0.0095, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 2c/0c1a, Prob: 0.0095, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: False
+Item1: 0p/1s, Item2: 3p/1s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/2s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 1c/0c1a, Prob: 0.005166666666666667, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 0p/1s, Item2: 3p/1s, Exclusive: 0c/0c1a, Prob: 0.0033333333333333335, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/0s, Item2: 2p/2s, Exclusive: 0c/0c1a, Prob: 0.0033333333333333335, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
+Item1: 1p/1s, Item2: 2p/1s, Exclusive: 0c/0c1a, Prob: 0.0033333333333333335, Multimods: 0, Eldritch Annuls: 3, Aspect Suffix Count: 1, Desired Suffixes: 2, One Mod Magic: True
 
 -------------------------------------
 3p/3s

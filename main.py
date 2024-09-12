@@ -130,6 +130,7 @@ class Recombinate:
 
         # number of times need to multimod
         self.multimods_used = float("inf")
+        self.magic_multimods = float("inf")
 
         # number of annuls used
         self.annuls_used = 0
@@ -265,9 +266,7 @@ class Recombinate:
                     # check if magic item possible
                     if (
                         crafted_prefixes <= affix_limit
-                        and crafted_suffixes <= affix_limit
-                        and crafted_prefixes == self.total_exclusive_prefixes
-                        and crafted_suffixes == self.total_exclusive_suffixes
+                        and crafted_suffixes + self.aspect_suffix_count <= affix_limit
                     ):
                         self.one_mod_magic = True
         # if (
