@@ -114,10 +114,6 @@ function getGuaranteedPath(
       return;
     }
 
-    let finalAffixes = targetItem.match(/(\d+)p\/(\d+)s/);
-    let finalPrefixes = finalAffixes ? parseInt(finalAffixes[1]) : null;
-    let finalSuffixes = finalAffixes ? parseInt(finalAffixes[2]) : null;
-
     let bestPath = {
       feederItems: [],
       exclusiveMods: "",
@@ -138,14 +134,27 @@ function getGuaranteedPath(
         "Eldritch Annuls": annulsUsed,
         "Aspect Suffix Count": aspectSuffixCount,
         "Desired Suffixes": totalDesiredSuffixes,
-        "One Mod Magic": oneModMagic,
+        "Magic Multimods": magicMultiMods,
+        "Magic Item Used": magicItemUsed,
       } = recomb;
       probability = parseFloat(probability);
       multimodsUsed = parseFloat(multimodsUsed);
       aspectSuffixCount = parseFloat(aspectSuffixCount);
       annulsUsed = parseFloat(annulsUsed);
       totalDesiredSuffixes = parseFloat(totalDesiredSuffixes);
-      oneModMagic = oneModMagic.toLowerCase() === "true";
+      magicMultiMods =
+        magicMultiMods === "inf" ? Infinity : parseFloat(magicMultiMods);
+      magicItemUsed = magicItemUsed.toLowerCase() === "true";
+
+      // skip if has aspect and cant include
+      if (!allowAspect && aspectSuffixCount > 0) continue;
+
+      // if one mod must be magic, is one mod, and isn't magic then skip
+      valid_magic = ONE_MOD_MAGIC && magicItemUsed;
+      if (valid_magic && magicMultiMods == Infinity) continue;
+
+      let multiModsRequired = multimodsUsed;
+      if (valid_magic) multiModsRequired = magicMultiMods;
 
       // Guaranteed items for current final item
       // reach recomb has same starting amount of guaranteed items from dfs call
@@ -181,7 +190,7 @@ function getGuaranteedPath(
 
       // recomb cost is nothing, unless guaranteed, then risking base
       let benchCost = 0;
-      if (multimodsUsed > 0) benchCost += multimodsUsed * 2;
+      if (multiModsRequired > 0) benchCost += multiModsRequired * 2;
       if (aspectSuffixCount > 0 && totalDesiredSuffixes === 0) benchCost += 1;
       benchCost += aspectSuffixCount * ASPECT_COST;
       if (annulsUsed > 0) benchCost += annulsUsed * ANNUL_COST;
@@ -196,36 +205,11 @@ function getGuaranteedPath(
         (benchCost + (item1Path["pathCost"] + item2Path["pathCost"]) / 2) /
         probability;
 
-      // if (
-      //   sortProb &&
-      //   !allowAspect &&
-      //   targetItem === "3p/2s" &&
-      //   item1 === "2p/1s" &&
-      //   item2 === "1p/1s"
-      // ) {
-      //   console.log(
-      //     item1,
-      //     " + ",
-      //     item2,
-      //     " | ",
-      //     item1Path["pathProb"],
-      //     " * ",
-      //     item2Path["pathProb"],
-      //     " = ",
-      //     curPathProb
-      //   );
-      // }
-
       // set as path if sort by prob and highest prob, or sort by cost and lowest cost
       if (
         (sortProb && curPathProb >= bestPath["pathProb"]) ||
         (sortCost && curPathCost <= bestPath["pathCost"])
       ) {
-        // skip if has aspect and cant include
-        if (!allowAspect && aspectSuffixCount > 0) continue;
-
-        if (ONE_MOD_MAGIC && !oneModMagic) continue;
-
         // always update if is "better" or is cheaper
         if (
           (sortProb && curPathProb > bestPath["pathProb"]) ||
@@ -322,16 +306,27 @@ function getPath(
         "Eldritch Annuls": annulsUsed,
         "Aspect Suffix Count": aspectSuffixCount,
         "Desired Suffixes": totalDesiredSuffixes,
-        "One Mod Magic": oneModMagic,
+        "Magic Multimods": magicMultiMods,
+        "Magic Item Used": magicItemUsed,
       } = recomb;
       probability = parseFloat(probability);
       multimodsUsed = parseFloat(multimodsUsed);
       aspectSuffixCount = parseFloat(aspectSuffixCount);
       annulsUsed = parseFloat(annulsUsed);
       totalDesiredSuffixes = parseFloat(totalDesiredSuffixes);
-      oneModMagic = oneModMagic.toLowerCase() === "true";
+      magicMultiMods =
+        magicMultiMods === "inf" ? Infinity : parseFloat(magicMultiMods);
+      magicItemUsed = magicItemUsed.toLowerCase() === "true";
 
-      // check if item1 and item2 are guar, decrease count if so
+      // skip if has aspect and cant include
+      if (!allowAspect && aspectSuffixCount > 0) continue;
+
+      // if one mod must be magic, is one mod, and isn't magic then skip
+      valid_magic = ONE_MOD_MAGIC && magicItemUsed;
+      if (valid_magic && magicMultiMods == Infinity) continue;
+
+      let multiModsRequired = multimodsUsed;
+      if (valid_magic) multiModsRequired = magicMultiMods;
 
       // explore path if haven't yet
       if (!visited.has(item1)) {
@@ -347,7 +342,7 @@ function getPath(
 
       // recomb cost is nothing, unless guaranteed, then risking base
       let benchCost = 0;
-      if (multimodsUsed > 0) benchCost += multimodsUsed * 2;
+      if (multiModsRequired > 0) benchCost += multiModsRequired * 2;
       if (aspectSuffixCount > 0 && totalDesiredSuffixes === 0) benchCost += 1;
       benchCost += aspectSuffixCount * ASPECT_COST;
       if (annulsUsed > 0) benchCost += annulsUsed * ANNUL_COST;
@@ -362,36 +357,11 @@ function getPath(
         (benchCost + (item1Path["pathCost"] + item2Path["pathCost"]) / 2) /
         probability;
 
-      // if (
-      //   sortProb &&
-      //   !allowAspect &&
-      //   targetItem === "3p/2s" &&
-      //   item1 === "2p/1s" &&
-      //   item2 === "1p/1s"
-      // ) {
-      //   console.log(
-      //     item1,
-      //     " + ",
-      //     item2,
-      //     " | ",
-      //     item1Path["pathProb"],
-      //     " * ",
-      //     item2Path["pathProb"],
-      //     " = ",
-      //     curPathProb
-      //   );
-      // }
-
       // set as path if sort by prob and highest prob, or sort by cost and lowest cost
       if (
         (sortProb && curPathProb >= bestPath["pathProb"]) ||
         (sortCost && curPathCost <= bestPath["pathCost"])
       ) {
-        // skip if has aspect and cant include
-        if (!allowAspect && aspectSuffixCount > 0) continue;
-
-        if (ONE_MOD_MAGIC && !oneModMagic) continue;
-
         // always update if is "better" or is cheaper
         if (
           (sortProb && curPathProb > bestPath["pathProb"]) ||

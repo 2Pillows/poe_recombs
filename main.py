@@ -550,8 +550,11 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
 
                         if (
                             cur_recomb.multimods_used == recomb.multimods_used
-                            and cur_recomb.magic_multimods_used
-                            == recomb.magic_multimods_used
+                            and (
+                                cur_recomb.magic_multimods_used
+                                == recomb.magic_multimods_used
+                                or cur_recomb.magic_multimods_used == float("inf")
+                            )
                             and cur_recomb.aspect_suffix_count
                             == recomb.aspect_suffix_count
                         ):
@@ -559,7 +562,10 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
 
                             if cur_recomb.probability < recomb.probability:
                                 # if index can be magic item, don't overwrite
-                                if cur_recomb.magic_item_used:
+                                if (
+                                    cur_recomb.magic_item_used
+                                    and cur_recomb.magic_multimods_used != float("inf")
+                                ):
                                     item_pair_recombs.append(recomb)
                                     break
                                 else:
@@ -619,6 +625,7 @@ def format_path_line(path_details):
 
 
 def format_recomb_detailed_line(recomb: Recombinate):
+    m = recomb.magic_item_used and recomb.magic_multimods_used != float("inf")
     return (
         f"Item1: {recomb.get_item1().to_string()}, "
         f"Item2: {recomb.get_item2().to_string()}, "
