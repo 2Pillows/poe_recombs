@@ -110,7 +110,13 @@ class Item:
 
 class Recombinate:
     def __init__(
-        self, item1, item2, exclusive_mods, final_item, eldritch_annul
+        self,
+        item1,
+        item2,
+        exclusive_mods,
+        final_item,
+        eldritch_annul,
+        equal_affixes=False,
     ) -> None:
         # two items used in recomb
         self.item1: Item = item1
@@ -140,6 +146,8 @@ class Recombinate:
 
         # flag for if one mod items can be magic
         self.magic_item_used = False
+
+        self.equal_affixes = equal_affixes
 
         # get probability of recombination
         self.probability = self._get_recombinate_prob()
@@ -233,13 +241,20 @@ class Recombinate:
         self.magic_item_used = affix_limit > 0
 
         # basic item check, can get valid mods and less ovrall item
+        invalid_total_mods = (
+            sum(self.item1.get_item()) > sum(self.final_item.get_item())
+            or sum(self.item2.get_item()) > sum(self.final_item.get_item())
+            if self.equal_affixes
+            else sum(self.item1.get_item()) >= sum(self.final_item.get_item())
+            or sum(self.item2.get_item()) >= sum(self.final_item.get_item())
+        )
+
         if (
             # need at least desired number of affixes
             self.total_desired_prefixes < final_prefixes
             or self.total_desired_suffixes < final_suffixes
             # dont include if a single item has more desired mods than final
-            or sum(self.item1.get_item()) >= sum(self.final_item.get_item())
-            or sum(self.item2.get_item()) >= sum(self.final_item.get_item())
+            or invalid_total_mods
         ):
             return True
 
@@ -433,8 +448,8 @@ def get_recomb_dict(item_combos, exclusive_combos, eldritch_annul=False):
         for suffix_count in range(4)  # 0-3 final suffixes
         if not (
             (prefix_count == 0 and suffix_count == 0)
-            or (prefix_count == 1 and suffix_count == 0)
-            or (prefix_count == 0 and suffix_count == 1)
+            # or (prefix_count == 1 and suffix_count == 0)
+            # or (prefix_count == 0 and suffix_count == 1)
             # or (prefix_count == 3 and suffix_count == 3)
         )
     }
@@ -452,11 +467,11 @@ def get_recomb_dict(item_combos, exclusive_combos, eldritch_annul=False):
                 item2: Item
 
                 # cant' use same item as final item
-                if (
-                    item1.get_item() == final_item.get_item()
-                    or item2.get_item() == final_item.get_item()
-                ):
-                    continue
+                # if (
+                #     item1.get_item() == final_item.get_item()
+                #     or item2.get_item() == final_item.get_item()
+                # ):
+                #     continue
 
                 # avoid adding same items in dif order
                 item_pair = tuple(sorted((item1.get_item(), item2.get_item())))
@@ -467,7 +482,7 @@ def get_recomb_dict(item_combos, exclusive_combos, eldritch_annul=False):
                 # for each set of exclusive mods, create combination with items
                 for exclusive_mods in exclusive_combos:
                     recombination = Recombinate(
-                        item1, item2, exclusive_mods, final_item, eldritch_annul
+                        item1, item2, exclusive_mods, final_item, eldritch_annul, True
                     )
 
                     if recombination.probability == 0:
