@@ -327,8 +327,10 @@ class Recombinate:
             # if there is an exclsuive prefix, add 1 required prefix
             if self.total_exclusive_prefixes > 0 and self.total_desired_prefixes > 0:
                 required_prefixes += 1
-            # if there is no required prefix and a required suffix, add a req suffix
-            elif self.total_exclusive_suffixes > 0:
+            # if there is an exclusive suffix and no exclusive prefix, need additional suffix
+            elif (
+                self.total_exclusive_suffixes > 0 and self.total_exclusive_prefixes <= 0
+            ):
                 required_suffixes += 1
 
         # if suffix first, need to add exclusive mod to final suffixes
@@ -337,8 +339,10 @@ class Recombinate:
             # if there is an exclsuive suffix, add 1 required suffix
             if self.total_exclusive_suffixes > 0 and self.total_desired_suffixes > 0:
                 required_suffixes += 1
-            # if there is no required suffix and a required prefix, add a req prefix
-            elif self.total_exclusive_prefixes > 0:
+            # if there is an exclusive prefix and no exclusive suffix, need additional prefix
+            elif (
+                self.total_exclusive_prefixes > 0 and self.total_exclusive_suffixes <= 0
+            ):
                 required_prefixes += 1
 
         # else error
