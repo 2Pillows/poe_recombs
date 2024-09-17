@@ -147,6 +147,8 @@ class Recombinate:
         # flag for if one mod items can be magic
         self.magic_item_used = False
 
+        self.recomb_string = self.item1.to_string() + " + " + self.item2.to_string()
+
         self.equal_affixes = equal_affixes
 
         # get probability of recombination
@@ -258,79 +260,95 @@ class Recombinate:
         ):
             return True
 
-        item1_crafted_combos = self.item1.get_crafted_combos(self.aspect_suffix_count)
-        item2_crafted_combos = self.item2.get_crafted_combos(self.aspect_suffix_count)
+        def invalid_mods(item1_crafted_combos, item2_crafted_combos):
+            valid_crafted_mods = False
 
-        valid_crafted_mods = False
+            for item1_crafted in item1_crafted_combos:
+                for item2_crafted in item2_crafted_combos:
 
-        for item1_crafted in item1_crafted_combos:
-            for item2_crafted in item2_crafted_combos:
+                    crafted_prefixes = item1_crafted[0] + item2_crafted[0]
+                    crafted_suffixes = item1_crafted[1] + item2_crafted[1]
 
-                crafted_prefixes = item1_crafted[0] + item2_crafted[0]
-                crafted_suffixes = item1_crafted[1] + item2_crafted[1]
-
-                # require matching crafted mods
-                if (
-                    crafted_prefixes != self.crafted_prefix_count
-                    or crafted_suffixes != self.crafted_suffix_count
-                ):
-                    continue
-
-                valid_crafted_mods = True
-
-                # add multimod if either item has more than 1 crafted mod
-                recomb_multimods = 0
-                if sum(item1_crafted) > 1:
-                    recomb_multimods += 1
-                if sum(item2_crafted) > 1:
-                    recomb_multimods += 1
-
-                if recomb_multimods < self.multimods_used:
-                    self.multimods_used = recomb_multimods
-
-                # if items can be magic, get magic recomb amount
-                if (
-                    self.total_desired_prefixes + crafted_prefixes <= affix_limit
-                    and self.total_desired_suffixes
-                    + crafted_suffixes
-                    + self.aspect_suffix_count
-                    <= affix_limit
-                ):
-                    # check if item works if magic
-                    if magic_items[0] and (
-                        item1_desired_prefixes + item1_crafted[0] > 1
-                        or item1_desired_suffixes + item1_crafted[1] > 1
-                    ):
-                        continue
-                    if magic_items[1] and (
-                        item2_desired_prefixes + item2_crafted[0] > 1
-                        or item2_desired_suffixes + item2_crafted[1] > 1
+                    # require matching crafted mods
+                    if (
+                        crafted_prefixes != self.crafted_prefix_count
+                        or crafted_suffixes != self.crafted_suffix_count
                     ):
                         continue
 
-                    if recomb_multimods < self.magic_multimods_used:
-                        self.magic_multimods_used = recomb_multimods
+                    valid_crafted_mods = True
 
-        # if (
-        #     self.magic_multimods_used != self.multimods_used
-        #     and self.magic_multimods_used != float("inf")
-        # ):
-        #     print("a")
-        # if (
-        #     # final item
-        #     self.final_item.get_item() == (1, 1)
-        #     # # item1
-        #     and self.item1.get_item() == (0, 1)
-        #     # # item2
-        #     and self.item2.get_item() == (1, 0)
-        #     # # exclusive mods
-        #     and self.crafted_prefix_count == 0
-        #     and self.crafted_suffix_count == 0
-        #     and self.aspect_suffix_count == 0
-        # ):
-        #     print("check")
+                    # add multimod if either item has more than 1 crafted mod
+                    recomb_multimods = 0
+                    if sum(item1_crafted) > 1:
+                        recomb_multimods += 1
+                    if sum(item2_crafted) > 1:
+                        recomb_multimods += 1
 
-        return not valid_crafted_mods
+                    if recomb_multimods < self.multimods_used:
+                        self.multimods_used = recomb_multimods
+
+                        # make string for recomb
+                        # self.recomb_string = f"{item1_desired_prefixes}p{item1_crafted[0]}c/{item1_desired_suffixes}s{item2_crafted[0]}c{}a + {}p{}c/{}s{}c{}a"
+
+                    # if items can be magic, get magic recomb amount
+                    if (
+                        self.total_desired_prefixes + crafted_prefixes <= affix_limit
+                        and self.total_desired_suffixes
+                        + crafted_suffixes
+                        + self.aspect_suffix_count
+                        <= affix_limit
+                    ):
+                        # check if item works if magic
+                        if magic_items[0] and (
+                            item1_desired_prefixes + item1_crafted[0] > 1
+                            or item1_desired_suffixes + item1_crafted[1] > 1
+                        ):
+                            continue
+                        if magic_items[1] and (
+                            item2_desired_prefixes + item2_crafted[0] > 1
+                            or item2_desired_suffixes + item2_crafted[1] > 1
+                        ):
+                            continue
+
+                        if recomb_multimods < self.magic_multimods_used:
+                            self.magic_multimods_used = recomb_multimods
+
+            # if (
+            #     self.magic_multimods_used != self.multimods_used
+            #     and self.magic_multimods_used != float("inf")
+            # ):
+            #     print("a")
+            # if (
+            #     # final item
+            #     self.final_item.get_item() == (1, 1)
+            #     # # item1
+            #     and self.item1.get_item() == (0, 1)
+            #     # # item2
+            #     and self.item2.get_item() == (1, 0)
+            #     # # exclusive mods
+            #     and self.crafted_prefix_count == 0
+            #     and self.crafted_suffix_count == 0
+            #     and self.aspect_suffix_count == 0
+            # ):
+            #     print("check")
+
+            return not valid_crafted_mods
+
+        item1_aspect_combos = self.item1.get_crafted_combos(1)
+        item2_aspect_combos = self.item2.get_crafted_combos(1)
+        item1_combos = self.item1.get_crafted_combos(0)
+        item2_combos = self.item2.get_crafted_combos(0)
+
+        if self.aspect_suffix_count >= 2:
+            return invalid_mods(item1_aspect_combos, item2_aspect_combos)
+        if self.aspect_suffix_count <= 0:
+            return invalid_mods(item1_combos, item2_combos)
+        if self.aspect_suffix_count == 1:
+            # need to check w/ item1 having aspect and item2 having aspect
+            return invalid_mods(item1_aspect_combos, item2_combos) or invalid_mods(
+                item1_combos, item2_aspect_combos
+            )
 
     # calculate prefix and suffix probability
     def _item_probability(self, prefix_first=False, suffix_first=False):
