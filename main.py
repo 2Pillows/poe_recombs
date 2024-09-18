@@ -577,38 +577,22 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
                     if recomb.probability == 0:
                         continue
 
-                    # if same multimod count and aspect but better prob, remove current and add other
-                    index = 0
-                    matching_recomb_found = False
-                    while index < len(item_pair_recombs):
-                        cur_recomb = item_pair_recombs[index]
-
+                    # if same multimod count, aspect, and magic_multimods but better prob, remove current and add other
+                    match_found = False
+                    for i, cur_recomb in enumerate(item_pair_recombs):
                         if (
                             cur_recomb.multimods_used == recomb.multimods_used
-                            and (
-                                cur_recomb.magic_multimods_used
-                                == recomb.magic_multimods_used
-                                or cur_recomb.magic_multimods_used == float("inf")
-                            )
                             and cur_recomb.aspect_suffix_count
                             == recomb.aspect_suffix_count
+                            and cur_recomb.magic_multimods_used
+                            == recomb.magic_multimods_used
                         ):
-                            matching_recomb_found = True
-
                             if cur_recomb.probability < recomb.probability:
-                                # if index can be magic item, don't overwrite
-                                if (
-                                    cur_recomb.magic_item_used
-                                    and cur_recomb.magic_multimods_used != float("inf")
-                                ):
-                                    item_pair_recombs.append(recomb)
-                                    break
-                                else:
-                                    item_pair_recombs[index] = recomb
+                                item_pair_recombs[i] = recomb
+                            match_found = True
+                            break
 
-                        index += 1
-
-                    if not matching_recomb_found:
+                    if not match_found:
                         item_pair_recombs.append(recomb)
 
                 if item_pair_recombs:
