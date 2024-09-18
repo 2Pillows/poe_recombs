@@ -584,8 +584,8 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
                             cur_recomb.multimods_used == recomb.multimods_used
                             and cur_recomb.aspect_suffix_count
                             == recomb.aspect_suffix_count
-                            and cur_recomb.magic_multimods_used
-                            == recomb.magic_multimods_used
+                            # and cur_recomb.magic_multimods_used
+                            # == recomb.magic_multimods_used
                         ):
                             if cur_recomb.probability < recomb.probability:
                                 item_pair_recombs[i] = recomb
