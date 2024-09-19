@@ -9,7 +9,7 @@ function getRecombData(sheetName, ELDTRICH_ITEM) {
   var column = ELDTRICH_ITEM ? "D" : "B";
   var data = sheet.getRange(column + "5:" + column).getValues();
 
-  var recombsDict = {};
+  var recombDict = {};
 
   var finalItem = "";
 
@@ -22,7 +22,7 @@ function getRecombData(sheetName, ELDTRICH_ITEM) {
       cellValue.indexOf("Item1:") === -1
     ) {
       finalItem = cellValue;
-      recombsDict[finalItem] = [];
+      recombDict[finalItem] = [];
     } else if (cellValue.indexOf("Item1:") !== -1) {
       dict = {};
 
@@ -34,11 +34,31 @@ function getRecombData(sheetName, ELDTRICH_ITEM) {
         dict[key] = value;
       }
 
-      recombsDict[finalItem].push(dict);
+      recombDict[finalItem].push(dict);
     }
   }
 
-  return recombsDict;
+  let parsedRecombDict = parseRecombDict(recombDict);
+
+  return parsedRecombDict;
+}
+
+function parseRecombDict(recombDict) {
+  const parsedRecombDict = {};
+
+  for (const targetItem in recombDict) {
+    parsedRecombDict[targetItem] = recombDict[targetItem].map((recomb) => ({
+      ...recomb,
+      Prob: parseFloat(recomb.Prob),
+      Multimods: parseFloat(recomb.Multimods),
+      "Aspect Suffix Count": parseFloat(recomb["Aspect Suffix Count"]),
+      "Eldritch Annuls": parseFloat(recomb["Eldritch Annuls"]),
+      "Desired Suffixes": parseFloat(recomb["Desired Suffixes"]),
+      "Magic Prob": parseFloat(recomb["Magic Prob"]),
+    }));
+  }
+
+  return parsedRecombDict;
 }
 
 // Get path options and guaranteed items from sheet
@@ -56,7 +76,7 @@ function getPathOptions(sheetName) {
   const annulCost = parseFloat(sheet.getRange("C9").getValue());
 
   const eldritchItem = sheet.getRange("C11").getValue();
-  const oneModMagic = sheet.getRange("C12").getValue();
+  const allRareItems = sheet.getRange("C12").getValue();
 
   var guaranteedItems = {
     "2p/0s": sheet.getRange("C15").getValue(),
@@ -90,7 +110,7 @@ function getPathOptions(sheetName) {
     eldritchItem,
     guaranteedItems,
     annulCost,
-    oneModMagic,
+    allRareItems,
   };
 }
 
@@ -101,7 +121,7 @@ function getGuaranteedPath(
   BASE_COST,
   ASPECT_COST,
   ANNUL_COST,
-  ONE_MOD_MAGIC,
+  ALL_RARE_ITEMS,
   GUARANTEED_ITEMS,
   sortProb,
   sortCost,
@@ -125,7 +145,7 @@ function getGuaranteedPath(
 
     // Process all recombinations for the target item
     for (const recomb of recombDict[targetItem]) {
-      var {
+      let {
         Item1: item1,
         Item2: item2,
         Exclusive: exclusive,
@@ -134,27 +154,14 @@ function getGuaranteedPath(
         "Eldritch Annuls": annulsUsed,
         "Aspect Suffix Count": aspectSuffixCount,
         "Desired Suffixes": totalDesiredSuffixes,
-        "Magic Multimods": magicMultiMods,
-        "Magic Item Used": magicItemUsed,
+        "Magic Prob": magicProb,
       } = recomb;
-      probability = parseFloat(probability);
-      multimodsUsed = parseFloat(multimodsUsed);
-      aspectSuffixCount = parseFloat(aspectSuffixCount);
-      annulsUsed = parseFloat(annulsUsed);
-      totalDesiredSuffixes = parseFloat(totalDesiredSuffixes);
-      magicMultiMods =
-        magicMultiMods === "inf" ? Infinity : parseFloat(magicMultiMods);
-      magicItemUsed = magicItemUsed.toLowerCase() === "true";
 
       // skip if has aspect and cant include
       if (!allowAspect && aspectSuffixCount > 0) continue;
 
-      // if one mod must be magic, is one mod, and isn't magic then skip
-      valid_magic = ONE_MOD_MAGIC && magicItemUsed;
-      if (valid_magic && magicMultiMods == Infinity) continue;
-
-      let multiModsRequired = multimodsUsed;
-      if (valid_magic) multiModsRequired = magicMultiMods;
+      // if one mod magic, use magic prob
+      let recombProb = ALL_RARE_ITEMS ? probability : magicProb;
 
       // Guaranteed items for current final item
       // reach recomb has same starting amount of guaranteed items from dfs call
@@ -190,20 +197,20 @@ function getGuaranteedPath(
 
       // recomb cost is nothing, unless guaranteed, then risking base
       let benchCost = 0;
-      if (multiModsRequired > 0) benchCost += multiModsRequired * 2;
+      if (multimodsUsed > 0) benchCost += multimodsUsed * 2;
       if (aspectSuffixCount > 0 && totalDesiredSuffixes === 0) benchCost += 1;
       benchCost += aspectSuffixCount * ASPECT_COST;
       if (annulsUsed > 0) benchCost += annulsUsed * ANNUL_COST;
-      recombCost = (benchCost + BASE_COST) / probability;
+      recombCost = (benchCost + BASE_COST) / recombProb;
 
       // get prob of current item in path
       let curPathProb =
-        item1Path["pathProb"] * item2Path["pathProb"] * probability;
+        item1Path["pathProb"] * item2Path["pathProb"] * recombProb;
 
       // get cost of current item in path
       let curPathCost =
         (benchCost + (item1Path["pathCost"] + item2Path["pathCost"]) / 2) /
-        probability;
+        recombProb;
 
       // set as path if sort by prob and highest prob, or sort by cost and lowest cost
       if (
@@ -222,7 +229,7 @@ function getGuaranteedPath(
             feeder: item2 + " + " + item1,
             exclusive: exclusive,
             cost: recombCost,
-            prob: probability,
+            prob: recombProb,
           });
           bestPath = {
             item1: item1,
@@ -266,12 +273,28 @@ function getPath(
   BASE_COST,
   ASPECT_COST,
   ANNUL_COST,
-  ONE_MOD_MAGIC,
+  ALL_RARE_ITEMS,
   GUARANTEED_ITEMS,
   sortProb,
   sortCost,
   allowAspect
 ) {
+  // use getGuaranteedPath if additional guaranteed items
+  if (Object.keys(GUARANTEED_ITEMS).length > 2) {
+    return getGuaranteedPath(
+      recombDict,
+      FINAL_ITEM,
+      BASE_COST,
+      ASPECT_COST,
+      ANNUL_COST,
+      ALL_RARE_ITEMS,
+      GUARANTEED_ITEMS,
+      sortProb,
+      sortCost,
+      allowAspect
+    );
+  }
+
   pathDetails = {
     "0p/1s": { pathProb: 1, pathCost: BASE_COST, path: [] },
     "1p/0s": { pathProb: 1, pathCost: BASE_COST, path: [] },
@@ -297,7 +320,7 @@ function getPath(
 
     // Process all recombinations for the target item
     for (const recomb of recombDict[targetItem]) {
-      var {
+      let {
         Item1: item1,
         Item2: item2,
         Exclusive: exclusive,
@@ -306,27 +329,14 @@ function getPath(
         "Eldritch Annuls": annulsUsed,
         "Aspect Suffix Count": aspectSuffixCount,
         "Desired Suffixes": totalDesiredSuffixes,
-        "Magic Multimods": magicMultiMods,
-        "Magic Item Used": magicItemUsed,
+        "Magic Prob": magicProb,
       } = recomb;
-      probability = parseFloat(probability);
-      multimodsUsed = parseFloat(multimodsUsed);
-      aspectSuffixCount = parseFloat(aspectSuffixCount);
-      annulsUsed = parseFloat(annulsUsed);
-      totalDesiredSuffixes = parseFloat(totalDesiredSuffixes);
-      magicMultiMods =
-        magicMultiMods === "inf" ? Infinity : parseFloat(magicMultiMods);
-      magicItemUsed = magicItemUsed.toLowerCase() === "true";
 
       // skip if has aspect and cant include
       if (!allowAspect && aspectSuffixCount > 0) continue;
 
-      // if one mod must be magic, is one mod, and isn't magic then skip
-      valid_magic = ONE_MOD_MAGIC && magicItemUsed;
-      if (valid_magic && magicMultiMods == Infinity) continue;
-
-      let multiModsRequired = multimodsUsed;
-      if (valid_magic) multiModsRequired = magicMultiMods;
+      // if one mod magic, use magic prob
+      let recombProb = ALL_RARE_ITEMS ? probability : magicProb;
 
       // explore path if haven't yet
       if (!visited.has(item1)) {
@@ -342,20 +352,20 @@ function getPath(
 
       // recomb cost is nothing, unless guaranteed, then risking base
       let benchCost = 0;
-      if (multiModsRequired > 0) benchCost += multiModsRequired * 2;
+      if (multimodsUsed > 0) benchCost += multimodsUsed * 2;
       if (aspectSuffixCount > 0 && totalDesiredSuffixes === 0) benchCost += 1;
       benchCost += aspectSuffixCount * ASPECT_COST;
       if (annulsUsed > 0) benchCost += annulsUsed * ANNUL_COST;
-      recombCost = (benchCost + BASE_COST) / probability;
+      recombCost = (benchCost + BASE_COST) / recombProb;
 
       // get prob of current item in path
       let curPathProb =
-        item1Path["pathProb"] * item2Path["pathProb"] * probability;
+        item1Path["pathProb"] * item2Path["pathProb"] * recombProb;
 
       // get cost of current item in path
       let curPathCost =
         (benchCost + (item1Path["pathCost"] + item2Path["pathCost"]) / 2) /
-        probability;
+        recombProb;
 
       // set as path if sort by prob and highest prob, or sort by cost and lowest cost
       if (
@@ -374,7 +384,7 @@ function getPath(
             feeder: item2 + " + " + item1,
             exclusive: exclusive,
             cost: recombCost,
-            prob: probability,
+            prob: recombProb,
           });
           bestPath = {
             item1: item1,
@@ -473,127 +483,68 @@ function run() {
   const ELDTRICH_ITEM = pathOptions.eldritchItem;
   const GUARANTEED_ITEMS = pathOptions.guaranteedItems;
   const ANNUL_COST = pathOptions.annulCost;
-  const ONE_MOD_MAGIC = pathOptions.oneModMagic;
+  const ALL_RARE_ITEMS = pathOptions.allRareItems;
 
   recombDict = getRecombData("Recombs for Script", ELDTRICH_ITEM);
 
   // 2 always guaranteed
-  if (Object.keys(GUARANTEED_ITEMS).length > 2) {
-    let path_prob = getGuaranteedPath(
-      JSON.parse(JSON.stringify(recombDict)),
-      FINAL_ITEM,
-      BASE_COST,
-      ASPECT_COST,
-      ANNUL_COST,
-      ONE_MOD_MAGIC,
-      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-      (sortProb = true),
-      (sortCost = false),
-      (allowAspect = false)
-    );
 
-    let path_prob_aspect = getGuaranteedPath(
-      JSON.parse(JSON.stringify(recombDict)),
-      FINAL_ITEM,
-      BASE_COST,
-      ASPECT_COST,
-      ANNUL_COST,
-      ONE_MOD_MAGIC,
-      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-      (sortProb = true),
-      (sortCost = false),
-      (allowAspect = true)
-    );
-    let path_cost = getGuaranteedPath(
-      JSON.parse(JSON.stringify(recombDict)),
-      FINAL_ITEM,
-      BASE_COST,
-      ASPECT_COST,
-      ANNUL_COST,
-      ONE_MOD_MAGIC,
-      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-      (sortProb = false),
-      (sortCost = true),
-      (allowAspect = false)
-    );
-    let path_cost_aspect = getGuaranteedPath(
-      JSON.parse(JSON.stringify(recombDict)),
-      FINAL_ITEM,
-      BASE_COST,
-      ASPECT_COST,
-      ANNUL_COST,
-      ONE_MOD_MAGIC,
-      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-      (sortProb = false),
-      (sortCost = true),
-      (allowAspect = true)
-    );
-    // write paths to sheet
-    writeToSheet(
-      "Find Path",
-      path_prob,
-      path_prob_aspect,
-      path_cost,
-      path_cost_aspect
-    );
-  } else {
-    let path_prob = getPath(
-      JSON.parse(JSON.stringify(recombDict)),
-      FINAL_ITEM,
-      BASE_COST,
-      ASPECT_COST,
-      ANNUL_COST,
-      ONE_MOD_MAGIC,
-      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-      (sortProb = true),
-      (sortCost = false),
-      (allowAspect = false)
-    );
-    let path_prob_aspect = getPath(
-      JSON.parse(JSON.stringify(recombDict)),
-      FINAL_ITEM,
-      BASE_COST,
-      ASPECT_COST,
-      ANNUL_COST,
-      ONE_MOD_MAGIC,
-      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-      (sortProb = true),
-      (sortCost = false),
-      (allowAspect = true)
-    );
-    let path_cost = getPath(
-      JSON.parse(JSON.stringify(recombDict)),
-      FINAL_ITEM,
-      BASE_COST,
-      ASPECT_COST,
-      ANNUL_COST,
-      ONE_MOD_MAGIC,
-      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-      (sortProb = false),
-      (sortCost = true),
-      (allowAspect = false)
-    );
-    let path_cost_aspect = getPath(
-      JSON.parse(JSON.stringify(recombDict)),
-      FINAL_ITEM,
-      BASE_COST,
-      ASPECT_COST,
-      ANNUL_COST,
-      ONE_MOD_MAGIC,
-      JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-      (sortProb = false),
-      (sortCost = true),
-      (allowAspect = true)
-    );
-    // write paths to sheet
-    writeToSheet(
-      "Find Path",
-      path_prob,
-      path_prob_aspect,
-      path_cost,
-      path_cost_aspect
-    );
-  }
+  let path_prob = getPath(
+    JSON.parse(JSON.stringify(recombDict)),
+    FINAL_ITEM,
+    BASE_COST,
+    ASPECT_COST,
+    ANNUL_COST,
+    ALL_RARE_ITEMS,
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+    (sortProb = true),
+    (sortCost = false),
+    (allowAspect = false)
+  );
+  let path_prob_aspect = getPath(
+    JSON.parse(JSON.stringify(recombDict)),
+    FINAL_ITEM,
+    BASE_COST,
+    ASPECT_COST,
+    ANNUL_COST,
+    ALL_RARE_ITEMS,
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+    (sortProb = true),
+    (sortCost = false),
+    (allowAspect = true)
+  );
+  let path_cost = getPath(
+    JSON.parse(JSON.stringify(recombDict)),
+    FINAL_ITEM,
+    BASE_COST,
+    ASPECT_COST,
+    ANNUL_COST,
+    ALL_RARE_ITEMS,
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+    (sortProb = false),
+    (sortCost = true),
+    (allowAspect = false)
+  );
+  let path_cost_aspect = getPath(
+    JSON.parse(JSON.stringify(recombDict)),
+    FINAL_ITEM,
+    BASE_COST,
+    ASPECT_COST,
+    ANNUL_COST,
+    ALL_RARE_ITEMS,
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+    (sortProb = false),
+    (sortCost = true),
+    (allowAspect = true)
+  );
+  // write paths to sheet
+  writeToSheet(
+    "Find Path",
+    path_prob,
+    path_prob_aspect,
+    path_cost,
+    path_cost_aspect
+  );
 }
 
 // trigger run from script

@@ -136,7 +136,6 @@ class Recombinate:
 
         # number of times need to multimod
         self.multimods_used = float("inf")
-        self.magic_multimods_used = float("inf")
 
         # number of annuls used
         self.annuls_used = 0
@@ -144,15 +143,17 @@ class Recombinate:
         # number of times u need to lock prefix to remove aspect
         self.prefix_lock_required = False
 
-        # flag for if one mod items can be magic
-        self.magic_item_used = False
+        self.regal_item1 = False
+        self.regal_item2 = False
 
         self.recomb_string = self.item1.to_string() + " + " + self.item2.to_string()
 
         self.equal_affixes = equal_affixes
 
         # get probability of recombination
-        self.probability = self._get_recombinate_prob()
+        self.probability = 0
+        self.magic_prob = 0
+        self._get_recombinate_prob()
 
         self.bench_cost = self._get_bench_cost()
 
@@ -206,41 +207,73 @@ class Recombinate:
         #     print("check")
 
         if self._invalid_crafted_mods():
-            return 0
+            return 0, 0
 
         # if prefix first, suffixes assume no exclusive, but requires there to be exclusive prefixes
         prefix_first = self._item_probability(prefix_first=True)
         suffix_first = self._item_probability(suffix_first=True)
 
-        return 0.5 * (prefix_first + suffix_first)
+        annul_rare_mod = 1
+        # if only 1 prefix and suffix wo/ exclusive mods, need to reagl and annul
+        if (
+            self.final_item.prefix_count == 1
+            and self.final_item.suffix_count == 1
+            and self.total_exclusive_mods == 0
+        ):
+            annul_rare_mod = 1 / 2 if self.eldritch_annul else 1 / 3
+
+        self.probability = 0.5 * annul_rare_mod * (prefix_first + suffix_first)
+
+        # if item1 has max 1 prefix or suffix its assumed magic
+        # if item is magic, need to factor in chance of regal and annuling
+        if self.regal_item1 or self.regal_item2:
+            # 1/2 alt gives prefix and suffix, regal into 2/3 annul and 1/3 annul
+            # 1/4 alt gives prefix or suffix, regal into 1/2 annul
+            regal_mod = 1
+
+            if self.regal_item1:
+                regal_mod *= 1 / 2 * 2 / 3 * 1 / 2 + 1 / 4 * 1 / 2 + 1 / 4 * 1 / 2
+            if self.regal_item2:
+                regal_mod *= 1 / 2 * 2 / 3 * 1 / 2 + 1 / 4 * 1 / 2 + 1 / 4 * 1 / 2
+
+            self.magic_prob = (
+                0.5 * regal_mod * annul_rare_mod * (prefix_first + suffix_first)
+            )
+
+        else:
+            self.magic_prob = self.probability
 
     def _invalid_crafted_mods(self):
         (item1_desired_prefixes, item1_desired_suffixes) = self.item1.get_item()
         (item2_desired_prefixes, item2_desired_suffixes) = self.item2.get_item()
         (final_prefixes, final_suffixes) = self.final_item.get_item()
 
-        affix_limit = 0
         magic_items = [False, False]
 
         # if both items are magic, limited to 2 prefix and 2 suffix
-        if (item1_desired_prefixes <= 1 and item1_desired_suffixes <= 1) and (
-            item2_desired_prefixes <= 1 and item2_desired_suffixes <= 1
+        if (
+            (item1_desired_prefixes == 1 or item1_desired_suffixes == 1)
+            and item1_desired_prefixes + item1_desired_suffixes == 1
+        ) and (
+            (item2_desired_prefixes == 1 or item2_desired_suffixes == 1)
+            and item2_desired_prefixes + item2_desired_suffixes == 1
         ):
             # if self.total_prefixes <= 2 and self.total_suffixes <= 2:
-            affix_limit = 2
             magic_items = [True, True]
+
         # item1 magic, limited to 1 prefix / suffix on item1 and 3 prefix / suffix on item2
-        elif (item1_desired_prefixes <= 1 and item1_desired_suffixes <= 1) or (
-            item2_desired_prefixes <= 1 and item2_desired_suffixes <= 1
+        elif (
+            (item1_desired_prefixes == 1 or item1_desired_suffixes == 1)
+            and item1_desired_prefixes + item1_desired_suffixes == 1
+        ) or (
+            (item2_desired_prefixes == 1 or item2_desired_suffixes == 1)
+            and item2_desired_prefixes + item2_desired_suffixes == 1
         ):
             # if self.total_prefixes <= 4 and self.total_suffixes <= 4:
-            affix_limit = 4
             if item1_desired_prefixes <= 1 and item1_desired_suffixes <= 1:
                 magic_items = [True, False]
             else:
                 magic_items = [False, True]
-
-        self.magic_item_used = affix_limit > 0
 
         # basic item check, can get valid mods and less ovrall item
         invalid_total_mods = (
@@ -292,27 +325,39 @@ class Recombinate:
                         # self.recomb_string = f"{item1_desired_prefixes}p{item1_crafted[0]}c/{item1_desired_suffixes}s{item2_crafted[0]}c{}a + {}p{}c/{}s{}c{}a"
 
                     # if items can be magic, get magic recomb amount
-                    if (
-                        self.total_desired_prefixes + crafted_prefixes <= affix_limit
-                        and self.total_desired_suffixes
-                        + crafted_suffixes
-                        + self.aspect_suffix_count
-                        <= affix_limit
-                    ):
-                        # check if item works if magic
-                        if magic_items[0] and (
-                            item1_desired_prefixes + item1_crafted[0] > 1
-                            or item1_desired_suffixes + item1_crafted[1] > 1
-                        ):
-                            continue
-                        if magic_items[1] and (
-                            item2_desired_prefixes + item2_crafted[0] > 1
-                            or item2_desired_suffixes + item2_crafted[1] > 1
-                        ):
-                            continue
+                    # if (
+                    #     self.total_desired_prefixes + crafted_prefixes <= affix_limit
+                    #     and self.total_desired_suffixes
+                    #     + crafted_suffixes
+                    #     + self.aspect_suffix_count
+                    #     <= affix_limit
+                    # ):
 
-                        if recomb_multimods < self.magic_multimods_used:
-                            self.magic_multimods_used = recomb_multimods
+                    # invalid_exclusive = False
+                    aspects_needed = self.aspect_suffix_count
+                    # check if item works if magic
+                    if magic_items[0] and (
+                        item1_desired_prefixes + item1_crafted[0] > 1
+                        or item1_desired_suffixes + item1_crafted[1] + aspects_needed
+                        > 1
+                    ):
+                        self.regal_item1 = True
+                        aspects_needed -= 1
+                        # invalid_exclusive = True
+
+                    if magic_items[1] and (
+                        item2_desired_prefixes + item2_crafted[0] > 1
+                        or item2_desired_suffixes + item2_crafted[1] + aspects_needed
+                        > 1
+                    ):
+                        self.regal_item2 = True
+                    #     invalid_exclusive = True
+
+                    # if invalid_exclusive:
+                    #     continue
+
+                    # if recomb_multimods < self.magic_multimods_used:
+                    #     self.magic_multimods_used = recomb_multimods
 
             # if (
             #     self.magic_multimods_used != self.multimods_used
@@ -436,16 +481,7 @@ class Recombinate:
         # ):
         #     print("check")
 
-        # if only 1 prefix and suffix wo/ exclusive mods, need to reagl and annul
-        if (
-            self.final_item.prefix_count == 1
-            and self.final_item.suffix_count == 1
-            and self.total_exclusive_mods == 0
-        ):
-            annul_rare_mod = 1 / 2 if self.eldritch_annul else 1 / 3
-            return prefix_prob * suffix_prob * annul_rare_mod
-        else:
-            return prefix_prob * suffix_prob
+        return prefix_prob * suffix_prob
 
     def _get_bench_cost(self):
         bench_cost = 0
@@ -567,6 +603,7 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
 
                 # all recombs for item pair
                 item_pair_recombs: list[Recombinate] = []
+                magic_item_pair_recombs: list[Recombinate] = []
 
                 # for each set of exclusive mods, create combination with items
                 for exclusive_mods in exclusive_combos:
@@ -577,26 +614,17 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
                     if recomb.probability == 0:
                         continue
 
-                    # if same multimod count, aspect, and magic_multimods but better prob, remove current and add other
-                    match_found = False
-                    for i, cur_recomb in enumerate(item_pair_recombs):
-                        if (
-                            cur_recomb.multimods_used == recomb.multimods_used
-                            and cur_recomb.aspect_suffix_count
-                            == recomb.aspect_suffix_count
-                            # and cur_recomb.magic_multimods_used
-                            # == recomb.magic_multimods_used
-                        ):
-                            if cur_recomb.probability < recomb.probability:
-                                item_pair_recombs[i] = recomb
-                            match_found = True
-                            break
+                    item_pair_recombs = add_to_item_pair_recombs(
+                        item_pair_recombs, recomb, False
+                    )
+                    magic_item_pair_recombs = add_to_item_pair_recombs(
+                        magic_item_pair_recombs, recomb, True
+                    )
 
-                    if not match_found:
-                        item_pair_recombs.append(recomb)
-
-                if item_pair_recombs:
-                    recomb_dict[final_item].extend(item_pair_recombs)
+                if item_pair_recombs or magic_item_pair_recombs:
+                    recomb_dict[final_item].extend(
+                        list(set(item_pair_recombs + magic_item_pair_recombs))
+                    )
 
         # sort results by highest prob
         recomb_dict[final_item] = sorted(
@@ -606,6 +634,36 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
         )
 
     return recomb_dict
+
+
+# if same multimod count, aspect, and magic_multimods but better prob, remove current and add other
+def add_to_item_pair_recombs(item_pair_recombs, recomb: Recombinate, magic_prob=False):
+    match_found = False
+    for i, cur_recomb in enumerate(item_pair_recombs):
+        cur_recomb: Recombinate
+        # find other recomb w/ same multimods and aspects, same cost
+        if (
+            cur_recomb.multimods_used == recomb.multimods_used
+            and cur_recomb.aspect_suffix_count == recomb.aspect_suffix_count
+        ):
+            # if better prob, replace index w/ new recomb
+            if (not magic_prob and cur_recomb.probability <= recomb.probability) or (
+                magic_prob and cur_recomb.magic_prob <= recomb.magic_prob
+            ):
+                if (
+                    (not magic_prob and cur_recomb.probability < recomb.probability)
+                    or (magic_prob and cur_recomb.magic_prob < recomb.magic_prob)
+                    or cur_recomb.total_exclusive_mods > recomb.total_exclusive_mods
+                ):
+                    item_pair_recombs[i] = recomb
+
+            match_found = True
+            break
+
+    if not match_found:
+        item_pair_recombs.append(recomb)
+
+    return item_pair_recombs
 
 
 def write_to_file(filename, data, format_line):
@@ -621,7 +679,7 @@ def write_to_file(filename, data, format_line):
                 f.write(format_line(item))
 
 
-def format_recomb_line(recomb):
+def format_recomb_line(recomb: Recombinate):
     return (
         f"Items: {recomb.get_item1().to_string()} + {recomb.get_item2().to_string()}, "
         f"Exclusive: {recomb.get_exclusive_mods()}, "
@@ -629,33 +687,33 @@ def format_recomb_line(recomb):
     )
 
 
-def format_path_line(path_details):
-    recomb = path_details["recomb"]
-    if recomb is None:
-        return ""
-    path_prob = path_details["path prob"]
-    path_cost = path_details["path cost"]
+# def format_path_line(path_details):
+#     recomb = path_details["recomb"]
+#     if recomb is None:
+#         return ""
+#     path_prob = path_details["path prob"]
+#     path_cost = path_details["path cost"]
 
-    return (
-        f"Items: {recomb.get_item1().to_string()} + {recomb.get_item2().to_string()}, "
-        f"Exclusive: {recomb.get_exclusive_mods()}, "
-        f"Path Cost: {path_cost:.2f}, Path Prob: {path_prob:.2%}\n"
-    )
+#     return (
+#         f"Items: {recomb.get_item1().to_string()} + {recomb.get_item2().to_string()}, "
+#         f"Exclusive: {recomb.get_exclusive_mods()}, "
+#         f"Path Cost: {path_cost:.2f}, Path Prob: {path_prob:.2%}\n"
+#     )
 
 
 def format_recomb_detailed_line(recomb: Recombinate):
-    m = recomb.magic_item_used and recomb.magic_multimods_used != float("inf")
     return (
         f"Item1: {recomb.get_item1().to_string()}, "
         f"Item2: {recomb.get_item2().to_string()}, "
         f"Exclusive: {recomb.get_exclusive_mods()}, "
         f"Prob: {recomb.probability}, "
+        f"Magic Prob: {recomb.magic_prob}, "
         f"Multimods: {recomb.multimods_used}, "
-        f"Eldritch Annuls: {recomb.annuls_used}, "
         f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
-        f"Desired Suffixes: {recomb.total_desired_suffixes}, "
-        f"Magic Item Used: {recomb.magic_item_used}, "
-        f"Magic Multimods: {recomb.magic_multimods_used}\n"
+        f"Eldritch Annuls: {recomb.annuls_used}, "
+        f"Desired Suffixes: {recomb.total_desired_suffixes}\n"
+        # f"Magic Item Used: {recomb.magic_item_used}, "
+        # f"Magic Multimods: {recomb.magic_multimods_used}\n"
     )
 
 
