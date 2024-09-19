@@ -229,12 +229,16 @@ class Recombinate:
         if self.regal_item1 or self.regal_item2:
             # 1/2 alt gives prefix and suffix, regal into 2/3 annul and 1/3 annul
             # 1/4 alt gives prefix or suffix, regal into 1/2 annul
+            # if prefix or suffix, 2/3 chance to have other mod. 1/3 to be one mod
             regal_mod = 1
 
+            both_mods_chances = 2 / 3 * 2 / 3 * 1 / 2
+            single_mod_chances = 1 / 3 * 1 / 2
+
             if self.regal_item1:
-                regal_mod *= 1 / 2 * 2 / 3 * 1 / 2 + 1 / 4 * 1 / 2 + 1 / 4 * 1 / 2
+                regal_mod *= both_mods_chances + single_mod_chances
             if self.regal_item2:
-                regal_mod *= 1 / 2 * 2 / 3 * 1 / 2 + 1 / 4 * 1 / 2 + 1 / 4 * 1 / 2
+                regal_mod *= both_mods_chances + single_mod_chances
 
             self.magic_prob = (
                 0.5 * regal_mod * annul_rare_mod * (prefix_first + suffix_first)
