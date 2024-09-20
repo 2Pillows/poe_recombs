@@ -75,7 +75,7 @@ class Item:
                 -1,
                 -1,
             ):
-                #
+                # can't have more than 1 crafted prefix wo/ multimod suffix
                 if crafted_suffix == 0 and crafted_prefix > 1:
                     crafted_prefix = 1
 
@@ -200,19 +200,19 @@ class Recombinate:
             self.total_desired_suffixes + self.total_exclusive_suffixes
         )
 
-        if (
-            # final item
-            self.final_item.get_item() == (0, 2)
-            # # item1
-            and self.item1.get_item() == (0, 1)
-            # # item2
-            and self.item2.get_item() == (0, 1)
-            # # exclusive mods
-            and self.crafted_prefix_count == 1
-            and self.crafted_suffix_count == 1
-            and self.aspect_suffix_count == 0
-        ):
-            print("check")
+        # if (
+        #     # final item
+        #     self.final_item.get_item() == (2, 2)
+        #     # # item1
+        #     and self.item1.get_item() == (0, 2)
+        #     # # item2
+        #     and self.item2.get_item() == (2, 0)
+        #     # # exclusive mods
+        #     and self.crafted_prefix_count == 3
+        #     and self.crafted_suffix_count == 3
+        #     and self.aspect_suffix_count == 1
+        # ):
+        #     print("check")
 
         if self._invalid_crafted_mods():
             return 0, 0
@@ -466,7 +466,8 @@ class Recombinate:
             return invalid_mods(item1_combos, item2_combos)
         if self.aspect_suffix_count == 1:
             # need to check w/ item1 having aspect and item2 having aspect
-            return invalid_mods(item1_aspect_combos, item2_combos) or invalid_mods(
+            # return invalid if both configs are invalid
+            return invalid_mods(item1_aspect_combos, item2_combos) and invalid_mods(
                 item1_combos, item2_aspect_combos
             )
 
