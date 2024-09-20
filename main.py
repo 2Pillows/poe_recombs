@@ -152,7 +152,7 @@ class Recombinate:
 
         # get probability of recombination
         self.probability = 0
-        self.magic_prob = 0
+        self.annul_chances = 0
         self._get_recombinate_prob()
 
         self.bench_cost = self._get_bench_cost()
@@ -168,12 +168,20 @@ class Recombinate:
 
     # returns chance to recombinate item1 + item2 = final item
     def _get_recombinate_prob(self):
-        (item1_desired_prefixes, item1_desired_suffixes) = self.item1.get_item()
-        (item2_desired_prefixes, item2_desired_suffixes) = self.item2.get_item()
+        (self.item1_desired_prefixes, self.item1_desired_suffixes) = (
+            self.item1.get_item()
+        )
+        (self.item2_desired_prefixes, self.item2_desired_suffixes) = (
+            self.item2.get_item()
+        )
 
         # desired mods
-        self.total_desired_prefixes = item1_desired_prefixes + item2_desired_prefixes
-        self.total_desired_suffixes = item1_desired_suffixes + item2_desired_suffixes
+        self.total_desired_prefixes = (
+            self.item1_desired_prefixes + self.item2_desired_prefixes
+        )
+        self.total_desired_suffixes = (
+            self.item1_desired_suffixes + self.item2_desired_suffixes
+        )
 
         # exclusive mods
         self.total_exclusive_prefixes = self.crafted_prefix_count
@@ -192,19 +200,19 @@ class Recombinate:
             self.total_desired_suffixes + self.total_exclusive_suffixes
         )
 
-        # if (
-        #     # final item
-        #     self.final_item.get_item() == (2, 1)
-        #     # # item1
-        #     and self.item1.get_item() == (1, 1)
-        #     # # item2
-        #     and self.item2.get_item() == (2, 0)
-        #     # # exclusive mods
-        #     and self.crafted_prefix_count == 0
-        #     and self.crafted_suffix_count == 2
-        #     and self.aspect_suffix_count == 0
-        # ):
-        #     print("check")
+        if (
+            # final item
+            self.final_item.get_item() == (0, 2)
+            # # item1
+            and self.item1.get_item() == (0, 1)
+            # # item2
+            and self.item2.get_item() == (0, 1)
+            # # exclusive mods
+            and self.crafted_prefix_count == 1
+            and self.crafted_suffix_count == 1
+            and self.aspect_suffix_count == 0
+        ):
+            print("check")
 
         if self._invalid_crafted_mods():
             return 0, 0
@@ -226,58 +234,60 @@ class Recombinate:
 
         # if item1 has max 1 prefix or suffix its assumed magic
         # if item is magic, need to factor in chance of regal and annuling
-        if self.regal_item1 or self.regal_item2:
+        if (
+            self.item1_desired_prefixes + self.item1_desired_suffixes == 1
+            or self.item2_desired_prefixes + self.item2_desired_suffixes == 1
+        ):
+            # include prob if need to regal and annul to fit exclusive mods
+
             # 1/2 alt gives prefix and suffix, regal into 2/3 annul and 1/3 annul
             # 1/4 alt gives prefix or suffix, regal into 1/2 annul
             # if prefix or suffix, 2/3 chance to have other mod. 1/3 to be one mod
-            regal_mod = 1
 
-            both_mods_chances = 2 / 3 * 2 / 3 * 1 / 2
-            single_mod_chances = 1 / 3 * 1 / 2
+            # if 1 mod item and no regal, need to include chance of being a 1 mod item
 
+            regal_chances = 2 / 3 * 2 / 3 * 1 / 2 + 1 / 3 * 1 / 2
+            magic_chances = 2 / 3 * 1 / 2 + 1 / 3 * 1
+
+            self.annul_chances = 1
+
+            # magic item that needs to be regaled
             if self.regal_item1:
-                regal_mod *= both_mods_chances + single_mod_chances
+                self.annul_chances *= regal_chances
+            # magic item, no regal needed
+            else:
+                self.annul_chances *= magic_chances
+
             if self.regal_item2:
-                regal_mod *= both_mods_chances + single_mod_chances
-
-            self.magic_prob = (
-                0.5 * regal_mod * annul_rare_mod * (prefix_first + suffix_first)
-            )
-
-        else:
-            self.magic_prob = self.probability
+                self.annul_chances *= regal_chances
+            else:
+                self.annul_chances *= magic_chances
 
     def _invalid_crafted_mods(self):
-        (item1_desired_prefixes, item1_desired_suffixes) = self.item1.get_item()
-        (item2_desired_prefixes, item2_desired_suffixes) = self.item2.get_item()
         (final_prefixes, final_suffixes) = self.final_item.get_item()
 
         magic_items = [False, False]
 
         # if both items are magic, limited to 2 prefix and 2 suffix
-        if (
-            (item1_desired_prefixes == 1 or item1_desired_suffixes == 1)
-            and item1_desired_prefixes + item1_desired_suffixes == 1
-        ) and (
-            (item2_desired_prefixes == 1 or item2_desired_suffixes == 1)
-            and item2_desired_prefixes + item2_desired_suffixes == 1
+        if (self.item1_desired_prefixes + self.item1_desired_suffixes == 1) and (
+            self.item2_desired_prefixes + self.item2_desired_suffixes == 1
         ):
             # if self.total_prefixes <= 2 and self.total_suffixes <= 2:
             magic_items = [True, True]
+            self.regal_item1 = True
+            self.regal_item2 = True
 
         # item1 magic, limited to 1 prefix / suffix on item1 and 3 prefix / suffix on item2
-        elif (
-            (item1_desired_prefixes == 1 or item1_desired_suffixes == 1)
-            and item1_desired_prefixes + item1_desired_suffixes == 1
-        ) or (
-            (item2_desired_prefixes == 1 or item2_desired_suffixes == 1)
-            and item2_desired_prefixes + item2_desired_suffixes == 1
+        elif (self.item1_desired_prefixes + self.item1_desired_suffixes == 1) or (
+            self.item2_desired_prefixes + self.item2_desired_suffixes == 1
         ):
             # if self.total_prefixes <= 4 and self.total_suffixes <= 4:
-            if item1_desired_prefixes <= 1 and item1_desired_suffixes <= 1:
+            if self.item1_desired_prefixes <= 1 and self.item1_desired_suffixes <= 1:
                 magic_items = [True, False]
+                self.regal_item1 = True
             else:
                 magic_items = [False, True]
+                self.regal_item2 = True
 
         # basic item check, can get valid mods and less ovrall item
         invalid_total_mods = (
@@ -326,7 +336,7 @@ class Recombinate:
                         self.multimods_used = recomb_multimods
 
                         # make string for recomb
-                        # self.recomb_string = f"{item1_desired_prefixes}p{item1_crafted[0]}c/{item1_desired_suffixes}s{item2_crafted[0]}c{}a + {}p{}c/{}s{}c{}a"
+                        # self.recomb_string = f"{self.item1_desired_prefixes}p{item1_crafted[0]}c/{self.item1_desired_suffixes}s{item2_crafted[0]}c{}a + {}p{}c/{}s{}c{}a"
 
                     # if items can be magic, get magic recomb amount
                     # if (
@@ -338,23 +348,84 @@ class Recombinate:
                     # ):
 
                     # invalid_exclusive = False
-                    aspects_needed = self.aspect_suffix_count
                     # check if item works if magic
-                    if magic_items[0] and (
-                        item1_desired_prefixes + item1_crafted[0] > 1
-                        or item1_desired_suffixes + item1_crafted[1] + aspects_needed
-                        > 1
-                    ):
-                        self.regal_item1 = True
-                        aspects_needed -= 1
-                        # invalid_exclusive = True
 
-                    if magic_items[1] and (
-                        item2_desired_prefixes + item2_crafted[0] > 1
-                        or item2_desired_suffixes + item2_crafted[1] + aspects_needed
-                        > 1
-                    ):
-                        self.regal_item2 = True
+                    item1_total_prefixes = (
+                        self.item1_desired_prefixes + item1_crafted[0]
+                    )
+                    item1_total_suffixes = (
+                        self.item1_desired_suffixes + item1_crafted[1]
+                    )
+
+                    item2_total_prefixes = (
+                        self.item2_desired_prefixes + item2_crafted[0]
+                    )
+                    item2_total_suffixes = (
+                        self.item2_desired_suffixes + item2_crafted[1]
+                    )
+
+                    # if both magic
+                    if magic_items[0] and magic_items[1]:
+                        if (
+                            item1_total_prefixes <= 1
+                            and item1_total_suffixes <= 1
+                            and item2_total_prefixes <= 1
+                            and item2_total_suffixes <= 1
+                            and (
+                                item1_total_suffixes
+                                + item2_total_suffixes
+                                + self.aspect_suffix_count
+                                <= 2
+                            )
+                        ):
+                            self.regal_item1 = False
+                            self.regal_item2 = False
+
+                    # only item1 magic
+                    elif magic_items[0]:
+                        if (
+                            item1_total_prefixes <= 1
+                            and item1_total_suffixes <= 1
+                            and (
+                                item1_total_suffixes
+                                + item2_total_suffixes
+                                + self.aspect_suffix_count
+                                <= 4
+                            )
+                        ):
+                            self.regal_item1 = False
+                    # only item 2 magic
+                    elif magic_items[1]:
+                        if (
+                            item2_total_prefixes <= 1
+                            and item2_total_suffixes <= 1
+                            and (
+                                item1_total_suffixes
+                                + item2_total_suffixes
+                                + self.aspect_suffix_count
+                                <= 4
+                            )
+                        ):
+                            self.regal_item2 = False
+
+                    # if magic_items[0] and (
+                    #     self.item1_desired_prefixes + item1_crafted[0] <= 1
+                    #     or self.item1_desired_suffixes
+                    #     + item1_crafted[1]
+                    #     <= 1
+                    # ):
+                    #     self.regal_item1 = False
+                    #     if
+                    #     aspects_needed += 1
+                    # invalid_exclusive = True
+
+                    # if magic_items[1] and (
+                    #     self.item2_desired_prefixes + item2_crafted[0] > 1
+                    #     or self.item2_desired_suffixes
+                    #     + item2_crafted[1]
+                    #     <= 1
+                    # ):
+                    #     self.regal_item2 = True
                     #     invalid_exclusive = True
 
                     # if invalid_exclusive:
@@ -607,7 +678,6 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
 
                 # all recombs for item pair
                 item_pair_recombs: list[Recombinate] = []
-                magic_item_pair_recombs: list[Recombinate] = []
 
                 # for each set of exclusive mods, create combination with items
                 for exclusive_mods in exclusive_combos:
@@ -619,16 +689,11 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
                         continue
 
                     item_pair_recombs = add_to_item_pair_recombs(
-                        item_pair_recombs, recomb, False
-                    )
-                    magic_item_pair_recombs = add_to_item_pair_recombs(
-                        magic_item_pair_recombs, recomb, True
+                        item_pair_recombs, recomb
                     )
 
-                if item_pair_recombs or magic_item_pair_recombs:
-                    recomb_dict[final_item].extend(
-                        list(set(item_pair_recombs + magic_item_pair_recombs))
-                    )
+                if item_pair_recombs:
+                    recomb_dict[final_item].extend(item_pair_recombs)
 
         # sort results by highest prob
         recomb_dict[final_item] = sorted(
@@ -641,7 +706,7 @@ def get_script_dict(item_combos, exclusive_combos, eldritch_annul=False):
 
 
 # if same multimod count, aspect, and magic_multimods but better prob, remove current and add other
-def add_to_item_pair_recombs(item_pair_recombs, recomb: Recombinate, magic_prob=False):
+def add_to_item_pair_recombs(item_pair_recombs, recomb: Recombinate):
     match_found = False
     for i, cur_recomb in enumerate(item_pair_recombs):
         cur_recomb: Recombinate
@@ -649,17 +714,14 @@ def add_to_item_pair_recombs(item_pair_recombs, recomb: Recombinate, magic_prob=
         if (
             cur_recomb.multimods_used == recomb.multimods_used
             and cur_recomb.aspect_suffix_count == recomb.aspect_suffix_count
+            and cur_recomb.annul_chances == recomb.annul_chances
         ):
             # if better prob, replace index w/ new recomb
-            if (not magic_prob and cur_recomb.probability <= recomb.probability) or (
-                magic_prob and cur_recomb.magic_prob <= recomb.magic_prob
+            if cur_recomb.probability < recomb.probability or (
+                cur_recomb.probability == recomb.probability
+                and cur_recomb.total_exclusive_mods > recomb.total_exclusive_mods
             ):
-                if (
-                    (not magic_prob and cur_recomb.probability < recomb.probability)
-                    or (magic_prob and cur_recomb.magic_prob < recomb.magic_prob)
-                    or cur_recomb.total_exclusive_mods > recomb.total_exclusive_mods
-                ):
-                    item_pair_recombs[i] = recomb
+                item_pair_recombs[i] = recomb
 
             match_found = True
             break
@@ -711,7 +773,7 @@ def format_recomb_detailed_line(recomb: Recombinate):
         f"Item2: {recomb.get_item2().to_string()}, "
         f"Exclusive: {recomb.get_exclusive_mods()}, "
         f"Prob: {recomb.probability}, "
-        f"Magic Prob: {recomb.magic_prob}, "
+        f"Annul Prob: {recomb.annul_chances}, "
         f"Multimods: {recomb.multimods_used}, "
         f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
         f"Eldritch Annuls: {recomb.annuls_used}, "
