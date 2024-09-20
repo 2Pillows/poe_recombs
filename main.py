@@ -230,7 +230,9 @@ class Recombinate:
         ):
             annul_rare_mod = 1 / 2 if self.eldritch_annul else 1 / 3
 
-        self.probability = 0.5 * annul_rare_mod * (prefix_first + suffix_first)
+        self.probability = round(
+            0.5 * annul_rare_mod * (prefix_first + suffix_first), 4
+        )
 
         # if item1 has max 1 prefix or suffix its assumed magic
         # if item is magic, need to factor in chance of regal and annuling
@@ -262,6 +264,8 @@ class Recombinate:
                 self.annul_chances *= regal_chances
             else:
                 self.annul_chances *= magic_chances
+
+            self.annul_chances = round(self.annul_chances, 4)
 
     def _invalid_crafted_mods(self):
         (final_prefixes, final_suffixes) = self.final_item.get_item()
@@ -779,8 +783,6 @@ def format_recomb_detailed_line(recomb: Recombinate):
         f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
         f"Eldritch Annuls: {recomb.annuls_used}, "
         f"Desired Suffixes: {recomb.total_desired_suffixes}\n"
-        # f"Magic Item Used: {recomb.magic_item_used}, "
-        # f"Magic Multimods: {recomb.magic_multimods_used}\n"
     )
 
 
