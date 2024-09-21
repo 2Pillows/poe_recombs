@@ -1,6 +1,84 @@
 // app_script.js
 // app script used for sheet
 
+// main script
+function run() {
+  pathOptions = getPathOptions("Find Path");
+  const BASE_COST = pathOptions.baseCost;
+  const MOD_ROLLING = pathOptions.modRolling;
+  const ASPECT_COST = pathOptions.aspectCost;
+  const FINAL_ITEM = pathOptions.finalItem;
+  const ELDTRICH_ITEM = pathOptions.eldritchItem;
+  const GUARANTEED_ITEMS = pathOptions.guaranteedItems;
+  const ANNUL_COST = pathOptions.annulCost;
+  const ALL_RARE_ITEMS = pathOptions.allRareItems;
+
+  recombDict = getRecombData("Recombs for Script", ELDTRICH_ITEM);
+
+  // 2 always guaranteed
+
+  let path_prob = getPath(
+    JSON.parse(JSON.stringify(recombDict)),
+    FINAL_ITEM,
+    BASE_COST,
+    MOD_ROLLING,
+    ASPECT_COST,
+    ANNUL_COST,
+    ALL_RARE_ITEMS,
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+    (sortProb = true),
+    (sortCost = false),
+    (allowAspect = false)
+  );
+  let path_prob_aspect = getPath(
+    JSON.parse(JSON.stringify(recombDict)),
+    FINAL_ITEM,
+    BASE_COST,
+    MOD_ROLLING,
+    ASPECT_COST,
+    ANNUL_COST,
+    ALL_RARE_ITEMS,
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+    (sortProb = true),
+    (sortCost = false),
+    (allowAspect = true)
+  );
+  let path_cost = getPath(
+    JSON.parse(JSON.stringify(recombDict)),
+    FINAL_ITEM,
+    BASE_COST,
+    MOD_ROLLING,
+    ASPECT_COST,
+    ANNUL_COST,
+    ALL_RARE_ITEMS,
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+    (sortProb = false),
+    (sortCost = true),
+    (allowAspect = false)
+  );
+  let path_cost_aspect = getPath(
+    JSON.parse(JSON.stringify(recombDict)),
+    FINAL_ITEM,
+    BASE_COST,
+    MOD_ROLLING,
+    ASPECT_COST,
+    ANNUL_COST,
+    ALL_RARE_ITEMS,
+    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
+    (sortProb = false),
+    (sortCost = true),
+    (allowAspect = true)
+  );
+  // write paths to sheet
+  writeToSheet(
+    "Find Path",
+    path_prob,
+    path_prob_aspect,
+    path_cost,
+    path_cost_aspect
+  );
+}
+
 // Get detailed paths from the sheet
 // Has each recomb for any final item
 function getRecombData(sheetName, ELDTRICH_ITEM) {
@@ -539,84 +617,6 @@ function writeDataToSheet(sheet, pathData, startCell) {
   var range = sheet.getRange(startCell).offset(0, 0, numRows, numCols);
 
   range.setValues(pathArray);
-}
-
-// main script
-function run() {
-  pathOptions = getPathOptions("Find Path");
-  const BASE_COST = pathOptions.baseCost;
-  const MOD_ROLLING = pathOptions.modRolling;
-  const ASPECT_COST = pathOptions.aspectCost;
-  const FINAL_ITEM = pathOptions.finalItem;
-  const ELDTRICH_ITEM = pathOptions.eldritchItem;
-  const GUARANTEED_ITEMS = pathOptions.guaranteedItems;
-  const ANNUL_COST = pathOptions.annulCost;
-  const ALL_RARE_ITEMS = pathOptions.allRareItems;
-
-  recombDict = getRecombData("Recombs for Script", ELDTRICH_ITEM);
-
-  // 2 always guaranteed
-
-  let path_prob = getPath(
-    JSON.parse(JSON.stringify(recombDict)),
-    FINAL_ITEM,
-    BASE_COST,
-    MOD_ROLLING,
-    ASPECT_COST,
-    ANNUL_COST,
-    ALL_RARE_ITEMS,
-    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-    (sortProb = true),
-    (sortCost = false),
-    (allowAspect = false)
-  );
-  let path_prob_aspect = getPath(
-    JSON.parse(JSON.stringify(recombDict)),
-    FINAL_ITEM,
-    BASE_COST,
-    MOD_ROLLING,
-    ASPECT_COST,
-    ANNUL_COST,
-    ALL_RARE_ITEMS,
-    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-    (sortProb = true),
-    (sortCost = false),
-    (allowAspect = true)
-  );
-  let path_cost = getPath(
-    JSON.parse(JSON.stringify(recombDict)),
-    FINAL_ITEM,
-    BASE_COST,
-    MOD_ROLLING,
-    ASPECT_COST,
-    ANNUL_COST,
-    ALL_RARE_ITEMS,
-    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-    (sortProb = false),
-    (sortCost = true),
-    (allowAspect = false)
-  );
-  let path_cost_aspect = getPath(
-    JSON.parse(JSON.stringify(recombDict)),
-    FINAL_ITEM,
-    BASE_COST,
-    MOD_ROLLING,
-    ASPECT_COST,
-    ANNUL_COST,
-    ALL_RARE_ITEMS,
-    JSON.parse(JSON.stringify(GUARANTEED_ITEMS)),
-    (sortProb = false),
-    (sortCost = true),
-    (allowAspect = true)
-  );
-  // write paths to sheet
-  writeToSheet(
-    "Find Path",
-    path_prob,
-    path_prob_aspect,
-    path_cost,
-    path_cost_aspect
-  );
 }
 
 // trigger run from script
