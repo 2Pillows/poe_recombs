@@ -143,44 +143,72 @@ function parseRecombDict(recombDict) {
 function getPathOptions(sheetName) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
   const finalItemValues = sheet
-    .getRange("C4")
+    .getRange("D4")
     .setNumberFormat("@STRING@")
     .getValue();
   const [a, b] = finalItemValues.split("/");
   const finalItem = `${a}p/${b}s`;
 
-  const baseCost = parseFloat(sheet.getRange("C7").getValue());
-  const modRolling = parseFloat(sheet.getRange("C8").getValue());
-  const aspectCost = parseFloat(sheet.getRange("C9").getValue());
-  const annulCost = parseFloat(sheet.getRange("C10").getValue());
+  const baseCost = parseFloat(sheet.getRange("D7").getValue());
+  const modRolling = parseFloat(sheet.getRange("D8").getValue());
+  const aspectCost = parseFloat(sheet.getRange("D9").getValue());
+  const annulCost = parseFloat(sheet.getRange("D10").getValue());
 
-  const eldritchItem = sheet.getRange("C13").getValue();
-  const allRareItems = sheet.getRange("C14").getValue();
+  const eldritchItem = sheet.getRange("D13").getValue();
+  const allRareItems = sheet.getRange("D14").getValue();
 
-  var guaranteedItems = {
-    "2p/0s": sheet.getRange("C17").getValue(),
-    "1p/1s": sheet.getRange("C18").getValue(),
-    "0p/2s": sheet.getRange("C19").getValue(),
-    "3p/0s": sheet.getRange("C20").getValue(),
-    "2p/1s": sheet.getRange("C21").getValue(),
-    "1p/2s": sheet.getRange("C22").getValue(),
-    "0p/3s": sheet.getRange("C23").getValue(),
-    "3p/1s": sheet.getRange("C24").getValue(),
-    "2p/2s": sheet.getRange("C25").getValue(),
-    "1p/3s": sheet.getRange("C26").getValue(),
-    "3p/2s": sheet.getRange("C27").getValue(),
-    "2p/3s": sheet.getRange("C28").getValue(),
+  var guaranteedItemsCount = {
+    "2p/0s": sheet.getRange("C18").getValue(),
+    "1p/1s": sheet.getRange("C19").getValue(),
+    "0p/2s": sheet.getRange("C20").getValue(),
+    "3p/0s": sheet.getRange("C21").getValue(),
+    "2p/1s": sheet.getRange("C22").getValue(),
+    "1p/2s": sheet.getRange("C23").getValue(),
+    "0p/3s": sheet.getRange("C24").getValue(),
+    "3p/1s": sheet.getRange("C25").getValue(),
+    "2p/2s": sheet.getRange("C26").getValue(),
+    "1p/3s": sheet.getRange("C27").getValue(),
+    "3p/2s": sheet.getRange("C28").getValue(),
+    "2p/3s": sheet.getRange("C29").getValue(),
+  };
+  var guaranteedItemsCost = {
+    "2p/0s": sheet.getRange("D18").getValue(),
+    "1p/1s": sheet.getRange("D19").getValue(),
+    "0p/2s": sheet.getRange("D20").getValue(),
+    "3p/0s": sheet.getRange("D21").getValue(),
+    "2p/1s": sheet.getRange("D22").getValue(),
+    "1p/2s": sheet.getRange("D23").getValue(),
+    "0p/3s": sheet.getRange("D24").getValue(),
+    "3p/1s": sheet.getRange("D25").getValue(),
+    "2p/2s": sheet.getRange("D26").getValue(),
+    "1p/3s": sheet.getRange("D27").getValue(),
+    "3p/2s": sheet.getRange("D28").getValue(),
+    "2p/3s": sheet.getRange("D29").getValue(),
   };
 
-  guaranteedItems = Object.keys(guaranteedItems)
-    .filter((key) => guaranteedItems[key] >= 1)
-    .reduce((obj, key) => {
-      obj[key] = guaranteedItems[key];
-      return obj;
-    }, {});
+  let guaranteedItems = {};
+  for (const key in guaranteedItemsCount) {
+    keyCount = guaranteedItemsCount[key];
+    keyCost = guaranteedItemsCost[key];
+
+    if (keyCount === "" || keyCost === "" || keyCount === 0 || keyCost === 0)
+      continue;
+
+    guaranteedItems[key] = {
+      count: keyCount,
+      cost: keyCost,
+    };
+  }
+
   // always guaranteed items
-  guaranteedItems["1p/0s"] = 9999999;
-  guaranteedItems["0p/1s"] = 9999999;
+  guaranteedItems["1p/0s"] = {
+    count: 9999999999,
+    cost: baseCost,
+  };
+  guaranteedItems["0p/1s"] = {
+    count: 9999999999,
+    cost: baseCost,
+  };
 
   return {
     finalItem,
@@ -278,26 +306,24 @@ function getGuaranteedPath(
       let item1Path = {
         pathProb: 1,
         pathCost: BASE_COST,
-        MOD_ROLLING,
         path: [],
       };
       let item2Path = {
         pathProb: 1,
         pathCost: BASE_COST,
-        MOD_ROLLING,
         path: [],
       };
 
       // check if item1 and item2 are guar, decrease count if so
       let item1Guar = false;
       let item2Guar = false;
-      if (availGuaranteed[item1] > 0) {
-        availGuaranteed[item1] -= 1;
+      if (item1 in availGuaranteed && availGuaranteed[item1]["count"] > 0) {
+        availGuaranteed[item1]["count"] -= 1;
         item1Guar = true;
       }
 
-      if (availGuaranteed[item2] > 0) {
-        availGuaranteed[item2] -= 1;
+      if (item2 in availGuaranteed && availGuaranteed[item2]["count"] > 0) {
+        availGuaranteed[item2]["count"] -= 1;
         item2Guar = true;
       }
 
@@ -305,11 +331,15 @@ function getGuaranteedPath(
       if (!item1Guar) {
         item1Path = { pathProb: 0, pathCost: 0, path: [] };
         guaranteedDfs(availGuaranteed, item1, item1Path);
+      } else {
+        item1Path["pathCost"] = availGuaranteed[item1]["cost"];
       }
 
       if (!item2Guar) {
         item2Path = { pathProb: 0, pathCost: 0, path: [] };
         guaranteedDfs(availGuaranteed, item2, item2Path);
+      } else {
+        item2Path["pathCost"] = availGuaranteed[item2]["cost"];
       }
 
       // benchcost + mod rolling cost
@@ -341,7 +371,6 @@ function getGuaranteedPath(
       let curPathCost =
         (prepItemsCost + (item1Path["pathCost"] + item2Path["pathCost"]) / 2) /
         prob;
-      // let curPathCost = item1Path["pathCost"] + item2Path["pathCost"] + recombCost;
 
       // set as path if sort by prob and highest prob, or sort by cost and lowest cost
       if (
@@ -510,7 +539,6 @@ function getPath(
       let curPathCost =
         (prepItemsCost + (item1Path["pathCost"] + item2Path["pathCost"]) / 2) /
         prob;
-      // let curPathCost = item1Path["pathCost"] + item2Path["pathCost"] + recombCost;
 
       // set as path if sort by prob and highest prob, or sort by cost and lowest cost
       if (
@@ -565,38 +593,38 @@ function writeToSheet(
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
 
   // Clear sheet before writing
-  sheet.getRange("E4:J23").clearContent();
-  sheet.getRange("K4:P23").clearContent();
-  sheet.getRange("E28:J47").clearContent();
-  sheet.getRange("K28:P47").clearContent();
+  sheet.getRange("F4:J23").clearContent();
+  sheet.getRange("L4:P23").clearContent();
+  sheet.getRange("F28:J47").clearContent();
+  sheet.getRange("L28:P47").clearContent();
 
   // Path prob
-  sheet.getRange("G24").setValue(path_prob["pathCost"].toFixed(2));
+  sheet.getRange("H24").setValue(path_prob["pathCost"].toFixed(2));
   sheet
-    .getRange("I24")
+    .getRange("J24")
     .setValue((path_prob["pathProb"] * 100).toFixed(2) + "%");
-  writeDataToSheet(sheet, path_prob["path"], "E4");
+  writeDataToSheet(sheet, path_prob["path"], "F4");
 
   // Path prob with aspect
-  sheet.getRange("M24").setValue(path_prob_aspect["pathCost"].toFixed(2));
+  sheet.getRange("N24").setValue(path_prob_aspect["pathCost"].toFixed(2));
   sheet
-    .getRange("O24")
+    .getRange("P24")
     .setValue((path_prob_aspect["pathProb"] * 100).toFixed(2) + "%");
-  writeDataToSheet(sheet, path_prob_aspect["path"], "K4");
+  writeDataToSheet(sheet, path_prob_aspect["path"], "L4");
 
   // Path cost
-  sheet.getRange("G48").setValue(path_cost["pathCost"].toFixed(2));
+  sheet.getRange("H48").setValue(path_cost["pathCost"].toFixed(2));
   sheet
-    .getRange("I48")
+    .getRange("J48")
     .setValue((path_cost["pathProb"] * 100).toFixed(2) + "%");
-  writeDataToSheet(sheet, path_cost["path"], "E28");
+  writeDataToSheet(sheet, path_cost["path"], "F28");
 
   // Path cost with aspect
-  sheet.getRange("M48").setValue(path_cost_aspect["pathCost"].toFixed(2));
+  sheet.getRange("N48").setValue(path_cost_aspect["pathCost"].toFixed(2));
   sheet
-    .getRange("O48")
+    .getRange("P48")
     .setValue((path_cost_aspect["pathProb"] * 100).toFixed(2) + "%");
-  writeDataToSheet(sheet, path_cost_aspect["path"], "K28");
+  writeDataToSheet(sheet, path_cost_aspect["path"], "L28");
 }
 
 // write data to sheet section
@@ -625,11 +653,11 @@ function onEdit(e) {
     var sheet = e.source.getActiveSheet();
     if (sheet.getName() === "Find Path") {
       var range = e.range;
-      if (range.getA1Notation() === "C30") {
+      if (range.getA1Notation() === "D31") {
         // Check if the value is TRUE
         if (range.getValue() === true) {
           run();
-          sheet.getRange("C30").setValue(false);
+          sheet.getRange("D31").setValue(false);
         }
       }
     }
