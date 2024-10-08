@@ -483,7 +483,7 @@ class Recombinate:
         # if no exclusive prefixes, add exclusive suffix
         if prefix_first:
             # if there is an exclsuive prefix, add 1 required prefix
-            if self.total_exclusive_prefixes > 0:
+            if self.total_exclusive_prefixes > 0 and self.total_exclusive_suffixes > 0:
                 required_prefixes += 1
             # if there is an exclusive suffix and no exclusive prefix, need additional suffix
             elif (
@@ -495,7 +495,7 @@ class Recombinate:
         # if no exclusive suffixes, add exclusive prefix
         elif suffix_first:
             # if there is an exclsuive suffix, add 1 required suffix
-            if self.total_exclusive_suffixes > 0:
+            if self.total_exclusive_suffixes > 0 and self.total_exclusive_prefixes > 0:
                 required_suffixes += 1
             # if there is an exclusive prefix and no exclusive suffix, need additional prefix
             elif (
