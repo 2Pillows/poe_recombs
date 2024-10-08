@@ -202,15 +202,15 @@ class Recombinate:
 
         # if (
         #     # final item
-        #     self.final_item.get_item() == (2, 2)
+        #     self.final_item.get_item() == (0, 3)
         #     # # item1
-        #     and self.item1.get_item() == (0, 2)
+        #     and self.item1.get_item() == (0, 1)
         #     # # item2
-        #     and self.item2.get_item() == (2, 0)
+        #     and self.item2.get_item() == (0, 2)
         #     # # exclusive mods
-        #     and self.crafted_prefix_count == 3
+        #     and self.crafted_prefix_count == 1
         #     and self.crafted_suffix_count == 3
-        #     and self.aspect_suffix_count == 1
+        #     and self.aspect_suffix_count == 0
         # ):
         #     print("check")
 
@@ -483,7 +483,7 @@ class Recombinate:
         # if no exclusive prefixes, add exclusive suffix
         if prefix_first:
             # if there is an exclsuive prefix, add 1 required prefix
-            if self.total_exclusive_prefixes > 0 and self.total_desired_prefixes > 0:
+            if self.total_exclusive_prefixes > 0:
                 required_prefixes += 1
             # if there is an exclusive suffix and no exclusive prefix, need additional suffix
             elif (
@@ -495,7 +495,7 @@ class Recombinate:
         # if no exclusive suffixes, add exclusive prefix
         elif suffix_first:
             # if there is an exclsuive suffix, add 1 required suffix
-            if self.total_exclusive_suffixes > 0 and self.total_desired_suffixes > 0:
+            if self.total_exclusive_suffixes > 0:
                 required_suffixes += 1
             # if there is an exclusive prefix and no exclusive suffix, need additional prefix
             elif (
@@ -520,8 +520,12 @@ class Recombinate:
         prefix_prob = CUMSUM[self.total_prefixes][required_prefixes]
         suffix_prob = CUMSUM[self.total_suffixes][required_suffixes]
 
-        # if there is an aspect and need suffixes, adjust suffix prob
-        if self.aspect_suffix_count > 0 and self.final_item.suffix_count != 0:
+        # if exclusive suffix and there is an aspect and need suffixes, adjust suffix prob
+        if (
+            suffix_first
+            and self.aspect_suffix_count > 0
+            and self.final_item.suffix_count != 0
+        ):
             # add annul used
             if self.eldritch_annul:
                 self.annuls_used = required_suffixes
