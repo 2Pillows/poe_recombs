@@ -900,6 +900,13 @@ def main():
         format_recomb_line,
     )
 
+    write_to_file("results/best_recombs.txt", script_recomb_dict, format_recomb_line)
+    write_to_file(
+        "results/best_recombs_eldritch.txt",
+        script_recomb_dict_eldritch,
+        format_recomb_line,
+    )
+
     write_to_file(
         "results/detailed_recombs.txt",
         script_recomb_dict,
