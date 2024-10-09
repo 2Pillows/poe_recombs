@@ -152,7 +152,8 @@ class Recombinate:
 
         # get probability of recombination
         self.probability = 0
-        self.annul_chances = 0
+        self.item1_annul_chances = 0
+        self.item2_annul_chances = 0
         self._get_recombinate_prob()
 
         self.bench_cost = self._get_bench_cost()
@@ -234,38 +235,42 @@ class Recombinate:
             0.5 * annul_rare_mod * (prefix_first + suffix_first), 4
         )
 
+        # include prob if need to regal and annul to fit exclusive mods
+
+        # 1/2 alt gives prefix and suffix, regal into 2/3 annul and 1/3 annul
+        # 1/4 alt gives prefix or suffix, regal into 1/2 annul
+        # if prefix or suffix, 2/3 chance to have other mod. 1/3 to be one mod
+
+        # if 1 mod item and no regal, need to include chance of being a 1 mod item
+
+        regal_chances = 2 / 3 * 2 / 3 * 1 / 2 + 1 / 3 * 1 / 2
+        magic_chances = 2 / 3 * 1 / 2 + 1 / 3 * 1
+
         # if item1 has max 1 prefix or suffix its assumed magic
         # if item is magic, need to factor in chance of regal and annuling
-        if (
-            self.item1_desired_prefixes + self.item1_desired_suffixes == 1
-            or self.item2_desired_prefixes + self.item2_desired_suffixes == 1
-        ):
-            # include prob if need to regal and annul to fit exclusive mods
-
-            # 1/2 alt gives prefix and suffix, regal into 2/3 annul and 1/3 annul
-            # 1/4 alt gives prefix or suffix, regal into 1/2 annul
-            # if prefix or suffix, 2/3 chance to have other mod. 1/3 to be one mod
-
-            # if 1 mod item and no regal, need to include chance of being a 1 mod item
-
-            regal_chances = 2 / 3 * 2 / 3 * 1 / 2 + 1 / 3 * 1 / 2
-            magic_chances = 2 / 3 * 1 / 2 + 1 / 3 * 1
-
-            self.annul_chances = 1
+        if self.item1_desired_prefixes + self.item1_desired_suffixes == 1:
+            self.item1_annul_chances = 1
 
             # magic item that needs to be regaled
             if self.regal_item1:
-                self.annul_chances *= regal_chances
+                self.item1_annul_chances *= regal_chances
             # magic item, no regal needed
             else:
-                self.annul_chances *= magic_chances
+                self.item1_annul_chances *= magic_chances
 
+            self.item1_annul_chances = round(self.item1_annul_chances, 4)
+
+        if self.item2_desired_prefixes + self.item2_desired_suffixes == 1:
+            self.item2_annul_chances = 1
+
+            # magic item that needs to be regaled
             if self.regal_item2:
-                self.annul_chances *= regal_chances
+                self.item2_annul_chances *= regal_chances
+            # magic item, no regal needed
             else:
-                self.annul_chances *= magic_chances
+                self.item2_annul_chances *= magic_chances
 
-            self.annul_chances = round(self.annul_chances, 4)
+            self.item2_annul_chances = round(self.item2_annul_chances, 4)
 
     def _invalid_crafted_mods(self):
         (final_prefixes, final_suffixes) = self.final_item.get_item()
@@ -727,7 +732,8 @@ def add_to_item_pair_recombs(item_pair_recombs, recomb: Recombinate):
         if (
             cur_recomb.multimods_used == recomb.multimods_used
             and cur_recomb.aspect_suffix_count == recomb.aspect_suffix_count
-            and cur_recomb.annul_chances == recomb.annul_chances
+            and cur_recomb.item1_annul_chances == recomb.item1_annul_chances
+            and cur_recomb.item2_annul_chances == recomb.item2_annul_chances
         ):
             # if better prob, replace index w/ new recomb
             if cur_recomb.probability < recomb.probability or (
@@ -786,11 +792,11 @@ def format_recomb_detailed_line(recomb: Recombinate):
         f"Item2: {recomb.get_item2().to_string()}, "
         f"Exclusive: {recomb.get_exclusive_mods()}, "
         f"Prob: {recomb.probability}, "
-        f"Annul Prob: {recomb.annul_chances}, "
+        f"Item1 Annul Prob: {recomb.item1_annul_chances}, "
+        f"Item2 Annul Prob: {recomb.item2_annul_chances}, "
         f"Multimods: {recomb.multimods_used}, "
         f"Aspect Suffix Count: {recomb.aspect_suffix_count}, "
-        f"Eldritch Annuls: {recomb.annuls_used}, "
-        f"Desired Suffixes: {recomb.total_desired_suffixes}\n"
+        f"Eldritch Annuls: {recomb.annuls_used}\n"
     )
 
 
