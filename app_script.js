@@ -131,8 +131,8 @@ function parseRecombDict(recombDict) {
       Multimods: parseFloat(recomb.Multimods),
       "Aspect Suffix Count": parseFloat(recomb["Aspect Suffix Count"]),
       "Eldritch Annuls": parseFloat(recomb["Eldritch Annuls"]),
-      "Desired Suffixes": parseFloat(recomb["Desired Suffixes"]),
-      "Annul Prob": parseFloat(recomb["Annul Prob"]),
+      "Item1 Annul Prob": parseFloat(recomb["Item1 Annul Prob"]),
+      "Item2 Annul Prob": parseFloat(recomb["Item2 Annul Prob"]),
     }));
   }
 
@@ -226,29 +226,37 @@ function getPrepItemsCost(
   multimodsUsed,
   aspectSuffixCount,
   ASPECT_COST,
-  totalDesiredSuffixes,
+  targetSuffixCount,
   eldritchAnnulsUsed,
   ANNUL_COST,
   MOD_ROLLING,
-  annulProb,
+  item1AnnulProb,
+  item2AnnulProb,
   ALL_RARE_ITEMS
 ) {
   // recomb cost is nothing, unless guaranteed, then risking base
   let benchCost = 0;
   if (multimodsUsed > 0) benchCost += multimodsUsed * 2;
-  if (aspectSuffixCount > 0 && totalDesiredSuffixes === 0) benchCost += 1;
+  if (aspectSuffixCount > 0 && targetSuffixCount === 0) benchCost += 1;
   benchCost += aspectSuffixCount * ASPECT_COST;
   if (eldritchAnnulsUsed > 0) benchCost += eldritchAnnulsUsed * ANNUL_COST;
 
   // cost of getting 1 mod item
   // assume just mod rolling, no need to annul
-  let modRollingCost = MOD_ROLLING;
-  // if item isn't one mod already and you can annul, get new cost
-  if (!ALL_RARE_ITEMS && annulProb !== 0) {
-    modRollingCost = MOD_ROLLING / annulProb;
+  let modRollingCost = 0;
+  // if item isn't one mod and requires an annul, then adjust mod rolling
+  if (!ALL_RARE_ITEMS) {
+    if (item1AnnulProb > 0) modRollingCost += MOD_ROLLING / item1AnnulProb;
+    if (item2AnnulProb > 0) modRollingCost += MOD_ROLLING / item2AnnulProb;
   }
 
   return benchCost + modRollingCost;
+}
+
+function getAffixCount(itemString) {
+  const match = itemString.match(/(\d+)p\/(\d+)s/);
+
+  return [parseInt(match[1]), parseInt(match[2])];
 }
 
 // Calculate best paths to get to final item according to params
@@ -291,9 +299,11 @@ function getGuaranteedPath(
         Multimods: multimodsUsed,
         "Eldritch Annuls": eldritchAnnulsUsed,
         "Aspect Suffix Count": aspectSuffixCount,
-        "Desired Suffixes": totalDesiredSuffixes,
-        "Annul Prob": annulProb,
+        "Item1 Annul Prob": item1AnnulProb,
+        "Item2 Annul Prob": item2AnnulProb,
       } = recomb;
+
+      const [targetPrefixCount, targetSuffixCount] = getAffixCount(targetItem);
 
       // skip if has aspect and cant include
       if (!allowAspect && aspectSuffixCount > 0) continue;
@@ -348,19 +358,22 @@ function getGuaranteedPath(
         multimodsUsed,
         aspectSuffixCount,
         ASPECT_COST,
-        totalDesiredSuffixes,
+        targetSuffixCount,
         eldritchAnnulsUsed,
         ANNUL_COST,
         MOD_ROLLING,
-        annulProb,
+        item1AnnulProb,
+        item2AnnulProb,
         ALL_RARE_ITEMS
       );
+
       let recombCost = (BASE_COST + prepItemsCost) / prob;
 
       // if item needs to be made one mod, factor into prob
       let recombProb = prob;
-      if (!ALL_RARE_ITEMS && annulProb !== 0) {
-        recombProb *= annulProb;
+      if (!ALL_RARE_ITEMS) {
+        if (item1AnnulProb > 0) recombProb *= item1AnnulProb;
+        if (item2AnnulProb > 0) recombProb *= item2AnnulProb;
       }
 
       // get prob of current item in path
@@ -388,7 +401,7 @@ function getGuaranteedPath(
             final: targetItem,
             feeder: item2 + " + " + item1,
             exclusive: exclusive,
-            cost: recombCost,
+            cost: curPathCost,
             prob: prob,
           });
           bestPath = {
@@ -458,8 +471,8 @@ function getPath(
   }
 
   pathDetails = {
-    "0p/1s": { pathProb: 1, pathCost: BASE_COST, MOD_ROLLING, path: [] },
-    "1p/0s": { pathProb: 1, pathCost: BASE_COST, MOD_ROLLING, path: [] },
+    "0p/1s": { pathProb: 1, pathCost: BASE_COST, path: [] },
+    "1p/0s": { pathProb: 1, pathCost: BASE_COST, path: [] },
   };
 
   // explore paths for target item
@@ -490,9 +503,11 @@ function getPath(
         Multimods: multimodsUsed,
         "Eldritch Annuls": eldritchAnnulsUsed,
         "Aspect Suffix Count": aspectSuffixCount,
-        "Desired Suffixes": totalDesiredSuffixes,
-        "Annul Prob": annulProb,
+        "Item1 Annul Prob": item1AnnulProb,
+        "Item2 Annul Prob": item2AnnulProb,
       } = recomb;
+
+      const [targetPrefixCount, targetSuffixCount] = getAffixCount(targetItem);
 
       // skip if has aspect and cant include
       if (!allowAspect && aspectSuffixCount > 0) continue;
@@ -515,11 +530,12 @@ function getPath(
         multimodsUsed,
         aspectSuffixCount,
         ASPECT_COST,
-        totalDesiredSuffixes,
+        targetSuffixCount,
         eldritchAnnulsUsed,
         ANNUL_COST,
         MOD_ROLLING,
-        annulProb,
+        item1AnnulProb,
+        item2AnnulProb,
         ALL_RARE_ITEMS
       );
 
@@ -527,8 +543,9 @@ function getPath(
 
       // if item needs to be made one mod, factor into prob
       let recombProb = prob;
-      if (!ALL_RARE_ITEMS && annulProb !== 0) {
-        recombProb *= annulProb;
+      if (!ALL_RARE_ITEMS) {
+        if (item1AnnulProb > 0) recombProb *= item1AnnulProb;
+        if (item2AnnulProb > 0) recombProb *= item2AnnulProb;
       }
 
       // get prob of current item in path
@@ -556,7 +573,7 @@ function getPath(
             final: targetItem,
             feeder: item2 + " + " + item1,
             exclusive: exclusive,
-            cost: recombCost,
+            cost: curPathCost,
             prob: prob,
           });
           bestPath = {
@@ -593,37 +610,21 @@ function writeToSheet(
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
 
   // Clear sheet before writing
-  sheet.getRange("F4:J23").clearContent();
-  sheet.getRange("L4:P23").clearContent();
-  sheet.getRange("F28:J47").clearContent();
-  sheet.getRange("L28:P47").clearContent();
+  sheet.getRange("F4:J24").clearContent();
+  sheet.getRange("L4:P24").clearContent();
+  sheet.getRange("F28:J48").clearContent();
+  sheet.getRange("L28:P48").clearContent();
 
   // Path prob
-  sheet.getRange("H24").setValue(path_prob["pathCost"].toFixed(2));
-  sheet
-    .getRange("J24")
-    .setValue((path_prob["pathProb"] * 100).toFixed(2) + "%");
   writeDataToSheet(sheet, path_prob["path"], "F4");
 
   // Path prob with aspect
-  sheet.getRange("N24").setValue(path_prob_aspect["pathCost"].toFixed(2));
-  sheet
-    .getRange("P24")
-    .setValue((path_prob_aspect["pathProb"] * 100).toFixed(2) + "%");
   writeDataToSheet(sheet, path_prob_aspect["path"], "L4");
 
   // Path cost
-  sheet.getRange("H48").setValue(path_cost["pathCost"].toFixed(2));
-  sheet
-    .getRange("J48")
-    .setValue((path_cost["pathProb"] * 100).toFixed(2) + "%");
   writeDataToSheet(sheet, path_cost["path"], "F28");
 
   // Path cost with aspect
-  sheet.getRange("N48").setValue(path_cost_aspect["pathCost"].toFixed(2));
-  sheet
-    .getRange("P48")
-    .setValue((path_cost_aspect["pathProb"] * 100).toFixed(2) + "%");
   writeDataToSheet(sheet, path_cost_aspect["path"], "L28");
 }
 
