@@ -250,7 +250,7 @@ function getPrepItemsCost(
     if (item2AnnulProb > 0) modRollingCost += MOD_ROLLING / item2AnnulProb;
   }
 
-  return benchCost + modRollingCost;
+  return benchCost + modRollingCost / 2;
 }
 
 function getAffixCount(itemString) {
@@ -470,7 +470,7 @@ function getPath(
     );
   }
 
-  pathDetails = {
+  let pathDetails = {
     "0p/1s": { pathProb: 1, pathCost: BASE_COST, path: [] },
     "1p/0s": { pathProb: 1, pathCost: BASE_COST, path: [] },
   };
@@ -521,8 +521,8 @@ function getPath(
         dfs(item2, visited);
       }
 
-      item1Path = pathDetails[item1];
-      item2Path = pathDetails[item2];
+      let item1Path = pathDetails[item1];
+      let item2Path = pathDetails[item2];
 
       // benchcost + mod rolling cost
       // if item isn't 1p/0s or 0p/1s no mod rolling cost
