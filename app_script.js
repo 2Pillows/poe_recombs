@@ -259,8 +259,20 @@ function getAffixCount(itemString) {
   return [parseInt(match[1]), parseInt(match[2])];
 }
 
+function checkGuaranteedItem(item, availGuaranteed) {
+  isGuaranteed = false;
+
+  if (item in availGuaranteed && availGuaranteed[item]["count"] > 0) {
+    availGuaranteed[item]["count"] -= 1;
+    isGuaranteed = true;
+  }
+
+  return isGuaranteed;
+}
+
 // Calculate best paths to get to final item according to params
 function getGuaranteedPath(
+  pathDetails,
   recombDict,
   FINAL_ITEM,
   BASE_COST,
@@ -275,20 +287,76 @@ function getGuaranteedPath(
 ) {
   const [finalPrefixCount, finalSuffixCount] = getAffixCount(FINAL_ITEM);
 
+  function getItemPath(
+    BASE_COST,
+    isGuaranteed,
+    availGuaranteed,
+    item,
+    pathDetails
+  ) {
+    // assume paths are guar
+    let itemPath = {
+      pathProb: 1,
+      pathCost: BASE_COST,
+      path: [],
+    };
+
+    // if not guar, explore paths
+    if (!isGuaranteed) {
+      // if a guaranteed item can be used, explore path
+      // needs to have guaranteed item with less prefixes and less suffixes
+      // check all guar items, if any has less prefixes and less suffixes, then do guarDfs
+      let validGuarItems = false;
+      for (let guarItem in availGuaranteed) {
+        if (availGuaranteed[guarItem]["count"] <= 0) continue;
+        if (guarItem === "1p/0s" || guarItem === "0p/1s") continue;
+        const [guarPrefixCount, guarSuffixCount] = getAffixCount(guarItem);
+        const [itemPrefixCount, itemSuffixCount] = getAffixCount(item);
+        if (
+          guarPrefixCount <= itemPrefixCount &&
+          guarSuffixCount <= itemSuffixCount
+        ) {
+          validGuarItems = true;
+        }
+      }
+
+      if (validGuarItems) {
+        itemPath["pathProb"] = -Infinity;
+        itemPath["pathCost"] = Infinity;
+        guaranteedDfs(availGuaranteed, item, itemPath);
+      }
+      // no guarantee can be used, grab basic path
+      else {
+        itemPath = pathDetails[item];
+      }
+    }
+    // item is guaranteed
+    else {
+      itemPath["pathCost"] = availGuaranteed[item]["cost"];
+    }
+
+    return itemPath;
+  }
+
   // explore paths for target item
   function guaranteedDfs(guaranteedItems, targetItem, curPath) {
-    // Skip if not in recomb dict
-    if (!(targetItem in recombDict)) {
+    const [targetPrefixCount, targetSuffixCount] = getAffixCount(targetItem);
+
+    // Skip if not in recomb dict or has too many affixes
+    if (
+      !(targetItem in recombDict) ||
+      targetPrefixCount > finalPrefixCount ||
+      targetSuffixCount > finalSuffixCount
+    ) {
       return;
     }
 
     let bestPath = {
-      feederItems: [],
-      exclusiveMods: "",
-      cost: Infinity,
-      prob: -Infinity,
+      item1: "",
+      item2: "",
       pathProb: -Infinity,
       pathCost: Infinity,
+      path: [],
     };
 
     // Process all recombinations for the target item
@@ -305,14 +373,6 @@ function getGuaranteedPath(
         "Item2 Annul Prob": item2AnnulProb,
       } = recomb;
 
-      const [targetPrefixCount, targetSuffixCount] = getAffixCount(targetItem);
-
-      if (
-        targetPrefixCount > finalPrefixCount ||
-        targetSuffixCount > finalSuffixCount
-      )
-        continue;
-
       // skip if has aspect and cant include
       if (!allowAspect && aspectSuffixCount > 0) continue;
 
@@ -320,45 +380,25 @@ function getGuaranteedPath(
       // reach recomb has same starting amount of guaranteed items from dfs call
       let availGuaranteed = JSON.parse(JSON.stringify(guaranteedItems));
 
-      // assume paths are guar
-      let item1Path = {
-        pathProb: 1,
-        pathCost: BASE_COST,
-        path: [],
-      };
-      let item2Path = {
-        pathProb: 1,
-        pathCost: BASE_COST,
-        path: [],
-      };
-
       // check if item1 and item2 are guar, decrease count if so
-      let item1Guar = false;
-      let item2Guar = false;
-      if (item1 in availGuaranteed && availGuaranteed[item1]["count"] > 0) {
-        availGuaranteed[item1]["count"] -= 1;
-        item1Guar = true;
-      }
+      let item1Guar = checkGuaranteedItem(item1, availGuaranteed);
+      let item2Guar = checkGuaranteedItem(item2, availGuaranteed);
 
-      if (item2 in availGuaranteed && availGuaranteed[item2]["count"] > 0) {
-        availGuaranteed[item2]["count"] -= 1;
-        item2Guar = true;
-      }
-
-      // if not guar, explore paths
-      if (!item1Guar) {
-        item1Path = { pathProb: 0, pathCost: 0, path: [] };
-        guaranteedDfs(availGuaranteed, item1, item1Path);
-      } else {
-        item1Path["pathCost"] = availGuaranteed[item1]["cost"];
-      }
-
-      if (!item2Guar) {
-        item2Path = { pathProb: 0, pathCost: 0, path: [] };
-        guaranteedDfs(availGuaranteed, item2, item2Path);
-      } else {
-        item2Path["pathCost"] = availGuaranteed[item2]["cost"];
-      }
+      // assume paths are guar
+      let item1Path = getItemPath(
+        BASE_COST,
+        item1Guar,
+        availGuaranteed,
+        item1,
+        pathDetails
+      );
+      let item2Path = getItemPath(
+        BASE_COST,
+        item2Guar,
+        availGuaranteed,
+        item2,
+        pathDetails
+      );
 
       // benchcost + mod rolling cost
       // if item isn't 1p/0s or 0p/1s no mod rolling cost
@@ -461,23 +501,6 @@ function getPath(
   sortCost,
   allowAspect
 ) {
-  // use getGuaranteedPath if additional guaranteed items
-  if (Object.keys(GUARANTEED_ITEMS).length > 2) {
-    return getGuaranteedPath(
-      recombDict,
-      FINAL_ITEM,
-      BASE_COST,
-      MOD_ROLLING,
-      ASPECT_COST,
-      ANNUL_COST,
-      ALL_RARE_ITEMS,
-      GUARANTEED_ITEMS,
-      sortProb,
-      sortCost,
-      allowAspect
-    );
-  }
-
   const [finalPrefixCount, finalSuffixCount] = getAffixCount(FINAL_ITEM);
 
   let pathDetails = {
@@ -492,15 +515,30 @@ function getPath(
       return;
     }
 
+    const [targetPrefixCount, targetSuffixCount] = getAffixCount(targetItem);
+
+    if (
+      targetPrefixCount > finalPrefixCount ||
+      targetSuffixCount > finalSuffixCount
+    ) {
+      pathDetails[targetItem] = {
+        item1: "",
+        item2: "",
+        pathProb: -Infinity,
+        pathCost: Infinity,
+        path: [],
+      };
+      return;
+    }
+
     visited.add(targetItem);
 
     let bestPath = {
-      feederItems: [],
-      exclusiveMods: "",
-      cost: Infinity,
-      prob: -Infinity,
+      item1: "",
+      item2: "",
       pathProb: -Infinity,
       pathCost: Infinity,
+      path: [],
     };
 
     // Process all recombinations for the target item
@@ -516,14 +554,6 @@ function getPath(
         "Item1 Annul Prob": item1AnnulProb,
         "Item2 Annul Prob": item2AnnulProb,
       } = recomb;
-
-      const [targetPrefixCount, targetSuffixCount] = getAffixCount(targetItem);
-
-      if (
-        targetPrefixCount > finalPrefixCount ||
-        targetSuffixCount > finalSuffixCount
-      )
-        continue;
 
       // skip if has aspect and cant include
       if (!allowAspect && aspectSuffixCount > 0) continue;
@@ -610,6 +640,24 @@ function getPath(
 
   // start exploring paths
   dfs(FINAL_ITEM, new Set());
+
+  // use getGuaranteedPath if additional guaranteed items
+  if (Object.keys(GUARANTEED_ITEMS).length > 2) {
+    return getGuaranteedPath(
+      pathDetails,
+      recombDict,
+      FINAL_ITEM,
+      BASE_COST,
+      MOD_ROLLING,
+      ASPECT_COST,
+      ANNUL_COST,
+      ALL_RARE_ITEMS,
+      GUARANTEED_ITEMS,
+      sortProb,
+      sortCost,
+      allowAspect
+    );
+  }
 
   // return best path
   return pathDetails[FINAL_ITEM];
