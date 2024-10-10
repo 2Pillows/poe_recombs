@@ -738,7 +738,18 @@ def add_to_item_pair_recombs(item_pair_recombs, recomb: Recombinate):
             # if better prob, replace index w/ new recomb
             if cur_recomb.probability < recomb.probability or (
                 cur_recomb.probability == recomb.probability
-                and cur_recomb.total_exclusive_mods > recomb.total_exclusive_mods
+                and (
+                    (
+                        cur_recomb.total_desired_prefixes > 0
+                        and cur_recomb.total_exclusive_prefixes
+                        < recomb.total_exclusive_prefixes
+                    )
+                    or (
+                        cur_recomb.total_desired_suffixes > 0
+                        and cur_recomb.total_exclusive_suffixes
+                        < recomb.total_exclusive_suffixes
+                    )
+                )
             ):
                 item_pair_recombs[i] = recomb
 
