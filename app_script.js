@@ -273,6 +273,8 @@ function getGuaranteedPath(
   sortCost,
   allowAspect
 ) {
+  const [finalPrefixCount, finalSuffixCount] = getAffixCount(FINAL_ITEM);
+
   // explore paths for target item
   function guaranteedDfs(guaranteedItems, targetItem, curPath) {
     // Skip if not in recomb dict
@@ -304,6 +306,12 @@ function getGuaranteedPath(
       } = recomb;
 
       const [targetPrefixCount, targetSuffixCount] = getAffixCount(targetItem);
+
+      if (
+        targetPrefixCount > finalPrefixCount ||
+        targetSuffixCount > finalSuffixCount
+      )
+        continue;
 
       // skip if has aspect and cant include
       if (!allowAspect && aspectSuffixCount > 0) continue;
@@ -470,6 +478,8 @@ function getPath(
     );
   }
 
+  const [finalPrefixCount, finalSuffixCount] = getAffixCount(FINAL_ITEM);
+
   let pathDetails = {
     "0p/1s": { pathProb: 1, pathCost: BASE_COST, path: [] },
     "1p/0s": { pathProb: 1, pathCost: BASE_COST, path: [] },
@@ -508,6 +518,12 @@ function getPath(
       } = recomb;
 
       const [targetPrefixCount, targetSuffixCount] = getAffixCount(targetItem);
+
+      if (
+        targetPrefixCount > finalPrefixCount ||
+        targetSuffixCount > finalSuffixCount
+      )
+        continue;
 
       // skip if has aspect and cant include
       if (!allowAspect && aspectSuffixCount > 0) continue;
