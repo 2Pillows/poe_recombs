@@ -13,7 +13,7 @@ function run() {
   const ANNUL_COST = pathOptions.annulCost;
   const ALL_RARE_ITEMS = pathOptions.allRareItems;
 
-  recombDict = getRecombData("Recombs for Script", ELDTRICH_ITEM);
+  let recombDict = getRecombData("Recombs for Script", ELDTRICH_ITEM);
 
   // 2 always guaranteed
 
@@ -384,6 +384,10 @@ function getGuaranteedPath(
       let item1Guar = checkGuaranteedItem(item1, availGuaranteed);
       let item2Guar = checkGuaranteedItem(item2, availGuaranteed);
 
+      // if (item2 == "2p/1s" && !item2Guar) {
+      //   console.log('a')
+      // }
+
       // assume paths are guar
       let item1Path = getItemPath(
         BASE_COST,
@@ -470,12 +474,18 @@ function getGuaranteedPath(
     curPath["path"].push(...bestPath["path"]);
 
     // remove from guar if either item is used
-    if (guaranteedItems[bestPath["item1"]] > 0) {
-      guaranteedItems[bestPath["item1"]] -= 1;
+    if (
+      guaranteedItems[bestPath["item1"]] &&
+      guaranteedItems[bestPath["item1"]]["count"] > 0
+    ) {
+      guaranteedItems[bestPath["item1"]]["count"] -= 1;
     }
 
-    if (guaranteedItems[bestPath["item2"]] > 0) {
-      guaranteedItems[bestPath["item2"]] -= 1;
+    if (
+      guaranteedItems[bestPath["item2"]] &&
+      guaranteedItems[bestPath["item2"]]["count"] > 0
+    ) {
+      guaranteedItems[bestPath["item2"]]["count"] -= 1;
     }
   }
 
@@ -517,19 +527,19 @@ function getPath(
 
     const [targetPrefixCount, targetSuffixCount] = getAffixCount(targetItem);
 
-    if (
-      targetPrefixCount > finalPrefixCount ||
-      targetSuffixCount > finalSuffixCount
-    ) {
-      pathDetails[targetItem] = {
-        item1: "",
-        item2: "",
-        pathProb: -Infinity,
-        pathCost: Infinity,
-        path: [],
-      };
-      return;
-    }
+    // if (
+    //   targetPrefixCount > finalPrefixCount ||
+    //   targetSuffixCount > finalSuffixCount
+    // ) {
+    //   pathDetails[targetItem] = {
+    //     item1: "",
+    //     item2: "",
+    //     pathProb: -Infinity,
+    //     pathCost: Infinity,
+    //     path: [],
+    //   };
+    //   return;
+    // }
 
     visited.add(targetItem);
 
