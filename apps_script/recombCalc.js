@@ -14,6 +14,32 @@ function startRecombCalc() {
 }
 
 // -----------------------------------------------------
+// Tables for recomb odds
+// -----------------------------------------------------
+const weightsTable = [
+  // 0    1     2     3         final mods
+  [1.0, 0.0, 0.0, 0.0], // 0 initial mods, guaranteed 0 mods
+  [0.41, 0.59, 0.0, 0.0], // 1 initial mod
+  [0.0, 0.67, 0.33, 0.0], // 2 initial mods
+  [0.0, 0.39, 0.52, 0.1], // 3 initial mods
+  [0.0, 0.11, 0.59, 0.31], // 4 initial mods
+  [0.0, 0.0, 0.43, 0.57], // 5 initial mods
+  [0.0, 0.0, 0.28, 0.72], // 6 initial mods
+];
+
+// Sum of odds, chance of getting at least
+const cumsumTable = [
+  // 0    1     2     3         final mods
+  [1.0, 0.0, 0.0, 0.0], // 0 initial mods, guaranteed 0 mods
+  [1.0, 0.59, 0.0, 0.0], // 1 initial mod
+  [1.0, 1.0, 0.33, 0.0], // 2 initial mods
+  [1.0, 1.0, 0.62, 0.1], // 3 initial mods
+  [1.0, 1.0, 0.9, 0.31], // 4 initial mods
+  [1.0, 1.0, 1.0, 0.57], // 5 initial mods
+  [1.0, 1.0, 1.0, 0.72], // 6 initial mods
+];
+
+// -----------------------------------------------------
 // Recombinator class for single recombination
 // -----------------------------------------------------
 class Recombinator {
@@ -249,29 +275,6 @@ class Item {
 // Functions for recombination calculations
 // -----------------------------------------------------
 
-const weightsTable = [
-  // 0    1     2     3         final mods
-  [1.0, 0.0, 0.0, 0.0], // 0 initial mods, guaranteed 0 mods
-  [0.41, 0.59, 0.0, 0.0], // 1 initial mod
-  [0.0, 0.67, 0.33, 0.0], // 2 initial mods
-  [0.0, 0.39, 0.52, 0.1], // 3 initial mods
-  [0.0, 0.11, 0.59, 0.31], // 4 initial mods
-  [0.0, 0.0, 0.43, 0.57], // 5 initial mods
-  [0.0, 0.0, 0.28, 0.72], // 6 initial mods
-];
-
-// Sum of odds, chance of getting at least
-const cumsumTable = [
-  // 0    1     2     3         final mods
-  [1.0, 0.0, 0.0, 0.0], // 0 initial mods, guaranteed 0 mods
-  [1.0, 0.59, 0.0, 0.0], // 1 initial mod
-  [1.0, 1.0, 0.33, 0.0], // 2 initial mods
-  [1.0, 1.0, 0.62, 0.1], // 3 initial mods
-  [1.0, 1.0, 0.9, 0.31], // 4 initial mods
-  [1.0, 1.0, 1.0, 0.57], // 5 initial mods
-  [1.0, 1.0, 1.0, 0.72], // 6 initial mods
-];
-
 const getRecombResults = (allFeederPairs) => {
   const allResults = {};
 
@@ -292,20 +295,10 @@ const getRecombResults = (allFeederPairs) => {
     // impossible if des affixes on items are less than final
     // but don't want to have 0/1 + 3/3 to get 0/1 for example
     // but if you have a 3/3, then 0/1 is a downgrade
-    // 2/0 + 2/0 -> 3/0 is okay
-    // 2/0 + 1/0 -> 2/0 is bad
+    // 2/0 + 2/0 -> 3/0 is fine
+    // 3/0 + 0/1 -> 1/1 is fine
+    // 1/2 + 0/1 -> 1/2 is bad
     // 2/0 + 1/1 -> 2/1 is okya
-
-    // if final item prefixes and suffixes are less than
-    // the most on item1 or item2, invalid
-
-    // -------------------------------------------
-    // should be able to figure out all recombs that are valid and their failed items and probs
-    // know total prefixes, suffixes,and exclusive mods which gives row in weighths table
-    // prefix or suffix first prob = (prefix prob * suffix prob * aspect prob)
-    // think fine to do (prefix prob * suffix prob + prefix prob *suffix prob) * aspect
-    // returns finalItem1 or finalItem2, etc
-    // can use to collect final and failed items
 
     for (
       let finalP = 0;
@@ -318,12 +311,14 @@ const getRecombResults = (allFeederPairs) => {
         finalS++
       ) {
         const finalItem = { desP: finalP, desS: finalS };
-        const finalItemStr = `${finalP}/${finalS}`;
+        const finalItemStr = `${finalP}p/${finalS}s`;
 
+        // Fine to have same number of mods as feeder, used for transfering
         if (
-          finalItemStr == "0/0" ||
-          (finalP < item1.desP && finalS < item1.desS) ||
-          (finalP < item2.desP && finalS < item2.desS)
+          // Final can't have less total mods than both feeders
+          // Maybe okay to use || instead of &&, not sure
+          finalP + finalS < item1.desP + item1.desS &&
+          finalP + finalS < item2.desP + item2.desS
         ) {
           continue;
         }
