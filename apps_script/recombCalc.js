@@ -1,11 +1,6 @@
 // script that perfoms calcs to make recomb data
 // writes results to sheets
 
-// creates 3 types of results
-// all recombs
-// path recombs
-// detailed path recombs - used to find best path
-
 // -----------------------------------------------------
 // Main Function
 // -----------------------------------------------------
@@ -13,13 +8,7 @@
 function startRecombCalc() {
   const allFeederPairs = getAllFeederPairs();
 
-  // few options for getting recomb prob
-  // want to go through each recomb option and determine odds for final item
-  // add info under recombResults[targetItem]
   const allRecombResults = getRecombResults(allFeederPairs);
-
-  // eldritch only changes aspect and 1/1 final that needs to be made rare
-  // should be fine to calc when doing normally
 
   // console.log(allRecombResults);
 }
@@ -33,36 +22,47 @@ class Recombinator {
     this.finalItem = finalItem;
     this.finalItemStr = finalItemStr;
 
-    // divines for multimod. doesn't factor in prefix lock
+    // divines for multimod
+    // prefix lock used when have only aspect as suffix
+    // but don't need to lock prefix if can use edlritch annul
     this.divines = feederItems.multimods;
+    this.divinesEldritch = feederItems.multimods;
 
     // Eldritch annuls used to remove aspect
     this.eldritchAnnuls = 0;
 
     // Prob of recomb
-    this.prob = this.getProb(false);
-    this.probEldritch = this.getProb(true);
+    // probs have only desired mods and crafted, probAspects has aspects
+    [this.prob, this.probAspects] = this.getProb(false);
+    [this.probEldritch, this.probEldritchAspects] = this.getProb(true);
 
     // list of all items and their probabilites for if recomb fails
     this.failedProbs = this.getFailed();
   }
 
   getProb(isEldritch) {
-    // get probs for 50/50 prefix or suffix first
-    let prefixFirstProb = this.calcItemProb(isEldritch, true);
-    let suffixFirstProb = this.calcItemProb(isEldritch, false);
+    // get probs for final item for two scenarios of prefix or suffix chosen first
+    // clean prob has no other mods besides desired, prob has aspects
+    let [pProb, pProbAspect] = this.calcItemProb(isEldritch, true);
+    let [sProb, sProbAspect] = this.calcItemProb(isEldritch, false);
 
-    // If item has exclusive affixes wo/ desired affixes need to adjust probs
-    // 59% chance to get exclusive, 41% chance to fail and move exclusive to other side
-    if (this.feederItems.totalExcP > 0 && this.finalItem.desP == 0) {
-      prefixFirstProb *= 0.59;
-      suffixFirstProb *= 1.41;
-    } else if (this.feederItems.totalExcS > 0 && this.finalItem.desS == 0) {
-      suffixFirstProb *= 0.59;
-      prefixFirstProb *= 1.41;
+    // Edge case if item has 1 exclusive affix and no desired affixes
+    // The side chosen by recomb may not get any mods, meaning exclusive must appear on other side
+    // If more than 1 exclusive affix then guaranteed to land on first chosen side
+    // 59% chance to get exclusive, 41% chance to move exclusive to other side
+    const adjustProbs = (fProb, sProb) => {
+      return [fProb * 0.59, sProb * 1.41];
+    };
+    if (this.feederItems.totalExcP == 1 && this.finalItem.desP == 0) {
+      [pProb, sProb] = adjustProbs(pProb, sProb);
+      [pProbAspect, sProbAspect] = adjustProbs(pProbAspect, sProbAspect);
+    } else if (this.feederItems.totalExcS == 1 && this.finalItem.desS == 0) {
+      [sProb, pProb] = adjustProbs(sProb, pProb);
+      [sProbAspect, pProbAspect] = adjustProbs(sProbAspect, pProbAspect);
     }
 
-    let recombProb = 0.5 * (prefixFirstProb + suffixFirstProb);
+    let recombProb = 0.5 * (pProb + sProb);
+    let recombProbAspect = 0.5 * (pProbAspect + sProbAspect);
 
     // Adjust prob if need to regal final item if magic
     if (
@@ -73,10 +73,10 @@ class Recombinator {
       recombProb *= isEldritch ? 1 / 2 : 1 / 3;
     }
 
-    return recombProb;
+    return [recombProb, recombProbAspect];
   }
 
-  calcItemProb(isEldritch, prefixFirst) {
+  calcItemProb(isEldritch, prefixChosen) {
     // Decides where the exclusive mod is on item
     const allocateExclusive = (des1, exc1, des2, exc2) => {
       // Must be primary if have exclusive and desired
@@ -95,7 +95,7 @@ class Recombinator {
     };
 
     let [excPrefix, excSuffix] = [false, false];
-    if (prefixFirst) {
+    if (prefixChosen) {
       [excPrefix, excSuffix] = allocateExclusive(
         this.finalItem.desP,
         this.feederItems.totalExcP,
@@ -117,22 +117,27 @@ class Recombinator {
 
     // Get probs of getting required mods
     const prefixProb = cumsumTable[this.feederItems.totalP][requiredP];
-    let suffixProb = cumsumTable[this.feederItems.totalS][requiredS];
+    const suffixProb = cumsumTable[this.feederItems.totalS][requiredS];
 
     // Invalid required mods
     if (!prefixProb || !suffixProb) {
-      return 0;
+      return [0, 0];
     }
 
     // Apply chances to avoid or annul aspect
-    if (!prefixFirst && this.feederItems.totalAspS) {
-      // If no suffixes needed on final, can lock prefix and annul
+    let suffixProbClean = suffixProb;
+    if (!prefixChosen && this.feederItems.totalAspS) {
+      // Only called once for each item calc when suffix first
+
+      // If no suffixes needed on final, can lock prefix or eldritch annul
       if (this.finalItem.desS == 0) {
-        // Don't want to add divine cost since maybe eldritch annuls better
-        // Think fine to not include
+        // if not eldritch need to prefix lock
+        this.divines += 1;
+        // if eldritch, then use eldritch annul
+        this.eldritchAnnuls += 1;
       } else {
         // Avg 1 / required suffixes to remove
-        this.eldritchAnnuls = requiredS;
+        this.eldritchAnnuls += requiredS;
 
         const getAspProb =
           this.feederItems.totalAspS / this.feederItems.totalExcS;
@@ -143,11 +148,13 @@ class Recombinator {
           : 1 / (requiredP + requiredS);
 
         // Can either avoid aspect or get and annul
-        suffixProb = suffixProb * (avoidAspProb + getAspProb * annulAspProb);
+        suffixProbClean =
+          suffixProbClean * (avoidAspProb + getAspProb * annulAspProb);
       }
     }
+
     // Chances of getting prefixes and suffixes
-    return prefixProb * suffixProb;
+    return [prefixProb * suffixProbClean, prefixProb * suffixProb];
   }
 
   getFailed() {
