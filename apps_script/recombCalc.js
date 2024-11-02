@@ -10,21 +10,28 @@ function startRecombCalc() {
 
   const allRecombResults = getRecombResults(allFeederPairs);
 
+  // think done w/ everything earlier
+  // need to write to sheet
+
   // console.log(allRecombResults);
 }
 
 // -----------------------------------------------------
 // Tables for recomb odds
 // -----------------------------------------------------
+
+// think okay to set 0 final mods as 100%
+// if no desired mods and any exclusive then its guar, edge case handled separately
+// if desired mods then won't have 0 final mods
 const weightsTable = [
   // 0    1     2     3         final mods
   [1.0, 0.0, 0.0, 0.0], // 0 initial mods, guaranteed 0 mods
-  [0.41, 0.59, 0.0, 0.0], // 1 initial mod
-  [0.0, 0.67, 0.33, 0.0], // 2 initial mods
-  [0.0, 0.39, 0.52, 0.1], // 3 initial mods
-  [0.0, 0.11, 0.59, 0.31], // 4 initial mods
-  [0.0, 0.0, 0.43, 0.57], // 5 initial mods
-  [0.0, 0.0, 0.28, 0.72], // 6 initial mods
+  [1.0, 0.59, 0.0, 0.0], // 1 initial mod
+  [1.0, 0.67, 0.33, 0.0], // 2 initial mods
+  [1.0, 0.39, 0.52, 0.1], // 3 initial mods
+  [1.0, 0.11, 0.59, 0.31], // 4 initial mods
+  [1.0, 0.0, 0.43, 0.57], // 5 initial mods
+  [1.0, 0.0, 0.28, 0.72], // 6 initial mods
 ];
 
 // Sum of odds, chance of getting at least
@@ -43,10 +50,10 @@ const cumsumTable = [
 // Recombinator class for single recombination
 // -----------------------------------------------------
 class Recombinator {
-  constructor(feederItems, finalItem, finalItemStr) {
+  constructor(feederItems, finalItem) {
     this.feederItems = feederItems;
     this.finalItem = finalItem;
-    this.finalItemStr = finalItemStr;
+    this.desStr = `${finalItem.desP}p/${finalItem.desS}s`;
 
     // divines for multimod
     // prefix lock used when have only aspect as suffix
@@ -58,51 +65,106 @@ class Recombinator {
     this.eldritchAnnuls = 0;
 
     // Prob of recomb
-    // probs have only desired mods and crafted, probAspects has aspects
-    [this.prob, this.probAspects] = this.getProb(false);
-    [this.probEldritch, this.probEldritchAspects] = this.getProb(true);
+    // probs have only desired mods and crafted, probAspect has aspects
 
-    // list of all items and their probabilites for if recomb fails
-    this.failedProbs = this.getFailed();
+    [
+      // At least desired mods
+      this.prob,
+      this.probEldritch,
+      this.probAspect,
+      this.probEldritchAspect,
+      // Exactly desired mods
+      this.exactProb,
+      this.exactProbEldritch,
+      this.exactProbAspect,
+      this.exactProbEldritchAspect,
+    ] = this.getProb();
   }
 
-  getProb(isEldritch) {
-    // get probs for final item for two scenarios of prefix or suffix chosen first
-    // clean prob has no other mods besides desired, prob has aspects
-    let [pProb, pProbAspect] = this.calcItemProb(isEldritch, true);
-    let [sProb, sProbAspect] = this.calcItemProb(isEldritch, false);
+  addFailedItems(
+    failedList,
+    totalProb,
+    totalProbEldritch,
+    totalProbAspect,
+    totalProbEldritchAspect
+  ) {
+    // Update probs to make sum 1
+    for (let recomb of failedList) {
+      recomb.exactProb /= totalProb;
+      recomb.exactProbEldritch /= totalProbEldritch;
+      recomb.exactProbAspect /= totalProbAspect;
+      recomb.exactProbEldritchAspect /= totalProbEldritchAspect;
+
+      if (
+        this.desStr == "0p/2s" &&
+        (recomb.exactProb != 1 ||
+          recomb.exactProbEldritch != 1 ||
+          recomb.exactProbAspect != 1 ||
+          recomb.exactProbEldritchAspect != 1)
+      ) {
+        console.log("chekc");
+      }
+    }
+
+    this.failedItems = failedList;
+  }
+
+  clone() {
+    return new Recombinator(this.feederItems, this.finalItem);
+  }
+
+  getProb() {
+    // get probs for final item depending on prefix or suffix first
+    // returns prob, prob aspect, and prob aspect eldritch
+    // has probs for at least and probs for exactly desired mods
+    const [pProbs, sProbs] = [
+      this.calcItemProb(true),
+      this.calcItemProb(false),
+    ];
 
     // Edge case if item has 1 exclusive affix and no desired affixes
     // The side chosen by recomb may not get any mods, meaning exclusive must appear on other side
     // If more than 1 exclusive affix then guaranteed to land on first chosen side
     // 59% chance to get exclusive, 41% chance to move exclusive to other side
-    const adjustProbs = (fProb, sProb) => {
-      return [fProb * 0.59, sProb * 1.41];
-    };
-    if (this.feederItems.totalExcP == 1 && this.finalItem.desP == 0) {
-      [pProb, sProb] = adjustProbs(pProb, sProb);
-      [pProbAspect, sProbAspect] = adjustProbs(pProbAspect, sProbAspect);
-    } else if (this.feederItems.totalExcS == 1 && this.finalItem.desS == 0) {
-      [sProb, pProb] = adjustProbs(sProb, pProb);
-      [sProbAspect, pProbAspect] = adjustProbs(sProbAspect, pProbAspect);
+
+    let [pMod, sMod] = [0.5, 0.5];
+    const adjustProbs = (fMod, sMod) => [fMod * 0.59, sMod * 1.41];
+
+    if (this.feederItems.totalExcP === 1 && this.finalItem.desP === 0) {
+      [pMod, sMod] = adjustProbs(pMod, sMod);
+    } else if (this.feederItems.totalExcS === 1 && this.finalItem.desS === 0) {
+      [sMod, pMod] = adjustProbs(sMod, pMod);
     }
 
-    let recombProb = 0.5 * (pProb + sProb);
-    let recombProbAspect = 0.5 * (pProbAspect + sProbAspect);
-
     // Adjust prob if need to regal final item if magic
+    let regalMod = 1;
+    let regalModEldritch = 1;
     if (
       this.finalItem.desP == 1 &&
       this.finalItem.desS == 1 &&
       this.feederItems.totalExc == 0
     ) {
-      recombProb *= isEldritch ? 1 / 2 : 1 / 3;
+      regalMod = 1 / 3;
+      regalModEldritch = 1 / 2;
     }
 
-    return [recombProb, recombProbAspect];
+    const applyMod = ([pProb, sProb], rMod) =>
+      rMod * (pProb * pMod + sProb * sMod);
+
+    return [
+      applyMod([pProbs[0], sProbs[0]], regalMod), // prob
+      applyMod([pProbs[0], sProbs[0]], regalModEldritch), // probEldritch
+      applyMod([pProbs[1], sProbs[1]], regalMod), // probAspect
+      applyMod([pProbs[2], sProbs[2]], regalModEldritch), // probEldritchAspect
+
+      applyMod([pProbs[3], sProbs[3]], regalMod), // exactProb
+      applyMod([pProbs[3], sProbs[3]], regalModEldritch), // exactProbEldritch
+      applyMod([pProbs[4], sProbs[4]], regalMod), // exactProbAspect
+      applyMod([pProbs[5], sProbs[5]], regalModEldritch), // exactProbEldritchAspect
+    ];
   }
 
-  calcItemProb(isEldritch, prefixChosen) {
+  calcItemProb(prefixChosen) {
     // Decides where the exclusive mod is on item
     const allocateExclusive = (des1, exc1, des2, exc2) => {
       // Must be primary if have exclusive and desired
@@ -142,16 +204,23 @@ class Recombinator {
     const requiredS = excSuffix ? this.finalItem.desS + 1 : this.finalItem.desS;
 
     // Get probs of getting required mods
-    const prefixProb = cumsumTable[this.feederItems.totalP][requiredP];
-    const suffixProb = cumsumTable[this.feederItems.totalS][requiredS];
+    const pProb = cumsumTable[this.feederItems.totalP][requiredP];
+    const sProbAspect = cumsumTable[this.feederItems.totalS][requiredS];
+
+    const exactPProb = weightsTable[this.feederItems.totalP][requiredP];
+    const exactSProbAspect = weightsTable[this.feederItems.totalS][requiredS];
 
     // Invalid required mods
-    if (!prefixProb || !suffixProb) {
-      return [0, 0];
+    if (!pProb || !sProbAspect) {
+      return [0, 0, 0, 0, 0, 0];
     }
 
     // Apply chances to avoid or annul aspect
-    let suffixProbClean = suffixProb;
+    let sProb = sProbAspect;
+    let sProbEldritchAspect = sProbAspect;
+    let exactSProb = exactSProbAspect;
+    let exactSProbEdlritchAspect = exactSProbAspect;
+
     if (!prefixChosen && this.feederItems.totalAspS) {
       // Only called once for each item calc when suffix first
 
@@ -169,53 +238,38 @@ class Recombinator {
           this.feederItems.totalAspS / this.feederItems.totalExcS;
         const avoidAspProb = 1 - getAspProb;
 
-        const annulAspProb = isEldritch
-          ? 1 / requiredS
-          : 1 / (requiredP + requiredS);
+        // need to make option for edlrtich or not
+        const annulAspProb = 1 / (requiredP + requiredS);
+        const annulAspProbEldritch = 1 / requiredS;
+
+        const applyAspectProb = (suffixProb, annulProb) =>
+          suffixProb * avoidAspProb + suffixProb * getAspProb * annulProb;
 
         // Can either avoid aspect or get and annul
-        suffixProbClean =
-          suffixProbClean * (avoidAspProb + getAspProb * annulAspProb);
+        sProb = applyAspectProb(sProb, annulAspProb);
+        sProbEldritchAspect = applyAspectProb(
+          sProbEldritchAspect,
+          annulAspProbEldritch
+        );
+        exactSProb = applyAspectProb(exactSProb, annulAspProb);
+        exactSProbEdlritchAspect = applyAspectProb(
+          exactSProbEdlritchAspect,
+          annulAspProbEldritch
+        );
       }
     }
 
     // Chances of getting prefixes and suffixes
-    return [prefixProb * suffixProbClean, prefixProb * suffixProb];
+    return [
+      pProb * sProb, // prob
+      pProb * sProbAspect, // probAspect
+      pProb * sProbEldritchAspect, // probEldritchAspect
+
+      exactPProb * exactSProb, // exactProb
+      exactPProb * exactSProbAspect, // exactProbAspect
+      exactPProb * exactSProbEdlritchAspect, // exactProbEldritchAspect
+    ];
   }
-
-  getFailed() {
-    // know starting total mods in pool
-    // get row of options for final affix count
-    const prefixOption = weightsTable[this.feederItems.totalP];
-    const suffixOptions = weightsTable[this.feederItems.totalS];
-
-    // know options for affixes
-    // get probs for prefix or suffix?
-    // if have exclusive affixes on both then 50 / 50, except for 1 exclusive
-
-    return [];
-  }
-
-  // Moved to path calcs, recombs list if one mod item used, then factored into path
-  // // Prob of getting one mod starting items
-  // const getModRollingProb = (item) => {
-  //   if (item.desP + item.desS == 1) {
-  //     if (
-  //       item.desP + item.craftP > 1 ||
-  //       item.desS + item.craftS + item.aspS > 1
-  //     ) {
-  //       // regal adds +1 mod
-  //       // 2/3 to get 2 mods, 2 annuls
-  //       // 1/3 to get 1 mod, 1 annul
-  //       return (2 / 3) * (2 / 3) * (1 / 2) + (1 / 3) * (1 / 2);
-  //     } else {
-  //       // 2/3 to get 2 mods, 1 annul
-  //       return (2 / 3) * (1 / 2) + 1 / 3;
-  //     }
-  //   }
-
-  //   return 1;
-  // };
 }
 
 class FeederItems {
@@ -298,7 +352,15 @@ const getRecombResults = (allFeederPairs) => {
     // 2/0 + 2/0 -> 3/0 is fine
     // 3/0 + 0/1 -> 1/1 is fine
     // 1/2 + 0/1 -> 1/2 is bad
-    // 2/0 + 1/1 -> 2/1 is okya
+    // 2/0 + 1/1 -> 2/1 is fine
+
+    // All possible recombs for feeder items
+    const posRecombs = [];
+
+    let totalProb = 0;
+    let totalProbEldritch = 0;
+    let totalProbAspect = 0;
+    let totalProbEldritchAspect = 0;
 
     for (
       let finalP = 0;
@@ -311,29 +373,71 @@ const getRecombResults = (allFeederPairs) => {
         finalS++
       ) {
         const finalItem = { desP: finalP, desS: finalS };
-        const finalItemStr = `${finalP}p/${finalS}s`;
 
-        // Fine to have same number of mods as feeder, used for transfering
-        if (
-          // Final can't have less total mods than both feeders
-          // Maybe okay to use || instead of &&, not sure
-          finalP + finalS < item1.desP + item1.desS &&
-          finalP + finalS < item2.desP + item2.desS
-        ) {
+        // dont think can make 0 mod results
+        if (finalP == 0 && finalS == 0) {
           continue;
         }
 
-        const recomb = new Recombinator(feederItems, finalItem, finalItemStr);
+        // Want to get all options for final item, used to add failed
+        // Fine to have same number of mods as feeder, used for transfering
+        // if (
+        //   // Final can't have less total mods than both feeders
+        //   // Maybe okay to use || instead of &&, not sure
+        //   finalP + finalS < item1.desP + item1.desS &&
+        //   finalP + finalS < item2.desP + item2.desS
+        // ) {
+        //   continue;
+        // }
+
+        const recomb = new Recombinator(feederItems, finalItem);
+
+        // skip if impossible to recomb
+        if (recomb.prob == 0) continue;
 
         // Add recomb to all results
-        if (!(finalItemStr in allResults)) {
-          allResults[finalItemStr] = [];
+        if (!(recomb.desStr in allResults)) {
+          allResults[recomb.desStr] = [];
         }
+        allResults[recomb.desStr].push(recomb);
 
-        allResults[finalItemStr].push(recomb);
+        // skip if can't get exact final item
+        if (recomb.exactProb == 0) continue;
+
+        totalProb += recomb.exactProb;
+        totalProbEldritch += recomb.exactProbEldritch;
+        totalProbAspect += recomb.exactProbAspect;
+        totalProbEldritchAspect += recomb.exactProbEldritchAspect;
+
+        posRecombs.push(recomb);
       }
     }
+
+    // add failed items to recombs
+    while (posRecombs.length > 0) {
+      const recomb = posRecombs.pop();
+
+      totalProb -= recomb.exactProb;
+      totalProbEldritch -= recomb.exactProbEldritch;
+      totalProbAspect -= recomb.exactProbAspect;
+      totalProbEldritchAspect -= recomb.exactProbEldritchAspect;
+
+      // need to make copy of recombs for failed
+      const failedItems = [];
+      for (let failedRecomb of posRecombs) {
+        failedItems.push(failedRecomb.clone());
+      }
+
+      recomb.addFailedItems(
+        failedItems,
+        totalProb,
+        totalProbEldritch,
+        totalProbAspect,
+        totalProbEldritchAspect
+      );
+    }
   }
+
   return allResults;
 };
 
@@ -448,246 +552,4 @@ const getAllFeederPairs = () => {
 // -----------------------------------------------------
 // Call main func to start, used for VS Code
 // -----------------------------------------------------
-startRecombCalc();
-
-// notes from old py
-//include prob if need to regal and annul to fit exclusive mods
-
-//1/2 alt gives prefix and suffix, regal into 2/3 annul and 1/3 annul
-//1/4 alt gives prefix or suffix, regal into 1/2 annul
-//if prefix or suffix, 2/3 chance to have other mod. 1/3 to be one mod
-
-//if 1 mod item and no regal, need to include chance of being a 1 mod item
-
-//regal_chances = 2 / 3 * 2 / 3 * 1 / 2 + 1 / 3 * 1 / 2
-//magic_chances = 2 / 3 * 1 / 2 + 1 / 3 * 1
-
-//annul_chances = 1
-
-////if item1 has max 1 prefix or suffix its assumed magic
-////if item is magic, need to factor in chance of regal and annuling
-//if self.item1_desired_prefixes + self.item1_desired_suffixes == 1:
-//    //magic item that needs to be regaled
-//    if self.item1_rare:
-//        annul_chances *= regal_chances
-//    //magic item, no regal needed
-//    else:
-//        annul_chances *= magic_chances
-
-//if self.item2_desired_prefixes + self.item2_desired_suffixes == 1:
-//    //magic item that needs to be regaled
-//    if self.item2_rare:
-//        annul_chances *= regal_chances
-//    //magic item, no regal needed
-//    else:
-//        annul_chances *= magic_chances
-
-//self.overallProb = round(
-//    0.5 * annul_rare_mod * annul_chances * (prefix_first + suffix_first), 4
-//)
-
-//get odds for all options for recomb
-
-//prefix_options = WEIGHTS[self.total_prefixes]
-//suffix_options = WEIGHTS[self.total_suffixes]
-
-//max_prefix = self.total_desired_prefixes
-//max_suffix = self.total_desired_suffixes
-//total_mods = self.total_desired_prefixes + self.total_desired_suffixes
-
-////if exclusive_prefix and total_mods > 1:
-////    max_prefix -= 1
-
-////if exclusive_suffix and total_mods > 1:
-////    max_suffix -= 1
-
-//for final_prefixes, prefix_percent in enumerate(prefix_options):
-//    for final_suffixes, suffix_percent in enumerate(suffix_options):
-
-//        //if prefix count and suffix count > required prefixes and suffixes, then is counted as success
-//        //otherwise, its a failure, need to get final item after removing exclusive mod
-
-//        //adjust prefix and suffix count for exclusive mods
-//        prefix_count = final_prefixes
-//        suffix_count = final_suffixes
-
-//        if exclusive_prefix:
-//            prefix_count -= 1
-
-//        if exclusive_suffix:
-//            suffix_count -= 1
-
-//        if (
-//            //successful item
-//            (
-//                prefix_count >= self.final_prefixes
-//                and suffix_count >= self.final_suffixes
-//            )
-//            //can't get item
-//            or prefix_percent == 0
-//            or suffix_percent == 0
-//            //invalid affix count
-//            or prefix_count < 0
-//            or suffix_count < 0
-//            //too many mods
-//            //or max_prefix < prefix_count
-//            //or max_suffix < suffix_count
-//        ):
-//            continue
-
-//        percent = prefix_percent * suffix_percent
-
-//        //NEED TO FIGURE OUT HOW TO LIST ITEMS FOR READING PATH COST
-//        //should be possible to get more than final number of prefixes or suffixes
-//        //can't have more than desired prefixes or suffixes
-
-//        self.itemOptions.append(
-//            (
-//                f"{min(self.total_desired_prefixes, prefix_count)}p/{min(self.total_desired_suffixes, suffix_count)}s",
-//                //f"{prefix_count}p/{suffix_count}s",
-//                percent,
-//            )
-//        )
-//        self.total_fail_prob += percent
-
-//        //if percent < 0.1:
-//        //    print("a")
-
-//        //item = f"({prefix_count}p/{suffix_count}s, {percent})"
-
-//        //itemStrings += ", " + item if len(itemStrings) > 0 else item
-
-//return prefix_prob * suffix_prob
-
-//def getRecombFailStrings(self):
-//    itemStrings = ""
-//    scaling = 1 / self.total_fail_prob if self.total_fail_prob > 0 else 1
-
-//    for item in self.itemOptions:
-//        new_prob = round(item[1] * scaling, 4)
-//        item = f"({item[0]} {new_prob})"
-//        itemStrings += " " + item if len(itemStrings) > 0 else item
-
-//    if itemStrings != "":
-//        self.all_recomb_odds += itemStrings + " "
-//    else:
-//        self.all_recomb_odds = "(0p/0s 1.0)"
-
-//if same multimod count, aspect, and magic_multimods but better prob, remove current and add other
-//def add_to_item_pair_recombs(item_pair_recombs, recomb: Recombinate):
-//    match_found = False
-
-//    for i, cur_recomb in enumerate(item_pair_recombs):
-//        cur_recomb: Recombinate
-//        if (
-//            cur_recomb.item1_rare != recomb.item1_rare
-//            or cur_recomb.item2_rare != recomb.item2_rare
-//        ):
-//            print("a")
-//        //find other recomb w/ same multimods and aspects, same cost
-//        if (
-//            cur_recomb.multimods_used == recomb.multimods_used
-//            and cur_recomb.aspect_suffix_count == recomb.aspect_suffix_count
-//            and cur_recomb.item1_rare == recomb.item1_rare
-//            and cur_recomb.item2_rare == recomb.item2_rare
-//        ):
-//            //if better prob, replace index w/ new recomb
-//            if cur_recomb.recombProb < recomb.recombProb or (
-//                cur_recomb.recombProb == recomb.recombProb
-//                and (
-//                    (
-//                        cur_recomb.total_desired_prefixes > 0
-//                        and cur_recomb.total_exclusive_prefixes
-//                        < recomb.total_exclusive_prefixes
-//                    )
-//                    or (
-//                        cur_recomb.total_desired_suffixes > 0
-//                        and cur_recomb.total_exclusive_suffixes
-//                        < recomb.total_exclusive_suffixes
-//                    )
-//                )
-//            ):
-//                item_pair_recombs[i] = recomb
-
-//            match_found = True
-//            break
-
-//    if not match_found:
-//        item_pair_recombs.append(recomb)
-
-//    return item_pair_recombs
-
-//def write_to_file(filename, data, format_line):
-//    with open(filename, "w") as f:
-//        for final_item, items_list in data.items():
-//            if not items_list:
-//                continue
-
-//            f.write(f"\n-------------------------------------\n")
-//            f.write(f"{final_item.to_string()}\n")
-
-//            for item in items_list:
-//                f.write(format_line(item))
-
-//def format_recomb_line(recomb: Recombinate):
-//    return (
-//        f"Items: {recomb.get_item1().to_string()} + {recomb.get_item2().to_string()}, "
-//        f"Exclusive: {recomb.get_exclusive_mods()}, "
-//        f"Prob: {recomb.recombProb:.2%}\n"
-//    )
-
-//def format_recomb_detailed_line(recomb: Recombinate):
-//    return (
-//        f"item1: {recomb.get_item1().to_string()}, "
-//        f"item2: {recomb.get_item2().to_string()}, "
-//        f"exclusiveMods: {recomb.get_exclusive_mods()}, "
-//        f"recombProb: {recomb.recombProb}, "
-//        f"overallProb: {recomb.overallProb}, "
-//        f"item1Rare: {recomb.item1_rare}, "
-//        f"item2Rare: {recomb.item2_rare}, "
-//        f"multimodCount: {recomb.multimods_used}, "
-//        f"aspectSuffixCount: {recomb.aspect_suffix_count}, "
-//        f"eldritchAnnulCount: {recomb.annuls_used}, "
-//        f"failedItemProbs: {recomb.all_recomb_odds}\n"
-//    )
-
-//def main():
-//    item_combos = get_item_combos()
-//    exclusive_combos = get_exclusive_combinations()
-
-//    recomb_dict = get_recomb_dict(item_combos, exclusive_combos, eldritch_annul=False)
-//    recomb_dict_eldritch = get_recomb_dict(
-//        item_combos, exclusive_combos, eldritch_annul=True
-//    )
-
-//    script_recomb_dict = get_script_dict(
-//        item_combos, exclusive_combos, eldritch_annul=False
-//    )
-//    script_recomb_dict_eldritch = get_script_dict(
-//        item_combos, exclusive_combos, eldritch_annul=True
-//    )
-
-//    write_to_file("results/all_recombs.txt", recomb_dict, format_recomb_line)
-//    write_to_file(
-//        "results/all_recombs_eldritch.txt",
-//        recomb_dict_eldritch,
-//        format_recomb_line,
-//    )
-
-//    write_to_file("results/best_recombs.txt", script_recomb_dict, format_recomb_line)
-//    write_to_file(
-//        "results/best_recombs_eldritch.txt",
-//        script_recomb_dict_eldritch,
-//        format_recomb_line,
-//    )
-
-//    write_to_file(
-//        "results/detailed_recombs.txt",
-//        script_recomb_dict,
-//        format_recomb_detailed_line,
-//    )
-//    write_to_file(
-//        "results/detailed_recombs_eldritch.txt",
-//        script_recomb_dict_eldritch,
-//        format_recomb_detailed_line,
-//    )
+// startRecombCalc();
