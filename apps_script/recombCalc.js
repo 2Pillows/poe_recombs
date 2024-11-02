@@ -10,29 +10,92 @@ function startRecombCalc() {
 
   const allRecombResults = getRecombResults(allFeederPairs);
 
-  // think done w/ everything earlier
-  // need to write to sheet
-
   // console.log(allRecombResults);
+
+  writeResults(allRecombResults);
 }
+
+// -----------------------------------------------------
+// Write results to sheet
+// -----------------------------------------------------
+
+const writeResults = (recombResults) => {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
+    SHEET_NAMES.RESULTS_SHEET
+  );
+
+  const headers = [
+    "Final Item",
+    "Desired String",
+    "Exclusive String",
+    "Full String Option",
+    "Prob",
+    "Prob Eldritch",
+    "Prob Aspect",
+    "Prob Eldritch Aspect",
+    "Divines",
+    "Divines Eldritch",
+    "Aspects Used",
+    "Magic Items",
+    "Failed Items",
+  ];
+
+  const recombTable = [headers];
+
+  for (const [finalItem, recombList] of Object.entries(recombResults)) {
+    recombList.forEach((recomb) => {
+      recombTable.push([
+        finalItem,
+        recomb.feederItems.desStr,
+        recomb.feederItems.excStr,
+        recomb.feederItems.str,
+        recomb.prob,
+        recomb.probEldritch,
+        recomb.probAspect,
+        recomb.probEldritchAspect,
+        recomb.divines,
+        recomb.divinesEldritch,
+        recomb.feederItems.totalAspS,
+        recomb.feederItems.magicCount,
+        recomb.failedStr,
+      ]);
+    });
+  }
+
+  const startRow = 1;
+  const startCol = 1;
+  const numRows = recombTable.length;
+  const numCols = recombTable[0].length;
+
+  sheet.getRange(startRow, startCol, numRows, numCols).setValues(recombTable);
+
+  console.log("results written");
+};
 
 // -----------------------------------------------------
 // Tables for recomb odds
 // -----------------------------------------------------
 
-// think okay to set 0 final mods as 100%
-// if no desired mods and any exclusive then its guar, edge case handled separately
-// if desired mods then won't have 0 final mods
 const weightsTable = [
   // 0    1     2     3         final mods
   [1.0, 0.0, 0.0, 0.0], // 0 initial mods, guaranteed 0 mods
-  [1.0, 0.59, 0.0, 0.0], // 1 initial mod
-  [1.0, 0.67, 0.33, 0.0], // 2 initial mods
-  [1.0, 0.39, 0.52, 0.1], // 3 initial mods
-  [1.0, 0.11, 0.59, 0.31], // 4 initial mods
-  [1.0, 0.0, 0.43, 0.57], // 5 initial mods
-  [1.0, 0.0, 0.28, 0.72], // 6 initial mods
+  [0.41, 0.59, 0.0, 0.0], // 1 initial mod
+  [0.0, 0.67, 0.33, 0.0], // 2 initial mods
+  [0.0, 0.39, 0.52, 0.1], // 3 initial mods
+  [0.0, 0.11, 0.59, 0.31], // 4 initial mods
+  [0.0, 0.0, 0.43, 0.57], // 5 initial mods
+  [0.0, 0.0, 0.28, 0.72], // 6 initial mods
 ];
+
+const minFinal = {
+  0: 0,
+  1: 0,
+  2: 1,
+  3: 1,
+  4: 1,
+  5: 2,
+  6: 2,
+};
 
 // Sum of odds, chance of getting at least
 const cumsumTable = [
@@ -81,38 +144,6 @@ class Recombinator {
     ] = this.getProb();
   }
 
-  addFailedItems(
-    failedList,
-    totalProb,
-    totalProbEldritch,
-    totalProbAspect,
-    totalProbEldritchAspect
-  ) {
-    // Update probs to make sum 1
-    for (let recomb of failedList) {
-      recomb.exactProb /= totalProb;
-      recomb.exactProbEldritch /= totalProbEldritch;
-      recomb.exactProbAspect /= totalProbAspect;
-      recomb.exactProbEldritchAspect /= totalProbEldritchAspect;
-
-      if (
-        this.desStr == "0p/2s" &&
-        (recomb.exactProb != 1 ||
-          recomb.exactProbEldritch != 1 ||
-          recomb.exactProbAspect != 1 ||
-          recomb.exactProbEldritchAspect != 1)
-      ) {
-        console.log("chekc");
-      }
-    }
-
-    this.failedItems = failedList;
-  }
-
-  clone() {
-    return new Recombinator(this.feederItems, this.finalItem);
-  }
-
   getProb() {
     // get probs for final item depending on prefix or suffix first
     // returns prob, prob aspect, and prob aspect eldritch
@@ -151,15 +182,23 @@ class Recombinator {
     const applyMod = ([pProb, sProb], rMod) =>
       rMod * (pProb * pMod + sProb * sMod);
 
+    // xProbs list indices
+    // prob
+    // probEldritch
+    // probAspect
+    // exactProb
+    // exactProbEldritch
+    // exactProbAspect
+
     return [
       applyMod([pProbs[0], sProbs[0]], regalMod), // prob
-      applyMod([pProbs[0], sProbs[0]], regalModEldritch), // probEldritch
-      applyMod([pProbs[1], sProbs[1]], regalMod), // probAspect
+      applyMod([pProbs[1], sProbs[1]], regalModEldritch), // probEldritch
+      applyMod([pProbs[2], sProbs[2]], regalMod), // probAspect
       applyMod([pProbs[2], sProbs[2]], regalModEldritch), // probEldritchAspect
 
       applyMod([pProbs[3], sProbs[3]], regalMod), // exactProb
-      applyMod([pProbs[3], sProbs[3]], regalModEldritch), // exactProbEldritch
-      applyMod([pProbs[4], sProbs[4]], regalMod), // exactProbAspect
+      applyMod([pProbs[4], sProbs[4]], regalModEldritch), // exactProbEldritch
+      applyMod([pProbs[5], sProbs[5]], regalMod), // exactProbAspect
       applyMod([pProbs[5], sProbs[5]], regalModEldritch), // exactProbEldritchAspect
     ];
   }
@@ -217,9 +256,10 @@ class Recombinator {
 
     // Apply chances to avoid or annul aspect
     let sProb = sProbAspect;
-    let sProbEldritchAspect = sProbAspect;
+    let sProbEldritch = sProbAspect;
+
     let exactSProb = exactSProbAspect;
-    let exactSProbEdlritchAspect = exactSProbAspect;
+    let exactSProbEdlritch = exactSProbAspect;
 
     if (!prefixChosen && this.feederItems.totalAspS) {
       // Only called once for each item calc when suffix first
@@ -247,13 +287,10 @@ class Recombinator {
 
         // Can either avoid aspect or get and annul
         sProb = applyAspectProb(sProb, annulAspProb);
-        sProbEldritchAspect = applyAspectProb(
-          sProbEldritchAspect,
-          annulAspProbEldritch
-        );
+        sProbEldritch = applyAspectProb(sProbEldritch, annulAspProbEldritch);
         exactSProb = applyAspectProb(exactSProb, annulAspProb);
-        exactSProbEdlritchAspect = applyAspectProb(
-          exactSProbEdlritchAspect,
+        exactSProbEdlritch = applyAspectProb(
+          exactSProbEdlritch,
           annulAspProbEldritch
         );
       }
@@ -262,12 +299,12 @@ class Recombinator {
     // Chances of getting prefixes and suffixes
     return [
       pProb * sProb, // prob
+      pProb * sProbEldritch, // probEldritch
       pProb * sProbAspect, // probAspect
-      pProb * sProbEldritchAspect, // probEldritchAspect
 
       exactPProb * exactSProb, // exactProb
+      exactPProb * exactSProbEdlritch, // exactProbEldritch
       exactPProb * exactSProbAspect, // exactProbAspect
-      exactPProb * exactSProbEdlritchAspect, // exactProbEldritchAspect
     ];
   }
 }
@@ -298,10 +335,13 @@ class FeederItems {
     this.totalP = this.totalDesP + this.totalExcP;
     this.totalS = this.totalDesS + this.totalExcS;
 
-    this.excStr = `${this.totalExcP}/${this.totalExcS}`;
+    this.excStr = `${this.totalExcP}c/${this.totalCraftedS}c${this.totalAspS}a`;
 
     // Total multimods
     this.multimods = item1.multimods + item2.multimods;
+
+    // Total magic items
+    this.magicCount = [item1, item2].filter((item) => item.isMagic).length;
   }
 }
 
@@ -401,9 +441,6 @@ const getRecombResults = (allFeederPairs) => {
         }
         allResults[recomb.desStr].push(recomb);
 
-        // skip if can't get exact final item
-        if (recomb.exactProb == 0) continue;
-
         totalProb += recomb.exactProb;
         totalProbEldritch += recomb.exactProbEldritch;
         totalProbAspect += recomb.exactProbAspect;
@@ -412,6 +449,10 @@ const getRecombResults = (allFeederPairs) => {
         posRecombs.push(recomb);
       }
     }
+
+    const adjustProbs = (baseProb, probsSum) => {
+      return probsSum > 0 ? (baseProb / probsSum).toFixed(4) : "0.0000";
+    };
 
     // add failed items to recombs
     while (posRecombs.length > 0) {
@@ -422,19 +463,45 @@ const getRecombResults = (allFeederPairs) => {
       totalProbAspect -= recomb.exactProbAspect;
       totalProbEldritchAspect -= recomb.exactProbEldritchAspect;
 
-      // need to make copy of recombs for failed
-      const failedItems = [];
+      let failedStr = "";
       for (let failedRecomb of posRecombs) {
-        failedItems.push(failedRecomb.clone());
+        let desStr = failedRecomb.desStr;
+
+        let exactProb = adjustProbs(failedRecomb.exactProb, totalProb);
+        let exactProbEldritch = adjustProbs(
+          failedRecomb.exactProbEldritch,
+          totalProbEldritch
+        );
+        let exactProbAspect = adjustProbs(
+          failedRecomb.exactProbAspect,
+          totalProbAspect
+        );
+        let exactProbEldritchAspect = adjustProbs(
+          failedRecomb.exactProbEldritchAspect,
+          totalProbEldritchAspect
+        );
+
+        // dont add to failed options if impossible to get
+        if (exactProb == 0) continue;
+
+        failedStr += `(${desStr}: ${exactProb}, ${exactProbEldritch}, ${exactProbAspect}, ${exactProbEldritchAspect}) `;
       }
 
-      recomb.addFailedItems(
-        failedItems,
-        totalProb,
-        totalProbEldritch,
-        totalProbAspect,
-        totalProbEldritchAspect
-      );
+      // if no failed then add using min vals
+      if (failedStr == "") {
+        const minP = Math.min(
+          recomb.finalItem.desP,
+          minFinal[recomb.feederItems.totalP]
+        );
+        const minS = Math.min(
+          recomb.finalItem.desS,
+          minFinal[recomb.feederItems.totalS]
+        );
+        failedStr += `(${minP}p/${minS}s: 1.0000, 1.0000, 1.0000, 1.0000)`;
+      }
+
+      // recomb.addFailedItems(failedStr.trim());
+      recomb.failedStr = failedStr.trim();
     }
   }
 
@@ -522,8 +589,7 @@ const getAllFeederPairs = () => {
       const feederItems = new FeederItems(item1, item2);
       const desStr = feederItems.desStr;
       const excStr = feederItems.excStr;
-
-      const magicCount = [item1, item2].filter((item) => item.isMagic).length;
+      const magicCount = feederItems.magicCount;
 
       // If haven't seen item, init
       if (!(desStr in seenFeeders)) {
