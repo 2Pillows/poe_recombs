@@ -32,7 +32,7 @@ const writeToSheet = (recombResults) => {
     "Desired String",
     "Exclusive String",
     "Full String Option",
-    "Path Option",
+    "Option in Path",
     "Prob",
     "Prob Eldritch",
     "Prob Aspect",
