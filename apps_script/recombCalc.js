@@ -1,86 +1,8 @@
 // script that perfoms calcs to make recomb data
-// writes results to sheets
 
 // -----------------------------------------------------
-// Main Function
+// Access recomb results w/ getRecombResults()
 // -----------------------------------------------------
-
-function startRecombCalc() {
-  const allFeederPairs = getAllFeederPairs();
-
-  const allRecombResults = getRecombResults(allFeederPairs);
-
-  writeResults(allRecombResults);
-}
-
-// -----------------------------------------------------
-// Write results to sheet
-// -----------------------------------------------------
-
-const writeResults = (recombResults) => {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
-    SHEET_NAMES.RESULTS_SHEET
-  );
-
-  // need to clear before writing
-  const lastRow = sheet.getLastRow();
-  sheet.setFrozenRows(0);
-  if (lastRow > 2) {
-    sheet.deleteRows(3, lastRow - 2);
-  }
-  sheet.setFrozenRows(1);
-
-  const headers = [
-    "Final Item",
-    "Desired String",
-    "Exclusive String",
-    "Full String Option",
-    "Path Option",
-    "Prob",
-    "Prob Eldritch",
-    "Prob Aspect",
-    // "Prob Eldritch Aspect",
-    "Divines",
-    "Divines Eldritch",
-    "Divines Aspect",
-    "Aspects Used",
-    "Magic Items",
-    "Failed Items",
-  ];
-
-  const recombTable = [headers];
-
-  for (const [finalItem, recombList] of Object.entries(recombResults)) {
-    recombList.forEach((recomb) => {
-      recombTable.push([
-        finalItem,
-        recomb.feederItems.desStr,
-        recomb.feederItems.excStr,
-        recomb.feederItems.str,
-        recomb.isPathOption,
-        recomb.prob,
-        recomb.probEldritch,
-        recomb.probAspect,
-        // recomb.probEldritchAspect,
-        recomb.divines,
-        recomb.divinesEldritch,
-        recomb.divinesAspect,
-        recomb.feederItems.totalAspS,
-        recomb.feederItems.magicCount,
-        recomb.failedStr,
-      ]);
-    });
-  }
-
-  const startRow = 1;
-  const startCol = 1;
-  const numRows = recombTable.length;
-  const numCols = recombTable[0].length;
-
-  sheet.getRange(startRow, startCol, numRows, numCols).setValues(recombTable);
-
-  console.log("results written");
-};
 
 // -----------------------------------------------------
 // Tables for recomb odds
@@ -398,8 +320,9 @@ class Item {
 // Functions for recombination calculations
 // -----------------------------------------------------
 
-const getRecombResults = (allFeederPairs) => {
+const getRecombResults = () => {
   const allResults = {};
+  const allFeederPairs = getFeederPairs();
 
   for (const feederItems of allFeederPairs) {
     const item1 = feederItems.item1;
@@ -575,7 +498,7 @@ const getAllItems = () => {
 };
 
 // All item affix and exclusive mod combinations
-const getAllFeederPairs = () => {
+const getFeederPairs = () => {
   const allItems = getAllItems();
 
   // Loop through all items and find every unique item pair
@@ -620,8 +543,3 @@ const getAllFeederPairs = () => {
 
   return allFeederPairs;
 };
-
-// -----------------------------------------------------
-// Call main func to start, used for VS Code
-// -----------------------------------------------------
-// startRecombCalc();
