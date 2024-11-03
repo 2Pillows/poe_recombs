@@ -22,17 +22,27 @@ const writeResults = (recombResults) => {
     SHEET_NAMES.RESULTS_SHEET
   );
 
+  // need to clear before writing
+  const lastRow = sheet.getLastRow();
+  sheet.setFrozenRows(0);
+  if (lastRow > 2) {
+    sheet.deleteRows(3, lastRow - 2);
+  }
+  sheet.setFrozenRows(1);
+
   const headers = [
     "Final Item",
     "Desired String",
     "Exclusive String",
     "Full String Option",
+    "Path Option",
     "Prob",
     "Prob Eldritch",
     "Prob Aspect",
-    "Prob Eldritch Aspect",
+    // "Prob Eldritch Aspect",
     "Divines",
     "Divines Eldritch",
+    "Divines Aspect",
     "Aspects Used",
     "Magic Items",
     "Failed Items",
@@ -47,12 +57,14 @@ const writeResults = (recombResults) => {
         recomb.feederItems.desStr,
         recomb.feederItems.excStr,
         recomb.feederItems.str,
+        recomb.isPathOption,
         recomb.prob,
         recomb.probEldritch,
         recomb.probAspect,
-        recomb.probEldritchAspect,
+        // recomb.probEldritchAspect,
         recomb.divines,
         recomb.divinesEldritch,
+        recomb.divinesAspect,
         recomb.feederItems.totalAspS,
         recomb.feederItems.magicCount,
         recomb.failedStr,
@@ -116,14 +128,19 @@ class Recombinator {
     this.finalItem = finalItem;
     this.desStr = `${finalItem.desP}p/${finalItem.desS}s`;
 
-    // divines for multimod
-    // prefix lock used when have only aspect as suffix
-    // but don't need to lock prefix if can use edlritch annul
-    this.divines = feederItems.multimods;
-    this.divinesEldritch = feederItems.multimods;
+    this.divines = feederItems.multimods; // lock prefix to clean suffixes
+    this.divinesEldritch = feederItems.multimods; // eldritch annul to clean suffixes
+    this.divinesAspect = feederItems.multimods; // don't need anything beside multimods
 
     // Eldritch annuls used to remove aspect
     this.eldritchAnnuls = 0;
+
+    // Is valid for path if no feeder item is better version of final
+    this.isPathOption =
+      (finalItem.finalP > feederItems.item1.desP ||
+        finalItem.finalS > feederItems.item1.desS) &&
+      (finalItem.finalP > feederItems.item2.desP ||
+        finalItem.finalS > feederItems.item2.desS);
 
     // Prob of recomb
     // probs have only desired mods and crafted, probAspect has aspects
@@ -355,11 +372,26 @@ class Item {
     this.totalS = desS + craftS + aspS;
 
     this.desStr = `${desP}p/${desS}s`;
-    this.str = `${desP}p${craftP}c/${desS}s${craftS}c${aspS}a`;
+    this.str = `${this.addAffixStr(desP, "p", craftP)}/${this.addAffixStr(
+      desS,
+      "s",
+      craftS,
+      aspS
+    )}`;
 
     this.isMagic = this.totalP <= 1 && this.totalS <= 1;
 
     this.multimods = craftP + craftS > 1 ? 1 : 0;
+  }
+
+  addAffixStr(xVal, xChar, cVal, aVal) {
+    let str = "";
+
+    if (xVal != 0) str += `${xVal}${xChar}`;
+    if (cVal != 0) str += `${cVal}c`;
+    if (aVal && aVal != 0) str += `${aVal}a`;
+
+    return str == "" ? `0${xChar}` : str;
   }
 }
 
@@ -376,21 +408,6 @@ const getRecombResults = (allFeederPairs) => {
 
     // loop through all possible final items
     // all recomb
-
-    // want better way of getting probabiltiies as well as failed itme probs
-    // doing full calc for each possible final item seems inefficient
-    //    get all final items for item combo
-    //    caclate prob and all failes for each item
-    //    same logic as better method? can improve later if need
-
-    // when is an item combination valid for a final item?
-    // impossible if des affixes on items are less than final
-    // but don't want to have 0/1 + 3/3 to get 0/1 for example
-    // but if you have a 3/3, then 0/1 is a downgrade
-    // 2/0 + 2/0 -> 3/0 is fine
-    // 3/0 + 0/1 -> 1/1 is fine
-    // 1/2 + 0/1 -> 1/2 is bad
-    // 2/0 + 1/1 -> 2/1 is fine
 
     // All possible recombs for feeder items
     const posRecombs = [];
@@ -417,27 +434,12 @@ const getRecombResults = (allFeederPairs) => {
           continue;
         }
 
-        // Want to get all options for final item, used to add failed
-        // Fine to have same number of mods as feeder, used for transfering
-        // if (
-        //   // Final can't have less total mods than both feeders
-        //   // Maybe okay to use || instead of &&, not sure
-        //   finalP + finalS < item1.desP + item1.desS &&
-        //   finalP + finalS < item2.desP + item2.desS
-        // ) {
-        //   continue;
-        // }
-
         const recomb = new Recombinator(feederItems, finalItem);
 
         // skip if impossible to recomb
         if (recomb.prob == 0) continue;
 
-        // Add recomb to all results
-        if (!(recomb.desStr in allResults)) {
-          allResults[recomb.desStr] = [];
-        }
-        allResults[recomb.desStr].push(recomb);
+        // Add as recomb result for feeder items
 
         totalProb += recomb.exactProb;
         totalProbEldritch += recomb.exactProbEldritch;
@@ -445,6 +447,12 @@ const getRecombResults = (allFeederPairs) => {
         // totalProbEldritchAspect += recomb.exactProbEldritchAspect;
 
         posRecombs.push(recomb);
+
+        // Add recomb to all results
+        if (!(recomb.desStr in allResults)) {
+          allResults[recomb.desStr] = [];
+        }
+        allResults[recomb.desStr].push(recomb);
       }
     }
 
