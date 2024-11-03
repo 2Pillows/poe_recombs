@@ -10,8 +10,6 @@ function startRecombCalc() {
 
   const allRecombResults = getRecombResults(allFeederPairs);
 
-  // console.log(allRecombResults);
-
   writeResults(allRecombResults);
 }
 
@@ -135,12 +133,12 @@ class Recombinator {
       this.prob,
       this.probEldritch,
       this.probAspect,
-      this.probEldritchAspect,
+      // this.probEldritchAspect,
       // Exactly desired mods
       this.exactProb,
       this.exactProbEldritch,
       this.exactProbAspect,
-      this.exactProbEldritchAspect,
+      // this.exactProbEldritchAspect,
     ] = this.getProb();
   }
 
@@ -167,20 +165,20 @@ class Recombinator {
       [sMod, pMod] = adjustProbs(sMod, pMod);
     }
 
+    // Think can move to path logic if item is magic
     // Adjust prob if need to regal final item if magic
-    let regalMod = 1;
-    let regalModEldritch = 1;
-    if (
-      this.finalItem.desP == 1 &&
-      this.finalItem.desS == 1 &&
-      this.feederItems.totalExc == 0
-    ) {
-      regalMod = 1 / 3;
-      regalModEldritch = 1 / 2;
-    }
+    // let regalMod = 1;
+    // let regalModEldritch = 1;
+    // if (
+    //   this.finalItem.desP == 1 &&
+    //   this.finalItem.desS == 1 &&
+    //   this.feederItems.totalExc == 0
+    // ) {
+    //   regalMod = 1 / 3;
+    //   regalModEldritch = 1 / 2;
+    // }
 
-    const applyMod = ([pProb, sProb], rMod) =>
-      rMod * (pProb * pMod + sProb * sMod);
+    const applyMods = ([pProb, sProb]) => pProb * pMod + sProb * sMod;
 
     // xProbs list indices
     // prob
@@ -191,15 +189,15 @@ class Recombinator {
     // exactProbAspect
 
     return [
-      applyMod([pProbs[0], sProbs[0]], regalMod), // prob
-      applyMod([pProbs[1], sProbs[1]], regalModEldritch), // probEldritch
-      applyMod([pProbs[2], sProbs[2]], regalMod), // probAspect
-      applyMod([pProbs[2], sProbs[2]], regalModEldritch), // probEldritchAspect
+      applyMods([pProbs[0], sProbs[0]]), // prob
+      applyMods([pProbs[1], sProbs[1]]), // probEldritch
+      applyMods([pProbs[2], sProbs[2]]), // probAspect
+      // applyMods([pProbs[2], sProbs[2]], regalModEldritch), // probEldritchAspect
 
-      applyMod([pProbs[3], sProbs[3]], regalMod), // exactProb
-      applyMod([pProbs[4], sProbs[4]], regalModEldritch), // exactProbEldritch
-      applyMod([pProbs[5], sProbs[5]], regalMod), // exactProbAspect
-      applyMod([pProbs[5], sProbs[5]], regalModEldritch), // exactProbEldritchAspect
+      applyMods([pProbs[3], sProbs[3]]), // exactProb
+      applyMods([pProbs[4], sProbs[4]]), // exactProbEldritch
+      applyMods([pProbs[5], sProbs[5]]), // exactProbAspect
+      // applyMods([pProbs[5], sProbs[5]], regalModEldritch), // exactProbEldritchAspect
     ];
   }
 
@@ -400,7 +398,7 @@ const getRecombResults = (allFeederPairs) => {
     let totalProb = 0;
     let totalProbEldritch = 0;
     let totalProbAspect = 0;
-    let totalProbEldritchAspect = 0;
+    // let totalProbEldritchAspect = 0;
 
     for (
       let finalP = 0;
@@ -444,7 +442,7 @@ const getRecombResults = (allFeederPairs) => {
         totalProb += recomb.exactProb;
         totalProbEldritch += recomb.exactProbEldritch;
         totalProbAspect += recomb.exactProbAspect;
-        totalProbEldritchAspect += recomb.exactProbEldritchAspect;
+        // totalProbEldritchAspect += recomb.exactProbEldritchAspect;
 
         posRecombs.push(recomb);
       }
@@ -461,7 +459,7 @@ const getRecombResults = (allFeederPairs) => {
       totalProb -= recomb.exactProb;
       totalProbEldritch -= recomb.exactProbEldritch;
       totalProbAspect -= recomb.exactProbAspect;
-      totalProbEldritchAspect -= recomb.exactProbEldritchAspect;
+      // totalProbEldritchAspect -= recomb.exactProbEldritchAspect;
 
       let failedStr = "";
       for (let failedRecomb of posRecombs) {
@@ -476,15 +474,16 @@ const getRecombResults = (allFeederPairs) => {
           failedRecomb.exactProbAspect,
           totalProbAspect
         );
-        let exactProbEldritchAspect = adjustProbs(
-          failedRecomb.exactProbEldritchAspect,
-          totalProbEldritchAspect
-        );
+        // let exactProbEldritchAspect = adjustProbs(
+        //   failedRecomb.exactProbEldritchAspect,
+        //   totalProbEldritchAspect
+        // );
 
         // dont add to failed options if impossible to get
         if (exactProb == 0) continue;
 
-        failedStr += `(${desStr}: ${exactProb}, ${exactProbEldritch}, ${exactProbAspect}, ${exactProbEldritchAspect}) `;
+        // failedStr += `(${desStr}: ${exactProb}, ${exactProbEldritch}, ${exactProbAspect}, ${exactProbEldritchAspect}) `;
+        failedStr += `(${desStr}: ${exactProb}, ${exactProbEldritch}, ${exactProbAspect}) `;
       }
 
       // if no failed then add using min vals
