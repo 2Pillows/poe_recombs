@@ -221,13 +221,12 @@ class Recombinator {
   calcItemProb(prefixChosen) {
     // Decides where the exclusive mod is on item
     const allocateExclusive = (des1, exc1, des2, exc2) => {
-      // Must be primary if have exclusive and desired
-      // If no desired mods, then don't need to add a required
+      // If primary w/ desired, then need primary
       if (exc1 > 0 && des1 > 0) {
         return [true, false];
       }
-      // If not primary, but secondary, then need secondary
-      else if (exc2 > 0 && des2 > 0) {
+      // If no primary, but secondary w/ desired, then need secondary
+      else if (exc1 == 0 && exc2 > 0 && des2 > 0) {
         return [false, true];
       }
       // Has no exclusive mods or no desired mods
