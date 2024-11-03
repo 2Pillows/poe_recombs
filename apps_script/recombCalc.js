@@ -137,10 +137,10 @@ class Recombinator {
 
     // Is valid for path if no feeder item is better version of final
     this.isPathOption =
-      (finalItem.finalP > feederItems.item1.desP ||
-        finalItem.finalS > feederItems.item1.desS) &&
-      (finalItem.finalP > feederItems.item2.desP ||
-        finalItem.finalS > feederItems.item2.desS);
+      (finalItem.desP > feederItems.item1.desP ||
+        finalItem.desS > feederItems.item1.desS) &&
+      (finalItem.desP > feederItems.item2.desP ||
+        finalItem.desS > feederItems.item2.desS);
 
     // Prob of recomb
     // probs have only desired mods and crafted, probAspect has aspects
