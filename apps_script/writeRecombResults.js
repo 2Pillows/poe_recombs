@@ -30,8 +30,8 @@ const writeToSheet = (recombResults) => {
   const headers = [
     "Final Item",
     "Desired String",
-    "Exclusive String",
-    "Full String Option",
+    "Exclusive Mod Pool",
+    "Full String Example",
     "Option in Path",
     "Prob",
     "Prob Eldritch",
