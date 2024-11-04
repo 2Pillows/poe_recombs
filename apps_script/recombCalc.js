@@ -50,9 +50,9 @@ class Recombinator {
     this.finalItem = finalItem;
     this.desStr = `${finalItem.desP}p/${finalItem.desS}s`;
 
-    this.divines = feederItems.multimods; // lock prefix to clean suffixes
-    this.divinesEldritch = feederItems.multimods; // eldritch annul to clean suffixes
-    this.divinesAspect = feederItems.multimods; // don't need anything beside multimods
+    this.divines = feederItems.multimods * 2; // lock prefix to clean suffixes
+    this.divinesEldritch = feederItems.multimods * 2; // eldritch annul to clean suffixes
+    this.divinesAspect = feederItems.multimods * 2; // don't need anything beside multimods
 
     // Eldritch annuls used to remove aspect
     this.eldritchAnnuls = 0;
