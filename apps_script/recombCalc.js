@@ -19,16 +19,6 @@ const weightsTable = [
   [0.0, 0.0, 0.28, 0.72], // 6 initial mods
 ];
 
-const minFinal = {
-  0: 0,
-  1: 0,
-  2: 1,
-  3: 1,
-  4: 1,
-  5: 2,
-  6: 2,
-};
-
 // Sum of odds, chance of getting at least
 const cumsumTable = [
   // 0    1     2     3         final mods
@@ -72,12 +62,10 @@ class Recombinator {
       this.prob,
       this.probEldritch,
       this.probAspect,
-      // this.probEldritchAspect,
       // Exactly desired mods
       this.exactProb,
       this.exactProbEldritch,
       this.exactProbAspect,
-      // this.exactProbEldritchAspect,
     ] = this.getProb();
   }
 
@@ -131,59 +119,78 @@ class Recombinator {
       applyMods([pProbs[0], sProbs[0]]), // prob
       applyMods([pProbs[1], sProbs[1]]), // probEldritch
       applyMods([pProbs[2], sProbs[2]]), // probAspect
-      // applyMods([pProbs[2], sProbs[2]], regalModEldritch), // probEldritchAspect
 
       applyMods([pProbs[3], sProbs[3]]), // exactProb
       applyMods([pProbs[4], sProbs[4]]), // exactProbEldritch
       applyMods([pProbs[5], sProbs[5]]), // exactProbAspect
-      // applyMods([pProbs[5], sProbs[5]], regalModEldritch), // exactProbEldritchAspect
     ];
   }
 
   calcItemProb(prefixChosen) {
-    // Decides where the exclusive mod is on item
-    const allocateExclusive = (des1, exc1, des2, exc2) => {
-      // If primary w/ desired, then need primary
-      if (exc1 > 0 && des1 > 0) {
-        return [true, false];
-      }
-      // If no primary, but secondary w/ desired, then need secondary
-      else if (exc1 == 0 && exc2 > 0 && des2 > 0) {
-        return [false, true];
-      }
-      // Has no exclusive mods or no desired mods
-      else {
+    // Returns total number of affixes required
+    const getRequiredAffixes = (requiredAffix = false) => {
+      // Decides where the exclusive mod is on item
+      const allocateExclusive = (des1, exc1, des2, exc2) => {
+        // If primary
+        if (exc1 > 0) {
+          // check if needed or desired, then need primary
+          if (requiredAffix || des1 > 0) {
+            return [true, false];
+          }
+        }
+
+        // If no primary, but secondary
+        else if (exc2 > 0) {
+          // check if needed or desired, then need secondary
+          if (requiredAffix || des2 > 0) {
+            return [false, true];
+          }
+        }
+
+        // Has no exclusive mods or no desired mods
         return [false, false];
+      };
+
+      let [excPrefix, excSuffix] = [false, false];
+      if (prefixChosen) {
+        [excPrefix, excSuffix] = allocateExclusive(
+          this.finalItem.desP,
+          this.feederItems.totalExcP,
+          this.finalItem.desS,
+          this.feederItems.totalExcS
+        );
+      } else {
+        [excSuffix, excPrefix] = allocateExclusive(
+          this.finalItem.desS,
+          this.feederItems.totalExcS,
+          this.finalItem.desP,
+          this.feederItems.totalExcP
+        );
       }
+
+      // Add exclusive to prefixes or suffixes
+      const requiredP = excPrefix
+        ? this.finalItem.desP + 1
+        : this.finalItem.desP;
+      const requiredS = excSuffix
+        ? this.finalItem.desS + 1
+        : this.finalItem.desS;
+
+      return [requiredP, requiredS];
     };
 
-    let [excPrefix, excSuffix] = [false, false];
-    if (prefixChosen) {
-      [excPrefix, excSuffix] = allocateExclusive(
-        this.finalItem.desP,
-        this.feederItems.totalExcP,
-        this.finalItem.desS,
-        this.feederItems.totalExcS
-      );
-    } else {
-      [excSuffix, excPrefix] = allocateExclusive(
-        this.finalItem.desS,
-        this.feederItems.totalExcS,
-        this.finalItem.desP,
-        this.feederItems.totalExcP
-      );
-    }
-
-    // Add exclusive to prefixes or suffixes
-    const requiredP = excPrefix ? this.finalItem.desP + 1 : this.finalItem.desP;
-    const requiredS = excSuffix ? this.finalItem.desS + 1 : this.finalItem.desS;
+    const [requiredP, requiredS] = getRequiredAffixes();
 
     // Get probs of getting required mods
     const pProb = cumsumTable[this.feederItems.totalP][requiredP];
     const sProbAspect = cumsumTable[this.feederItems.totalS][requiredS];
 
-    const exactPProb = weightsTable[this.feederItems.totalP][requiredP];
-    const exactSProbAspect = weightsTable[this.feederItems.totalS][requiredS];
+    // exact probs require affix if present
+    const [exactRequiredP, exactRequiredS] = getRequiredAffixes(true);
+
+    const exactPProb = weightsTable[this.feederItems.totalP][exactRequiredP];
+    const exactSProbAspect =
+      weightsTable[this.feederItems.totalS][exactRequiredS];
 
     // Invalid required mods
     if (!pProb || !sProbAspect) {
@@ -328,16 +335,8 @@ const getRecombResults = () => {
     const item1 = feederItems.item1;
     const item2 = feederItems.item2;
 
-    // loop through all possible final items
-    // all recomb
-
     // All possible recombs for feeder items
     const posRecombs = [];
-
-    let totalProb = 0;
-    let totalProbEldritch = 0;
-    let totalProbAspect = 0;
-    // let totalProbEldritchAspect = 0;
 
     for (
       let finalP = 0;
@@ -362,12 +361,6 @@ const getRecombResults = () => {
         if (recomb.prob == 0) continue;
 
         // Add as recomb result for feeder items
-
-        totalProb += recomb.exactProb;
-        totalProbEldritch += recomb.exactProbEldritch;
-        totalProbAspect += recomb.exactProbAspect;
-        // totalProbEldritchAspect += recomb.exactProbEldritchAspect;
-
         posRecombs.push(recomb);
 
         // Add recomb to all results
@@ -382,55 +375,87 @@ const getRecombResults = () => {
       return probsSum > 0 ? (baseProb / probsSum).toFixed(4) : "0.0000";
     };
 
-    // add failed items to recombs
-    while (posRecombs.length > 0) {
-      const recomb = posRecombs.pop();
+    // Find failed possibilities for each successful recomb
+    for (let successRecomb of posRecombs) {
+      let tProb = 0;
+      let tProbEldritch = 0;
+      let tProbAspect = 0;
 
-      totalProb -= recomb.exactProb;
-      totalProbEldritch -= recomb.exactProbEldritch;
-      totalProbAspect -= recomb.exactProbAspect;
-      // totalProbEldritchAspect -= recomb.exactProbEldritchAspect;
+      let failedRecombs = [];
 
-      let failedStr = "";
+      // Collect failed recombs and get total prob
       for (let failedRecomb of posRecombs) {
+        // isn't failed if has at least same prefixes and suffixes as success
+        if (
+          failedRecomb.finalItem.desP >= successRecomb.finalItem.desP &&
+          failedRecomb.finalItem.desS >= successRecomb.finalItem.desS
+        ) {
+          continue;
+        }
+
+        // if failed recomb then add to total to adjust prob
+        tProb += failedRecomb.exactProb;
+        tProbEldritch += failedRecomb.exactProbEldritch;
+        tProbAspect += failedRecomb.exactProbAspect;
+
+        // Add to list of failed
+        failedRecombs.push(failedRecomb);
+      }
+
+      // adjust probs and make string
+      let failedStr = "";
+      for (let failedRecomb of failedRecombs) {
         let desStr = failedRecomb.desStr;
 
-        let exactProb = adjustProbs(failedRecomb.exactProb, totalProb);
+        let exactProb = adjustProbs(failedRecomb.exactProb, tProb);
         let exactProbEldritch = adjustProbs(
           failedRecomb.exactProbEldritch,
-          totalProbEldritch
+          tProbEldritch
         );
         let exactProbAspect = adjustProbs(
           failedRecomb.exactProbAspect,
-          totalProbAspect
+          tProbAspect
         );
-        // let exactProbEldritchAspect = adjustProbs(
-        //   failedRecomb.exactProbEldritchAspect,
-        //   totalProbEldritchAspect
-        // );
 
         // dont add to failed options if impossible to get
         if (exactProb == 0) continue;
 
-        // failedStr += `(${desStr}: ${exactProb}, ${exactProbEldritch}, ${exactProbAspect}, ${exactProbEldritchAspect}) `;
         failedStr += `(${desStr}: ${exactProb}, ${exactProbEldritch}, ${exactProbAspect}) `;
       }
 
       // if no failed then add using min vals
-      if (failedStr == "") {
-        const minP = Math.min(
-          recomb.finalItem.desP,
-          minFinal[recomb.feederItems.totalP]
-        );
-        const minS = Math.min(
-          recomb.finalItem.desS,
-          minFinal[recomb.feederItems.totalS]
-        );
-        failedStr += `(${minP}p/${minS}s: 1.0000, 1.0000, 1.0000, 1.0000)`;
+      // for 1 mod items
+      if (failedRecombs.length == 0) {
+        // const minFinal = {
+        //   0: 0,
+        //   1: 0,
+        //   2: 1,
+        //   3: 1,
+        //   4: 1,
+        //   5: 2,
+        //   6: 2,
+        // };
+        // const minP = Math.min(
+        //   successRecomb.finalItem.desP,
+        //   minFinal[successRecomb.feederItems.totalP]
+        // );
+        // const minS = Math.min(
+        //   successRecomb.finalItem.desS,
+        //   minFinal[successRecomb.feederItems.totalS]
+        // );
+        // failedStr += `(${minP}p/${minS}s: 1.0000, 1.0000, 1.0000, 1.0000)`;
+        if (successRecomb.desStr != "0p/1s") {
+          failedStr += "(0p/1s: 1.0000, 1.0000, 1.0000, 1.0000)";
+        } else if (successRecomb.desStr != "1p/0s") {
+          failedStr += "(1p/0s: 1.0000, 1.0000, 1.0000, 1.0000)";
+        } else {
+          console.log("expected failed but none found");
+        }
       }
 
-      // recomb.addFailedItems(failedStr.trim());
-      recomb.failedStr = failedStr.trim();
+      // successRecomb.addFailedItems(failedStr.trim());
+      successRecomb.failedRecombs = failedRecombs;
+      successRecomb.failedStr = failedStr.trim();
     }
   }
 
