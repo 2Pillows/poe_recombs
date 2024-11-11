@@ -509,7 +509,7 @@ function getPath(baseValues, sortProb, allowAspect) {
       itemOptions.eldritchItem &&
       eAnnulsUsed != 0
     ) {
-      constantCost = eAnnulsUsed * costOptions.eldritchAnnulCost;
+      constantCost += eAnnulsUsed * costOptions.eldritchAnnulCost;
     }
 
     // item cost for each recomb is feeders - expected return from failed
