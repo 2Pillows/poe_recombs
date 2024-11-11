@@ -378,8 +378,6 @@ function getPath(baseValues, sortProb, allowAspect) {
         const dpStr = itemStr + " R";
         const guarUsed = { [dpStr]: 1 };
         const guarKey = JSON.stringify(guarUsed);
-        const cost = guarItems[itemStr].cost;
-        // const count = guarItems[itemStr].count;
 
         if (!dp[dpStr]) {
           dp[dpStr] = {};
@@ -387,8 +385,8 @@ function getPath(baseValues, sortProb, allowAspect) {
 
         dp[dpStr][guarKey] = {
           pathProb: 1,
-          pathCost: cost,
-          baseValue: cost,
+          pathCost: guarItems[itemStr].cost,
+          baseValue: baseValues[dpStr],
           pathHistory: [],
           guarUsed: guarUsed,
         };
