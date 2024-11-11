@@ -1,7 +1,6 @@
-// script that perfoms calcs to make recomb data
-
 // -----------------------------------------------------
 // Access recomb results w/ getRecombResults()
+// Returns dict of {finalItem: [all recomb options]}
 // -----------------------------------------------------
 
 // -----------------------------------------------------
@@ -38,6 +37,7 @@ class Recombinator {
   constructor(feederItems, finalItem) {
     this.feederItems = feederItems;
     this.finalItem = finalItem;
+    this.totalDes = finalItem.desP + finalItem.desS;
     this.desStr = `${finalItem.desP}p/${finalItem.desS}s`;
 
     this.divines = feederItems.multimods * 2; // lock prefix to clean suffixes
@@ -47,16 +47,21 @@ class Recombinator {
     // Eldritch annuls used to remove aspect
     this.eldritchAnnuls = 0;
 
-    // Is valid for path if no feeder item is better version of final
-    this.isPathOption =
-      (finalItem.desP > feederItems.item1.desP ||
-        finalItem.desS > feederItems.item1.desS) &&
-      (finalItem.desP > feederItems.item2.desP ||
-        finalItem.desS > feederItems.item2.desS);
+    // Bool if each feeder has less mods than final, 0 mods is fine
+    const checkLessMods = (item) => {
+      // if item doesn't have more mods than final
+      // and isn't same as final, then okay
+      return (
+        item.desP <= finalItem.desP &&
+        item.desS <= finalItem.desS &&
+        item.desStr != this.desStr
+      );
+    };
+    this.hasLessMods =
+      checkLessMods(feederItems.item1) && checkLessMods(feederItems.item2);
 
     // Prob of recomb
     // probs have only desired mods and crafted, probAspect has aspects
-
     [
       // At least desired mods
       this.prob,
@@ -92,38 +97,12 @@ class Recombinator {
       [sMod, pMod] = adjustProbs(sMod, pMod);
     }
 
-    // Think can move to path logic if item is magic
-    // Adjust prob if need to regal final item if magic
-    // let regalMod = 1;
-    // let regalModEldritch = 1;
-    // if (
-    //   this.finalItem.desP == 1 &&
-    //   this.finalItem.desS == 1 &&
-    //   this.feederItems.totalExc == 0
-    // ) {
-    //   regalMod = 1 / 3;
-    //   regalModEldritch = 1 / 2;
-    // }
+    let itemProbs = [];
+    for (let i = 0; i < pProbs.length; i++) {
+      itemProbs.push(pProbs[i] * pMod + sProbs[i] * sMod);
+    }
 
-    const applyMods = ([pProb, sProb]) => pProb * pMod + sProb * sMod;
-
-    // xProbs list indices
-    // prob
-    // probEldritch
-    // probAspect
-    // exactProb
-    // exactProbEldritch
-    // exactProbAspect
-
-    return [
-      applyMods([pProbs[0], sProbs[0]]), // prob
-      applyMods([pProbs[1], sProbs[1]]), // probEldritch
-      applyMods([pProbs[2], sProbs[2]]), // probAspect
-
-      applyMods([pProbs[3], sProbs[3]]), // exactProb
-      applyMods([pProbs[4], sProbs[4]]), // exactProbEldritch
-      applyMods([pProbs[5], sProbs[5]]), // exactProbAspect
-    ];
+    return itemProbs;
   }
 
   calcItemProb(prefixChosen) {
@@ -328,7 +307,8 @@ class Item {
 // -----------------------------------------------------
 
 const getRecombResults = () => {
-  const allResults = {};
+  const recombsForFinal = {};
+  const recombsForFeeder = {};
   const allFeederPairs = getFeederPairs();
 
   for (const feederItems of allFeederPairs) {
@@ -336,7 +316,7 @@ const getRecombResults = () => {
     const item2 = feederItems.item2;
 
     // All possible recombs for feeder items
-    const posRecombs = [];
+    const allRecombs = [];
 
     for (
       let finalP = 0;
@@ -361,30 +341,46 @@ const getRecombResults = () => {
         if (recomb.prob == 0) continue;
 
         // Add as recomb result for feeder items
-        posRecombs.push(recomb);
+        allRecombs.push(recomb);
 
         // Add recomb to all results
-        if (!(recomb.desStr in allResults)) {
-          allResults[recomb.desStr] = [];
+        if (!(recomb.desStr in recombsForFinal)) {
+          recombsForFinal[recomb.desStr] = [];
         }
-        allResults[recomb.desStr].push(recomb);
+        recombsForFinal[recomb.desStr].push(recomb);
+
+        const getItemStr = (item) => {
+          return item.isMagic ? item.desStr + " M" : item.desStr + " R";
+        };
+
+        const item1DesStr = getItemStr(item1);
+        const item2DesStr = getItemStr(item2);
+
+        const addRecombForFeeder = (itemStr) => {
+          if (!recombsForFeeder[itemStr]) {
+            recombsForFeeder[itemStr] = [];
+          }
+          recombsForFeeder[itemStr].push(recomb);
+        };
+
+        addRecombForFeeder(item1DesStr);
+
+        if (item1DesStr != item2DesStr) {
+          addRecombForFeeder(item2DesStr);
+        }
       }
     }
 
-    const adjustProbs = (baseProb, probsSum) => {
-      return probsSum > 0 ? (baseProb / probsSum).toFixed(4) : "0.0000";
-    };
-
     // Find failed possibilities for each successful recomb
-    for (let successRecomb of posRecombs) {
+    for (let successRecomb of allRecombs) {
       let tProb = 0;
       let tProbEldritch = 0;
       let tProbAspect = 0;
 
-      let failedRecombs = [];
+      let posFailed = [];
 
       // Collect failed recombs and get total prob
-      for (let failedRecomb of posRecombs) {
+      for (let failedRecomb of allRecombs) {
         // isn't failed if has at least same prefixes and suffixes as success
         if (
           failedRecomb.finalItem.desP >= successRecomb.finalItem.desP &&
@@ -399,13 +395,20 @@ const getRecombResults = () => {
         tProbAspect += failedRecomb.exactProbAspect;
 
         // Add to list of failed
-        failedRecombs.push(failedRecomb);
+        posFailed.push(failedRecomb);
       }
 
-      // adjust probs and make string
+      // adjust probs and make list and string
+      let failedRecombs = [];
       let failedStr = "";
-      for (let failedRecomb of failedRecombs) {
+      for (let failedRecomb of posFailed) {
+        const finalItem = failedRecomb.finalItem;
+        const totalDes = finalItem.desP + finalItem.desS;
         let desStr = failedRecomb.desStr;
+
+        const adjustProbs = (baseProb, probsSum) => {
+          return probsSum > 0 ? baseProb / probsSum : 0.0;
+        };
 
         let exactProb = adjustProbs(failedRecomb.exactProb, tProb);
         let exactProbEldritch = adjustProbs(
@@ -420,30 +423,24 @@ const getRecombResults = () => {
         // dont add to failed options if impossible to get
         if (exactProb == 0) continue;
 
-        failedStr += `(${desStr}: ${exactProb}, ${exactProbEldritch}, ${exactProbAspect}) `;
+        failedStr += `(${desStr}: ${exactProb.toFixed(
+          4
+        )}, ${exactProbEldritch.toFixed(4)}, ${exactProbAspect.toFixed(4)}) `;
+
+        failedRecombs.push({
+          desStr: desStr,
+          totalDes: totalDes,
+          desP: finalItem.desP,
+          desS: finalItem.desS,
+          prob: exactProb,
+          probEldritch: exactProbEldritch,
+          probAspect: exactProbAspect,
+        });
       }
 
       // if no failed then add using min vals
       // for 1 mod items
       if (failedRecombs.length == 0) {
-        // const minFinal = {
-        //   0: 0,
-        //   1: 0,
-        //   2: 1,
-        //   3: 1,
-        //   4: 1,
-        //   5: 2,
-        //   6: 2,
-        // };
-        // const minP = Math.min(
-        //   successRecomb.finalItem.desP,
-        //   minFinal[successRecomb.feederItems.totalP]
-        // );
-        // const minS = Math.min(
-        //   successRecomb.finalItem.desS,
-        //   minFinal[successRecomb.feederItems.totalS]
-        // );
-        // failedStr += `(${minP}p/${minS}s: 1.0000, 1.0000, 1.0000, 1.0000)`;
         if (successRecomb.desStr != "0p/1s") {
           failedStr += "(0p/1s: 1.0000, 1.0000, 1.0000, 1.0000)";
         } else if (successRecomb.desStr != "1p/0s") {
@@ -459,7 +456,7 @@ const getRecombResults = () => {
     }
   }
 
-  return allResults;
+  return [recombsForFinal, recombsForFeeder];
 };
 
 // -----------------------------------------------------

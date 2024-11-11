@@ -4,10 +4,10 @@
 // Main Function
 // -----------------------------------------------------
 
-function writeResults() {
-  const recombResults = getRecombResults();
+function writeRecombResults() {
+  const [finalRecombs, feederRecombs] = getRecombResults();
 
-  writeToSheet(recombResults);
+  writeToSheet(finalRecombs);
 }
 
 // -----------------------------------------------------
@@ -32,7 +32,7 @@ const writeToSheet = (recombResults) => {
     "Desired String",
     "Exclusive Mod Pool",
     "Full String Example",
-    "Option in Path",
+    "Has Less Mods",
     "Prob",
     "Prob Eldritch",
     "Prob Aspect",
@@ -53,7 +53,7 @@ const writeToSheet = (recombResults) => {
         recomb.feederItems.desStr,
         recomb.feederItems.excStr,
         recomb.feederItems.str,
-        recomb.isPathOption,
+        recomb.hasLessMods,
         recomb.prob,
         recomb.probEldritch,
         recomb.probAspect,
