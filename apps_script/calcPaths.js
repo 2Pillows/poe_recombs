@@ -107,12 +107,12 @@ function getPathTypes() {
 
 // find best path
 function getPath(baseValues, sortProb, allowAspect) {
-  const [finalRecombs, feederRecombs] = getRecombResults(); // dict w/ {final item: recomb options}
-  const sheetOptions = getSheetOptions(); // final item, cost / item options, guar items
-  const guarItems = sheetOptions.guarItems; // get guaranteed items
+  const [finalRecombs, feederRecombs] = getRecombResults();
+  const sheetOptions = getSheetOptions();
+  const guarItems = sheetOptions.guarItems;
 
   // Need to setup item details if given is empty
-  const setValues = Object.keys(baseValues).length == 0;
+  let setValues = Object.keys(baseValues).length == 0;
 
   // name for prob and divines to reference based on sheet options
   const [pathProbType, pathDivType] = getPathTypes();
@@ -123,50 +123,44 @@ function getPath(baseValues, sortProb, allowAspect) {
   // options for guar options in path
   const guarOptions = getGuarOptions(guarItems);
 
-  // create dp table
-  const dp = {};
-  initDP();
+  const dp = {}; // create dp table
+  initDP(); // add one mods and guar items
+  fillDP(); // fill in dp table
 
-  fillDP();
-
-  // update all base values if setValues
-  // if (setValues) {
-  //   for (const itemStr in dp) {
-  //     // const plainStr = itemStr.replace(" R", "")
-
-  //     // if (guarItems[plainStr]) continue // don't overwrite base values oof guar items
-
-  //     const value = baseValues[itemStr]
-  //     for (const guarKey in dp[itemStr]) {
-  //       dp[itemStr][guarKey].baseValue = value
-  //     }
-  //   }
-  // }
-
-  // fillDP()
-
-  // find best path given options, assume guar is best
-  const finalItem = dp[sheetOptions.finalItem + " R"];
-  let bestPath = { pathProb: -Infinity, pathCost: Infinity };
-
-  for (const guarPath of guarOptions) {
-    const guarKey = JSON.stringify(guarPath);
-    const curPath = finalItem[guarKey];
-
-    const isBetter = isBetterRecomb(
-      bestPath.pathProb,
-      bestPath.pathCost,
-      curPath.pathProb,
-      curPath.pathCost
-    );
-
-    if (isBetter) {
-      bestPath = JSON.parse(JSON.stringify(curPath));
-    }
+  // if setting values, won't include guar items in first pass
+  if (setValues && Object.keys(guarItems).length > 0) {
+    setValues = false;
+    initDP();
+    fillDP();
   }
 
-  return bestPath;
+  // look at all variants for final item, choose best one
+  return getBestDP();
 
+  // get best option from dp table
+  function getBestDP() {
+    const finalItem = dp[sheetOptions.finalItem + " R"];
+    let bestPath = { pathProb: -Infinity, pathCost: Infinity };
+
+    for (const guarPath of guarOptions) {
+      const guarKey = JSON.stringify(guarPath);
+      const curPath = finalItem[guarKey];
+
+      const isBetter = isBetterRecomb(
+        bestPath.pathProb,
+        bestPath.pathCost,
+        curPath.pathProb,
+        curPath.pathCost
+      );
+
+      if (isBetter) {
+        bestPath = JSON.parse(JSON.stringify(curPath));
+      }
+    }
+    return bestPath;
+  }
+
+  // get list of base items, one mod items and guar items
   function getQueueItems() {
     const queueItems = [];
     if (maxDesP > 0) {
@@ -182,6 +176,7 @@ function getPath(baseValues, sortProb, allowAspect) {
     return queueItems;
   }
 
+  // fill in dp table w/ best path for each variant of guar path
   function fillDP() {
     const queue = getQueueItems();
     const visited = new Set();
@@ -315,6 +310,7 @@ function getPath(baseValues, sortProb, allowAspect) {
     }
   }
 
+  // set base values in dp
   function initDP() {
     // create {item: {pathProb, pathCost, pathHistory}}
     const addOneMod = (prefixCount, isMagic) => {
@@ -375,28 +371,32 @@ function getPath(baseValues, sortProb, allowAspect) {
       addOneMod(0, false); // "0p/1s" rare
     }
 
-    // add guar items
-    for (const itemStr in guarItems) {
-      const dpStr = itemStr + " R";
-      const guarUsed = { [dpStr]: 1 };
-      const guarKey = JSON.stringify(guarUsed);
-      const cost = guarItems[itemStr].cost;
-      // const count = guarItems[itemStr].count;
+    // dont want to use guar items when setting base values
+    if (!setValues) {
+      // add guar items
+      for (const itemStr in guarItems) {
+        const dpStr = itemStr + " R";
+        const guarUsed = { [dpStr]: 1 };
+        const guarKey = JSON.stringify(guarUsed);
+        const cost = guarItems[itemStr].cost;
+        // const count = guarItems[itemStr].count;
 
-      if (!dp[dpStr]) {
-        dp[dpStr] = {};
+        if (!dp[dpStr]) {
+          dp[dpStr] = {};
+        }
+
+        dp[dpStr][guarKey] = {
+          pathProb: 1,
+          pathCost: cost,
+          baseValue: cost,
+          pathHistory: [],
+          guarUsed: guarUsed,
+        };
       }
-
-      dp[dpStr][guarKey] = {
-        pathProb: 1,
-        pathCost: cost,
-        baseValue: cost,
-        pathHistory: [],
-        guarUsed: guarUsed,
-      };
     }
   }
 
+  // get all types of guar items in path
   function getGuarOptions(guarItems) {
     const allItems = Object.keys(guarItems);
     const result = [];
@@ -424,12 +424,14 @@ function getPath(baseValues, sortProb, allowAspect) {
     return result;
   }
 
+  // gets number of prefixes and suffixes
   function getAffixCount(desStr) {
     const match = desStr.match(/(\d+)p\/(\d+)s/);
 
     return [parseInt(match[1]), parseInt(match[2])];
   }
 
+  // checkcs if recomb has aspects, too many mods, or a feeder that is a finished item
   function isValidRecomb(recomb) {
     const finalItem = recomb.finalItem;
     const item1 = recomb.feederItems.item1;
@@ -454,7 +456,7 @@ function getPath(baseValues, sortProb, allowAspect) {
     return true;
   }
 
-  // get probs
+  // get prob of recomb
   function getPathProb(recombProb, details1, details2) {
     let pathProb = recombProb * details1.pathProb * details2.pathProb;
 
@@ -463,7 +465,7 @@ function getPath(baseValues, sortProb, allowAspect) {
     return pathProb;
   }
 
-  // get costs
+  // get costs of recomb
   function getRecombCost(recomb, details1, details2) {
     let feederValue = details1.baseValue + details2.baseValue; // value of feeder items
 
@@ -522,6 +524,7 @@ function getPath(baseValues, sortProb, allowAspect) {
     return netCost / recomb[pathProbType];
   }
 
+  // if the current details are better than final details
   function isBetterRecomb(fProb, fCost, cProb, cCost) {
     // Comparators between current and final probs and costs
     const isHigherProb = cProb > fProb;
@@ -535,11 +538,3 @@ function getPath(baseValues, sortProb, allowAspect) {
     );
   }
 }
-
-// create dp table w/ base items
-
-// need to have list {feeder item: list of all recombs w/ feeder item}
-// skip recombs that don't have a item in the dp table
-// when those items are made, they will then check the recombs where they were skipped
-
-// have feeder
