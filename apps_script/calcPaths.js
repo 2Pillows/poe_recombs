@@ -1,11 +1,11 @@
 // starts finding best path, called from on edit
 function getPathResults() {
-  let baseValues = {};
+  let itemValues = {};
 
-  const pathCost = getPath(baseValues, false, false);
-  const pathCostAspect = getPath(baseValues, false, true);
-  const pathProb = getPath(baseValues, true, false);
-  const pathProbAspect = getPath(baseValues, true, true);
+  const pathCost = getPath(itemValues, false, false);
+  const pathCostAspect = getPath(itemValues, false, true);
+  const pathProb = getPath(itemValues, true, false);
+  const pathProbAspect = getPath(itemValues, true, true);
 
   return { pathProb, pathProbAspect, pathCost, pathCostAspect };
 }
@@ -106,13 +106,13 @@ function getPathTypes() {
 }
 
 // find best path
-function getPath(baseValues, sortProb, allowAspect) {
+function getPath(itemValues, sortProb, allowAspect) {
   const [finalRecombs, feederRecombs] = getRecombResults();
   const sheetOptions = getSheetOptions();
   const guarItems = sheetOptions.guarItems;
 
   // Need to setup item details if given is empty
-  let setValues = Object.keys(baseValues).length == 0;
+  let setValues = Object.keys(itemValues).length == 0;
 
   // name for prob and divines to reference based on sheet options
   const [pathProbType, pathDivType] = getPathTypes();
@@ -286,14 +286,14 @@ function getPath(baseValues, sortProb, allowAspect) {
               if (isBetter) {
                 // set base value, no guars
                 if (setValues && guarKey === "{}") {
-                  baseValues[finalStr] = pathCost;
+                  itemValues[finalStr] = pathCost;
                 }
 
                 // update guar key for item
                 dp[finalStr][guarKey] = {
                   pathProb: pathProb,
                   pathCost: pathCost,
-                  baseValue: baseValues[finalStr],
+                  baseValue: itemValues[finalStr],
                   pathHistory: history,
                   guarUsed: guarUsed,
                 };
@@ -371,7 +371,7 @@ function getPath(baseValues, sortProb, allowAspect) {
       };
 
       if (setValues) {
-        baseValues[itemStr] = itemValue;
+        itemValues[itemStr] = itemValue;
       }
     };
 
@@ -400,7 +400,7 @@ function getPath(baseValues, sortProb, allowAspect) {
         dp[dpStr][guarKey] = {
           pathProb: 1,
           pathCost: guarItems[itemStr].cost,
-          baseValue: baseValues[dpStr],
+          baseValue: itemValues[dpStr],
           pathHistory: [],
           guarUsed: guarUsed,
         };
@@ -488,7 +488,7 @@ function getPath(baseValues, sortProb, allowAspect) {
       const failedProb = failedRecomb[pathProbType];
       // Get magic details if can be magic, otherwise get details
       const itemValue =
-        baseValues[failedDesStr + " M"] || baseValues[failedDesStr + " R"];
+        itemValues[failedDesStr + " M"] || itemValues[failedDesStr + " R"];
 
       // known base value of item
       if (itemValue) {
