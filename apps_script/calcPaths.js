@@ -367,8 +367,8 @@ function getPath(itemValues, sortProb, allowAspect) {
       };
 
       const itemProb = getOneModProb();
-      const itemValue =
-        getOneModCost() / itemProb + sheetOptions.costOptions.baseCost;
+      const modCost = getOneModCost() / itemProb;
+      const itemValue = modCost + sheetOptions.costOptions.baseCost;
 
       const plainStr = prefixCount == 1 ? "1p/0s" : "0p/1s";
       const itemStr = isMagic ? plainStr + " M" : plainStr + " R";
@@ -393,7 +393,7 @@ function getPath(itemValues, sortProb, allowAspect) {
 
       dp[itemStr]["{}"] = {
         pathProb: itemProb,
-        pathCost: 0,
+        pathCost: modCost,
         pathHistory: history,
         guarUsed: {},
       };
