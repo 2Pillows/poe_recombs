@@ -337,12 +337,26 @@ function getPath(baseValues, sortProb, allowAspect) {
           : sheetOptions.costOptions.suffixModCost;
       };
 
-      let itemProb = getOneModProb();
-      let itemValue =
+      const itemProb = getOneModProb();
+      const itemValue =
         getOneModCost() / itemProb + sheetOptions.costOptions.baseCost;
 
-      let itemStr = prefixCount == 1 ? "1p/0s" : "0p/1s";
-      itemStr += isMagic ? " M" : " R";
+      const plainStr = prefixCount == 1 ? "1p/0s" : "0p/1s";
+      const itemStr = isMagic ? plainStr + " M" : plainStr + " R";
+
+      const regalProb = ((((2 / 3) * 2) / 3) * 1) / 2 + ((1 / 3) * 1) / 2;
+      const regalDetails = {
+        recomb: {
+          desStr: plainStr,
+          feederItems: { desStr: plainStr, excStr: "Regal", str: "Regal" },
+          prob: regalProb,
+          probEldritch: regalProb,
+          probAspect: regalProb,
+        },
+        cost: itemValue,
+      };
+      const history =
+        isMagic || sheetOptions.itemOptions.modsRolled ? [] : [regalDetails];
 
       if (!dp[itemStr]) {
         dp[itemStr] = {};
@@ -352,7 +366,7 @@ function getPath(baseValues, sortProb, allowAspect) {
         pathProb: itemProb,
         pathCost: 0,
         baseValue: itemValue,
-        pathHistory: [],
+        pathHistory: history,
         guarUsed: {},
       };
 
