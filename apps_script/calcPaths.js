@@ -1,6 +1,6 @@
 // starts finding best path, called from on edit
 function getPathResults() {
-  let itemValues = {};
+  const itemValues = {};
 
   const pathCost = getPath(itemValues, false, false);
   const pathCostAspect = getPath(itemValues, false, true);
@@ -404,6 +404,23 @@ function getPath(itemValues, sortProb, allowAspect) {
           pathHistory: [],
           guarUsed: guarUsed,
         };
+
+        // if item can also be magic, make item
+        // only works with 1p/1s, think fine to hard code
+        const dpStrM = itemStr + " M";
+        if (itemStr == "1p/1s") {
+          if (!dp[dpStrM]) {
+            dp[dpStrM] = {};
+          }
+
+          dp[dpStrM][guarKey] = {
+            pathProb: 1,
+            pathCost: guarItems[itemStr].cost,
+            baseValue: itemValues[dpStrM],
+            pathHistory: [],
+            guarUsed: guarUsed,
+          };
+        }
       }
     }
   }
