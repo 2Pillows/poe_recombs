@@ -111,70 +111,74 @@ function getPath(itemValues, sortProb, allowAspect) {
   const sheetOptions = getSheetOptions();
   const guarItems = sheetOptions.guarItems;
 
-  // Need to setup item details if given is empty
-  let setValues = Object.keys(itemValues).length == 0;
-
   // name for prob and divines to reference based on sheet options
   const [pathProbType, pathDivType] = getPathTypes();
 
   // max number of total desired mods, limits number of items that can be made
   const [maxDesP, maxDesS] = getAffixCount(sheetOptions.finalItem);
 
-  // options for guar options in path
-  const guarOptions = getGuarOptions(guarItems);
+  // Need to setup item details if given is empty
+  let setValues = Object.keys(itemValues).length == 0;
 
-  const dp = {}; // create dp table
+  let dp = {}; // create dp table
+
+  if (setValues) {
+    // need to set values for itemValues
+    initDP(); // add one mods and guar items
+    fillDP(); // fill in dp table
+
+    setValues = false;
+  }
+
+  dp = {};
   initDP(); // add one mods and guar items
   fillDP(); // fill in dp table
 
-  // if setting values, won't include guar items in first pass
-  if (setValues && Object.keys(guarItems).length > 0) {
-    setValues = false;
-    initDP();
-    fillDP();
+  const guarKey = {};
+  for (const guarItem in guarItems) {
+    guarKey[guarItem + " R"] = guarItems[guarItem].count;
   }
 
   // look at all variants for final item, choose best one
-  // return getBestDP();
-
-  // returns path that includes all guar items
-  return dp[sheetOptions.finalItem + " R"][JSON.stringify(guarItems)];
+  return dp[sheetOptions.finalItem + " R"][JSON.stringify(guarKey)];
 
   // get best option from dp table
-  // currently requires guar items that aren't given a cost
-  // function getBestDP() {
-  //   const finalItem = dp[sheetOptions.finalItem + " R"];
-  //   let bestPath = { pathProb: -Infinity, pathCost: Infinity };
+  //   function getBestDP() {
+  //     const finalItem = dp[sheetOptions.finalItem + " R"];
+  //     let bestPath = { pathProb: -Infinity, pathCost: Infinity };
 
-  //   const requiredGuar = [];
-  //   for (const itemStr in guarItems) {
-  //     if (guarItems[itemStr].cost === 0) {
-  //       requiredGuar.push(itemStr + " R");
+  //     const requiredGuar = [];
+  //     for (const itemStr in guarItems) {
+  //       if (guarItems[itemStr].cost === 0) {
+  //         requiredGuar.push(itemStr + " R");
+  //       }
   //     }
-  //   }
 
-  //   for (const guarPath of guarOptions) {
-  //     const guarKey = JSON.stringify(guarPath);
-  //     const curPath = finalItem[guarKey];
+  //     // options for guar options in path
+  //     const guarOptions = getGuarOptions(guarItems);
 
-  //     if (!curPath) continue;
+  //     for (const guarPath of guarOptions) {
+  //       const guarKey = JSON.stringify(guarPath);
+  //       const curPath = finalItem[guarKey];
 
-  //     const isBetter = isBetterRecomb(
-  //       bestPath.pathProb,
-  //       bestPath.pathCost,
-  //       curPath.pathProb,
-  //       curPath.pathCost
-  //     );
+  //       if (!curPath) continue;
 
-  //     if (
-  //       isBetter &&
-  //       requiredGuar.every((guarItem) => guarKey.includes(guarItem))
-  //     ) {
-  //       bestPath = JSON.parse(JSON.stringify(curPath));
+  //       const isBetter = isBetterRecomb(
+  //         bestPath.pathProb,
+  //         bestPath.pathCost,
+  //         curPath.pathProb,
+  //         curPath.pathCost
+  //       );
+
+  //       if (
+  //         isBetter &&
+  //         requiredGuar.every((guarItem) => guarKey.includes(guarItem))
+  //       ) {
+  //         bestPath = JSON.parse(JSON.stringify(curPath));
+  //       }
   //     }
+  //     return bestPath;
   //   }
-  //   return bestPath;
-  // }
 
   // get list of base items, one mod items and guar items
   function getQueueItems() {
@@ -186,16 +190,19 @@ function getPath(itemValues, sortProb, allowAspect) {
       queueItems.push(...["0p/1s M", "0p/1s R"]);
     }
 
-    for (const itemStr in guarItems) {
-      queueItems.push(itemStr + " R");
+    if (!setValues) {
+      for (const itemStr in guarItems) {
+        queueItems.push(itemStr + " R");
+      }
     }
+
     return queueItems;
   }
 
   // fill in dp table w/ best path for each variant of guar path
   function fillDP() {
     const queue = getQueueItems();
-    const visited = new Set();
+    const guarOptions = getGuarOptions(guarItems);
 
     while (queue.length > 0) {
       const currentItem = queue.shift();
@@ -217,16 +224,6 @@ function getPath(itemValues, sortProb, allowAspect) {
           recomb.feederItems.totalExc == 0 && recomb.desStr == "1p/1s";
         const finalStr = isMagic ? recomb.desStr + " M" : recomb.desStr + " R";
 
-        // if (finalStr == "3p/2s R") {
-        //   console.log("final item")
-        // }
-
-        // Add the new item to the queue if it's not already there and no dp
-        // if (!queue.includes(finalStr) && !visited.has(finalStr)) {
-        //   queue.push(finalStr);
-        //   visited.add(finalStr);
-        // }
-
         const item1Paths = dp[item1Str] || [];
         const item2Paths = dp[item2Str] || [];
 
@@ -235,7 +232,6 @@ function getPath(itemValues, sortProb, allowAspect) {
           continue;
         }
 
-        // NEED TO IMPLEMENT GUAR ITEMS
         for (const guarKey1 in item1Paths) {
           for (const guarKey2 in item2Paths) {
             for (const guarPath of guarOptions) {
@@ -269,7 +265,7 @@ function getPath(itemValues, sortProb, allowAspect) {
               // Get prob, cost, and path history
               const prob = recomb[pathProbType];
               const pathProb = getPathProb(prob, item1Details, item2Details);
-              const cost = getRecombCost(recomb, item1Details, item2Details);
+              const cost = getRecombCost(recomb, item1Str, item2Str);
               const pathCost =
                 cost + item1Details.pathCost + item2Details.pathCost;
 
@@ -278,6 +274,8 @@ function getPath(itemValues, sortProb, allowAspect) {
                 ...item1Details.pathHistory,
               ];
               history.push({ recomb: recomb, cost: cost });
+
+              const recombStr = recomb.feederItems.str;
 
               // create dp dict for item and key
               if (!dp[finalStr] || !dp[finalStr][guarKey]) {
@@ -288,10 +286,12 @@ function getPath(itemValues, sortProb, allowAspect) {
                 dp[finalStr][guarKey] = {
                   pathProb: -Infinity,
                   pathCost: Infinity,
+                  recombStr: recombStr,
                 };
               }
 
               const curPath = dp[finalStr][guarKey];
+
               const isBetter = isBetterRecomb(
                 curPath.pathProb,
                 curPath.pathCost,
@@ -299,7 +299,10 @@ function getPath(itemValues, sortProb, allowAspect) {
                 pathCost
               );
 
-              if (isBetter) {
+              const isSameRecomb = recombStr === curPath.recombStr;
+              const moreCost = pathCost > curPath.pathCost;
+
+              if (isBetter || (setValues && isSameRecomb && moreCost)) {
                 // set base value, no guars
                 if (setValues && guarKey === "{}") {
                   itemValues[finalStr] = pathCost;
@@ -309,14 +312,24 @@ function getPath(itemValues, sortProb, allowAspect) {
                 dp[finalStr][guarKey] = {
                   pathProb: pathProb,
                   pathCost: pathCost,
-                  baseValue: itemValues[finalStr],
                   pathHistory: history,
                   guarUsed: guarUsed,
+                  recombStr: recombStr,
                 };
 
+                // check uses for final str as feeder
                 if (!queue.includes(finalStr)) {
                   queue.push(finalStr);
-                  // visited.add(finalStr);
+                }
+                // update cost for recomb, need to re check curent feeder
+                if (
+                  !queue.includes(currentItem) &&
+                  setValues &&
+                  isSameRecomb &&
+                  moreCost
+                ) {
+                  queue.push(currentItem);
+                  // console.log(queue);
                 }
               }
             }
@@ -381,7 +394,6 @@ function getPath(itemValues, sortProb, allowAspect) {
       dp[itemStr]["{}"] = {
         pathProb: itemProb,
         pathCost: 0,
-        baseValue: itemValue,
         pathHistory: history,
         guarUsed: {},
       };
@@ -416,13 +428,12 @@ function getPath(itemValues, sortProb, allowAspect) {
         dp[dpStr][guarKey] = {
           pathProb: 1,
           pathCost: guarItems[itemStr].cost,
-          baseValue: itemValues[dpStr],
           pathHistory: [],
           guarUsed: guarUsed,
         };
 
         // if item can also be magic, make item
-        // only works with 1p/1s, think fine to hard code
+        // only works with 1p/1s, think fine to only check that
         const dpStrM = itemStr + " M";
         if (itemStr == "1p/1s") {
           if (!dp[dpStrM]) {
@@ -432,7 +443,6 @@ function getPath(itemValues, sortProb, allowAspect) {
           dp[dpStrM][guarKey] = {
             pathProb: 1,
             pathCost: guarItems[itemStr].cost,
-            baseValue: itemValues[dpStrM],
             pathHistory: [],
             guarUsed: guarUsed,
           };
@@ -443,6 +453,10 @@ function getPath(itemValues, sortProb, allowAspect) {
 
   // get all types of guar items in path
   function getGuarOptions(guarItems) {
+    // no guar options when setting item values
+    if (setValues) {
+      return [{}];
+    }
     const allItems = Object.keys(guarItems);
     const result = [];
 
@@ -511,13 +525,12 @@ function getPath(itemValues, sortProb, allowAspect) {
   }
 
   // get costs of recomb
-  function getRecombCost(recomb, details1, details2) {
-    let feederValue = details1.baseValue + details2.baseValue; // value of feeder items
+  function getRecombCost(recomb, str1, str2) {
+    let feederValue = itemValues[str1] + itemValues[str2]; // value of feeder items
 
     let failedValue = 0; // value of expected failed items
     for (let failedRecomb of recomb.failedRecombs) {
       const failedDesStr = failedRecomb.desStr;
-      const [failedDesP, failedDesS] = getAffixCount(failedDesStr);
       const failedProb = failedRecomb[pathProbType];
       // Get magic details if can be magic, otherwise get details
       const itemValue =
@@ -527,13 +540,6 @@ function getPath(itemValues, sortProb, allowAspect) {
       if (itemValue) {
         failedValue += itemValue * failedProb;
       }
-
-      // DONT THINK NEEDED
-      // if same number of desired mods as final, assume same value as final
-      // else if (failedRecomb.totalDes == recomb.totalDes && failedDesP <= maxDesP && failedDesS <= maxDesS) {
-      //   // failedValue +=
-      //   //   (details1.baseValue + details2.baseValue) * failedProb;
-      // }
     }
 
     // options from sheet
