@@ -107,23 +107,17 @@ class Recombinator {
 
   calcItemProb(prefixChosen) {
     // Returns total number of affixes required
-    const getRequiredAffixes = (requiredAffix = false) => {
+    const getRequiredAffixes = () => {
       // Decides where the exclusive mod is on item
       const allocateExclusive = (des1, exc1, des2, exc2) => {
-        // If primary
-        if (exc1 > 0) {
-          // check if needed or desired, then need primary
-          if (requiredAffix || des1 > 0) {
-            return [true, false];
-          }
+        // If primary and desired mod
+        if (exc1 > 0 && des1 > 0) {
+          return [true, false];
         }
 
-        // If no primary, but secondary
-        else if (exc2 > 0) {
-          // check if needed or desired, then need secondary
-          if (requiredAffix || des2 > 0) {
-            return [false, true];
-          }
+        // If no primary, but secondary and desired mod
+        else if (exc1 == 0 && exc2 > 0 && des2 > 0) {
+          return [false, true];
         }
 
         // Has no exclusive mods or no desired mods
@@ -148,28 +142,29 @@ class Recombinator {
       }
 
       // Add exclusive to prefixes or suffixes
-      const requiredP = excPrefix
-        ? this.finalItem.desP + 1
-        : this.finalItem.desP;
-      const requiredS = excSuffix
-        ? this.finalItem.desS + 1
-        : this.finalItem.desS;
+      const desP = this.finalItem.desP;
+      const desS = this.finalItem.desS;
 
-      return [requiredP, requiredS];
+      const reqP = excPrefix ? desP + 1 : desP;
+      const reqS = excSuffix ? desS + 1 : desS;
+
+      return [reqP, reqS];
     };
 
-    const [requiredP, requiredS] = getRequiredAffixes();
+    const [reqP, reqS] = getRequiredAffixes();
+
+    const totalP = this.feederItems.totalP;
+    const totalS = this.feederItems.totalS;
+    const totalDesP = this.feederItems.totalDesP;
+    const totalDesS = this.feederItems.totalDesS;
 
     // Get probs of getting required mods
-    const pProb = cumsumTable[this.feederItems.totalP][requiredP];
-    const sProbAspect = cumsumTable[this.feederItems.totalS][requiredS];
+    const pProb = cumsumTable[totalP][reqP];
+    const sProbAspect = cumsumTable[totalS][reqS];
 
-    // exact probs require affix if present
-    const [exactRequiredP, exactRequiredS] = getRequiredAffixes(true);
-
-    const exactPProb = weightsTable[this.feederItems.totalP][exactRequiredP];
-    const exactSProbAspect =
-      weightsTable[this.feederItems.totalS][exactRequiredS];
+    // exact probs, is 100% if no desired mods on item
+    const exactPProb = totalDesP === 0 ? 1 : weightsTable[totalP][reqP];
+    const exactSProbAspect = totalDesS === 0 ? 1 : weightsTable[totalS][reqS];
 
     // Invalid required mods
     if (!pProb || !sProbAspect) {
@@ -194,15 +189,15 @@ class Recombinator {
         this.eldritchAnnuls += 1;
       } else {
         // Avg 1 / required suffixes to remove
-        this.eldritchAnnuls += requiredS;
+        this.eldritchAnnuls += reqS;
 
         const getAspProb =
           this.feederItems.totalAspS / this.feederItems.totalExcS;
         const avoidAspProb = 1 - getAspProb;
 
         // need to make option for edlrtich or not
-        const annulAspProb = 1 / (requiredP + requiredS);
-        const annulAspProbEldritch = 1 / requiredS;
+        const annulAspProb = 1 / (reqP + reqS);
+        const annulAspProbEldritch = 1 / reqS;
 
         const applyAspectProb = (suffixProb, annulProb) =>
           suffixProb * avoidAspProb + suffixProb * getAspProb * annulProb;
