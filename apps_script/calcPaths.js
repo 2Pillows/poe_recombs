@@ -135,30 +135,46 @@ function getPath(itemValues, sortProb, allowAspect) {
   }
 
   // look at all variants for final item, choose best one
-  return getBestDP();
+  // return getBestDP();
+
+  // returns path that includes all guar items
+  return dp[sheetOptions.finalItem + " R"][JSON.stringify(guarItems)];
 
   // get best option from dp table
-  function getBestDP() {
-    const finalItem = dp[sheetOptions.finalItem + " R"];
-    let bestPath = { pathProb: -Infinity, pathCost: Infinity };
+  // currently requires guar items that aren't given a cost
+  // function getBestDP() {
+  //   const finalItem = dp[sheetOptions.finalItem + " R"];
+  //   let bestPath = { pathProb: -Infinity, pathCost: Infinity };
 
-    for (const guarPath of guarOptions) {
-      const guarKey = JSON.stringify(guarPath);
-      const curPath = finalItem[guarKey];
+  //   const requiredGuar = [];
+  //   for (const itemStr in guarItems) {
+  //     if (guarItems[itemStr].cost === 0) {
+  //       requiredGuar.push(itemStr + " R");
+  //     }
+  //   }
 
-      const isBetter = isBetterRecomb(
-        bestPath.pathProb,
-        bestPath.pathCost,
-        curPath.pathProb,
-        curPath.pathCost
-      );
+  //   for (const guarPath of guarOptions) {
+  //     const guarKey = JSON.stringify(guarPath);
+  //     const curPath = finalItem[guarKey];
 
-      if (isBetter) {
-        bestPath = JSON.parse(JSON.stringify(curPath));
-      }
-    }
-    return bestPath;
-  }
+  //     if (!curPath) continue;
+
+  //     const isBetter = isBetterRecomb(
+  //       bestPath.pathProb,
+  //       bestPath.pathCost,
+  //       curPath.pathProb,
+  //       curPath.pathCost
+  //     );
+
+  //     if (
+  //       isBetter &&
+  //       requiredGuar.every((guarItem) => guarKey.includes(guarItem))
+  //     ) {
+  //       bestPath = JSON.parse(JSON.stringify(curPath));
+  //     }
+  //   }
+  //   return bestPath;
+  // }
 
   // get list of base items, one mod items and guar items
   function getQueueItems() {
