@@ -1,17 +1,12 @@
-// write paths to sheet
-// have sheet that lists all path results
-// toggles on display sheet to change what appears
-// show exclusive pool or give full string w/ exclusive
-// show what type of path
-// same 4 section layout but toggle what is shown?
-// fills in from left to right and top to bottom?
+// -----------------------------------------------------
+// writePaths
+// Gets paths and writes to sheet
+// -----------------------------------------------------
 
 function writePathResults() {
   const allPathResults = getPathResults();
 
   writePaths(allPathResults);
-
-  console.log("paths written");
 }
 
 const pathHeaders = [
@@ -26,13 +21,6 @@ function writePaths(allPathResults) {
     SHEET_NAMES.PATH_DATA_SHEET
   );
 
-  const PATH_ROWS = {
-    pathProb: 52,
-    pathProbAspect: 76,
-    pathCost: 4,
-    pathCostAspect: 28,
-  };
-
   const [pathProbType, pathDivType] = getPathTypes();
 
   const writePathType = (pathName, startRow) => {
@@ -40,6 +28,14 @@ function writePaths(allPathResults) {
     let pathResults = allPathResults[pathName];
 
     for (let { recomb, cost } of pathResults.pathHistory) {
+      // columns
+      // Final Item
+      // Feeder Items
+      // Exclusive Mods
+      // Full Recomb
+      // Cost
+      // Prob
+
       pathTable.push([
         recomb.desStr,
         recomb.feederItems.desStr,
@@ -55,13 +51,6 @@ function writePaths(allPathResults) {
         pathTable.push(["overflow"]);
       }
     }
-    // columns
-    // Final Item
-    // Feeder Items
-    // Exclusive Mods
-    // Full Recomb
-    // Cost
-    // Prob
 
     const startCol = 1;
     const numRows = pathTable.length;
@@ -72,8 +61,8 @@ function writePaths(allPathResults) {
       .getRange(startRow, startCol, numRows, numCols)
       .setValues(pathTable.reverse());
 
-    // only write 21 rows
-    console.log("written");
+    // write total path cost
+    sheet.getRange(startRow, startCol + numCols).setValue(pathResults.pathCost);
   };
 
   for (const [type, startRow] of Object.entries(PATH_ROWS)) {
