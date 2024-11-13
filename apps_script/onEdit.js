@@ -1,4 +1,8 @@
-// only one edit possibe, need to have one for the path check and one for the resize check
+// -----------------------------------------------------
+// onEdit
+// onEdit function, calls function based on range
+// -----------------------------------------------------
+
 function onEdit(e) {
   const sheet = e.source.getActiveSheet();
   const range = e.range;

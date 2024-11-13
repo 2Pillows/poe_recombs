@@ -1,17 +1,40 @@
+// -----------------------------------------------------
+// calcPaths
+// Returns dict w/ best path for all 4 path options
+// -----------------------------------------------------
+
+// defined in getPathResults()
+let allRecombs,
+  sheetConfig,
+  guarItems,
+  pathProbType,
+  pathDivType,
+  maxDesP,
+  maxDesS,
+  itemValues;
+
 // starts finding best path, called from on edit
 function getPathResults() {
-  const itemValues = {};
+  if (typeof allRecombs === "undefined") {
+    allRecombs = getFeederRecombs(); // results from calcRecombs
+    sheetConfig = getSheetConfig(); // options from sheet
+    guarItems = sheetConfig.guarItems; // guaranteed items
+    [pathProbType, pathDivType] = getPathTypes(); // prob and divines for sheet item
+    [maxDesP, maxDesS] = getAffixCount(sheetConfig.finalItem); // max desired mods
+    itemValues = {}; // filed out when param is empty
+  }
 
-  const pathCost = getPath(itemValues, false, false);
-  const pathCostAspect = getPath(itemValues, false, true);
-  const pathProb = getPath(itemValues, true, false);
-  const pathProbAspect = getPath(itemValues, true, true);
+  // getPath(sortProb, allowAspect)
+  const pathCost = getPath(false, false);
+  const pathCostAspect = getPath(false, true);
+  const pathProb = getPath(true, false);
+  const pathProbAspect = getPath(true, true);
 
   return { pathProb, pathProbAspect, pathCost, pathCostAspect };
 }
 
 // need to grab options from sheet
-function getSheetOptions() {
+function getSheetConfig() {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
     SHEET_NAMES.PATH_SHEET
   );
@@ -88,16 +111,17 @@ function getSheetOptions() {
   };
 }
 
+// returns string for prob and divines based on item for path
 function getPathTypes() {
-  const sheetOptions = getSheetOptions();
+  const sheetConfig = getSheetConfig();
 
   // get string for prob to use for sheet options
   let pathProbType = "prob";
   let pathDivType = "divines";
-  if (sheetOptions.itemOptions.aspectOkay) {
+  if (sheetConfig.itemOptions.aspectOkay) {
     pathProbType = "probAspect";
     pathDivType = "divinesAspect";
-  } else if (sheetOptions.itemOptions.eldritchItem) {
+  } else if (sheetConfig.itemOptions.eldritchItem) {
     pathProbType = "probEldritch";
     pathDivType = "divinesEldritch";
   }
@@ -106,45 +130,37 @@ function getPathTypes() {
 }
 
 // find best path
-function getPath(itemValues, sortProb, allowAspect) {
-  const [finalRecombs, feederRecombs] = getRecombResults();
-  const sheetOptions = getSheetOptions();
-  const guarItems = sheetOptions.guarItems;
-
-  // name for prob and divines to reference based on sheet options
-  const [pathProbType, pathDivType] = getPathTypes();
-
-  // max number of total desired mods, limits number of items that can be made
-  const [maxDesP, maxDesS] = getAffixCount(sheetOptions.finalItem);
-
+function getPath(sortProb, allowAspect) {
   // Need to setup item details if given is empty
   let setValues = Object.keys(itemValues).length == 0;
 
   let dp = {}; // create dp table
 
+  // if no item values, need to set values for each item
   if (setValues) {
     // need to set values for itemValues
-    initDP(); // add one mods and guar items
+    initDP(); // add one mods, no guar items to set values
     fillDP(); // fill in dp table
 
-    setValues = false;
+    dp = {}; // reset dp
+    setValues = false; // values are now set
   }
 
-  dp = {};
   initDP(); // add one mods and guar items
   fillDP(); // fill in dp table
 
+  // key to get path w/ all guar items
   const guarKey = {};
   for (const guarItem in guarItems) {
     guarKey[guarItem + " R"] = guarItems[guarItem].count;
   }
 
-  // look at all variants for final item, choose best one
-  return dp[sheetOptions.finalItem + " R"][JSON.stringify(guarKey)];
+  // return best path that has all guar at final item
+  return dp[sheetConfig.finalItem + " R"][JSON.stringify(guarKey)];
 
   // get best option from dp table
   //   function getBestDP() {
-  //     const finalItem = dp[sheetOptions.finalItem + " R"];
+  //     const finalItem = dp[sheetConfig.finalItem + " R"];
   //     let bestPath = { pathProb: -Infinity, pathCost: Infinity };
 
   //     const requiredGuar = [];
@@ -183,6 +199,8 @@ function getPath(itemValues, sortProb, allowAspect) {
   // get list of base items, one mod items and guar items
   function getQueueItems() {
     const queueItems = [];
+
+    // add base items, need to have desired affix to check
     if (maxDesP > 0) {
       queueItems.push(...["1p/0s M", "1p/0s R"]);
     }
@@ -190,6 +208,7 @@ function getPath(itemValues, sortProb, allowAspect) {
       queueItems.push(...["0p/1s M", "0p/1s R"]);
     }
 
+    // add guar items if not setting values
     if (!setValues) {
       for (const itemStr in guarItems) {
         queueItems.push(itemStr + " R");
@@ -206,7 +225,7 @@ function getPath(itemValues, sortProb, allowAspect) {
 
     while (queue.length > 0) {
       const currentItem = queue.shift();
-      const recombOptions = feederRecombs[currentItem];
+      const recombOptions = allRecombs[currentItem];
 
       for (const recomb of recombOptions) {
         if (!isValidRecomb(recomb)) continue;
@@ -260,15 +279,12 @@ function getPath(itemValues, sortProb, allowAspect) {
                 continue;
               }
 
-              const guarKey = JSON.stringify(guarUsed);
-
               // Get prob, cost, and path history
               const prob = recomb[pathProbType];
               const pathProb = getPathProb(prob, item1Details, item2Details);
               const cost = getRecombCost(recomb, item1Str, item2Str);
               const pathCost =
                 cost + item1Details.pathCost + item2Details.pathCost;
-
               const history = [
                 ...item2Details.pathHistory,
                 ...item1Details.pathHistory,
@@ -276,6 +292,8 @@ function getPath(itemValues, sortProb, allowAspect) {
               history.push({ recomb: recomb, cost: cost });
 
               const recombStr = recomb.feederItems.str;
+
+              const guarKey = JSON.stringify(guarUsed);
 
               // create dp dict for item and key
               if (!dp[finalStr] || !dp[finalStr][guarKey]) {
@@ -329,7 +347,6 @@ function getPath(itemValues, sortProb, allowAspect) {
                   moreCost
                 ) {
                   queue.push(currentItem);
-                  // console.log(queue);
                 }
               }
             }
@@ -345,7 +362,7 @@ function getPath(itemValues, sortProb, allowAspect) {
     const addOneMod = (prefixCount, isMagic) => {
       const getOneModProb = () => {
         // if mod is already rolled then its guaranteed
-        if (sheetOptions.itemOptions.modsRolled) {
+        if (sheetConfig.itemOptions.modsRolled) {
           return 1;
         }
         // 1/2 alt gives prefix and suffix, regal into 2/3 annul and 1/3 annul
@@ -362,13 +379,13 @@ function getPath(itemValues, sortProb, allowAspect) {
       const getOneModCost = () => {
         // return prefix or suffix mod cost
         return prefixCount == 1
-          ? sheetOptions.costOptions.prefixModCost
-          : sheetOptions.costOptions.suffixModCost;
+          ? sheetConfig.costOptions.prefixModCost
+          : sheetConfig.costOptions.suffixModCost;
       };
 
       const itemProb = getOneModProb();
       const modCost = getOneModCost() / itemProb;
-      const itemValue = modCost + sheetOptions.costOptions.baseCost;
+      const itemValue = modCost + sheetConfig.costOptions.baseCost;
 
       const plainStr = prefixCount == 1 ? "1p/0s" : "0p/1s";
       const itemStr = isMagic ? plainStr + " M" : plainStr + " R";
@@ -385,7 +402,7 @@ function getPath(itemValues, sortProb, allowAspect) {
         cost: itemValue,
       };
       const history =
-        isMagic || sheetOptions.itemOptions.modsRolled ? [] : [regalDetails];
+        isMagic || sheetConfig.itemOptions.modsRolled ? [] : [regalDetails];
 
       if (!dp[itemStr]) {
         dp[itemStr] = {};
@@ -483,13 +500,6 @@ function getPath(itemValues, sortProb, allowAspect) {
     return result;
   }
 
-  // gets number of prefixes and suffixes
-  function getAffixCount(desStr) {
-    const match = desStr.match(/(\d+)p\/(\d+)s/);
-
-    return [parseInt(match[1]), parseInt(match[2])];
-  }
-
   // checkcs if recomb has aspects, too many mods, or a feeder that is a finished item
   function isValidRecomb(recomb) {
     const finalItem = recomb.finalItem;
@@ -543,8 +553,8 @@ function getPath(itemValues, sortProb, allowAspect) {
     }
 
     // options from sheet
-    const costOptions = sheetOptions.costOptions;
-    const itemOptions = sheetOptions.itemOptions;
+    const costOptions = sheetConfig.costOptions;
+    const itemOptions = sheetConfig.itemOptions;
 
     // cost of each recomb attempt. divines, aspects, eldritch annuls
     let constantCost = recomb[pathDivType];
@@ -588,4 +598,11 @@ function getPath(itemValues, sortProb, allowAspect) {
       (!sortProb && (isLowerCost || (isSameCost && isHigherProb)))
     );
   }
+}
+
+// gets number of prefixes and suffixes
+function getAffixCount(desStr) {
+  const match = desStr.match(/(\d+)p\/(\d+)s/);
+
+  return [parseInt(match[1]), parseInt(match[2])];
 }

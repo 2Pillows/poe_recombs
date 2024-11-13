@@ -1,4 +1,8 @@
-// stores names for sheets
+// -----------------------------------------------------
+// references
+// Names and ranges for sheet
+// -----------------------------------------------------
+
 const SHEET_NAMES = {
   RESULTS_SHEET: "Recomb Results",
   SEARCH_SHEET: "Search Recombs",
@@ -14,4 +18,11 @@ const SHEET_RANGES = {
   guarCount: "C31:C42",
   guarCost: "D31:D42",
   guarNames: "B31:B42",
+};
+
+const PATH_ROWS = {
+  pathCost: 4,
+  pathCostAspect: 28,
+  pathProb: 52,
+  pathProbAspect: 76,
 };

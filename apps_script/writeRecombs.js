@@ -1,11 +1,11 @@
-// writes results to sheets
-
 // -----------------------------------------------------
-// Main Function
+// writeRecombs
+// Gets final recombs and writes to sheet
+// Consistently crashed my sheet tab when writing
 // -----------------------------------------------------
 
 function writeRecombResults() {
-  const [finalRecombs, feederRecombs] = getRecombResults();
+  const finalRecombs = getFinalRecombs();
 
   writeToSheet(finalRecombs);
 }
@@ -73,6 +73,4 @@ const writeToSheet = (recombResults) => {
   const numCols = recombTable[0].length;
 
   sheet.getRange(startRow, startCol, numRows, numCols).setValues(recombTable);
-
-  console.log("results written");
 };
