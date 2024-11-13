@@ -511,7 +511,14 @@ function getPath(sortProb, allowAspect) {
       return false;
     }
     // skip if too many desired mods
-    if (finalItem.desP > maxDesP || finalItem.desS > maxDesS) {
+    const isTooManyMods = (item) => {
+      item.desP > maxDesP || item.desS > maxDesS;
+    };
+    if (
+      isTooManyMods(finalItem) ||
+      isTooManyMods(item1) ||
+      isTooManyMods(item2)
+    ) {
       return false;
     }
 
