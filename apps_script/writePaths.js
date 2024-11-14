@@ -63,6 +63,11 @@ function writePaths(allPathResults) {
 
     // write total path cost
     sheet.getRange(startRow, startCol + numCols).setValue(pathResults.pathCost);
+
+    // write total bases needed
+    sheet
+      .getRange(startRow, startCol + numCols + 1)
+      .setValue(pathResults.basesUsed);
   };
 
   for (const [type, startRow] of Object.entries(PATH_ROWS)) {

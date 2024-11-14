@@ -295,6 +295,10 @@ function getPath(sortProb, allowAspect) {
               ];
               history.push({ recomb: recomb, cost: cost });
 
+              const basesNeeded = 1 / prob;
+              const totalBases =
+                basesNeeded + item1Details.basesUsed + item2Details.basesUsed;
+
               const recombStr = recomb.feederItems.str;
 
               const guarKey = JSON.stringify(guarUsed);
@@ -334,6 +338,7 @@ function getPath(sortProb, allowAspect) {
                 dp[finalStr][guarKey] = {
                   pathProb: pathProb,
                   pathCost: pathCost,
+                  basesUsed: totalBases,
                   pathHistory: history,
                   guarUsed: guarUsed,
                   recombStr: recombStr,
@@ -415,6 +420,7 @@ function getPath(sortProb, allowAspect) {
       dp[itemStr]["{}"] = {
         pathProb: itemProb,
         pathCost: modCost,
+        basesUsed: 0,
         pathHistory: history,
         guarUsed: {},
       };
@@ -449,6 +455,7 @@ function getPath(sortProb, allowAspect) {
         dp[dpStr][guarKey] = {
           pathProb: 1,
           pathCost: guarItems[itemStr].cost,
+          basesUsed: 0,
           pathHistory: [],
           guarUsed: guarUsed,
         };
@@ -464,6 +471,7 @@ function getPath(sortProb, allowAspect) {
           dp[dpStrM][guarKey] = {
             pathProb: 1,
             pathCost: guarItems[itemStr].cost,
+            basesUsed: 0,
             pathHistory: [],
             guarUsed: guarUsed,
           };
