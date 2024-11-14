@@ -225,7 +225,7 @@ const getRecombResults = () => {
           if (successRecomb.desStr == "0p/1s") {
             addFailed("0p/1s", 0, 1);
           }
-          if (successRecomb.desStr != "1p/0s") {
+          if (successRecomb.desStr == "1p/0s") {
             addFailed("1p/0s", 1, 0);
           }
         }
