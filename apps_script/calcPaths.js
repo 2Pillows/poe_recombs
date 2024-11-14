@@ -528,7 +528,8 @@ function getPath(sortProb, allowAspect) {
 
     // if a feeder item is same or better version of final, skip
     const isFeederBetter = (item) => {
-      return finalItem.desP <= item.desP && finalItem.desS <= item.desS;
+      // finalItem.desP < item.desP || finalItem.desS < item.desS || item.desStr === this.desStr
+      return !recomb.hasLessMods;
     };
     if (isFeederBetter(item1) || isFeederBetter(item2)) {
       return false;
