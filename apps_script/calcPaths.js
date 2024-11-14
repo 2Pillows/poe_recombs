@@ -212,6 +212,10 @@ function getPath(sortProb, allowAspect) {
     if (!setValues) {
       for (const itemStr in guarItems) {
         queueItems.push(itemStr + " R");
+
+        if (itemStr === "1p/1s") {
+          queueItems.push(itemStr + " M");
+        }
       }
     }
 
