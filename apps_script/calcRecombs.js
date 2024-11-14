@@ -393,10 +393,14 @@ class Recombinator {
     };
     const minP = getMinMods(feederItems.totalDesP, totalP, exactPrefixExc);
     const minS = getMinMods(feederItems.totalDesS, totalS, exactSuffixExc);
-    const isMin = minP == desP && minS == desS; // if min item is match to final
+    const isMinP = minP == desP; // if min affix is match to final
+    const isMinS = minS == desS; // if min affix is match to final
 
-    const exactPProb = isMin ? 1 : weightsTable[totalP][reqP];
-    const exactSProbAspect = isMin ? 1 : weightsTable[totalS][reqS];
+    // if there is a min affix that isn't given a weight, then its guar
+    const prefixWeight = weightsTable[totalP][reqP];
+    const suffixWeight = weightsTable[totalS][reqS];
+    const exactPProb = prefixWeight === 0 && isMinP ? 1 : prefixWeight;
+    const exactSProbAspect = suffixWeight === 0 && isMinS ? 1 : suffixWeight;
 
     // Invalid required mods
     if (!pProb || !sProbAspect) {
