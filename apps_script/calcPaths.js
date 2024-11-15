@@ -637,10 +637,17 @@ function getPath(sortProb, allowAspect) {
     // }
 
     // 3p/0s = 1p1c/0s + 2p1c/2c
+    // feeder - 1p/0s + 2p/0s, 5.058
+    // saved - ?? - 2.86
+    // net - 2.195
+
     // 3p/1s = 1p2c/1s1c + 2p1c/2c
+    // feeder - 1p/1s + 2p/0s, 7.4545
+    // saved - ??, 9.4283
+    // net - 0
     // if (
-    //   recomb.desStr === "1p/1s" &&
-    //   recomb.feederItems.str === "0p/1s + 1p/0s"
+    //   recomb.desStr === "3p/1s" &&
+    //   recomb.feederItems.str === "1p2c/1s1c + 2p1c/2c"
     // ) {
     //   console.log("match");
     // }
@@ -695,7 +702,8 @@ function getPath(sortProb, allowAspect) {
 
       // known base value of item
       else if (value) {
-        savedCost += value * prob;
+        savedCost += Math.min(value, feederValue) * prob;
+        // savedCost += value * prob;
       }
     }
 
@@ -709,7 +717,7 @@ function getPath(sortProb, allowAspect) {
     const isHigherProb = cProb > fProb;
     const isSameProb = cProb === fProb;
     const isLowerCost = cCost < fCost;
-    const isSameCost = cCost.toFixed(2) === fCost.toFixed(2);
+    const isSameCost = cCost.toFixed(4) === fCost.toFixed(4);
 
     return (
       (sortProb && (isHigherProb || (isSameProb && isLowerCost))) ||
