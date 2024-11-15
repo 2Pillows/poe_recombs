@@ -191,6 +191,9 @@ const getRecombResults = () => {
           )}, ${exactProbEldritch.toFixed(4)}, ${exactProbAspect.toFixed(4)}) `;
 
           failedRecombs.push({
+            finalItem: finalItem,
+            feederItems: failedRecomb.feederItems,
+            hasLessMods: failedRecomb.hasLessMods,
             desStr: desStr,
             totalDes: totalDes,
             desP: finalItem.desP,
