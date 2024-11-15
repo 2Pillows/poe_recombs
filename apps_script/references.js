@@ -13,11 +13,11 @@ const SHEET_NAMES = {
 const SHEET_RANGES = {
   runScript: "B3",
   finalItem: "D6",
-  costOptions: "D18:D22",
-  itemOptions: "D25:D27",
-  guarCount: "C31:C42",
-  guarCost: "D31:D42",
-  guarNames: "B31:B42",
+  costOptions: "D22:D26",
+  itemOptions: "D29:D31",
+  guarCount: "C35:C46",
+  guarCost: "D35:D46",
+  guarNames: "B35:B46",
 };
 
 const PATH_ROWS = {
