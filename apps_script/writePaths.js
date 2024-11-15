@@ -20,6 +20,8 @@ function writePaths(allPathResults) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
     SHEET_NAMES.PATH_DATA_SHEET
   );
+  const sheetConfig = getSheetConfig();
+  const baseCost = sheetConfig.costOptions.baseCost;
 
   const [pathProbType, pathDivType] = getPathTypes();
 
@@ -46,9 +48,10 @@ function writePaths(allPathResults) {
       ]);
 
       // only write 20 lines
-      if (pathTable.length == 19) {
+      if (pathTable.length == 18) {
         pathTable.pop();
-        pathTable.push(["overflow"]);
+        pathTable.push(["TOO", "MANY", "PATHS", "TO", "WRITE", ""]);
+        break;
       }
     }
 
@@ -67,7 +70,7 @@ function writePaths(allPathResults) {
     // write total bases needed
     sheet
       .getRange(startRow, startCol + numCols + 1)
-      .setValue(pathResults.basesUsed);
+      .setValue(pathResults.baseCost / baseCost);
   };
 
   for (const [type, startRow] of Object.entries(PATH_ROWS)) {
