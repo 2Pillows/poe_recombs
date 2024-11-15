@@ -630,9 +630,9 @@ function getPath(sortProb, allowAspect) {
     const savedMods = getSavedValue(feederMods, recomb, modValues);
 
     const netMods = Math.max(feederMods - savedMods, 0);
-    if (feederMods - savedMods < 0) {
-      console.log("neg mod cost");
-    }
+    // if (feederMods - savedMods < 0) {
+    //   console.log("neg mod cost");
+    // }
 
     // 3p/0s = 1p1c/0s + 2p1c/2c
     // 3p/1s = 1p2c/1s1c + 2p1c/2c
