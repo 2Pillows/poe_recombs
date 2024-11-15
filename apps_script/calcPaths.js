@@ -21,7 +21,7 @@ function getPathResults() {
     guarItems = sheetConfig.guarItems; // guaranteed items
     [pathProbType, pathDivType] = getPathTypes(); // prob and divines for sheet item
     [maxDesP, maxDesS] = getAffixCount(sheetConfig.finalItem); // max desired mods
-    itemValues = {}; // filed out when param is empty
+    itemValues = { base: {}, mods: {}, prep: {} }; // filed out when param is empty
   }
 
   // getPath(sortProb, allowAspect)
@@ -132,7 +132,7 @@ function getPathTypes() {
 // find best path
 function getPath(sortProb, allowAspect) {
   // Need to setup item details if given is empty
-  let setValues = Object.keys(itemValues).length == 0;
+  let setValues = Object.keys(itemValues.base).length == 0;
 
   let dp = {}; // create dp table
 
@@ -283,21 +283,40 @@ function getPath(sortProb, allowAspect) {
                 continue;
               }
 
+              // if setting values, adjust the failed item probs
+              // wont' always have enough desired mods to make all
+              if (setValues) {
+                adjustFailed(recomb.failedRecombs);
+              }
+
               // Get prob, cost, and path history
               const prob = recomb[pathProbType];
               const pathProb = getPathProb(prob, item1Details, item2Details);
-              const cost = getRecombCost(recomb, item1Str, item2Str);
+
+              // each recomb uses 1 base, number of bases needed depends on failed recovery
+              const baseCost = getBaseCost(recomb, item1Str, item2Str);
+              const pathBaseCost =
+                baseCost + item1Details.baseCost + item2Details.baseCost;
+
+              const modCost = getModCost(recomb, item1Str, item2Str);
+              const pathModCost =
+                modCost + item1Details.modCost + item2Details.modCost;
+
+              const prepCost = getPrepCost(recomb);
+              const pathPrepCost =
+                prepCost + item1Details.prepCost + item2Details.prepCost;
+
+              const cost = baseCost + modCost + prepCost;
               const pathCost =
                 cost + item1Details.pathCost + item2Details.pathCost;
+
+              // cost = base + mod + prep
+
               const history = [
                 ...item2Details.pathHistory,
                 ...item1Details.pathHistory,
               ];
               history.push({ recomb: recomb, cost: cost });
-
-              const basesNeeded = 1 / prob;
-              const totalBases =
-                basesNeeded + item1Details.basesUsed + item2Details.basesUsed;
 
               const recombStr = recomb.feederItems.str;
 
@@ -326,19 +345,29 @@ function getPath(sortProb, allowAspect) {
               );
 
               const isSameRecomb = recombStr === curPath.recombStr;
-              const moreCost = pathCost > curPath.pathCost;
+              const moreCost =
+                parseFloat(pathCost.toFixed(4)) >
+                parseFloat(curPath.pathCost.toFixed(4));
+
+              // if (recomb.feederItems.str === "1p2c/1s1c + 2p1c/2s1c" && recomb.desStr === "3p/2s") {
+              //   console.log("check")
+              // }
 
               if (isBetter || (setValues && isSameRecomb && moreCost)) {
                 // set base value, no guars
                 if (setValues && guarKey === "{}") {
-                  itemValues[finalStr] = pathCost;
+                  itemValues.base[finalStr] = pathBaseCost;
+                  itemValues.mods[finalStr] = pathModCost;
+                  itemValues.prep[finalStr] = pathPrepCost;
                 }
 
                 // update guar key for item
                 dp[finalStr][guarKey] = {
                   pathProb: pathProb,
                   pathCost: pathCost,
-                  basesUsed: totalBases,
+                  baseCost: pathBaseCost,
+                  modCost: pathModCost,
+                  prepCost: pathPrepCost,
                   pathHistory: history,
                   guarUsed: guarUsed,
                   recombStr: recombStr,
@@ -386,15 +415,13 @@ function getPath(sortProb, allowAspect) {
       };
 
       const getOneModCost = () => {
+        const costs = sheetConfig.costOptions;
         // return prefix or suffix mod cost
-        return prefixCount == 1
-          ? sheetConfig.costOptions.prefixModCost
-          : sheetConfig.costOptions.suffixModCost;
+        return prefixCount === 1 ? costs.prefixModCost : costs.suffixModCost;
       };
 
       const itemProb = getOneModProb();
       const modCost = getOneModCost() / itemProb;
-      const itemValue = modCost + sheetConfig.costOptions.baseCost;
 
       const plainStr = prefixCount == 1 ? "1p/0s" : "0p/1s";
       const itemStr = isMagic ? plainStr + " M" : plainStr + " R";
@@ -408,7 +435,7 @@ function getPath(sortProb, allowAspect) {
           probEldritch: regalProb,
           probAspect: regalProb,
         },
-        cost: itemValue,
+        cost: modCost,
       };
       const history =
         isMagic || sheetConfig.itemOptions.modsRolled ? [] : [regalDetails];
@@ -420,13 +447,17 @@ function getPath(sortProb, allowAspect) {
       dp[itemStr]["{}"] = {
         pathProb: itemProb,
         pathCost: modCost,
-        basesUsed: 0,
+        baseCost: 0,
+        modCost: modCost,
+        prepCost: 0,
         pathHistory: history,
         guarUsed: {},
       };
 
       if (setValues) {
-        itemValues[itemStr] = itemValue;
+        itemValues.base[itemStr] = sheetConfig.costOptions.baseCost;
+        itemValues.mods[itemStr] = modCost;
+        itemValues.prep[itemStr] = 0;
       }
     };
 
@@ -447,6 +478,7 @@ function getPath(sortProb, allowAspect) {
         const dpStr = itemStr + " R";
         const guarUsed = { [dpStr]: 1 };
         const guarKey = JSON.stringify(guarUsed);
+        const baseCost = sheetConfig.costOptions.baseCost;
 
         if (!dp[dpStr]) {
           dp[dpStr] = {};
@@ -455,7 +487,9 @@ function getPath(sortProb, allowAspect) {
         dp[dpStr][guarKey] = {
           pathProb: 1,
           pathCost: guarItems[itemStr].cost,
-          basesUsed: 0,
+          baseCost: 0,
+          modCost: 0,
+          prepCost: 0,
           pathHistory: [],
           guarUsed: guarUsed,
         };
@@ -471,7 +505,9 @@ function getPath(sortProb, allowAspect) {
           dp[dpStrM][guarKey] = {
             pathProb: 1,
             pathCost: guarItems[itemStr].cost,
-            basesUsed: 0,
+            baseCost: 0,
+            modCost: 0,
+            prepCost: 0,
             pathHistory: [],
             guarUsed: guarUsed,
           };
@@ -522,10 +558,7 @@ function getPath(sortProb, allowAspect) {
     if (recomb.feederItems.totalAspS > 0 && !allowAspect) {
       return false;
     }
-    // skip if too many desired mods
-    const isTooManyMods = (item) => {
-      return item.desP > maxDesP || item.desS > maxDesS;
-    };
+
     if (
       isTooManyMods(finalItem) ||
       isTooManyMods(item1) ||
@@ -535,14 +568,38 @@ function getPath(sortProb, allowAspect) {
     }
 
     // if a feeder item is same or better version of final, skip
-    const isFeederBetter = (item) => {
-      // finalItem.desP < item.desP || finalItem.desS < item.desS || item.desStr === this.desStr
-      return !recomb.hasLessMods;
-    };
-    if (isFeederBetter(item1) || isFeederBetter(item2)) {
+    // const isFeederBetter = (item) => {
+    //   return finalItem.desP < item.desP || finalItem.desS < item.desS || item.desStr === this.desStr;
+    // };
+    // if (isFeederBetter(item1) || isFeederBetter(item2)) {
+    if (!recomb.hasLessMods) {
       return false;
     }
     return true;
+  }
+
+  // skip if too many desired mods
+  function isTooManyMods(item) {
+    return item.desP > maxDesP || item.desS > maxDesS;
+  }
+
+  function adjustFailed(failedRecombs) {
+    let totalProb = 0;
+    for (const recomb of failedRecombs) {
+      const finalItem = recomb.finalItem;
+      if (isTooManyMods(finalItem)) {
+        continue;
+      }
+      totalProb += recomb[pathProbType];
+    }
+
+    for (const recomb of failedRecombs) {
+      const finalItem = recomb.finalItem;
+      if (isTooManyMods(finalItem)) {
+        continue;
+      }
+      recomb[pathProbType] = recomb[pathProbType] / totalProb;
+    }
   }
 
   // get prob of recomb
@@ -554,35 +611,53 @@ function getPath(sortProb, allowAspect) {
     return pathProb;
   }
 
-  // get costs of recomb
-  function getRecombCost(recomb, str1, str2) {
-    let feederValue = itemValues[str1] + itemValues[str2]; // value of feeder items
+  function getBaseCost(recomb, str1, str2) {
+    const baseValues = itemValues.base;
 
-    let failedValue = 0; // value of expected failed items
-    for (let failedRecomb of recomb.failedRecombs) {
-      const failedDesStr = failedRecomb.desStr;
-      const failedProb = failedRecomb[pathProbType];
-      // Get magic details if can be magic, otherwise get details
-      const itemValue =
-        itemValues[failedDesStr + " M"] || itemValues[failedDesStr + " R"];
+    const feederBases = baseValues[str1] + baseValues[str2];
+    const savedBases = getSavedValue(feederBases, recomb, baseValues);
 
-      // known base value of item
-      if (itemValue) {
-        failedValue += itemValue * failedProb;
-      }
+    const baseCost = sheetConfig.costOptions.baseCost;
+    const netBases = Math.max(feederBases - savedBases, baseCost);
+
+    return netBases / recomb[pathProbType];
+  }
+
+  function getModCost(recomb, str1, str2) {
+    const modValues = itemValues.mods;
+
+    const feederMods = modValues[str1] + modValues[str2];
+    const savedMods = getSavedValue(feederMods, recomb, modValues);
+
+    const netMods = Math.max(feederMods - savedMods, 0);
+    if (feederMods - savedMods < 0) {
+      console.log("neg mod cost");
     }
 
+    // 3p/0s = 1p1c/0s + 2p1c/2c
+    // 3p/1s = 1p2c/1s1c + 2p1c/2c
+    // if (
+    //   recomb.desStr === "1p/1s" &&
+    //   recomb.feederItems.str === "0p/1s + 1p/0s"
+    // ) {
+    //   console.log("match");
+    // }
+
+    return netMods / recomb[pathProbType];
+  }
+
+  function getPrepCost(recomb) {
     // options from sheet
     const costOptions = sheetConfig.costOptions;
     const itemOptions = sheetConfig.itemOptions;
 
     // cost of each recomb attempt. divines, aspects, eldritch annuls
-    let constantCost = recomb[pathDivType];
+    let prepCost = recomb[pathDivType];
 
     // add aspect cost
     const aspectsUsed = recomb.feederItems.totalAspS;
     if (aspectsUsed != 0) {
-      constantCost += aspectsUsed * costOptions.aspectCost;
+      prepCost += aspectsUsed * costOptions.aspectCost;
     }
 
     // add eldritch annul cost
@@ -592,17 +667,38 @@ function getPath(sortProb, allowAspect) {
       itemOptions.eldritchItem &&
       eAnnulsUsed != 0
     ) {
-      constantCost += eAnnulsUsed * costOptions.eldritchAnnulCost;
+      prepCost += eAnnulsUsed * costOptions.eldritchAnnulCost;
     }
 
-    // item cost for each recomb is feeders - expected return from failed
-    // can't be less than the cost of a base
-    // always costs the divines, aspects, and eldritch annuls
-    const netCost =
-      Math.max(feederValue - failedValue, costOptions.baseCost) + constantCost;
+    return prepCost / recomb[pathProbType];
+  }
 
-    // expected cost of recomb until success
-    return netCost / recomb[pathProbType];
+  function getSavedValue(feederValue, recomb, itemValues) {
+    const finalItem = recomb.finalItem;
+    const failedRecombs = recomb.failedRecombs;
+    let savedCost = 0;
+
+    for (const recomb of failedRecombs) {
+      const desStr = recomb.desStr;
+      const value = itemValues[desStr + " M"] || itemValues[desStr + " R"];
+      const prob = recomb[pathProbType];
+      const flippedFinal =
+        finalItem.desP === recomb.desS && finalItem.desS === recomb.desP;
+      const failedFinal = recomb.finalItem;
+
+      // if same as final but flipped then use feeder cost
+      if (flippedFinal && !isTooManyMods(failedFinal)) {
+        savedCost += feederValue * prob;
+      }
+
+      // known base value of item
+      else if (value) {
+        savedCost += value * prob;
+      }
+    }
+
+    //
+    return savedCost;
   }
 
   // if the current details are better than final details
