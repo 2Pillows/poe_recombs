@@ -23,11 +23,11 @@ const weightsTable = [
   // 0    1     2     3         final mods
   [1.0, 0.0, 0.0, 0.0], // 0 initial mods, guaranteed 0 mods
   [0.41, 0.59, 0.0, 0.0], // 1 initial mod
-  [0.0, 0.67, 0.33, 0.0], // 2 initial mods
-  [0.0, 0.39, 0.52, 0.1], // 3 initial mods
-  [0.0, 0.11, 0.59, 0.31], // 4 initial mods
-  [0.0, 0.0, 0.43, 0.57], // 5 initial mods
-  [0.0, 0.0, 0.28, 0.72], // 6 initial mods
+  [1.0, 0.67, 0.33, 0.0], // 2 initial mods
+  [1.0, 0.39, 0.52, 0.1], // 3 initial mods
+  [1.0, 0.11, 0.59, 0.31], // 4 initial mods
+  [1.0, 1.0, 0.43, 0.57], // 5 initial mods
+  [1.0, 1.0, 0.28, 0.72], // 6 initial mods
 ];
 
 // min affixes on final item
@@ -233,11 +233,18 @@ const getRecombResults = () => {
         // if (successRecomb.feederItems.str === "1p/2c + 1p/3c" && successRecomb.desStr === "2p/0s") {
         // if (successRecomb.feederItems.str === "1c/1s + 1p2c/1c" && successRecomb.desStr === "1p/1s") {
         // if (successRecomb.feederItems.str === "1p/0s + 1p/0s" && successRecomb.desStr === "2p/0s") {
+        // if (successRecomb.feederItems.str === "2c/1s1c + 1p2c/1s1c1a" && successRecomb.desStr === "1p/2s") {
+        // if (successRecomb.feederItems.str === "1c/1s + 1p/0s" && successRecomb.desStr === "1p/1s") {
+        // if (successRecomb.feederItems.str === "1c/1s1c + 1p/3c" && successRecomb.desStr === "1p/0s") {
+        // if (
+        //   successRecomb.feederItems.str === "2c/1s1c + 1p2c/1s1c1a" &&
+        //   successRecomb.desStr === "1p/2s"
+        // ) {
         //   // 1p/1s - 1c/1s + 1p/0s
         //   // prefix chosen = 0p/1s w/ 57%
         //   // suffix chosen = 0p/1s w/ 57%
         //   // final items' cant have 0 mods, but think can land w/ only exclusive
-        //   console.log("a")
+        //   console.log("a");
         // }
 
         successRecomb.failedRecombs = failedRecombs;
@@ -351,51 +358,48 @@ class Recombinator {
 
   calcItemProb(prefixChosen) {
     // Decides where the exclusive mod is on item
-
-    // Returns total number of affixes required
-    const getRequiredAffixes = (reqExc = false) => {
-      const getExcChosen = (reqExc) => {
-        const allocateExclusive = (des1, exc1, des2, exc2, reqExc = false) => {
-          // If primary and desired mod
-          if (exc1 > 0 && (des1 > 0 || reqExc)) {
-            return [true, false];
-          }
-
-          // If no primary, but secondary and desired mod
-          else if (exc1 == 0 && exc2 > 0 && (des2 > 0 || reqExc)) {
-            return [false, true];
-          }
-
-          // Has no exclusive mods or no desired mods / required mods
-          return [false, false];
-        };
-
-        let [excPrefix, excSuffix] = [false, false];
-        if (prefixChosen) {
-          [excPrefix, excSuffix] = allocateExclusive(
-            this.finalItem.desP,
-            this.feederItems.totalExcP,
-            this.finalItem.desS,
-            this.feederItems.totalExcS,
-            reqExc
-          );
-        } else {
-          [excSuffix, excPrefix] = allocateExclusive(
-            this.finalItem.desS,
-            this.feederItems.totalExcS,
-            this.finalItem.desP,
-            this.feederItems.totalExcP,
-            reqExc
-          );
+    const getExcChosen = (reqExc = false) => {
+      const allocateExclusive = (des1, exc1, des2, exc2, reqExc) => {
+        // If primary and desired mod
+        if (exc1 > 0 && (des1 > 0 || reqExc)) {
+          return [true, false];
         }
 
-        return [excPrefix, excSuffix];
+        // If no primary, but secondary and desired mod
+        else if (exc1 == 0 && exc2 > 0 && (des2 > 0 || reqExc)) {
+          return [false, true];
+        }
+
+        // Has no exclusive mods or no desired mods / required mods
+        return [false, false];
       };
 
-      let [excPrefix, excSuffix] = getExcChosen(reqExc);
-      const desP = this.finalItem.desP;
-      const desS = this.finalItem.desS;
+      let [excPrefix, excSuffix] = [false, false];
+      const totalExcP = this.feederItems.totalExcP;
+      const totalExcS = this.feederItems.totalExcS;
+      if (prefixChosen) {
+        [excPrefix, excSuffix] = allocateExclusive(
+          desP,
+          totalExcP,
+          desS,
+          totalExcS,
+          reqExc
+        );
+      } else {
+        [excSuffix, excPrefix] = allocateExclusive(
+          desS,
+          totalExcS,
+          desP,
+          totalExcP,
+          reqExc
+        );
+      }
 
+      return [excPrefix, excSuffix];
+    };
+
+    // Returns total number of affixes required
+    const getRequiredAffixes = (excPrefix, excSuffix) => {
       // Add exclusive to prefixes or suffixes
       const reqP = excPrefix ? desP + 1 : desP;
       const reqS = excSuffix ? desS + 1 : desS;
@@ -403,45 +407,45 @@ class Recombinator {
       return [reqP, reqS];
     };
 
+    const desP = this.finalItem.desP;
+    const desS = this.finalItem.desS;
+
     const feederItems = this.feederItems;
     const totalP = feederItems.totalP;
     const totalS = feederItems.totalS;
 
-    const [reqP, reqS] = getRequiredAffixes();
-
-    // Get probs of getting required mods
+    // Get probs of at least getting desired + exclusive
+    const [excPrefix, excSuffix] = getExcChosen();
+    const [reqP, reqS] = getRequiredAffixes(excPrefix, excSuffix);
     const pProb = cumsumTable[totalP][reqP];
     const sProbAspect = cumsumTable[totalS][reqS];
 
-    // Min number of mods based on feeder items, required exc if present
-    const [exactReqP, exactReqS] = getRequiredAffixes(true);
-    const getMinMods = (totalDes, totalMods) => {
-      // let minMods = Math.min(totalDes, minAffixes[totalMods]);
-      // if (excMod && minMods > 0) minMods -= 1;
-      return Math.min(totalDes, minAffixes[totalMods]);
+    // Exact probs of getting desired + exclusive
+    const [eExcPrefix, eExcSuffix] = getExcChosen(true);
+    const [eReqP, eReqS] = getRequiredAffixes(eExcPrefix, eExcSuffix);
+    // number of mods required on final item
+    const getMinMods = (totalDes, totalMods, excMod) => {
+      let minMods = minAffixes[totalMods];
+      if (minMods > 0 && excMod) minMods -= 1;
+      return Math.min(totalDes, minMods);
     };
-    const minP = getMinMods(feederItems.totalDesP, totalP);
-    const minS = getMinMods(feederItems.totalDesS, totalS);
-    const isMinP = minP === exactReqP || feederItems.totalDesP === 0; // if min affix is match to final
-    const isMinS = minS === exactReqS || feederItems.totalDesS === 0; // if min affix is match to final
+    const minP = getMinMods(feederItems.totalDesP, totalP, eExcPrefix);
+    const minS = getMinMods(feederItems.totalDesS, totalS, eExcSuffix);
 
-    // problem 5 mods total, 0 desired. minS is 0
-    // exact reqs is 1 since have exclusive suffix
-    //
-
-    // if there is a min affix that isn't given a weight, then its guar
-    const prefixWeight = weightsTable[totalP][exactReqP];
-    const suffixWeight = weightsTable[totalS][exactReqS];
-    const exactPProb = isMinP && prefixWeight == 0 ? 1 : prefixWeight;
-    const exactSProbAspect = isMinS && suffixWeight == 0 ? 1 : suffixWeight;
+    // if final item has too little mods, invalid. otherise get prob from table
+    const exactPProb = desP < minP ? 0 : weightsTable[totalP][eReqP];
+    const exactSProbAspect = desS < minS ? 0 : weightsTable[totalS][eReqS];
 
     // if (this.feederItems.str === "1p/2c + 1p/3c" && this.desStr === "2p/0s") {
     // if (this.feederItems.str === "1c/1s + 1p2c/1c" && this.desStr === "1p/0s") {
     // if (this.feederItems.str === "1c/1s + 1p/0s" && this.desStr === "0p/0s") {
+    // if (this.feederItems.str === "2c/1s1c + 1p2c/1s1c1a" && this.desStr === "0p/2s") {
+    // if (this.feederItems.str === "1c/1s1c + 1p/3c" && this.desStr === "0p/1s") {
     //   console.log("a")
     // }
 
     // Invalid required mods
+    // if final item has too little mods, then invalid
     if (!pProb || !sProbAspect) {
       return [0, 0, 0, 0, 0, 0];
     }
