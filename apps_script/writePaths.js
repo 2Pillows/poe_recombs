@@ -23,6 +23,12 @@ function writePaths(allPathResults) {
   const sheetConfig = getSheetConfig();
   const baseCost = sheetConfig.costOptions.baseCost;
 
+  const [finalP, finalS] = getAffixCount(sheetConfig.finalItem);
+  const prefixCost = sheetConfig.costOptions.prefixModCost;
+  const suffixCost = sheetConfig.costOptions.suffixModCost;
+  const modCost =
+    (prefixCost * finalP + suffixCost * finalS) / (finalP + finalS);
+
   const [pathProbType, pathDivType] = getPathTypes();
 
   const writePathType = (pathName, startRow) => {
@@ -71,6 +77,11 @@ function writePaths(allPathResults) {
     sheet
       .getRange(startRow, startCol + numCols + 1)
       .setValue(pathResults.baseCost / baseCost);
+
+    // write total mod rolls needed
+    sheet
+      .getRange(startRow, startCol + numCols + 2)
+      .setValue(pathResults.modCost / modCost);
   };
 
   for (const [type, startRow] of Object.entries(PATH_ROWS)) {
