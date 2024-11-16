@@ -82,6 +82,11 @@ function writePaths(allPathResults) {
     sheet
       .getRange(startRow, startCol + numCols + 2)
       .setValue(pathResults.modCost / modCost);
+
+    // write total prep cost needed
+    sheet
+      .getRange(startRow, startCol + numCols + 3)
+      .setValue(pathResults.prepCost);
   };
 
   for (const [type, startRow] of Object.entries(PATH_ROWS)) {
