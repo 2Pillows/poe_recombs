@@ -420,7 +420,7 @@ function getPath(sortProb, allowAspect) {
       const itemProb = getOneModProb();
       const modCost = getOneModCost() / itemProb;
       const baseCost = sheetConfig.costOptions.baseCost;
-      const pathCost = modCost + baseCost;
+      const pathCost = modCost;
 
       const plainStr = prefixCount == 1 ? "1p/0s" : "0p/1s";
       const itemStr = isMagic ? plainStr + " M" : plainStr + " R";
@@ -446,7 +446,7 @@ function getPath(sortProb, allowAspect) {
       dp[itemStr]["{}"] = {
         pathProb: itemProb,
         pathCost: pathCost,
-        baseCost: baseCost,
+        baseCost: 0,
         modCost: modCost,
         prepCost: 0,
         pathHistory: history,
@@ -486,7 +486,7 @@ function getPath(sortProb, allowAspect) {
         dp[dpStr][guarKey] = {
           pathProb: 1,
           pathCost: guarItems[itemStr].cost,
-          baseCost: baseCost,
+          baseCost: 0,
           modCost: 0,
           prepCost: 0,
           pathHistory: [],
@@ -504,7 +504,7 @@ function getPath(sortProb, allowAspect) {
           dp[dpStrM][guarKey] = {
             pathProb: 1,
             pathCost: guarItems[itemStr].cost,
-            baseCost: baseCost,
+            baseCost: 0,
             modCost: 0,
             prepCost: 0,
             pathHistory: [],
