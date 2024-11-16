@@ -343,8 +343,7 @@ function getPath(sortProb, allowAspect) {
                 curPath.pathProb,
                 curPath.pathCost,
                 pathProb,
-                pathCost,
-                recomb.feederItems.desStr
+                pathCost
               );
 
               const isSameRecomb = recombStr === curPath.recombStr;
@@ -722,7 +721,7 @@ function getPath(sortProb, allowAspect) {
   }
 
   // if the current details are better than final details
-  function isBetterRecomb(fProb, fCost, cProb, cCost, feederStr) {
+  function isBetterRecomb(fProb, fCost, cProb, cCost) {
     // Comparators between current and final probs and costs
     const round = (num) => {
       return parseFloat(num.toFixed(4));
