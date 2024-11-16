@@ -658,6 +658,7 @@ const getFeederPairs = () => {
       const desStr = feederItems.desStr;
       const excStr = feederItems.excStr;
       const magicCount = feederItems.magicCount;
+      const multiCount = feederItems.multimods;
 
       // If haven't seen item, init
       if (!(desStr in seenFeeders)) {
@@ -667,8 +668,13 @@ const getFeederPairs = () => {
       // If haven't seen exclusive pool, add w/ magic count
       // Set new magic count if found more
       const matchingFeeder = seenFeeders[desStr][excStr];
-      if (!matchingFeeder || magicCount > matchingFeeder.magicCount) {
-        seenFeeders[desStr][excStr] = { feederItems, magicCount };
+
+      if (
+        !matchingFeeder ||
+        magicCount > matchingFeeder.magicCount ||
+        multiCount < matchingFeeder.multiCount
+      ) {
+        seenFeeders[desStr][excStr] = { feederItems, magicCount, multiCount };
       }
     }
   }
