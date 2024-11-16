@@ -731,12 +731,10 @@ function getPath(sortProb, allowAspect) {
     const isSameProb = round(cProb) === round(fProb);
     const isLowerCost = round(cCost) < round(fCost);
     const isSameCost = round(cCost) === round(fCost);
-    const has1p1s = feederStr === "0p/1s + 1p/0s";
 
     return (
-      (sortProb &&
-        (isHigherProb || (isSameProb && (isLowerCost || has1p1s)))) ||
-      (!sortProb && (isLowerCost || (isSameCost && (isHigherProb || has1p1s))))
+      (sortProb && (isHigherProb || (isSameProb && isLowerCost))) ||
+      (!sortProb && (isLowerCost || (isSameCost && isHigherProb)))
     );
   }
 }
