@@ -83,11 +83,10 @@ const getRecombResults = () => {
           finalS <= Math.min(3, item1.desS + item2.desS);
           finalS++
         ) {
-          // dont think can make 0 mod results
-          // can make 0 mod items if only get single exclusive
-          // if (finalP == 0 && finalS == 0) {
-          //   continue;
-          // }
+          // 0 mod items only possible if have exclusive
+          if (finalP == 0 && finalS == 0 && feederItems.totalExc === 0) {
+            continue;
+          }
 
           const finalItem = { desP: finalP, desS: finalS };
 
@@ -150,8 +149,7 @@ const getRecombResults = () => {
           // think only applies to 1 mod
           if (
             failedRecomb.finalItem.desP >= successRecomb.finalItem.desP &&
-            failedRecomb.finalItem.desS >= successRecomb.finalItem.desS &&
-            feederRecombs.length > 2
+            failedRecomb.finalItem.desS >= successRecomb.finalItem.desS
           ) {
             continue;
           }
@@ -221,12 +219,7 @@ const getRecombResults = () => {
           failedStr += `(${itemStr}: 1.0000, 1.0000, 1.0000)`;
         };
 
-        if (
-          failedRecombs.length == 0 ||
-          (posFailed.length == 1 &&
-            successRecomb.desStr !== "1p/0s" &&
-            successRecomb.desStr !== "0p/1s")
-        ) {
+        if (failedRecombs.length == 0) {
           console.log("should have failed but none found");
         }
 
@@ -441,7 +434,8 @@ class Recombinator {
     // if (this.feederItems.str === "1c/1s + 1p/0s" && this.desStr === "0p/0s") {
     // if (this.feederItems.str === "2c/1s1c + 1p2c/1s1c1a" && this.desStr === "0p/2s") {
     // if (this.feederItems.str === "1c/1s1c + 1p/3c" && this.desStr === "0p/1s") {
-    //   console.log("a")
+    // if (this.feederItems.str === "0p/1s + 1p/0s" && this.desStr === "0p/0s") {
+    //   console.log("a");
     // }
 
     // Invalid required mods
