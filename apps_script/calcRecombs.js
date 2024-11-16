@@ -330,9 +330,9 @@ class Recombinator {
     const adjustProbs = (fMod, sMod) => [fMod * 0.59, sMod * 1.41];
 
     const totalExcP = this.feederItems.totalExcP;
-    const totalP = this.finalItem.totalP;
+    const totalP = this.feederItems.totalP;
     const totalExcS = this.feederItems.totalExcS;
-    const totalS = this.finalItem.totalS;
+    const totalS = this.feederItems.totalS;
 
     // if only 1 exclusive prefix ans one total affix, can not roll on selected side
     // adjust mods to increase prob of other side exclusive
