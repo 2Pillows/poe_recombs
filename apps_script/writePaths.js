@@ -50,7 +50,7 @@ function writePaths(allPathResults) {
         recomb.feederItems.excStr,
         recomb.feederItems.str,
         cost,
-        recomb[pathProbType],
+        `=TEXT(${recomb[pathProbType]},"0.00%")`,
       ]);
 
       // only write 20 lines
