@@ -341,17 +341,14 @@ function getPath(sortProb, allowAspect) {
                 curPath.pathProb,
                 curPath.pathCost,
                 pathProb,
-                pathCost
+                pathCost,
+                recomb.feederItems.desStr
               );
 
               const isSameRecomb = recombStr === curPath.recombStr;
               const moreCost =
                 parseFloat(pathCost.toFixed(4)) >
                 parseFloat(curPath.pathCost.toFixed(4));
-
-              // if (recomb.feederItems.str === "1p2c/1s1c + 2p1c/2s1c" && recomb.desStr === "3p/2s") {
-              //   console.log("check")
-              // }
 
               if (isBetter || (setValues && isSameRecomb && moreCost)) {
                 // set base value, no guars
@@ -712,16 +709,21 @@ function getPath(sortProb, allowAspect) {
   }
 
   // if the current details are better than final details
-  function isBetterRecomb(fProb, fCost, cProb, cCost) {
+  function isBetterRecomb(fProb, fCost, cProb, cCost, feederStr) {
     // Comparators between current and final probs and costs
-    const isHigherProb = cProb > fProb;
-    const isSameProb = cProb === fProb;
-    const isLowerCost = cCost < fCost;
-    const isSameCost = cCost.toFixed(4) === fCost.toFixed(4);
+    const round = (num) => {
+      return parseFloat(num.toFixed(4));
+    };
+    const isHigherProb = round(cProb) > round(fProb);
+    const isSameProb = round(cProb) === round(fProb);
+    const isLowerCost = round(cCost) < round(fCost);
+    const isSameCost = round(cCost) === round(fCost);
+    const has1p1s = feederStr === "0p/1s + 1p/0s";
 
     return (
-      (sortProb && (isHigherProb || (isSameProb && isLowerCost))) ||
-      (!sortProb && (isLowerCost || (isSameCost && isHigherProb)))
+      (sortProb &&
+        (isHigherProb || (isSameProb && (isLowerCost || has1p1s)))) ||
+      (!sortProb && (isLowerCost || (isSameCost && (isHigherProb || has1p1s))))
     );
   }
 }
