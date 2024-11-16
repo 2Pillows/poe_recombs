@@ -21,12 +21,14 @@ function getPathResults() {
     guarItems = sheetConfig.guarItems; // guaranteed items
     [pathProbType, pathDivType] = getPathTypes(); // prob and divines for sheet item
     [maxDesP, maxDesS] = getAffixCount(sheetConfig.finalItem); // max desired mods
-    itemValues = { base: {}, mods: {}, prep: {} }; // filed out when param is empty
   }
 
   // getPath(sortProb, allowAspect)
+  itemValues = { base: {}, mods: {}, prep: {} }; // new item values for lowest cost
   const pathCost = getPath(false, false);
   const pathCostAspect = getPath(false, true);
+
+  itemValues = { base: {}, mods: {}, prep: {} }; // new item values for highest prob
   const pathProb = getPath(true, false);
   const pathProbAspect = getPath(true, true);
 
@@ -686,7 +688,18 @@ function getPath(sortProb, allowAspect) {
 
     for (const recomb of failedRecombs) {
       const desStr = recomb.desStr;
-      const value = itemValues[desStr + " M"] || itemValues[desStr + " R"];
+
+      // check if failed recomb rseult can be magic
+      const feeders = recomb.feederItems;
+      const magicAffix = (des, exc) => {
+        return des + exc <= 1;
+      };
+      const isMagic =
+        magicAffix(feeders.totalDesP, feeders.totalExcP) &&
+        magicAffix(feeders.totalDesS, feeders.totalExcS);
+      const value = isMagic
+        ? itemValues[desStr + " M"]
+        : itemValues[desStr + " R"];
       const prob = recomb[pathProbType];
       const flippedFinal =
         finalItem.desP === recomb.desS && finalItem.desS === recomb.desP;
