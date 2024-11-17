@@ -688,17 +688,7 @@ function getPath(sortProb, allowAspect) {
     for (const recomb of failedRecombs) {
       const desStr = recomb.desStr;
 
-      // check if failed recomb rseult can be magic
-      const feeders = recomb.feederItems;
-      const magicAffix = (des, exc) => {
-        return des + exc <= 1;
-      };
-      const isMagic =
-        magicAffix(feeders.totalDesP, feeders.totalExcP) &&
-        magicAffix(feeders.totalDesS, feeders.totalExcS);
-      const value = isMagic
-        ? itemValues[desStr + " M"]
-        : itemValues[desStr + " R"];
+      const value = itemValues[desStr];
       const prob = recomb[pathProbType];
       const flippedFinal =
         finalItem.desP === recomb.desS && finalItem.desS === recomb.desP;

@@ -32,6 +32,7 @@ const weightsTable = [
 
 // min affixes on final item
 const minAffixes = {
+  0: 0,
   1: 0,
   2: 1,
   3: 1,
@@ -170,6 +171,11 @@ const getRecombResults = () => {
           const finalItem = failedRecomb.finalItem;
           const totalDes = finalItem.desP + finalItem.desS;
           let desStr = failedRecomb.desStr;
+          const feederItems = failedRecomb.feederItems;
+          const isMagic =
+            minAffixes[feederItems.totalP] <= 1 &&
+            minAffixes[feederItems.totalS] <= 1;
+          desStr += isMagic ? " M" : " R";
 
           const adjustProbs = (baseProb, probsSum) => {
             return probsSum > 0 ? baseProb / probsSum : 0.0;
