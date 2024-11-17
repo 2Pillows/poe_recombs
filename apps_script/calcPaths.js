@@ -312,8 +312,6 @@ function getPath(sortProb, allowAspect) {
               const pathCost =
                 cost + item1Details.pathCost + item2Details.pathCost;
 
-              // cost = base + mod + prep
-
               const history = [
                 ...item2Details.pathHistory,
                 ...item1Details.pathHistory,
@@ -447,7 +445,7 @@ function getPath(sortProb, allowAspect) {
       dp[itemStr]["{}"] = {
         pathProb: itemProb,
         pathCost: pathCost,
-        baseCost: 0,
+        baseCost: baseCost,
         modCost: modCost,
         prepCost: 0,
         pathHistory: history,
@@ -487,7 +485,7 @@ function getPath(sortProb, allowAspect) {
         dp[dpStr][guarKey] = {
           pathProb: 1,
           pathCost: guarItems[itemStr].cost,
-          baseCost: 0,
+          baseCost: baseCost,
           modCost: 0,
           prepCost: 0,
           pathHistory: [],
@@ -505,7 +503,7 @@ function getPath(sortProb, allowAspect) {
           dp[dpStrM][guarKey] = {
             pathProb: 1,
             pathCost: guarItems[itemStr].cost,
-            baseCost: 0,
+            baseCost: baseCost,
             modCost: 0,
             prepCost: 0,
             pathHistory: [],
