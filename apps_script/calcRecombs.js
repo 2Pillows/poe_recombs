@@ -173,6 +173,8 @@ const getRecombResults = () => {
           let desStr = failedRecomb.desStr;
           const feederItems = failedRecomb.feederItems;
           const isMagic =
+            finalItem.desP <= 1 &&
+            finalItem.desS <= 1 &&
             minAffixes[feederItems.totalP] <= 1 &&
             minAffixes[feederItems.totalS] <= 1;
           desStr += isMagic ? " M" : " R";
