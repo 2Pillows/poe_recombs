@@ -339,7 +339,8 @@ class Recombinator {
     // adjust mods to increase prob of other side exclusive
     if (totalExcP === 1 && totalP === 1) {
       [pMod, sMod] = adjustProbs(pMod, sMod);
-    } else if (totalExcS === 1 && totalS === 1) {
+    }
+    if (totalExcS === 1 && totalS === 1) {
       [sMod, pMod] = adjustProbs(sMod, pMod);
     }
 
