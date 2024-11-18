@@ -28,7 +28,7 @@ function getPathResults() {
   const pathCost = getPath(false, false);
   const pathCostAspect = getPath(false, true);
 
-  itemValues = { base: {}, mods: {}, prep: {} }; // new item values for highest prob
+  // itemValues = { base: {}, mods: {}, prep: {} }; // new item values for highest prob
   const pathProb = getPath(true, false);
   const pathProbAspect = getPath(true, true);
 
