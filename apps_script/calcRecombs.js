@@ -149,8 +149,8 @@ const getRecombResults = () => {
           // if only have successful recomb and 0p/0s, then dont skip
           // think only applies to 1 mod
           if (
-            failedRecomb.finalItem.desP >= successRecomb.finalItem.desP &&
-            failedRecomb.finalItem.desS >= successRecomb.finalItem.desS
+            failedRecomb.finalItem.desP === successRecomb.finalItem.desP &&
+            failedRecomb.finalItem.desS === successRecomb.finalItem.desS
           ) {
             continue;
           }
