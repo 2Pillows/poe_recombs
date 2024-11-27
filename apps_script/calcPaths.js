@@ -296,21 +296,22 @@ function getPath(sortProb, allowAspect) {
               const pathProb = getPathProb(prob, item1Details, item2Details);
 
               // each recomb uses 1 base, number of bases needed depends on failed recovery
-              const baseCost = getBaseCost(recomb, item1Str, item2Str);
-              const pathBaseCost =
-                baseCost + item1Details.baseCost + item2Details.baseCost;
+              const baseCost =
+                getBaseCost(recomb, item1Str, item2Str) +
+                item1Details.baseCost +
+                item2Details.baseCost;
 
-              const modCost = getModCost(recomb, item1Str, item2Str);
-              const pathModCost =
-                modCost + item1Details.modCost + item2Details.modCost;
+              const modCost =
+                getModCost(recomb, item1Str, item2Str) +
+                item1Details.modCost +
+                item2Details.modCost;
 
               const prepCost = getPrepCost(recomb);
               const pathPrepCost =
                 prepCost + item1Details.prepCost + item2Details.prepCost;
 
               const cost = baseCost + modCost + prepCost;
-              const pathCost =
-                cost + item1Details.pathCost + item2Details.pathCost;
+              const pathCost = baseCost + modCost + pathPrepCost;
 
               const history = [
                 ...item2Details.pathHistory,
@@ -352,8 +353,8 @@ function getPath(sortProb, allowAspect) {
               if (isBetter || (setValues && isSameRecomb && moreCost)) {
                 // set base value, no guars
                 if (setValues && guarKey === "{}") {
-                  itemValues.base[finalStr] = pathBaseCost;
-                  itemValues.mods[finalStr] = pathModCost;
+                  itemValues.base[finalStr] = baseCost;
+                  itemValues.mods[finalStr] = modCost;
                   itemValues.prep[finalStr] = pathPrepCost;
                 }
 
@@ -361,8 +362,8 @@ function getPath(sortProb, allowAspect) {
                 dp[finalStr][guarKey] = {
                   pathProb: pathProb,
                   pathCost: pathCost,
-                  baseCost: pathBaseCost,
-                  modCost: pathModCost,
+                  baseCost: baseCost,
+                  modCost: modCost,
                   prepCost: pathPrepCost,
                   pathHistory: history,
                   guarUsed: guarUsed,
@@ -618,7 +619,8 @@ function getPath(sortProb, allowAspect) {
     const baseCost = sheetConfig.costOptions.baseCost;
     const netBases = Math.max(feederBases - savedBases, baseCost);
 
-    return netBases / recomb[pathProbType];
+    const attempts = 1 / recomb[pathProbType] - 1;
+    return netBases * attempts;
   }
 
   function getModCost(recomb, str1, str2) {
@@ -648,7 +650,8 @@ function getPath(sortProb, allowAspect) {
     //   console.log("match");
     // }
 
-    return netMods / recomb[pathProbType];
+    const attempts = 1 / recomb[pathProbType] - 1;
+    return netMods * attempts;
   }
 
   function getPrepCost(recomb) {
