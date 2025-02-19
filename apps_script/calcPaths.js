@@ -620,6 +620,7 @@ function getPath(sortProb, allowAspect) {
     const netBases = Math.max(feederBases - savedBases, baseCost);
 
     const attempts = 1 / recomb[pathProbType] - 1;
+
     return netBases * attempts;
   }
 
@@ -651,6 +652,7 @@ function getPath(sortProb, allowAspect) {
     // }
 
     const attempts = 1 / recomb[pathProbType] - 1;
+
     return netMods * attempts;
   }
 

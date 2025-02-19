@@ -6,7 +6,7 @@
 const SHEET_NAMES = {
   RESULTS_SHEET: "Recomb Results",
   SEARCH_SHEET: "Search Recombs",
-  PATH_SHEET: "Find Path",
+  PATH_SHEET: "Find Path Calculator",
   PATH_DATA_SHEET: "Find Path Data",
 };
 
