@@ -10,9 +10,9 @@ function writePathResults() {
 }
 
 const pathHeaders = [
-  "Lowest Cost wo/ Aspects", //  A4:F24
+  "Lowest Cost w/o Aspects", //  A4:F24
   "Lowest Cost", // A28:F48
-  "Highest Prob wo/ Aspects", // A52:F72
+  "Highest Prob w/o Aspects", // A52:F72
   "Highest Prob", // A76:F96
 ];
 
